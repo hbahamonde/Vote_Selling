@@ -1,11 +1,34 @@
-# Build and Release Folders
-bin/
-bin-debug/
-bin-release/
+# ignore temp files w/ trailing ~
+*~
 
-# Other files and folders
-.settings/
+# ignore hidden files
+.*
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# ignore files with the rolling extensions
+*.DS_Store
+*.Rhistory
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.gz
+*.fdb_latexmk
+*.fls
+*.RData
+*.Rhistory
+*.pdf
+*.tex
+LICENSE
+README
+
+# don't ignore the .gitignore file
+!.gitignore
+
+# ignore folders
+back_up
+report
+cache
+figure
