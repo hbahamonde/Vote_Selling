@@ -21,18 +21,22 @@
 *.Rhistory
 *.pdf
 *.tex
+*.md
+*.dta
+
 
 
 # don't ignore the .gitignore file
 !.gitignore
 
 # ignore folders
-back_up
-report
-cache
-figure
-US
+
 
 LICENSE
+CENSUS
+DataBackUp
+Examples
+IRB
+Python_Scrypt
 
-*.md
+
