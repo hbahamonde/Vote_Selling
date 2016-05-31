@@ -1,0 +1,13 @@
+Attributes
+Right to vote:Citizens CANNOT vote for the next two elections,Citizens CAN vote for the next two elections 
+Right to run:Citizens CANNOT run for office in the next two elections,Citizens CAN run for office in the next two elections
+Right to associate:You CANNOT associate with others and form groups,You CAN associate with others and form groups
+Free press:Media CANNOT confront the Government,Media CAN confront the Government
+President Autonomy:President CANNOT rule without Congress,President CAN rule without Congress
+Weights
+Right to vote:0.5,0.5
+Right to run:0.5,0.5
+Right to associate:0.5,0.5
+Free press:0.5,0.5
+President Autonomy:0.5,0.5
+Restrictions

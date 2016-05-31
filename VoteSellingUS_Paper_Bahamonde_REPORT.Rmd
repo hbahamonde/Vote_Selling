@@ -1,0 +1,912 @@
+---
+title: "Democratic Values and Vote-Selling in the US"
+author: Hector Bahamonde
+date: April, 15th 2016
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+  theme: cosmo
+  fig_caption: yes
+  fontsize: 12pt
+---
+
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 12px;
+}
+td {  /* Table  */
+   font-size: 8px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 10px;
+}
+pre { /* Code block */
+  font-size: 10px
+}
+</style>
+
+# Motivation
+
+Most studies on vote-buying ask whether *political* parties have actually bribed voters. This study is different in two novel ways. First, it asks whether *subjects* would be willing to vote for a candidate in exchange for money. And such, this study provides empirical evidence on the supply side, that is, on vote-sellers not vote-buyers. Second, this study is novel since it asks subjects to sell their votes in an  **hypothetical situation**. Hence, the objective of this study is not precisely "corroborate" the existence of vote-selling. Rather, **the objective of this paper is to study what democratic values have "failed" that make individuals to want to sell their votes**. This distinction is important. Most literature argues about the role of poverty and political competition. However, we still don't know what are the (**broken**) democratic components that might explain individual decisions. 
+
+# Democracy and Vote-Selling
+
+Following O’Donnell, I operationalize "democratic components" in three dimensions, a democratic component, a liberal component and a republican component. The first one is related to how important elections are. The second one is related to matters of tolerance and civic liberties. The third one, is related to how important are matters such as separations of power. **My experiments disentangle which of these three dimensions has to be "broken" for an individual to be a likely vote-seller**. In other words, I study which dimensions should depart from the norm - from a democratic/normative standpoint - to make individuals more likely to sell their votes. 
+
+# Organization and Methodology
+
+This report is divided in two parts:
+
+1. First part presents results of a *list experiment*. List experiments are designed to elicit answers from sensitive questions, such as illegal behaviors and socially condemnable practices , for example, vote-selling. Subjects are told to number how many illegal activities they would engage in, without the (hypothetical) risk of being caught. The treatment condition receives the same number of illegal activities, *plus* another item on vote-selling. 
+
+2. The second part presents results of a *conjoint experiment*. Conjoint experiments are mostly used in marketing research. Consumers are instructed to choose different products based on different attributes. This experiment asked subjects to "elect" political candidates (the products) based on several attributes (different operationalizations for the three O’Donnell’s democratic dimensions). 
+
+I operationalize these dimensions as follows:
+
+#### Democratic Component
+
+1. Right to run for elections
+2. Right to vote in elections
+
+#### Liberal Component
+
+1. Right to associate and form groups
+2. Right to have a free press
+
+#### Republican Component
+
+1. Whether the President is allowed to rule without Congress
+
+##### Example
+
+
+Each attribute is randomly assigned in its "positive" or "negative" form. For example, subjects are told to choose between a candidate that stands for the right to associate and a second candidate that does not. It is important to stress that subjects evaluate candidates on all dimensions simultaneously. An example of one the tasks a subject had to answer, is the following:
+
+<style type="text/css">
+.tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+.tftable th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+.tftable tr {background-color:#d4e3e5;}
+.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+.tftable tr:hover {background-color:#ffffff;}
+</style>
+
+<table class="tftable" border="1">
+<tr><th>Attributes</th><th>Candidate 1</th><th>Candidate 2</th></tr>
+<tr><td>Right to Run</td><td>Citizens CAN run for office for the next two elections</td><td>Citizens CAN run for office for the next two elections</td></tr>
+<tr><td>Right to Vote</td><td>Citizens CAN vote in the next two elections</td><td>Citizens CANNOT vote in the next two elections</td></tr>
+<tr><td>Right to Associate</td><td>Citizens CAN associate with others and form groups</td><td>Citizens CANNOT associate with others and form groups</td></tr>
+<tr><td>Free Press</td><td>Media CANNOT confront the Government</td><td>Media CAN confront the Government</td></tr>
+<tr><td>President Autonomy</td><td>President CAN rule without Congress</td><td>President CANNOT rule without Congress</td></tr>
+</table>
+
+
+Subjects were randomly assigned different combinations these attributes. In theory, each subject sees a unique combination. Subjects answered 5 of these tasks.
+
+
+## Analyses
+
+1. From the list experiment, I calculated two quantities of interest. First, the population average of people answering the sensitive item for the affirmative, i.e. percentage of people in the US that would be willing to sell their votes for money. Second, I calculated the individual likelihood of each individual of selling his/her vote.
+
+2. From the conjoint experiment, I first evaluated the democratic "health" of US citizens, and see which type of hypothetical candidates are more likely to be elected. Second, **I use the individual vote-selling likelihoods estimated above and see which attributes (i.e. which democratic dimensions) predict likely vote-sellers**. And that's the core of my study.
+
+
+### Conclusions
+
+The "health" of the democratic values in the US has a contradictory diagnostic
+
+1. **Results from the list experiment**: More than 20% of individuals would sell their vote. A high percentage for an industrialized democracy.
+2. **Results from the conjoint experiment**: The hypothetical candidates that are elected, are in theory of what democratic citizens ought to elect. For example, candidates that didn't allow free press were systematically rejected relative to candidates that did support free press.
+3. **Combined Results from both experiments**: The democratic value that specifically predicts likely vote-sellers is the liberal component, and particularly, *associationism* : citizens that give value to the right to associate with others (keeping the rest of the attributes fixed at their means) are more likely to sell their votes.
+
+## Data
+
+I use original data from an online survey experiment in the US representative at the national level.
+
+# Results: List Experiment
+
+## Distribution of the actual items - The fourth in red is the number of actual people declaring they would sell their vote
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+###############################################
+# LIST  Experiment DESCRIPTIVES
+###############################################
+cat("\014")
+rm(list=ls())
+
+# Load Data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+# Histogram for Item Count
+## Create a factor variable to use in the plot
+dat$treatment.f = factor(dat$treatment, levels = c(0,1), labels=c("Control", "Treatment"))
+
+library(ggplot2)
+# Plot
+ggplot(dat, aes(x=ycount)) + 
+  geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
+  geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
+  facet_grid(.~ treatment.f) + 
+  xlab("Items") + 
+  ylab("Item Count") +
+  theme_bw()
+```
+
+## Answer to the question when directly asked
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+# Histogram for Direct Question
+library(ggplot2)
+# Plot
+
+ggplot.labels1 <- data.frame(
+  time = c(1, 2), 
+  value = c(1000, 300), 
+  label = c(table(dat$directquestion.f)[1], table(dat$directquestion.f)[2]), 
+  type = c("NA*", "MVH")
+)
+
+ggplot(dat[!is.na(dat$directquestion.f), ], aes(x=directquestion.f)) + geom_bar() +
+  xlab("Would you be willing to accept money from a candidate for your vote?") + 
+  ylab("Frequency") +
+  geom_text(data = ggplot.labels1, aes(x = time, y = value, label = label), colour = "forestgreen") +
+  theme_bw()
+```
+
+## Multivariate Analysis of The List Experiment: Models
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+#####
+# Multivariate Analysis of List Experiment
+#####
+
+# Load Data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+## Setting tolerance
+options(scipen=999)
+options(digits=2)
+
+library(list)
+
+# Micro-Level Model: List Experiment
+list <- ictreg(ycount ~ 
+                 #age.n + 
+                 woman + 
+                 socideo + 
+                 partyid + 
+                 reg + 
+                 trustfed + 
+                 income.n + 
+                 educ.n + 
+                 polknow, 
+               data = dat, 
+               treat = "treatment", 
+               J=3, 
+               method = "ml", 
+               maxIter = 200000)
+
+
+## Macro-Level Model: List Experiment
+list.2 <- ictreg(ycount ~ zipinequality:income.n + sizeofthepoor:income.n + proplabforgovtwork,
+                 data = dat, 
+                 treat = "treatment", 
+                 J=3, 
+                 method = "nls", 
+                 maxIter = 200000)
+
+## Micro Level: Direct Question, List Experiment
+direct.q <- glm(directquestion ~ 
+                  #age.n + 
+                  woman + 
+                  socideo + 
+                  partyid + 
+                  reg + 
+                  trustfed + 
+                  income.n + 
+                  educ.n + 
+                  polknow, 
+                #ziplabforce + 
+                #zippercamincome + 
+                #sizetimesincome + 
+                #proplabforgovtwork,               
+                data = dat, 
+                family = binomial(link = "logit"))
+```
+
+## Individuals tend to systematically lie they would sell their votes
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+avg.pred.social.desirability <- predict.ictreg(list, direct.glm = direct.q, se.fit = TRUE)
+
+
+socdes.p = data.frame(avg.pred.social.desirability$fit, 
+                      avg.pred.social.desirability$se.fit,
+                      c(1:3),
+                      sign= as.numeric(avg.pred.social.desirability$fit$lwr<=0))
+
+socdes.p$c.1.3 = as.factor(socdes.p$c.1.3)
+socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List Experiment ", "Direct Question", "Estimated \n Social Desirability Bias"))
+
+library(ggplot2)
+ggplot() + geom_pointrange(
+  data=socdes.p,
+  mapping=aes(
+    x=socdes.p$c.1.3, 
+    y=socdes.p$fit,
+    ymin=socdes.p$upr,
+    ymax=socdes.p$lwr,
+    colour = socdes.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("") + 
+  ylab("Probability of Vote-Selling") + 
+  ggtitle("The Difference Between the Direct Question Model \n and the Indirect Question Model (list experiment), \n is significant") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+
+
+## Estimating Individual Likelihoods of Vote Selling
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+## Individual predictions
+list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
+list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
+indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
+names(indpred.p)[4] = "se.fit"
+rownames(indpred.p) <- NULL
+indpred.p.fit= indpred.p$fit
+
+
+### Plot
+library(ggplot2)
+ggplot() + geom_pointrange(data=indpred.p, 
+                           mapping =aes(
+                             x=1:nrow(indpred.p), 
+                             y=indpred.p$fit, 
+                             ymin=indpred.p$lwr, 
+                             ymax=indpred.p$upr, 
+                             colour = indpred.p$sign
+                           ), 
+                           size=0.25, 
+                           alpha=.5) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Observations") + 
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Posterior Predictions of Vote Selling at the Individual Level") +
+  guides(colour=FALSE) + 
+  theme_bw()
+
+```
+
+
+## Important Predictions: Who is more likely to sell?
+
+### Gender
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+womanW <- womanM <- dat
+womanW <- dat[which(dat$woman=="Woman"), ] 
+womanM <- dat[which(dat$woman=="Man"), ] 
+
+library(list)
+avg.pred.womanW  <- predict.ictreg(list, newdata = womanW, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.womanM  <- predict.ictreg(list, newdata = womanM, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+
+woman.p = data.frame(
+  t(avg.pred.womanW$fit), 
+  t(avg.pred.womanM$fit)
+)
+
+woman.p = data.frame(t(woman.p))
+sign = as.numeric(woman.p$lwr<=0)
+woman.p["sign"] <- sign
+
+woman.p$gender = as.factor(c(1,0))
+woman.p$gender <- factor(woman.p$gender, levels = c(1,0), labels = c("Woman", "Man"))
+
+
+library(ggplot2)
+ggplot() + 
+  geom_pointrange(
+    data=woman.p, 
+    mapping=aes(
+      x=woman.p$gender, 
+      y=woman.p$fit, 
+      ymin=woman.p$lwr, 
+      ymax=woman.p$upr,
+      colour = woman.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Gender") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
+
+```
+
+### Social Ideology
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+
+socideoVC <- socideoC <- socideoM <- socideoL <- socideoVL <- dat
+socideoVL <- dat[which(dat$socideo == levels(dat$socideo)[1]),]
+socideoL <- dat[which(dat$socideo == levels(dat$socideo)[2]),]
+socideoM <- dat[which(dat$socideo == levels(dat$socideo)[3]),]
+socideoC <- dat[which(dat$socideo == levels(dat$socideo)[4]),]
+socideoVC <- dat[which(dat$socideo == levels(dat$socideo)[5]),]
+
+library(list)
+avg.pred.socideoVL <- predict.ictreg(list, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoL <- predict.ictreg(list, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoM <- predict.ictreg(list, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoC <- predict.ictreg(list, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoVC <- predict.ictreg(list, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+socideo.p = data.frame(
+  t(avg.pred.socideoVL$fit), 
+  t(avg.pred.socideoL$fit), 
+  t(avg.pred.socideoM$fit), 
+  t(avg.pred.socideoC$fit), 
+  t(avg.pred.socideoVC$fit)
+)
+
+socideo.p = data.frame(t(socideo.p))
+sign = as.numeric(socideo.p$lwr<=0)
+socideo.p["sign"] <- sign
+
+socideo.p$socioideo = as.factor(c(1:5))
+socideo.p$socioideo <- factor(socideo.p$socioideo, levels = c(1:5), labels = c("Very \n Liberal", "Liberal", "Moderate", "Conservative", "Very \n Conservative"))
+
+library(ggplot2)
+ggplot() + 
+  geom_pointrange(
+    data=socideo.p, 
+    mapping=aes(
+      x=socideo.p$socioideo, 
+      y=socideo.p$fit, 
+      ymin=socideo.p$lwr, 
+      ymax=socideo.p$upr,
+      colour = socideo.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Social Ideology") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+### Party Id
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+
+partyidD <- partyidR <- partyidI <- partyidSE <- dat
+
+partyidD <- dat[which(dat$partyid == levels(dat$partyid)[1]),]
+partyidR <- dat[which(dat$partyid == levels(dat$partyid)[2]),]
+partyidI <- dat[which(dat$partyid == levels(dat$partyid)[3]),]
+partyidSE <- dat[which(dat$partyid == levels(dat$partyid)[4]),]
+
+library(list)
+avg.pred.partyidD  <- predict.ictreg(list, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidR  <- predict.ictreg(list, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidI  <- predict.ictreg(list, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidSE  <- predict.ictreg(list, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+partyid.p = data.frame(
+  t(avg.pred.partyidD$fit), 
+  t(avg.pred.partyidR$fit), 
+  t(avg.pred.partyidI$fit), 
+  t(avg.pred.partyidSE$fit)
+)
+
+partyid.p = data.frame(t(partyid.p))
+sign = as.numeric(partyid.p$lwr<=0)
+partyid.p["sign"] <- sign
+
+partyid.p$partyid = as.factor(c(1:4))
+partyid.p$partyid <- factor(partyid.p$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+
+library(ggplot2)
+ggplot() + 
+  geom_pointrange(
+    data=partyid.p, 
+    mapping=aes(
+      x=partyid.p$partyid, 
+      y=partyid.p$fit, 
+      ymin=partyid.p$lwr, 
+      ymax=partyid.p$upr,
+      colour = partyid.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Party Id.") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+### Education Levels
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+
+educ.SHS <- educ.HS <- educ.T <- educ.SC <- educ.AD <- educ.BD <- educ.GS <- dat
+
+educ.SHS = dat[which(dat$educ == levels(dat$educ)[1]),]
+educ.HS = dat[which(dat$educ == levels(dat$educ)[2]),]
+educ.T = dat[which(dat$educ == levels(dat$educ)[3]),]
+educ.SC = dat[which(dat$educ == levels(dat$educ)[4]),]
+educ.AD = dat[which(dat$educ == levels(dat$educ)[5]),]
+educ.BD = dat[which(dat$educ == levels(dat$educ)[6]),]
+educ.GS = dat[which(dat$educ == levels(dat$educ)[7]),]
+
+library(list)
+avg.pred.educ.SHS = predict.ictreg(list, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.HS = predict.ictreg(list, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.T = predict.ictreg(list, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.SC = predict.ictreg(list, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.AD = predict.ictreg(list, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.BD = predict.ictreg(list, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.GS = predict.ictreg(list, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+educ.p = data.frame(
+  t(avg.pred.educ.SHS$fit), 
+  t(avg.pred.educ.HS$fit), 
+  t(avg.pred.educ.T$fit), 
+  t(avg.pred.educ.SC$fit), 
+  t(avg.pred.educ.AD$fit), 
+  t(avg.pred.educ.BD$fit), 
+  t(avg.pred.educ.GS$fit)
+)
+
+educ.p = data.frame(t(educ.p))
+sign = as.numeric(educ.p$lwr<=0)
+educ.p["sign"] <- sign
+
+educ.p$education = as.factor(c(1:7))
+educ.p$education <- factor(educ.p$education, levels = c(1:7), labels = c("Some \n High  \n School", "High \n  School \n  Graduate", "Technical \n  School", "Some  \n College", "Associate \n  Degree", "Bachelor's \n  Degree", "Graduate \n  School")
+)
+
+library(ggplot2)
+ggplot() + 
+  geom_pointrange(
+    data=educ.p, 
+    mapping=aes(
+      x=educ.p$education, 
+      y=educ.p$fit, 
+      ymin=educ.p$lwr, 
+      ymax=educ.p$upr,
+      colour = educ.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Type of Education") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+## Contextual Models: Macro Level Factors that might lead individuals to sell their votes
+
+### Interaction Between Inequality (at the ZIP level) and Income
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+inequality.L <- inequality.H <- dat
+
+inequality.L = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.25, na.rm = T)),]
+inequality.H = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.75, na.rm = T)),]
+
+library(list)
+avg.pred.inequality.L = predict.ictreg(list.2, newdata = inequality.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.inequality.H = predict.ictreg(list.2, newdata = inequality.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+inequality.p = data.frame(
+  t(avg.pred.inequality.L$fit), 
+  t(avg.pred.inequality.H$fit)
+)
+
+inequality.p = data.frame(t(inequality.p))
+sign = as.numeric(inequality.p$lwr<=0)
+inequality.p["sign"] <- sign
+
+inequality.p$inequality = as.factor(c(1:2))
+inequality.p$inequality <- factor(inequality.p$inequality, levels = c(1:2), labels = c(
+  "Low", 
+  "High"))
+
+library(ggplot2)
+ggplot() + geom_pointrange(
+  data=inequality.p, 
+  mapping=aes(
+    x=inequality.p$inequality, 
+    y=inequality.p$fit, 
+    ymin=inequality.p$lwr, 
+    ymax=inequality.p$upr,
+    colour = inequality.p$sign), 
+  size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Zip-Inequality") +
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Interaction between Individual Income \nand Inequality at the Zip Level") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+### Size of the Poor (at the ZIP level)
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+
+sizeofthepoor.L <- sizeofthepoor.S <- dat
+
+sizeofthepoor.L = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.75, na.rm = T)),]
+sizeofthepoor.S = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.25, na.rm = T)),]
+
+library(list)
+avg.pred.sizeofthepoor.L = predict.ictreg(list.2, newdata = sizeofthepoor.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.sizeofthepoor.S = predict.ictreg(list.2, newdata = sizeofthepoor.S, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+sizeofthepoor.p = data.frame(
+  t(avg.pred.sizeofthepoor.L$fit), 
+  t(avg.pred.sizeofthepoor.S$fit)
+)
+
+sizeofthepoor.p = data.frame(t(sizeofthepoor.p))
+sign = as.numeric(sizeofthepoor.p$lwr<=0)
+sizeofthepoor.p["sign"] <- sign
+
+sizeofthepoor.p$sizeofthepoor = as.factor(c(1:2))
+sizeofthepoor.p$sizeofthepoor <- factor(sizeofthepoor.p$sizeofthepoor, levels = c(1:2), labels = c("Large", "Small"))
+
+library(ggplot2)
+ggplot() + geom_pointrange(
+  data=sizeofthepoor.p, 
+  mapping=aes(
+    x=sizeofthepoor.p$sizeofthepoor, 
+    y=sizeofthepoor.p$fit, 
+    ymin=sizeofthepoor.p$lwr, 
+    ymax=sizeofthepoor.p$upr,
+    colour = sizeofthepoor.p$sign), 
+  size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Size of the Poor") +
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Interaction between Individual Income \nand Size of the Poor at the Zip Level") +
+  guides(colour=FALSE) +
+  theme_bw()
+```
+
+# Conjoint Data
+
+## Evaluating the "Democratic" Health of Americans
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+############################## 
+# CONJOINT Experiment DATA ANALYSES
+##############################
+cat("\014")
+rm(list=ls())
+
+# Load Data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData") # Load data
+
+
+# example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
+# developed in :
+# Causal Inference in Conjoint Analysis:
+# Understanding Multidimensional Choices via Stated Preference Experiments
+# Jens Hainmueller, Daniel Hopkins, Teppei Yamamoto
+
+# function that does clustered SEs
+vcovCluster <- function(
+  model,
+  cluster
+)
+{
+  require(sandwich)
+  require(lmtest)
+  if(nrow(model.matrix(model))!=length(cluster)){
+    stop("check your data: cluster variable has different N than model")
+  }
+  M <- length(unique(cluster))
+  N <- length(cluster)           
+  K <- model$rank   
+  if(M<50){
+    warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+  }
+  dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+  uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+  rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+  return(rcse.cov)
+}
+
+
+library(lmtest)
+library(sandwich)
+library(msm) # install.packages("msm")
+
+
+# make outcome numeric
+d$selected <- as.numeric(d$selected)
+
+# make treatments factors
+d$at.run = as.factor(d$at.run)
+d$at.asso = as.factor(d$at.asso)
+d$at.press = as.factor(d$at.press)
+d$at.presaut = as.factor(d$at.presaut)
+d$at.vote = as.factor(d$at.vote)
+
+
+# change reference ctegories
+d <- within(d, at.run <- relevel(at.run, ref = 2))
+d <- within(d, at.asso <- relevel(at.asso, ref = 2))
+d <- within(d, at.press <- relevel(at.press, ref = 2))
+d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
+d <- within(d, at.vote <- relevel(at.vote, ref = 2))
+
+model.1 = lm(selected ~ at.run, data=d)
+model.2 = lm(selected ~ at.asso, data=d)
+model.3 = lm(selected ~ at.press, data=d)
+model.4 = lm(selected ~ at.presaut, data=d)
+model.5 = lm(selected ~ at.vote, data=d)
+
+
+acme.1 = coeftest(model.1, vcov = vcovCluster(model.1, cluster = d$idnum)) # run
+acme.2 = coeftest(model.2, vcov = vcovCluster(model.2, cluster = d$idnum)) # asso
+acme.3 = coeftest(model.3, vcov = vcovCluster(model.3, cluster = d$idnum)) # press
+acme.4 = coeftest(model.4, vcov = vcovCluster(model.4, cluster = d$idnum)) # pres aut
+acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum)) # vote
+
+acme.d <- data.frame(
+  variable = seq(1:10),
+  coefficients = as.numeric(c(
+                   acme.1[2], 0, # run
+                   acme.5[2], 0, # vote
+                   acme.2[2], 0, # assoc
+                   acme.3[2], 0, # media
+                   acme.4[2], 0 # pres aut
+                   )
+                   ),
+  se = as.numeric(c(
+                   acme.1[4], 0, # run
+                   acme.5[4], 0, # vote
+                   acme.2[4], 0, # assoc
+                   acme.3[4], 0, # media
+                   acme.4[4], 0  # pres aut
+                   )
+  )
+)
+
+acme.d$upper <-acme.d$coefficients + 1.96*acme.d$se
+acme.d$lower <-acme.d$coefficients - 1.96*acme.d$se
+acme.d$variable = order(acme.d$variable)
+
+
+acme.d$variable <- factor(acme.d$variable,
+                          levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
+                    labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+                    )
+
+
+acme.d$variable = with(acme.d, factor(variable, levels = rev(levels(variable))))
+
+
+
+# Plot
+library(ggplot2)
+ggplot(acme.d, aes(
+  x = variable, 
+  y = coefficients, 
+  ymin = upper, 
+  ymax = lower)
+  ) +
+  geom_pointrange() + 
+  geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+  coord_flip() + 
+  xlab("") + 
+  ylab("Coefficient") +
+  ggtitle("Democratic Values: Americans Systematically \n Prefer Political Candidates that go in \n Line with a Strong Democracy")+
+  guides(colour=FALSE) +
+  theme(legend.position="none") + 
+  theme_bw()
+```
+
+### Predicting Which Of These Dimensions Predict Likely Vote-Sellers
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE}
+############
+## Predicting Predicted Probabiltities of Vote Selling
+############
+
+cat("\014")
+rm(list=ls())
+
+
+### GENERATE VECTOR WITH INDIVUDUAL PREDICTIONS
+
+# load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+
+
+# run the model
+library(list)
+list <- ictreg(ycount ~ 
+                 #age.n + 
+                 woman + 
+                 socideo + 
+                 partyid + 
+                 reg + 
+                 trustfed + 
+                 income.n + 
+                 educ.n + 
+                 polknow, 
+               #ziplabforce + 
+               #zippercamincome + 
+               #sizetimesincome + 
+               #proplabforgovtwork,               
+               data = dat, 
+               treat = "treatment", 
+               J=3, 
+               method = "ml", 
+               maxIter = 200000)
+
+
+## Get Individual predictions
+### Individual posterior likelihoods of vote-selling
+list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
+list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
+indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
+names(indpred.p)[4] = "se.fit"
+rownames(indpred.p) <- NULL
+indpred.p.fit= indpred.p$fit
+
+# build dataset for this analysis
+voteselling = data.frame(rep(indpred.p.fit, each = 10))
+
+# load conjoint data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData") # Load data
+# append voteselling column
+d = data.frame(voteselling, d); colnames(d)[1] <- "voteselling"
+
+# function that does clustered SEs
+vcovCluster <- function(
+  model,
+  cluster
+)
+{
+  require(sandwich)
+  require(lmtest)
+  if(nrow(model.matrix(model))!=length(cluster)){
+    stop("check your data: cluster variable has different N than model")
+  }
+  M <- length(unique(cluster))
+  N <- length(cluster)           
+  K <- model$rank   
+  if(M<50){
+    warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+  }
+  dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+  uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+  rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+  return(rcse.cov)
+}
+
+
+library(lmtest)
+library(sandwich)
+library(msm) # install.packages("msm")
+
+
+# make outcome numeric
+d$voteselling <- as.numeric(d$voteselling)
+
+# make treatments factors
+d$at.run = as.factor(d$at.run)
+d$at.asso = as.factor(d$at.asso)
+d$at.press = as.factor(d$at.press)
+d$at.presaut = as.factor(d$at.presaut)
+d$at.vote = as.factor(d$at.vote)
+
+
+# change reference ctegories
+d <- within(d, at.run <- relevel(at.run, ref = 2))
+d <- within(d, at.asso <- relevel(at.asso, ref = 2))
+d <- within(d, at.press <- relevel(at.press, ref = 2))
+d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
+d <- within(d, at.vote <- relevel(at.vote, ref = 2))
+
+model.vs.1 = lm(voteselling ~ at.run, data=d)
+model.vs.2 = lm(voteselling ~ at.asso, data=d)
+model.vs.3 = lm(voteselling ~ at.press, data=d)
+model.vs.4 = lm(voteselling ~ at.presaut, data=d)
+model.vs.5 = lm(voteselling ~ at.vote, data=d)
+
+
+acme.vs.1 = coeftest(model.vs.1, vcov = vcovCluster(model.vs.1, cluster = d$idnum)) # run
+acme.vs.2 = coeftest(model.vs.2, vcov = vcovCluster(model.vs.2, cluster = d$idnum)) # asso
+acme.vs.3 = coeftest(model.vs.3, vcov = vcovCluster(model.vs.3, cluster = d$idnum)) # press
+acme.vs.4 = coeftest(model.vs.4, vcov = vcovCluster(model.vs.4, cluster = d$idnum)) # pres aut
+acme.vs.5 = coeftest(model.vs.5, vcov = vcovCluster(model.vs.5, cluster = d$idnum)) # vote
+
+acme.vs.d <- data.frame(
+  variable = seq(1:10),
+  coefficients = as.numeric(c(
+    acme.vs.1[2], 0, # run
+    acme.vs.5[2], 0, # vote
+    acme.vs.2[2], 0, # assoc
+    acme.vs.3[2], 0, # media
+    acme.vs.4[2], 0 # pres aut
+  )
+  ),
+  se = as.numeric(c(
+    acme.vs.1[4], 0, # run
+    acme.vs.5[4], 0, # vote
+    acme.vs.2[4], 0, # assoc
+    acme.vs.3[4], 0, # media
+    acme.vs.4[4], 0  # pres aut
+  )
+  )
+)
+
+
+
+acme.vs.d$upper <-acme.vs.d$coefficients + 1.28*acme.vs.d$se
+acme.vs.d$lower <-acme.vs.d$coefficients - 1.28*acme.vs.d$se
+acme.vs.d$variable = order(acme.vs.d$variable)
+
+
+acme.vs.d$variable <- factor(acme.vs.d$variable,
+                             levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
+                             labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+)
+
+
+acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variable))))
+
+
+
+# Plot
+library(ggplot2)
+ggplot(acme.vs.d, aes(
+  x = variable, 
+  y = coefficients, 
+  ymin = upper, 
+  ymax = lower)
+) +
+  geom_pointrange() + 
+  geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+  coord_flip() + 
+  xlab("") + 
+  ylab("Coefficient") +
+  ggtitle("Broken Democratic Dimensions: \n Associationism Predicts Vote Selling")+
+  guides(colour=FALSE) +
+  theme(legend.position="none") + 
+  theme_bw()
+```
