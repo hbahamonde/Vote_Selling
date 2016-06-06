@@ -7,7 +7,7 @@ rm(list=ls())
 
 # Load the data
 library(foreign)
-dat <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/data_list.dta")
+dat <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/data_list.dta")
 
 # Data Cleaning
 ## Drop if Treatments are Missing
@@ -15,7 +15,7 @@ dat <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtri
 f = c("f_1_1_1",  "f_1_1_2", "f_1_1_3", "f_1_1_4", "f_1_1_5", "f_1_2_1", "f_1_2_2", "f_1_2_3", "f_1_2_4", "f_1_2_5", "f_2_1_1",  "f_2_1_2", "f_2_1_3", "f_2_1_4", "f_2_1_5", "f_2_2_1", "f_2_2_2", "f_2_2_3", "f_2_2_4", "f_2_2_5", "f_3_1_1", "f_3_1_2", "f_3_1_3", "f_3_1_4", "f_3_1_5", "f_3_2_1", "f_3_2_2", "f_3_2_3", "f_3_2_4", "f_3_2_5", "f_4_1_1", "f_4_1_2", "f_4_1_3", "f_4_1_4", "f_4_1_5", "f_4_2_1", "f_4_2_2", "f_4_2_3", "f_4_2_4", "f_4_2_5", "f_5_1_1", "f_5_1_2", "f_5_1_3", "f_5_1_4", "f_5_1_5", "f_5_2_1", "f_5_2_2", "f_5_2_3", "f_5_2_4", "f_5_2_5")
 
 dat = dat[!with(dat,is.na(treatment100) & is.na(treatment500) & is.na(control) |
-                        is.na(cj_1) | is.na(cj_2) | is.na(cj_3) | is.na(cj_4) | is.na(cj_5) | is.na(f)
+                  is.na(cj_1) | is.na(cj_2) | is.na(cj_3) | is.na(cj_4) | is.na(cj_5) | is.na(f)
 ),]
 
 
@@ -39,22 +39,22 @@ names(dat)[names(dat) == "gender"] <- "woman"
 # recoding sell (direct sell question)
 names(dat)[names(dat) == "sell1"] <- "directquestion" # renaming
 dat$directquestion.f <- ordered(dat$directquestion, levels = c(#recoding
-        "No, I don't want to sell my vote", 
-        "Yes, I want to sell my vote"), labels = c("No", "Yes"))
+  "No, I don't want to sell my vote", 
+  "Yes, I want to sell my vote"), labels = c("No", "Yes"))
 library(car)
 dat$directquestion  <- recode(as.integer(dat$directquestion), "1 = 0 ; 2 = 1")
 
 # Combine (weighted) pol. knowledge vars
 dat$polknow = rowSums(data.frame(cbind(
-        dat$roberts/dat$tknow1_3, 
-        dat$supremecourt/dat$supremecourt_t, 
-        dat$vp/dat$vp_t, 
-        dat$veto/dat$veto_t,
-        dat$majority/dat$majority_t,
-        dat$conservative/dat$conservative_t)), na.rm = T)
+  dat$roberts/dat$tknow1_3, 
+  dat$supremecourt/dat$supremecourt_t, 
+  dat$vp/dat$vp_t, 
+  dat$veto/dat$veto_t,
+  dat$majority/dat$majority_t,
+  dat$conservative/dat$conservative_t)), na.rm = T)
 
 # Merge ZIP data
-zipdata <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/zipdata.dta") # import ZIP DTA DATA 
+zipdata <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/zipdata.dta") # import ZIP DTA DATA 
 zipdata[zipdata == -1] <- NA
 dat = merge(dat, zipdata, by=c("zip"), all.x =T)
 
@@ -85,8 +85,8 @@ dat$educ.n = as.numeric(dat$educ)
 # drop missings THESE ARE THE COVARIATES I AM USING TO ESTIMATE THE LIST PART
 sapply(dat, function(x) sum(is.na(x)))
 completeFun <- function(data, desiredCols) {
-        completeVec <- complete.cases(data[, desiredCols])
-        return(data[completeVec, ])
+  completeVec <- complete.cases(data[, desiredCols])
+  return(data[completeVec, ])
 }
 dat = completeFun(dat, c("woman", "socideo", "partyid", "reg", "trustfed", "income.n", "educ.n", "polknow")) # variables
 
@@ -106,7 +106,7 @@ dat$idnum = NULL
 
 
 # Saving Data
-save(dat, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # in paper's folder
+save(dat, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # in paper's folder
 
 ############################## 
 # CONJOINT Experiment DATA CLEANING
@@ -115,7 +115,7 @@ cat("\014")
 rm(list=ls())
 
 # C
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData")
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData")
 c = dat
 
 
@@ -188,32 +188,32 @@ d = data.frame(code,idnum,pair,candidate,at.run, at.asso, at.press, at.presaut, 
 
 # Loops to populate d dataset
 for (i in code) { # RightToRun
-        d$at.run[d$code==i] = c$caracteristica[c$descripcion=="RightToRun" & c$code==i]
+  d$at.run[d$code==i] = c$caracteristica[c$descripcion=="RightToRun" & c$code==i]
 }
 
 for (i in code) { # RightToAssociate
-        d$at.asso[d$code==i] = c$caracteristica[c$descripcion=="RightToAssociate" & c$code==i]
+  d$at.asso[d$code==i] = c$caracteristica[c$descripcion=="RightToAssociate" & c$code==i]
 }
 
 
 for (i in code) { # FreePress
-        d$at.press[d$code==i] = c$caracteristica[c$descripcion=="FreePress" & c$code==i]
+  d$at.press[d$code==i] = c$caracteristica[c$descripcion=="FreePress" & c$code==i]
 }
 
 
 for (i in code) { # PresAutonomy
-        d$at.presaut[d$code==i] = c$caracteristica[c$descripcion=="PresAutonomy" & c$code==i]
+  d$at.presaut[d$code==i] = c$caracteristica[c$descripcion=="PresAutonomy" & c$code==i]
 }
 
 
 for (i in code) { # RightToVote
-        d$at.vote[d$code==i] = c$caracteristica[c$descripcion=="RightToVote" & c$code==i]
+  d$at.vote[d$code==i] = c$caracteristica[c$descripcion=="RightToVote" & c$code==i]
 }
 
 # Generate "outcome" dataset
 
 # E
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData")
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData")
 
 e = dat
 
@@ -267,39 +267,39 @@ outcome = data.frame(code.e,idnum.e, pair.e, candidate.e,all_d, woman.e, socideo
 
 # LOOPS: populating D dataset
 for (i in code) {# selected
-        d$selected2[d$code==i] = outcome$all_d[outcome$code.e==i] 
+  d$selected2[d$code==i] = outcome$all_d[outcome$code.e==i] 
 }
 
 for (i in code) {# woman
-        d$woman[d$code==i] = outcome$woman[outcome$code==i]
+  d$woman[d$code==i] = outcome$woman[outcome$code==i]
 }
 
 for (i in code) {# socideo
-        d$socideo[d$code==i] = outcome$socideo[outcome$code==i]
+  d$socideo[d$code==i] = outcome$socideo[outcome$code==i]
 }
 
 for (i in code) {# partyid
-        d$partyid[d$code==i] = outcome$partyid[outcome$code==i]
+  d$partyid[d$code==i] = outcome$partyid[outcome$code==i]
 }
 
 for (i in code) {# reg
-        d$reg[d$code==i] = outcome$reg[outcome$code==i]
+  d$reg[d$code==i] = outcome$reg[outcome$code==i]
 }
 
 for (i in code) {# trustfed
-        d$trustfed[d$code==i] = outcome$trustfed[outcome$code==i]
+  d$trustfed[d$code==i] = outcome$trustfed[outcome$code==i]
 }
 
 for (i in code) {# income.n
-        d$income.n[d$code==i] = outcome$income.n[outcome$code==i]
+  d$income.n[d$code==i] = outcome$income.n[outcome$code==i]
 }
 
 for (i in code) {# educ.n
-        d$educ.n[d$code==i] = outcome$educ.n[outcome$code==i]
+  d$educ.n[d$code==i] = outcome$educ.n[outcome$code==i]
 }
 
 for (i in code) {# polknow
-        d$polknow[d$code==i] = outcome$polknow[outcome$code==i]
+  d$polknow[d$code==i] = outcome$polknow[outcome$code==i]
 }
 
 
@@ -311,7 +311,7 @@ d$vote = NULL
 
 
 # Saving Data
-save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData")
+save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData")
 
 
 ###############################################
@@ -321,7 +321,7 @@ cat("\014")
 rm(list=ls())
 
 # Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # Histogram for Item Count
 ## Create a factor variable to use in the plot
@@ -330,29 +330,29 @@ dat$treatment.f = factor(dat$treatment, levels = c(0,1), labels=c("Control", "Tr
 library(ggplot2)
 # Plot
 ggplot(dat, aes(x=ycount)) + 
-        geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
-        geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
-        facet_grid(.~ treatment.f) + 
-        xlab("Items") + 
-        ylab("Item Count") +
-        theme_bw()
+  geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
+  geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
+  facet_grid(.~ treatment.f) + 
+  xlab("Items") + 
+  ylab("Item Count") +
+  theme_bw()
 
 # Histogram for Direct Question
 library(ggplot2)
 # Plot
 
 ggplot.labels1 <- data.frame(
-        time = c(1, 2), 
-        value = c(1000, 300), 
-        label = c(table(dat$directquestion.f)[1], table(dat$directquestion.f)[2]), 
-        type = c("NA*", "MVH")
+  time = c(1, 2), 
+  value = c(1000, 300), 
+  label = c(table(dat$directquestion.f)[1], table(dat$directquestion.f)[2]), 
+  type = c("NA*", "MVH")
 )
 
 ggplot(dat[!is.na(dat$directquestion.f), ], aes(x=directquestion.f)) + geom_bar() +
-        xlab("Would you be willing to accept money from a candidate for your vote?") + 
-        ylab("Frequency") +
-        geom_text(data = ggplot.labels1, aes(x = time, y = value, label = label), colour = "forestgreen") +
-        theme_bw()
+  xlab("Would you be willing to accept money from a candidate for your vote?") + 
+  ylab("Frequency") +
+  geom_text(data = ggplot.labels1, aes(x = time, y = value, label = label), colour = "forestgreen") +
+  theme_bw()
 
 
 # Balance Plots PENDING
@@ -416,7 +416,7 @@ cat("\014")
 rm(list=ls())
 
 # Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 
@@ -452,18 +452,18 @@ summary(sum.dif.means)
 # install_github("IQSS/Zelig")
 library(Zelig)
 # Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 # working model
 direct.q.zelig <-   zelig(directquestion ~ 
-                                  #age.n + 
-                                  woman + 
-                                  socideo + 
-                                  partyid + 
-                                  reg + 
-                                  trustfed + 
-                                  income.n + 
-                                  educ.n + 
-                                  polknow, 
+                            #age.n + 
+                            woman + 
+                            socideo + 
+                            partyid + 
+                            reg + 
+                            trustfed + 
+                            income.n + 
+                            educ.n + 
+                            polknow, 
                           #ziplabforce + 
                           #zippercamincome + 
                           #sizetimesincome + 
@@ -485,7 +485,7 @@ plot(s.out2)
 #####
 
 # Load Data 
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # drop missings
 ## sapply(dat, function(x) sum(is.na(x)))
@@ -501,15 +501,15 @@ options(digits=2)
 
 library(list)
 list <- ictreg(ycount ~ 
-                       #age.n + 
-                       woman + 
-                       socideo + 
-                       partyid + 
-                       reg + 
-                       trustfed + 
-                       income.n + 
-                       educ.n + 
-                       polknow, 
+                 #age.n + 
+                 woman + 
+                 socideo + 
+                 partyid + 
+                 reg + 
+                 trustfed + 
+                 income.n + 
+                 educ.n + 
+                 polknow, 
                #ziplabforce + 
                #zippercamincome + 
                #sizetimesincome + 
@@ -543,9 +543,9 @@ cat("\014")
 rm(list=ls())
 
 # load conjoint data D
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData") # d
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
 # load list DAT
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # dat
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # dat
 
 
 # extract Item Count from List and Append it into the COnjoint Data frame
@@ -557,11 +557,7 @@ treatment = data.frame(rep(dat$treatment, each = 10))
 dat.combined = data.frame(treatment, dat.combined); colnames(dat.combined)[1] <- "treatment"
 
 # function that does clustered SEs
-vcovCluster <- function(
-  model,
-  cluster
-)
-{
+vcovCluster <- function(model,cluster){
   require(sandwich)
   require(lmtest)
   if(nrow(model.matrix(model))!=length(cluster)){
@@ -605,20 +601,20 @@ dat.combined$at.vote = as.numeric(dat.combined$at.vote)
 
 
 # Estimate the model
-library(list)
+library(list) # install.packages("list")
 list.run <- ictreg(ycount ~ at.run*selected,           
-               data = dat.combined, 
-               treat = "treatment", 
-               J=3, 
-               method = "ml", 
-               maxIter = 200000)
-
-list.at.asso <- ictreg(ycount ~ at.asso*selected,           
                    data = dat.combined, 
                    treat = "treatment", 
                    J=3, 
                    method = "ml", 
                    maxIter = 200000)
+
+list.at.asso <- ictreg(ycount ~ at.asso*selected,           
+                       data = dat.combined, 
+                       treat = "treatment", 
+                       J=3, 
+                       method = "ml", 
+                       maxIter = 200000)
 
 
 
@@ -695,15 +691,15 @@ ggplot(acme.vs.d, aes(
 ## overdispersion is a concern due to possible positive correlation among control items, then beta-binomial logistic regression may be used
 
 over.disp.test <-glm(ycount ~
-                             #age.n + 
-                             woman + 
-                             socideo + 
-                             partyid + 
-                             reg + 
-                             trustfed + 
-                             income.n + 
-                             educ.n + 
-                             polknow, 
+                       #age.n + 
+                       woman + 
+                       socideo + 
+                       partyid + 
+                       reg + 
+                       trustfed + 
+                       income.n + 
+                       educ.n + 
+                       polknow, 
                      #ziplabforce + 
                      #zippercamincome + 
                      #sizetimesincome + 
@@ -752,35 +748,35 @@ indpred.p.fit= indpred.p$fit
 library(ggplot2)
 ggplot() + geom_pointrange(data=indpred.p, 
                            mapping =aes(
-                                   x=1:nrow(indpred.p), 
-                                   y=indpred.p$fit, 
-                                   ymin=indpred.p$lwr, 
-                                   ymax=indpred.p$upr, 
-                                   colour = indpred.p$sign
+                             x=1:nrow(indpred.p), 
+                             y=indpred.p$fit, 
+                             ymin=indpred.p$lwr, 
+                             ymax=indpred.p$upr, 
+                             colour = indpred.p$sign
                            ), 
                            size=0.25, 
                            alpha=.5) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Observations") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) + 
-        theme_bw()
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Observations") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) + 
+  theme_bw()
 
 ######################################################
 # Estimation of Social Desirability: Direct vs. Indidirect questions
 
 
 direct.q <- glm(directquestion ~ 
-                        #age.n + 
-                        woman + 
-                        socideo + 
-                        partyid + 
-                        reg + 
-                        trustfed + 
-                        income.n + 
-                        educ.n + 
-                        polknow, 
+                  #age.n + 
+                  woman + 
+                  socideo + 
+                  partyid + 
+                  reg + 
+                  trustfed + 
+                  income.n + 
+                  educ.n + 
+                  polknow, 
                 #ziplabforce + 
                 #zippercamincome + 
                 #sizetimesincome + 
@@ -802,19 +798,19 @@ socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List", "Direct", "Soc. Des"
 
 library(ggplot2)
 ggplot() + geom_pointrange(
-        data=socdes.p,
-        mapping=aes(
-                x=socdes.p$c.1.3, 
-                y=socdes.p$fit,
-                ymin=socdes.p$upr,
-                ymax=socdes.p$lwr,
-                colour = socdes.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("") + 
-        ylab("Probability of Vote-Selling") + 
-        guides(colour=FALSE) +
-        theme_bw()
+  data=socdes.p,
+  mapping=aes(
+    x=socdes.p$c.1.3, 
+    y=socdes.p$fit,
+    ymin=socdes.p$upr,
+    ymax=socdes.p$lwr,
+    colour = socdes.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("") + 
+  ylab("Probability of Vote-Selling") + 
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # PREDICTIONS
@@ -830,7 +826,7 @@ ggplot() + geom_pointrange(
 
 ######################################################
 # 1 WOMAN
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 womanW <- womanM <- dat
 womanW <- dat[which(dat$woman=="Woman"), ] 
@@ -842,8 +838,8 @@ avg.pred.womanM  <- predict.ictreg(list, newdata = womanM, avg = TRUE, se.fit = 
 
 
 woman.p = data.frame(
-        t(avg.pred.womanW$fit), 
-        t(avg.pred.womanM$fit)
+  t(avg.pred.womanW$fit), 
+  t(avg.pred.womanM$fit)
 )
 
 woman.p = data.frame(t(woman.p))
@@ -856,24 +852,24 @@ woman.p$gender <- factor(woman.p$gender, levels = c(1,0), labels = c("Woman", "M
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=woman.p, 
-                mapping=aes(
-                        x=woman.p$gender, 
-                        y=woman.p$fit, 
-                        ymin=woman.p$lwr, 
-                        ymax=woman.p$upr,
-                        colour = woman.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Gender") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=woman.p, 
+    mapping=aes(
+      x=woman.p$gender, 
+      y=woman.p$fit, 
+      ymin=woman.p$lwr, 
+      ymax=woman.p$upr,
+      colour = woman.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Gender") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 2 socideo
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 socideoVC <- socideoC <- socideoM <- socideoL <- socideoVL <- dat
@@ -891,11 +887,11 @@ avg.pred.socideoC <- predict.ictreg(list, newdata = socideoC, avg = TRUE, se.fit
 avg.pred.socideoVC <- predict.ictreg(list, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 socideo.p = data.frame(
-        t(avg.pred.socideoVL$fit), 
-        t(avg.pred.socideoL$fit), 
-        t(avg.pred.socideoM$fit), 
-        t(avg.pred.socideoC$fit), 
-        t(avg.pred.socideoVC$fit)
+  t(avg.pred.socideoVL$fit), 
+  t(avg.pred.socideoL$fit), 
+  t(avg.pred.socideoM$fit), 
+  t(avg.pred.socideoC$fit), 
+  t(avg.pred.socideoVC$fit)
 )
 
 socideo.p = data.frame(t(socideo.p))
@@ -907,24 +903,24 @@ socideo.p$socioideo <- factor(socideo.p$socioideo, levels = c(1:5), labels = c("
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=socideo.p, 
-                mapping=aes(
-                        x=socideo.p$socioideo, 
-                        y=socideo.p$fit, 
-                        ymin=socideo.p$lwr, 
-                        ymax=socideo.p$upr,
-                        colour = socideo.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Social Ideology") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=socideo.p, 
+    mapping=aes(
+      x=socideo.p$socioideo, 
+      y=socideo.p$fit, 
+      ymin=socideo.p$lwr, 
+      ymax=socideo.p$upr,
+      colour = socideo.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Social Ideology") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 3 partyid
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 partyidD <- partyidR <- partyidI <- partyidSE <- dat
@@ -941,10 +937,10 @@ avg.pred.partyidI  <- predict.ictreg(list, newdata = partyidI, avg = TRUE, se.fi
 avg.pred.partyidSE  <- predict.ictreg(list, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 partyid.p = data.frame(
-        t(avg.pred.partyidD$fit), 
-        t(avg.pred.partyidR$fit), 
-        t(avg.pred.partyidI$fit), 
-        t(avg.pred.partyidSE$fit)
+  t(avg.pred.partyidD$fit), 
+  t(avg.pred.partyidR$fit), 
+  t(avg.pred.partyidI$fit), 
+  t(avg.pred.partyidSE$fit)
 )
 
 partyid.p = data.frame(t(partyid.p))
@@ -956,24 +952,24 @@ partyid.p$partyid <- factor(partyid.p$partyid, levels = c(1:4), labels = c("Demo
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=partyid.p, 
-                mapping=aes(
-                        x=partyid.p$partyid, 
-                        y=partyid.p$fit, 
-                        ymin=partyid.p$lwr, 
-                        ymax=partyid.p$upr,
-                        colour = partyid.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Party Id.") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=partyid.p, 
+    mapping=aes(
+      x=partyid.p$partyid, 
+      y=partyid.p$fit, 
+      ymin=partyid.p$lwr, 
+      ymax=partyid.p$upr,
+      colour = partyid.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Party Id.") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 4 reg
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 regR <- regU <- dat
@@ -986,8 +982,8 @@ avg.pred.regR  <- predict.ictreg(list, newdata = regR, avg = TRUE, se.fit = TRUE
 avg.pred.regU  <- predict.ictreg(list, newdata = regU, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 reg.p = data.frame(
-        t(avg.pred.regR$fit), 
-        t(avg.pred.regU$fit)
+  t(avg.pred.regR$fit), 
+  t(avg.pred.regU$fit)
 )
 
 reg.p = data.frame(t(reg.p))
@@ -999,24 +995,24 @@ reg.p$registered <- factor(reg.p$registered, levels = c(1:2), labels = c("Regist
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=reg.p, 
-                mapping=aes(
-                        x=reg.p$registered, 
-                        y=reg.p$fit, 
-                        ymin=reg.p$lwr, 
-                        ymax=reg.p$upr,
-                        colour = reg.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Registered to Vote") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=reg.p, 
+    mapping=aes(
+      x=reg.p$registered, 
+      y=reg.p$fit, 
+      ymin=reg.p$lwr, 
+      ymax=reg.p$upr,
+      colour = reg.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Registered to Vote") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 5 trustfed
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 trustfed.NTAA <- trustfed.NVMT <- trustfed.I <- trustfed.FAOT <- trustfed.AGDOT <- dat
@@ -1035,11 +1031,11 @@ avg.pred.trustfed.FAOT = predict.ictreg(list, newdata = trustfed.FAOT, avg = TRU
 avg.pred.trustfed.AGDOT= predict.ictreg(list, newdata = trustfed.AGDOT, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 trustfed.p = data.frame(
-        t(avg.pred.trustfed.NTAA$fit),
-        t(avg.pred.trustfed.NVMT$fit),
-        t(avg.pred.trustfed.I$fit),
-        t(avg.pred.trustfed.FAOT$fit),
-        t(avg.pred.trustfed.AGDOT$fit)
+  t(avg.pred.trustfed.NTAA$fit),
+  t(avg.pred.trustfed.NVMT$fit),
+  t(avg.pred.trustfed.I$fit),
+  t(avg.pred.trustfed.FAOT$fit),
+  t(avg.pred.trustfed.AGDOT$fit)
 )
 
 trustfed.p = data.frame(t(trustfed.p))
@@ -1051,25 +1047,25 @@ trustfed.p$trustfed <- factor(trustfed.p$trustfed, levels = c(1:5), labels = c("
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=trustfed.p, 
-                mapping=aes(
-                        x=trustfed.p$trustfed, 
-                        y=trustfed.p$fit, 
-                        ymin=trustfed.p$lwr, 
-                        ymax=trustfed.p$upr,
-                        colour = trustfed.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Trust in the Federal Government in Washington, DC") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=trustfed.p, 
+    mapping=aes(
+      x=trustfed.p$trustfed, 
+      y=trustfed.p$fit, 
+      ymin=trustfed.p$lwr, 
+      ymax=trustfed.p$upr,
+      colour = trustfed.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Trust in the Federal Government in Washington, DC") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 
 ######################################################
 # 6 educ
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 educ.SHS <- educ.HS <- educ.T <- educ.SC <- educ.AD <- educ.BD <- educ.GS <- dat
@@ -1092,13 +1088,13 @@ avg.pred.educ.BD = predict.ictreg(list, newdata = educ.BD, avg = TRUE, se.fit = 
 avg.pred.educ.GS = predict.ictreg(list, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 educ.p = data.frame(
-        t(avg.pred.educ.SHS$fit), 
-        t(avg.pred.educ.HS$fit), 
-        t(avg.pred.educ.T$fit), 
-        t(avg.pred.educ.SC$fit), 
-        t(avg.pred.educ.AD$fit), 
-        t(avg.pred.educ.BD$fit), 
-        t(avg.pred.educ.GS$fit)
+  t(avg.pred.educ.SHS$fit), 
+  t(avg.pred.educ.HS$fit), 
+  t(avg.pred.educ.T$fit), 
+  t(avg.pred.educ.SC$fit), 
+  t(avg.pred.educ.AD$fit), 
+  t(avg.pred.educ.BD$fit), 
+  t(avg.pred.educ.GS$fit)
 )
 
 educ.p = data.frame(t(educ.p))
@@ -1111,20 +1107,20 @@ educ.p$education <- factor(educ.p$education, levels = c(1:7), labels = c("Some \
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=educ.p, 
-                mapping=aes(
-                        x=educ.p$education, 
-                        y=educ.p$fit, 
-                        ymin=educ.p$lwr, 
-                        ymax=educ.p$upr,
-                        colour = educ.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Type of Education") + 
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=educ.p, 
+    mapping=aes(
+      x=educ.p$education, 
+      y=educ.p$fit, 
+      ymin=educ.p$lwr, 
+      ymax=educ.p$upr,
+      colour = educ.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Type of Education") + 
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 6 income.n PENDING!!
@@ -1146,7 +1142,7 @@ ggplot() +
 ######################################################
 # 1 zipinequality:income.n
 
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 inequality.L <- inequality.H <- dat
 
@@ -1158,8 +1154,8 @@ avg.pred.inequality.L = predict.ictreg(list.2, newdata = inequality.L, avg = TRU
 avg.pred.inequality.H = predict.ictreg(list.2, newdata = inequality.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 inequality.p = data.frame(
-        t(avg.pred.inequality.L$fit), 
-        t(avg.pred.inequality.H$fit)
+  t(avg.pred.inequality.L$fit), 
+  t(avg.pred.inequality.H$fit)
 )
 
 inequality.p = data.frame(t(inequality.p))
@@ -1168,30 +1164,30 @@ inequality.p["sign"] <- sign
 
 inequality.p$inequality = as.factor(c(1:2))
 inequality.p$inequality <- factor(inequality.p$inequality, levels = c(1:2), labels = c(
-        "Low", 
-        "High"))
+  "Low", 
+  "High"))
 
 library(ggplot2)
 ggplot() + geom_pointrange(
-        data=inequality.p, 
-        mapping=aes(
-                x=inequality.p$inequality, 
-                y=inequality.p$fit, 
-                ymin=inequality.p$lwr, 
-                ymax=inequality.p$upr,
-                colour = inequality.p$sign), 
-        size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Zip-Inequality") +
-        ylab("Probability of Vote-Selling") +
-        ggtitle("Interaction between Individual Income \nand Inequality at the Zip Level") +
-        guides(colour=FALSE) +
-        theme_bw()
+  data=inequality.p, 
+  mapping=aes(
+    x=inequality.p$inequality, 
+    y=inequality.p$fit, 
+    ymin=inequality.p$lwr, 
+    ymax=inequality.p$upr,
+    colour = inequality.p$sign), 
+  size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Zip-Inequality") +
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Interaction between Individual Income \nand Inequality at the Zip Level") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 ######################################################
 # 2 sizeofthepoor:income.n
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 sizeofthepoor.L <- sizeofthepoor.S <- dat
@@ -1204,8 +1200,8 @@ avg.pred.sizeofthepoor.L = predict.ictreg(list.2, newdata = sizeofthepoor.L, avg
 avg.pred.sizeofthepoor.S = predict.ictreg(list.2, newdata = sizeofthepoor.S, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 sizeofthepoor.p = data.frame(
-        t(avg.pred.sizeofthepoor.L$fit), 
-        t(avg.pred.sizeofthepoor.S$fit)
+  t(avg.pred.sizeofthepoor.L$fit), 
+  t(avg.pred.sizeofthepoor.S$fit)
 )
 
 sizeofthepoor.p = data.frame(t(sizeofthepoor.p))
@@ -1217,26 +1213,26 @@ sizeofthepoor.p$sizeofthepoor <- factor(sizeofthepoor.p$sizeofthepoor, levels = 
 
 library(ggplot2)
 ggplot() + geom_pointrange(
-        data=sizeofthepoor.p, 
-        mapping=aes(
-                x=sizeofthepoor.p$sizeofthepoor, 
-                y=sizeofthepoor.p$fit, 
-                ymin=sizeofthepoor.p$lwr, 
-                ymax=sizeofthepoor.p$upr,
-                colour = sizeofthepoor.p$sign), 
-        size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Size of the Poor") +
-        ylab("Probability of Vote-Selling") +
-        ggtitle("Interaction between Individual Income \nand Size of the Poor at the Zip Level") +
-        guides(colour=FALSE) +
-        theme_bw()
+  data=sizeofthepoor.p, 
+  mapping=aes(
+    x=sizeofthepoor.p$sizeofthepoor, 
+    y=sizeofthepoor.p$fit, 
+    ymin=sizeofthepoor.p$lwr, 
+    ymax=sizeofthepoor.p$upr,
+    colour = sizeofthepoor.p$sign), 
+  size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Size of the Poor") +
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Interaction between Individual Income \nand Size of the Poor at the Zip Level") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 
 ######################################################
 # 3 income.n
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 income.L <- income.H <- dat
 
@@ -1248,8 +1244,8 @@ avg.pred.income.L = predict.ictreg(list.2, newdata = income.L, avg = TRUE, se.fi
 avg.pred.income.H = predict.ictreg(list.2, newdata = income.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 income.p = data.frame(
-        t(avg.pred.income.L$fit), 
-        t(avg.pred.income.H$fit)
+  t(avg.pred.income.L$fit), 
+  t(avg.pred.income.H$fit)
 )
 
 income.p = data.frame(t(income.p))
@@ -1261,26 +1257,26 @@ income.p$income <- factor(income.p$income, levels = c(1:2), labels = c("Low", "H
 
 library(ggplot2)
 ggplot() + geom_pointrange(
-        data=income.p, 
-        mapping=aes(
-                x=income.p$income, 
-                y=income.p$fit, 
-                ymin=income.p$lwr, 
-                ymax=income.p$upr,
-                colour = income.p$sign), 
-        size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Income") +
-        ylab("Probability of Vote-Selling") +
-        ggtitle("Individual Income Levels") +
-        guides(colour=FALSE) +
-        theme_bw()
+  data=income.p, 
+  mapping=aes(
+    x=income.p$income, 
+    y=income.p$fit, 
+    ymin=income.p$lwr, 
+    ymax=income.p$upr,
+    colour = income.p$sign), 
+  size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Income") +
+  ylab("Probability of Vote-Selling") +
+  ggtitle("Individual Income Levels") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 
 ######################################################
 # 4 proplabforgovtwork
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 govtwork.H <- govtwork.L <- dat
 
@@ -1292,8 +1288,8 @@ avg.pred.govtwork.H = predict.ictreg(list.2, newdata = govtwork.H, avg = TRUE, s
 avg.pred.govtwork.L = predict.ictreg(list.2, newdata = govtwork.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
 govtwork.p = data.frame(
-        t(avg.pred.govtwork.H$fit), 
-        t(avg.pred.govtwork.L$fit)
+  t(avg.pred.govtwork.H$fit), 
+  t(avg.pred.govtwork.L$fit)
 )
 
 govtwork.p = data.frame(t(govtwork.p))
@@ -1305,21 +1301,21 @@ govtwork.p$govtwork <- factor(govtwork.p$govtwork, levels = c(1:2), labels = c("
 
 library(ggplot2)
 ggplot() + 
-        geom_pointrange(
-                data=govtwork.p, 
-                mapping=aes(
-                        x=govtwork.p$govtwork, 
-                        y=govtwork.p$fit, 
-                        ymin=govtwork.p$lwr, 
-                        ymax=govtwork.p$upr,
-                        colour = govtwork.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-        xlab("Size of the Government at the ZIP Level") + 
-        ggtitle("") +
-        ylab("Probability of Vote-Selling") +
-        guides(colour=FALSE) +
-        theme_bw()
+  geom_pointrange(
+    data=govtwork.p, 
+    mapping=aes(
+      x=govtwork.p$govtwork, 
+      y=govtwork.p$fit, 
+      ymin=govtwork.p$lwr, 
+      ymax=govtwork.p$upr,
+      colour = govtwork.p$sign),size = 0.8) + 
+  theme(legend.position="none") + 
+  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+  xlab("Size of the Government at the ZIP Level") + 
+  ggtitle("") +
+  ylab("Probability of Vote-Selling") +
+  guides(colour=FALSE) +
+  theme_bw()
 
 
 ###############################################
@@ -1331,11 +1327,11 @@ clientelism <- factor(clientelism, labels = c("Often", "Sometines", "Never"))
 clientelism <- na.omit(clientelism)
 
 ggplot(, aes(x=clientelism)) + 
-        geom_histogram(binwidth=.5, fill = I("grey50"), colour="black") + 
-        xlab("Clientelism") + 
-        ylab("Subjects(N)") +
-        theme(plot.margin=unit(c(1,1,1,1),"cm")) + 
-        ggsave(file="/Users/hectorbahamonde/RU/research/Vote_Selling/Proposal_CESPS/PreTest/clien1.pdf", width = 5, height = 5)
+  geom_histogram(binwidth=.5, fill = I("grey50"), colour="black") + 
+  xlab("Clientelism") + 
+  ylab("Subjects(N)") +
+  theme(plot.margin=unit(c(1,1,1,1),"cm")) + 
+  ggsave(file="/Users/hectorbahamonde/RU/research/Vote_Selling/Proposal_CESPS/PreTest/clien1.pdf", width = 5, height = 5)
 dev.off()
 dev.off()
 
@@ -1343,7 +1339,7 @@ dev.off()
 # Vote-selling Pricing Survey Plot
 ###############################################
 
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # building auxiliary dataset
 pricing.d = na.omit(data.frame(dat$pricecheap,dat$priceexpensive))
@@ -1356,12 +1352,12 @@ pricing.d<- melt(pricing.d)
 
 # Plot
 ggplot(pricing.d,aes(x=value, fill=variable)) + 
-        geom_density(alpha=0.25) +
-        xlab("Price for your vote") + 
-        ylab("Density") +
-        scale_fill_discrete("") + #Price for Your Vote
-        theme_bw() +
-        theme(legend.position="bottom", legend.direction="horizontal")
+  geom_density(alpha=0.25) +
+  xlab("Price for your vote") + 
+  ylab("Density") +
+  scale_fill_discrete("") + #Price for Your Vote
+  theme_bw() +
+  theme(legend.position="bottom", legend.direction="horizontal")
 
 
 
@@ -1375,7 +1371,7 @@ cat("\014")
 rm(list=ls())
 
 # Load Data
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # Load data
 
 
 # example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
@@ -1386,25 +1382,25 @@ load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedco
 
 # function that does clustered SEs
 vcovCluster <- function(
-        model,
-        cluster
+  model,
+  cluster
 )
 {
-        require(sandwich)
-        require(lmtest)
-        if(nrow(model.matrix(model))!=length(cluster)){
-                stop("check your data: cluster variable has different N than model")
-        }
-        M <- length(unique(cluster))
-        N <- length(cluster)           
-        K <- model$rank   
-        if(M<50){
-                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
-        }
-        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
-        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
-        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
-        return(rcse.cov)
+  require(sandwich)
+  require(lmtest)
+  if(nrow(model.matrix(model))!=length(cluster)){
+    stop("check your data: cluster variable has different N than model")
+  }
+  M <- length(unique(cluster))
+  N <- length(cluster)           
+  K <- model$rank   
+  if(M<50){
+    warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+  }
+  dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+  uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+  rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+  return(rcse.cov)
 }
 
 
@@ -1448,35 +1444,35 @@ acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum))
 acme.d <- data.frame(coefficients = c(acme.1[2], acme.2[2],acme.3[2],acme.4[2],acme.5[2]),
                      se = c(acme.1[4], acme.2[4],acme.3[4],acme.4[4],acme.5[4]),
                      variable = c(
-                             "Citizens CAN run for office for the next two elections", 
-                             "Citizens CAN associate with others and form groups",
-                             "Media CAN confront the Government",
-                             "President CANNOT rule without Congress",
-                             "Citizens CAN vote in the next two elections"
-                             )
+                       "Citizens CAN run for office for the next two elections", 
+                       "Citizens CAN associate with others and form groups",
+                       "Media CAN confront the Government",
+                       "President CANNOT rule without Congress",
+                       "Citizens CAN vote in the next two elections"
                      )
+)
 acme.d$upper <-acme.d$coefficient + 1.96*acme.d$se
 acme.d$lower <-acme.d$coefficient - 1.96*acme.d$se
 
 
 
 acme.0 = data.frame(
-        variable = c("Citizens CANNOT run for office for the next two elections", 
-        "Citizens CANNOT associate with others and form groups",
-        "Media CANNOT confront the Government",
-        "President CAN rule without Congress",
-        "Citizens CANNOT vote in the next two elections"),
-        coefficients = c(rep(NA, times = 5)), 
-        se = c(rep(NA, times = 5)),
-        upper = c(rep(NA, times = 5)),
-        lower = c(rep(NA, times = 5))
-        )
+  variable = c("Citizens CANNOT run for office for the next two elections", 
+               "Citizens CANNOT associate with others and form groups",
+               "Media CANNOT confront the Government",
+               "President CAN rule without Congress",
+               "Citizens CANNOT vote in the next two elections"),
+  coefficients = c(rep(NA, times = 5)), 
+  se = c(rep(NA, times = 5)),
+  upper = c(rep(NA, times = 5)),
+  lower = c(rep(NA, times = 5))
+)
 
 acme.d = rbind(acme.d,acme.0)
 
 acme.d$attribute = c(
-        "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote",
-        "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote"
+  "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote",
+  "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote"
 )
 
 
@@ -1485,25 +1481,25 @@ acme.d$attribute = c(
 # Plot
 library(ggplot2)
 ggplot() + geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) + 
-        geom_pointrange(data=acme.d, 
-                        mapping=aes(x=variable, 
-                                    y=coefficients, 
-                                    ymin=upper, 
-                                    ymax=lower),
-                        #shape=22, 
-                        fill = "WHITE") +
-        coord_flip() + 
-        xlab("") + 
-        ylab("Coefficient") +
-        guides(colour=FALSE) +
-        theme(legend.position="none") + 
-        theme_bw()
+  geom_pointrange(data=acme.d, 
+                  mapping=aes(x=variable, 
+                              y=coefficients, 
+                              ymin=upper, 
+                              ymax=lower),
+                  #shape=22, 
+                  fill = "WHITE") +
+  coord_flip() + 
+  xlab("") + 
+  ylab("Coefficient") +
+  guides(colour=FALSE) +
+  theme(legend.position="none") + 
+  theme_bw()
 
 ############
 ## Predicting Predicted Probabiltities of Vote Selling
 ############
 
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/dat_list.RData") # Load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 voteselling = data.frame(rep(indpred.p.fit, each = 10))
 dat.combined = data.frame(voteselling, dat); colnames(dat.combined)[1] <- "voteselling"

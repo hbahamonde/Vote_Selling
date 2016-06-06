@@ -614,7 +614,7 @@ cat("\014")
 rm(list=ls())
 
 # Load Data
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/US/Data/Qualtrics/mergedconjoint.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # Load data
 
 
 # example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
