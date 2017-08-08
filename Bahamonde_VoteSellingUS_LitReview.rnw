@@ -82,3 +82,40 @@ library(knitr)
 % Why list experiment using statistical analyses
 	\citet[p. 1-2]{Imai2014a}: ``First, multivariate regression models have been developed to help researchers identify the respondent characteristics that are associated with certain answers to sensitive questions (Corstange 2009; Imai 2011; Blair and Imai 2012). Second, statistical methods have been developed for testing whether the key assumptions of list experiments are violated and for reducing the potential biases that arise from violation of such assumptions (Blair and Imai 2012). Third, methodological recommendations have been made to improve the design and validity of list experiments (Blair and Imai 2012; Glynn 2013; Blair, Imai, and Lyall 2014)''
 
+
+
+% democratic support
+
+	``examining how individuals psychologically construct democracy support, this study identifies shared democratic belief systems and the relative weight, constraint, and strength of their beliefs'' % Carlin2017, 1
+
+	``The most common survey questions of democratic support explicitly ask respondents whether they prefer democracy over other regime types.'' % Carlin2017, 3
+
+	``Winston Churchill (1947) that “democracy is the worst form of government, except for those other forms that have been tried from time to time” (p. 7566),'' % from Carlin2017, 3
+
+	Linz's (1978): ``Democracy is preferable to any other form of government''
+
+
+
+
+	``explicit support measures, especially those referring to `democracy,' raise validity questions. [and] interviewer/social desirability bias.'' % Carlin2017, 3.
+
+
+
+
+% definition of democracy
+
+	``The analysis is based on an emerging consensus that democratic support is a multidimensional concept and that ideal-type democrats coexist with citizens holding mixed or ambivalent belief systems.'' % Carlin2011a, 1501.
+
+
+% Framing
+``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative experimental dataset fielded to study the relationship between support for democracy and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
+
+This study is novel in a number of ways.
+
+1. Most studies consider less-developing countries, restricting the study of developed countries with supposedly `higher' levels of democratic values. The U.S. case suggests that American voters might still be interested in selling their right to vote for their preferred candidate in exchange for monetary compensation.
+
+2. Most qualitative studies present 
+
+First, it studies whether subjects would be willing to vote for a candidate in exchange for money. And such, this study provides empirical evidence on the supply side, that is, on vote-sellers not vote-buyers. Second, this study is novel since it asks subjects to sell their votes in an hypothetical situation. Hence, the objective of this study is not precisely “corroborate” the existence of vote-selling. Rather, the objective of this paper is to study what democratic values have “failed” that make individuals to want to sell their votes. This distinction is important. Most literature argues about the role of poverty and political competition. However, we still don’t know what are the (broken) democratic components that might explain individual decisions.
+
+
