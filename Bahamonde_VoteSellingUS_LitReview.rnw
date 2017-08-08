@@ -105,9 +105,15 @@ library(knitr)
 
 	``party brokers also consider democratic attitudinal profiles. Specifically, they are more likely to avoid full-fledged democrats and target citizens who are ambivalent to or reject core democratic principles.'' % Carlin2015, 14
 
-	``democrats are less likely vote- buying targets than their less democratic counterparts.'' % Carlin2015, 14
+	``democrats are less likely vote-buying targets than their less democratic counterparts.'' % Carlin2015, 14
 
 	``propose brokers can distinguish good vote-selling prospects from bad ones based on their attitudes toward democratic procedures, processes, and norms.'' % Carlin2015, 14
+
+	``targeting democrats can be comparatively costly.'' % Carlin2015, 15
+
+	``Moreover, true democrats who sell their votes would suffer psychic costs—guilt, shame, remorse—of abandoning their core political belief system.'' % Carlin2015, 16 (I could ask, 'Such as?' Since 'democracy' is a multidimensional concept, it's not clear what specific dimension should be broken to 'produce' a vote-seller).
+
+	``brokers avoid democrats because of audience audience costs: clientelistic linkage strategies repulse potential supporters'' % Carlin2015 (p. 16) talking about Weitz-shapiro.
 
 
 % read books
@@ -118,6 +124,13 @@ library(knitr)
 % definition of democracy
 
 	``The analysis is based on an emerging consensus that democratic support is a multidimensional concept and that ideal-type democrats coexist with citizens holding mixed or ambivalent belief systems.'' % Carlin2011a, 1501.
+
+
+% Measurement
+
+	- Carlin2015 measure attitudes towards democracy (in Dahlian terms) creating a series of indexes using survey data. 
+
+	- Carlin2017 uses a Q-Method and Carlin2011a/Carlin2015 a cluster analyses to account for the multifaceted views towards a multidimensional concept, something that linear methods cannot do (Carlin2015, 18). 
 
 
 % Framing
