@@ -95,9 +95,11 @@ library(knitr)
 	Linz's (1978): ``Democracy is preferable to any other form of government''
 
 
-
-
 	``explicit support measures, especially those referring to `democracy,' raise validity questions. [and] interviewer/social desirability bias.'' % Carlin2017, 3.
+
+	``Polyarchs are more educated, wealthier, more cognitively engaged with politics, and less ideological than their less democratic counterparts. They also tend to hold lower evaluations of the president.'' % Carlin2011a, 1501
+
+	``Relatively stable long-run factors such as education and political interest are the dominant predictors of attitudes toward protecting civil liberties and allowing inclusive participation for all groups in society.'' % Carlin2011a, 1501
 
 
 
@@ -108,11 +110,13 @@ library(knitr)
 
 
 % Framing
-``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative experimental dataset fielded to study the relationship between support for democracy and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
+``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative bi-experimental design, implemented to study the relationship between a novel and unbiased indicator of democratic support and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
 
 This study is novel in a number of ways.
 
 1. Most studies consider less-developing countries, restricting the study of developed countries with supposedly `higher' levels of democratic values. The U.S. case suggests that American voters might still be interested in selling their right to vote for their preferred candidate in exchange for monetary compensation.
+
+2. The paper exploits unbiased sources of variation towards a multidimensional concept---e.g. polyarchy---leveraging a conjoint experiment, an experimental setup specially designed to capture complex, heterogeneous, and even contradicting, attitudes. 
 
 2. Most qualitative studies present 
 
