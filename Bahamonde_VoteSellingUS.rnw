@@ -17,7 +17,7 @@
 \author[1]{
 \large
 \textsc{H\'ector Bahamonde, PhD}\\ 
-\thanks{Thank you paragraph.}
+\thanks{I thank Richard Lau, David Redlawsk, the 2016 Experimental Research Group in Political Psychology at Rutgers and Kosuke Imai. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University).}
 \normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
 \normalsize \texttt{e:}\href{mailto:\filetext}{\texttt{\filetext}}\\
 \normalsize \texttt{w:}\href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
@@ -73,13 +73,5 @@ library(knitr)
 \end{document}
 
 
-% Explaining List Experiments
-	\citet[p. 4]{Imai2014a}: ``Because the two subsamples were selected at random, the mean number of nonsensitive activities that respondents affirmed should be equal across the two lists, implying that any difference in means is attributable to vote-selling''.
-
-	\citet[p. 5]{Imai2014a}: ``In practice, the order of items in list experiments is often randomized to minimize the ordering effect''.
-
-
-% Why list experiment using statistical analyses
-	\citet[p. 1-2]{Imai2014a}: ``First, multivariate regression models have been developed to help researchers identify the respondent characteristics that are associated with certain answers to sensitive questions (Corstange 2009; Imai 2011; Blair and Imai 2012). Second, statistical methods have been developed for testing whether the key assumptions of list experiments are violated and for reducing the potential biases that arise from violation of such assumptions (Blair and Imai 2012). Third, methodological recommendations have been made to improve the design and validity of list experiments (Blair and Imai 2012; Glynn 2013; Blair, Imai, and Lyall 2014)''
 
 

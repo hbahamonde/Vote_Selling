@@ -101,7 +101,18 @@ library(knitr)
 
 	``Relatively stable long-run factors such as education and political interest are the dominant predictors of attitudes toward protecting civil liberties and allowing inclusive participation for all groups in society.'' % Carlin2011a, 1501
 
+% clientelism
 
+	``party brokers also consider democratic attitudinal profiles. Specifically, they are more likely to avoid full-fledged democrats and target citizens who are ambivalent to or reject core democratic principles.'' % Carlin2015, 14
+
+	``democrats are less likely vote- buying targets than their less democratic counterparts.'' % Carlin2015, 14
+
+	``propose brokers can distinguish good vote-selling prospects from bad ones based on their attitudes toward democratic procedures, processes, and norms.'' % Carlin2015, 14
+
+
+% read books
+		1. \citet{Booth:2009aa}.
+		2. \citet{Seligson2008a}, pp. 21-47.
 
 
 % definition of democracy
