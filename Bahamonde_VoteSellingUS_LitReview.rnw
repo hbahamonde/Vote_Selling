@@ -9,6 +9,35 @@
 	% Why list experiment using statistical analyses
 		\citet[p. 1-2]{Imai2014a}: ``First, multivariate regression models have been developed to help researchers identify the respondent characteristics that are associated with certain answers to sensitive questions (Corstange 2009; Imai 2011; Blair and Imai 2012). Second, statistical methods have been developed for testing whether the key assumptions of list experiments are violated and for reducing the potential biases that arise from violation of such assumptions (Blair and Imai 2012). Third, methodological recommendations have been made to improve the design and validity of list experiments (Blair and Imai 2012; Glynn 2013; Blair, Imai, and Lyall 2014)''
 
+	% he's saying that direct questions about democracy are HARD. So, I say, lets use conjoint experiments.
+	``Consider, too, what a heavy burden we place upon a man's normal impulses by asking him to submit unconditionally to democratic values and procedures.'' % McClosky1964, 376
+
+	% "operationalizing the Polyarchy"
+	\citet[3]{Dahl1971} conceptualizes polyarchy:
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\begin{tabular}{lll}
+\textbf{Dalh's Polyarchy Dimension}                        & \textbf{Dalh's Polyarchy Component}               & \textbf{Experimental Operationalization}               \\
+\multicolumn{1}{c}{\multirow{5}{*}{Formulate preferences}} & Freedom to form and join organizations            & Citizens can associate with others and form groups     \\
+\multicolumn{1}{c}{}                                       & Freedom of expression                             & Media can confront the government                      \\
+\multicolumn{1}{c}{}                                       & Right to vote                                     & Citizens can vote in the next two elections            \\
+\multicolumn{1}{c}{}                                       & Right of political leaders to compete for support & President can rule without Congress                    \\
+\multicolumn{1}{c}{}                                       & Alternative sources of information                & Media can confront the government                      \\
+\multirow{7}{*}{Signify preferences}                       & Freedom to form and join organizations            & Citizens can associate with others and form groups     \\
+                                                           & Freedom of expression                             & Media can confront the government                      \\
+                                                           & Right to vote                                     & Citizens can vote in the next two elections            \\
+                                                           & Eligibility for public office                     & Citizens can run for office for the next two elections \\
+                                                           & Right of political leaders to compete for support & President can rule without Congress                    \\
+                                                           & Alternative sources of information                & Media can confront the Government                      \\
+                                                           & Free and fair elections                           &                                                       
+\end{tabular}
+\caption{My caption}
+\label{my-label}
+\end{table}
+
 
 
 % democratic support
@@ -27,6 +56,8 @@
 	``Polyarchs are more educated, wealthier, more cognitively engaged with politics, and less ideological than their less democratic counterparts. They also tend to hold lower evaluations of the president.'' % Carlin2011a, 1501
 
 	``Relatively stable long-run factors such as education and political interest are the dominant predictors of attitudes toward protecting civil liberties and allowing inclusive participation for all groups in society.'' % Carlin2011a, 1501
+
+	``a democratic society can survive despite widespread popular misunderstanding and disagreement about basic democratic and constitutional values. The American political system survives and even flourishes under precisely these conditions.'' % McClosky1964, 376
 
 % clientelism
 
@@ -81,6 +112,12 @@
 
 	``The analysis is based on an emerging consensus that democratic support is a multidimensional concept and that ideal-type democrats coexist with citizens holding mixed or ambivalent belief systems.'' % Carlin2011a, 1501.
 
+	``since democracy may involve more dimensions than the two in figure 1.2, and since (in my view) no large system in the real world is fully democratized, I prefer to call real world systems that arc closest to the upper right corner polyarchies.'' % Dahl1971, 8.
+
+	``Polyarchies, then, may be thought of as relatively (but incompletely) democratized regimes, or, to put it in another way, polyarchies are regimes that have been substantially popularized and liberalized, that is, highly inclusive and extensively open to public contestation.'' % Dahl1971, 8.
+
+	there is a ``distinction between democracy as an ideal system and the institutional arrangements that have come to be regarded as a kind of imperfect approximation of [this] ideal.'' % Dahl1971, 9 (FN: # 4)
+
 
 % Measurement
 
@@ -90,16 +127,22 @@
 
 
 % Framing
-``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative bi-experimental design, implemented to study the relationship between a novel and unbiased indicator of democratic support and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
+
+	``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative bi-experimental design, implemented to study the relationship between a novel and unbiased indicator of democratic support and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
+
+	Empirical studies about democratization, and particularly, about democratic support, face important validity problems, both internal and external. [Carlin stuff: people don't usually give the same meaning, etc.] But not only that. Currently there are series practical problems as well. \citet{Dahl1971} introduced the important concept of ``polyarchy'' as an incomplete realization of ``democracy.'' While this paper appreciates Dahl's contribution, it proposes that Dahl at the same time that solved one problem---conceptualization one of the most (or perhaps \emph{the} most) utilized concept in comparative politics---it introduced another problem. Given the multidimensionality of polyarchies, applied researchers cannot simply ask survey respondents about their respective levels of ``polyarchy support.'' 
+
+
+	
 
 This study is novel in a number of ways.
 
-1. Most studies consider less-developing countries, restricting the study of developed countries with supposedly `higher' levels of democratic values. The U.S. case suggests that American voters might still be interested in selling their right to vote for their preferred candidate in exchange for monetary compensation.
+	1. Most studies consider less-developing countries, restricting the study of developed countries with supposedly `higher' levels of democratic values. The U.S. case suggests that American voters might still be interested in selling their right to vote for their preferred candidate in exchange for monetary compensation.
 
-2. The paper exploits unbiased sources of variation towards a multidimensional concept---e.g. polyarchy---leveraging a conjoint experiment, an experimental setup specially designed to capture complex, heterogeneous, and even contradicting, attitudes. 
+	2. The paper exploits unbiased sources of variation towards a multidimensional concept---e.g. polyarchy---leveraging a conjoint experiment, an experimental setup specially designed to capture complex, heterogeneous, and even contradicting, attitudes. 
 
-2. Most qualitative studies present 
+	2. Most qualitative studies present 
 
-First, it studies whether subjects would be willing to vote for a candidate in exchange for money. And such, this study provides empirical evidence on the supply side, that is, on vote-sellers not vote-buyers. Second, this study is novel since it asks subjects to sell their votes in an hypothetical situation. Hence, the objective of this study is not precisely “corroborate” the existence of vote-selling. Rather, the objective of this paper is to study what democratic values have “failed” that make individuals to want to sell their votes. This distinction is important. Most literature argues about the role of poverty and political competition. However, we still don’t know what are the (broken) democratic components that might explain individual decisions.
+	First, it studies whether subjects would be willing to vote for a candidate in exchange for money. And such, this study provides empirical evidence on the supply side, that is, on vote-sellers not vote-buyers. Second, this study is novel since it asks subjects to sell their votes in an hypothetical situation. Hence, the objective of this study is not precisely “corroborate” the existence of vote-selling. Rather, the objective of this paper is to study what democratic values have “failed” that make individuals to want to sell their votes. This distinction is important. Most literature argues about the role of poverty and political competition. However, we still don’t know what are the (broken) democratic components that might explain individual decisions.
 
 
