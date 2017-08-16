@@ -73,6 +73,9 @@
 
 	``brokers avoid democrats because of audience audience costs: clientelistic linkage strategies repulse potential supporters'' % Carlin2015 (p. 16) talking about Weitz-shapiro.
 
+% issue in Journal of Democracy about de-democratization
+In a highly controversial article,\footnote{\citet{Alexander2017}, \citet{Norris2017}, \citet{Voeten2017}.} \citet{Foa2016a} document, using survey-data, a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' 
+
 
 % clientelism in the US
 
@@ -101,8 +104,10 @@
 	The US had ``[medium] levels of party patronage in the post-war period.'' % Müller in Kitschelt2007 p. 252
 
 % read books
-		1. \citet{Booth:2009aa}.
-		2. \citet{Seligson2008a}, pp. 21-47.
+		1. \citet{Booth:2009aa}:
+			- 
+
+		2. \citet{Seligson2008a}, pp. 21-47:
 		3. \citet{Gosnell:1968aa} (already have it in hard copy).
 		4. \citet{Callow:1976aa}, pp. 91–138 (bought on Amazon).
 		5. \citet{Erie:1990aa} (bought on Amazon).
@@ -131,6 +136,10 @@
 	``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative bi-experimental design, implemented to study the relationship between a novel and unbiased indicator of democratic support and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
 
 	Empirical studies about democratization, and particularly, about democratic support, face important validity problems, both internal and external. [Carlin stuff: people don't usually give the same meaning, etc.] But not only that. Currently there are series practical problems as well. \citet{Dahl1971} introduced the important concept of ``polyarchy'' as an incomplete realization of ``democracy.'' While this paper appreciates Dahl's contribution, it proposes that Dahl at the same time that solved one problem---conceptualization one of the most (or perhaps \emph{the} most) utilized concept in comparative politics---it introduced another problem. Given the multidimensionality of polyarchies, applied researchers cannot simply ask survey respondents about their respective levels of ``polyarchy support.'' 
+
+	% Motivating the clientelism part.
+	- ``full-fledged support for democracy should also entail a commitment to liberal values such as the protection of key rights and civil liberties, as well as a willingness to use the institutions of liberal democracy to effect political change.'' % Foa2016a, p. 8.
+	However, I find that US citizens are still interested in selling their voting rights. 
 
 
 	
