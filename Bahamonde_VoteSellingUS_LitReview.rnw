@@ -74,7 +74,22 @@
 	``brokers avoid democrats because of audience audience costs: clientelistic linkage strategies repulse potential supporters'' % Carlin2015 (p. 16) talking about Weitz-shapiro.
 
 % issue in Journal of Democracy about de-democratization
-In a highly controversial article,\footnote{\citet{Alexander2017}, \citet{Norris2017}, \citet{Voeten2017}.} \citet{Foa2016a} document, using survey-data, a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' 
+	
+	Highly controversial pair of articles,\footnote{\citet{Alexander2017}, \citet{Norris2017}, \citet{Voeten2017}.} \citet{Foa2016a,Foa2017b} document, using survey-data, a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in a number of European countries as well as the United States. % rephrase this quote.
+
+		- ``In the United States, for example, only 10 percent of citizens born in the interwar years and 14 percent of baby-boomers say that it is `unimportant' in a democracy for people to `choose their leaders in free elections' (with `unimportant' defined as 1 to 5 on a 10-point scale of importance). Among millennials, this figure rises to 26 percent.'' % Foa2016a, 10.
+
+		- ``political scientists have abstained from pursuing questions that would seem to be among the most fundamental for the discipline [...] Do empirical indicators give us reason to believe that seemingly stable democracies may be in trouble?'' % Foa2016a, 14-15
+
+		- Using several waves of the WVS, \citet[3]{Voeten2017} compares the most preferred form of government, and finds that "democracy" is the most preferred one, disqualifying in this way \citet{Foa2016a}'s findings. However, the chosen strategy in \citet[3]{Voeten2017} isn't satisfactory. First, questions about "democracy" are loaded with social desirability bias. Second, the \emph{meaning} of what "democracy" MEANS does NOT travel between countries.    % Voeten2017, 3.
+
+		- In this debate, most papers compared variables without including control variables, limiting their respective analyses to simply showing different percentages. Likewise, most trends did not include confidence intervals either, undermining the certainty of the point estimates.
+
+		- ``while older generations continue to endorse illiberal notions of democracy, younger generations support an unequivocally liberal notion.'' % Alexander2017, 1. % And yet, I find that people would still sell their votes.
+
+		``the prevalence of liberal supporters in a country translates into corresponding differences in how strongly people base their preferred model of democracy on a liberal notion of it. We measure such a notion by how strongly people endorse free elections, equal rights and civil liberties as meanings of democracy.'' % Alexander2017, 4.
+
+			\citet[4]{Alexander2017} finds that ``a larger share of liberal supporters of democracy goes hand in hand with a stronger prevalence of liberal notions of democracy.'' That is, he finds that there is a substantive coherence between one thing and the other.
 
 
 % clientelism in the US
@@ -135,13 +150,14 @@ In a highly controversial article,\footnote{\citet{Alexander2017}, \citet{Norris
 
 	``Working from \citet{Dahl1971} Polyarchy's,''\footnote{This wording is from Carlin2017.} this paper leverages an original, nationally-representative bi-experimental design, implemented to study the relationship between a novel and unbiased indicator of democratic support and vote-selling in the United States. Particularly, it explains which of ``the basic rights, liberties, and practices associated with polyarchy in''\footnote{Wording from \citet[1500]{Carlin2011a}.} the United States should fail to produce clientelistic vote-seller individuals.
 
-	Empirical studies about democratization, and particularly, about democratic support, face important validity problems, both internal and external. [Carlin stuff: people don't usually give the same meaning, etc.] But not only that. Currently there are series practical problems as well. \citet{Dahl1971} introduced the important concept of ``polyarchy'' as an incomplete realization of ``democracy.'' While this paper appreciates Dahl's contribution, it proposes that Dahl at the same time that solved one problem---conceptualization one of the most (or perhaps \emph{the} most) utilized concept in comparative politics---it introduced another problem. Given the multidimensionality of polyarchies, applied researchers cannot simply ask survey respondents about their respective levels of ``polyarchy support.'' 
+	Empirical studies about democratization, and particularly, about democratic support, face important validity problems, both internal and external. [Carlin stuff: people don't usually give the same meaning, etc. // For example, to put meaning to the concept of ``democracy'' some scholars use the confidence in the United States Congress (\citet[6]{Voeten2017}). However, this strategy confounds ``democracy'' with ``party identification.'' For instance, a democrat respondent might not trust a majoritarily republican Congress.] But not only that. Currently there are series practical problems as well. \citet{Dahl1971} introduced the important concept of ``polyarchy'' as an incomplete realization of ``democracy.'' While this paper appreciates Dahl's contribution, it proposes that Dahl at the same time that solved one problem---conceptualization one of the most (or perhaps \emph{the} most) utilized concept in comparative politics---it introduced another problem. Given the multidimensionality of polyarchies, applied researchers cannot simply ask survey respondents about their respective levels of ``polyarchy support.'' 
 
 	% Motivating the clientelism part.
 	- ``full-fledged support for democracy should also entail a commitment to liberal values such as the protection of key rights and civil liberties, as well as a willingness to use the institutions of liberal democracy to effect political change.'' % Foa2016a, p. 8.
 	However, I find that US citizens are still interested in selling their voting rights. 
 
-
+	% Why this matters.
+	In a controversial paper, \citet{Foa2016a} find that respondents' levels of democratic trust in a number of European countries as well as the United States, has fallen dramatically. ``United States is an important country that is often credited for spreading democracy around the globe. If its younger generation is less enthusiastic about democracy, then this matters a great deal.''\footnote{\citet[6]{Voeten2017}.}
 	
 
 This study is novel in a number of ways.
