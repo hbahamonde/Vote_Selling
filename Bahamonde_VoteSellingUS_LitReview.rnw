@@ -152,6 +152,8 @@
 
 	Empirical studies about democratization, and particularly, about democratic support, face important validity problems, both internal and external. [Carlin stuff: people don't usually give the same meaning, etc. // For example, to put meaning to the concept of ``democracy'' some scholars use the confidence in the United States Congress (\citet[6]{Voeten2017}). However, this strategy confounds ``democracy'' with ``party identification.'' For instance, a democrat respondent might not trust a majoritarily republican Congress.] But not only that. Currently there are series practical problems as well. \citet{Dahl1971} introduced the important concept of ``polyarchy'' as an incomplete realization of ``democracy.'' While this paper appreciates Dahl's contribution, it proposes that Dahl at the same time that solved one problem---conceptualization one of the most (or perhaps \emph{the} most) utilized concept in comparative politics---it introduced another problem. Given the multidimensionality of polyarchies, applied researchers cannot simply ask survey respondents about their respective levels of ``polyarchy support.'' 
 
+	- ``we need a lot more surveys focused on questions about regime legitimacy to gain a clear picture.'' % Foa2017a, 6.
+
 	% Motivating the clientelism part.
 	- ``full-fledged support for democracy should also entail a commitment to liberal values such as the protection of key rights and civil liberties, as well as a willingness to use the institutions of liberal democracy to effect political change.'' % Foa2016a, p. 8.
 	However, I find that US citizens are still interested in selling their voting rights. 
