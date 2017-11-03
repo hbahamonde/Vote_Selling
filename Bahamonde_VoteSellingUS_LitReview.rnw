@@ -118,6 +118,10 @@
 
 	The US had ``[medium] levels of party patronage in the post-war period.'' % Müller in Kitschelt2007 p. 252
 
+	\citet[200]{Stokes:2013cj}: ``In the nineteenth-century Britain and the United States, vote buying was commonplace. Parties gave voters cash, food, alcohol, health care, poverty relief, and myriad other benefits in exchange for their votes. To gain leverage over them, parties gathered information about voter's debts, their crimes, even their infidelities. Today, these forms of distributive politics have basically disappeared from both countries.''
+
+	\citet[201]{Stokes:2013cj}: ``What, then, killed vote buying in Britain and the United States? The explanation we offer in this chapter focuses on changes in the electorate, changes that were the effects of industrialization and economic growth. We show that industrialization in both countries increased the size and average income of the electorate, made it harder for parties to discern people's votes and monitor their electoral behavior.''
+
 % read books
 		1. \citet{Booth:2009aa}:
 			- 
