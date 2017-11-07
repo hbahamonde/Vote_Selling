@@ -122,14 +122,29 @@
 
 	\citet[201]{Stokes:2013cj}: ``What, then, killed vote buying in Britain and the United States? The explanation we offer in this chapter focuses on changes in the electorate, changes that were the effects of industrialization and economic growth. We show that industrialization in both countries increased the size and average income of the electorate, made it harder for parties to discern people's votes and monitor their electoral behavior.''
 
-% read books
-		1. \citet{Booth:2009aa}:
+		- industrialization drives up the median income of the electorate (paraphrased from \citet[210]{Stokes:2013cj})
+
+	\citet[227]{Stokes:2013cj}: ``An exchange of favors for votes was an essential part of nineteenth-century American elections.''
+
+	Bensel: ``[voters] handed in a party ticket in return for a shot of whiskey, a pair of boots, or a small amount of money.'' (in \citet[227]{Stokes:2013cj}).
+
+	\citet[230]{Stokes:2013cj}: ``Today, party machines are a thing of the past.''
+
+	\citet[2]{Erie:1990aa}: ``The machine emerged as the major urban political institution in the late nineteenth century.''
+
+	\citet[2]{Erie:1990aa}: ``By 1890 centralized machines controlled one-half of the nation's twenty largest cities.''	
+
+	\citet[4]{Erie:1990aa}: ``Yet the once mighty Irish machines are now in eclipse. Government bureaucracies and labor unions have assumed the welfare and employment functions once fulfilled by the machines.'' 
+
+% read:
+		1. \citet{Erie:1990aa}:
 			- 
 
 		2. \citet{Seligson2008a}, pp. 21-47:
 		3. \citet{Gosnell:1968aa} (already have it in hard copy).
 		4. \citet{Callow:1976aa}, pp. 91–138 (bought on Amazon).
 		5. \citet{Erie:1990aa} (bought on Amazon).
+		6. \citet{Bensel:2004aa} (bought on Amazon).
 
 
 % definition of democracy
