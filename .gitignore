@@ -17,9 +17,7 @@
 *.gz
 *.fdb_latexmk
 *.fls
-*.RData
 *.Rhistory
-*.pdf
 *.tex
 *.md
 
