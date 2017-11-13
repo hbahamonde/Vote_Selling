@@ -66,7 +66,7 @@ drop *first_click* *last_click* *click_count*
 
 *cj_*
 
-saveold "/Users/hectorbahamonde/RU/research/Vote_Selling/data_list.dta", replace
+saveold "/Users/hectorbahamonde/RU/research/Vote_Selling/data_list.dta", replace  version(12)
 
 
 ***
@@ -80,7 +80,7 @@ order f_1* cj_1 f_2* cj_2 f_3* cj_3 f_4* cj_4 f_5* cj_5
 
 
 
-saveold "/Users/hectorbahamonde/RU/research/Vote_Selling/data_cj.dta", replace
+saveold "/Users/hectorbahamonde/RU/research/Vote_Selling/data_cj.dta", replace version(12)
 
 clear all
 
