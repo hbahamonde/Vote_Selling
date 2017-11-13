@@ -6,7 +6,9 @@ rm(list=ls())
 
 
 # Load the data
-library(foreign)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(foreign)
+
 dat <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/data_list.dta")
 
 # Data Cleaning
@@ -41,7 +43,10 @@ names(dat)[names(dat) == "sell1"] <- "directquestion" # renaming
 dat$directquestion.f <- ordered(dat$directquestion, levels = c(#recoding
   "No, I don't want to sell my vote", 
   "Yes, I want to sell my vote"), labels = c("No", "Yes"))
-library(car)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(car)
+
 dat$directquestion  <- recode(as.integer(dat$directquestion), "1 = 0 ; 2 = 1")
 
 # Combine (weighted) pol. knowledge vars
@@ -54,6 +59,9 @@ dat$polknow = rowSums(data.frame(cbind(
   dat$conservative/dat$conservative_t)), na.rm = T)
 
 # Merge ZIP data
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(foreign)
+
 zipdata <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/zipdata.dta") # import ZIP DTA DATA 
 zipdata[zipdata == -1] <- NA
 dat = merge(dat, zipdata, by=c("zip"), all.x =T)
@@ -137,12 +145,17 @@ nrowc = nrow(c) # I will use this here to entry the number of VALID subjects I'v
 c = subset(c, select = -c(cj_1, cj_2, cj_3, cj_4, cj_5) )
 
 # reshape dataset vertically
-library(reshape)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(reshape)
+
 c = melt(c, id="idnum")
 
 # create code variable
 c$variable = as.character(c$variable)
-library(stringr)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(stringr)
+
 c.string = data.frame(str_split_fixed(c$variable, "_", 4))
 colnames(c.string) = c("drop", "pair", "candidate", "attribute")
 
@@ -327,7 +340,10 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 ## Create a factor variable to use in the plot
 dat$treatment.f = factor(dat$treatment, levels = c(0,1), labels=c("Control", "Treatment"))
 
-library(ggplot2)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 # Plot
 ggplot(dat, aes(x=ycount)) + 
   geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
@@ -338,7 +354,9 @@ ggplot(dat, aes(x=ycount)) +
   theme_bw()
 
 # Histogram for Direct Question
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 # Plot
 
 ggplot.labels1 <- data.frame(
@@ -423,7 +441,9 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 # Difference in means 
 
 ##install.packages("list")
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 dif.means <- ictreg(ycount ~ 1, data = dat, treat = "treatment", J=3, method = "ml")
 sum.dif.means <- summary(dif.means, n.draws = 100000) # quasi-Bayesian approximation based predictions
 summary(sum.dif.means)
@@ -499,7 +519,9 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 options(scipen=999)
 options(digits=2)
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 list <- ictreg(ycount ~ 
                  #age.n + 
                  woman + 
@@ -575,10 +597,8 @@ vcovCluster <- function(model,cluster){
   return(rcse.cov)
 }
 
-
-library(lmtest)
-library(sandwich)
-library(msm) # install.packages("msm")
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(lmtest,sandwich,msm)
 
 
 # make outcome numeric
@@ -601,7 +621,10 @@ dat.combined$at.vote = as.numeric(dat.combined$at.vote)
 
 
 # Estimate the model
-library(list) # install.packages("list")
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
+
 list.run <- ictreg(ycount ~ at.run*selected,           
                    data = dat.combined, 
                    treat = "treatment", 
@@ -666,7 +689,9 @@ acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variab
 
 
 # Plot
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot(acme.vs.d, aes(
   x = variable, 
   y = coefficients, 
@@ -709,7 +734,9 @@ over.disp.test <-glm(ycount ~
 summary(over.disp.test)
 plot(over.disp.test)
 
-require(AER)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(AER)
+
 dispersiontest(over.disp.test)
 
 ######################################################
@@ -745,7 +772,9 @@ indpred.p.fit= indpred.p$fit
 
 
 ### Plot
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_pointrange(data=indpred.p, 
                            mapping =aes(
                              x=1:nrow(indpred.p), 
@@ -796,7 +825,10 @@ socdes.p = data.frame(avg.pred.social.desirability$fit,
 socdes.p$c.1.3 = as.factor(socdes.p$c.1.3)
 socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List", "Direct", "Soc. Des"))
 
-library(ggplot2)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_pointrange(
   data=socdes.p,
   mapping=aes(
@@ -832,7 +864,9 @@ womanW <- womanM <- dat
 womanW <- dat[which(dat$woman=="Woman"), ] 
 womanM <- dat[which(dat$woman=="Man"), ] 
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.womanW  <- predict.ictreg(list, newdata = womanW, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.womanM  <- predict.ictreg(list, newdata = womanM, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -849,8 +883,9 @@ woman.p["sign"] <- sign
 woman.p$gender = as.factor(c(1,0))
 woman.p$gender <- factor(woman.p$gender, levels = c(1,0), labels = c("Woman", "Man"))
 
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
 
-library(ggplot2)
 ggplot() + 
   geom_pointrange(
     data=woman.p, 
@@ -879,7 +914,9 @@ socideoM <- dat[which(dat$socideo == levels(dat$socideo)[3]),]
 socideoC <- dat[which(dat$socideo == levels(dat$socideo)[4]),]
 socideoVC <- dat[which(dat$socideo == levels(dat$socideo)[5]),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.socideoVL <- predict.ictreg(list, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.socideoL <- predict.ictreg(list, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.socideoM <- predict.ictreg(list, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
@@ -901,7 +938,9 @@ socideo.p["sign"] <- sign
 socideo.p$socioideo = as.factor(c(1:5))
 socideo.p$socioideo <- factor(socideo.p$socioideo, levels = c(1:5), labels = c("Very \n Liberal", "Liberal", "Moderate", "Conservative", "Very \n Conservative"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + 
   geom_pointrange(
     data=socideo.p, 
@@ -930,7 +969,9 @@ partyidR <- dat[which(dat$partyid == levels(dat$partyid)[2]),]
 partyidI <- dat[which(dat$partyid == levels(dat$partyid)[3]),]
 partyidSE <- dat[which(dat$partyid == levels(dat$partyid)[4]),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.partyidD  <- predict.ictreg(list, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.partyidR  <- predict.ictreg(list, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.partyidI  <- predict.ictreg(list, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
@@ -950,7 +991,10 @@ partyid.p["sign"] <- sign
 partyid.p$partyid = as.factor(c(1:4))
 partyid.p$partyid <- factor(partyid.p$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+
 ggplot() + 
   geom_pointrange(
     data=partyid.p, 
@@ -977,7 +1021,9 @@ regR <- regU <- dat
 regR <- dat[which(dat$reg == levels(dat$reg)[1]),]
 regU <- dat[which(dat$reg == levels(dat$reg)[2]),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.regR  <- predict.ictreg(list, newdata = regR, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.regU  <- predict.ictreg(list, newdata = regU, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -993,7 +1039,9 @@ reg.p["sign"] <- sign
 reg.p$registered = as.factor(c(1:2))
 reg.p$registered <- factor(reg.p$registered, levels = c(1:2), labels = c("Registered", "Not Registered"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + 
   geom_pointrange(
     data=reg.p, 
@@ -1023,7 +1071,9 @@ trustfed.I = dat[which(dat$trustfed == levels(dat$trustfed)[3]),]
 trustfed.FAOT = dat[which(dat$trustfed == levels(dat$trustfed)[4]),]
 trustfed.AGDOT= dat[which(dat$trustfed == levels(dat$trustfed)[5]),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.trustfed.NTAA = predict.ictreg(list, newdata = trustfed.NTAA, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.trustfed.NVMT = predict.ictreg(list, newdata = trustfed.NVMT, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.trustfed.I = predict.ictreg(list, newdata = trustfed.I, avg = TRUE, se.fit = TRUE, interval = "confidence")
@@ -1045,7 +1095,9 @@ trustfed.p["sign"] <- sign
 trustfed.p$trustfed = as.factor(c(1:5))
 trustfed.p$trustfed <- factor(trustfed.p$trustfed, levels = c(1:5), labels = c("No Trust \n At All", "Not Very \n Much Trust", "Indifferent", "Fair Amount \n Of Trust", "A Great Deal \n Of Trust"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + 
   geom_pointrange(
     data=trustfed.p, 
@@ -1078,7 +1130,9 @@ educ.AD = dat[which(dat$educ == levels(dat$educ)[5]),]
 educ.BD = dat[which(dat$educ == levels(dat$educ)[6]),]
 educ.GS = dat[which(dat$educ == levels(dat$educ)[7]),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.educ.SHS = predict.ictreg(list, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.educ.HS = predict.ictreg(list, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.educ.T = predict.ictreg(list, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
@@ -1105,7 +1159,9 @@ educ.p$education = as.factor(c(1:7))
 educ.p$education <- factor(educ.p$education, levels = c(1:7), labels = c("Some \n High  \n School", "High \n  School \n  Graduate", "Technical \n  School", "Some  \n College", "Associate \n  Degree", "Bachelor's \n  Degree", "Graduate \n  School")
 )
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + 
   geom_pointrange(
     data=educ.p, 
@@ -1149,7 +1205,9 @@ inequality.L <- inequality.H <- dat
 inequality.L = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.25, na.rm = T)),]
 inequality.H = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.75, na.rm = T)),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.inequality.L = predict.ictreg(list.2, newdata = inequality.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.inequality.H = predict.ictreg(list.2, newdata = inequality.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -1167,7 +1225,9 @@ inequality.p$inequality <- factor(inequality.p$inequality, levels = c(1:2), labe
   "Low", 
   "High"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_pointrange(
   data=inequality.p, 
   mapping=aes(
@@ -1195,7 +1255,9 @@ sizeofthepoor.L <- sizeofthepoor.S <- dat
 sizeofthepoor.L = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.75, na.rm = T)),]
 sizeofthepoor.S = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.25, na.rm = T)),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.sizeofthepoor.L = predict.ictreg(list.2, newdata = sizeofthepoor.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.sizeofthepoor.S = predict.ictreg(list.2, newdata = sizeofthepoor.S, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -1211,7 +1273,9 @@ sizeofthepoor.p["sign"] <- sign
 sizeofthepoor.p$sizeofthepoor = as.factor(c(1:2))
 sizeofthepoor.p$sizeofthepoor <- factor(sizeofthepoor.p$sizeofthepoor, levels = c(1:2), labels = c("Large", "Small"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_pointrange(
   data=sizeofthepoor.p, 
   mapping=aes(
@@ -1239,7 +1303,9 @@ income.L <- income.H <- dat
 income.L = dat[which(dat$income.n >= quantile(dat$income.n, prob = 0.25, na.rm = T)),]
 income.H = dat[which(dat$income.n >= quantile(dat$income.n, prob = 0.75, na.rm = T)),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.income.L = predict.ictreg(list.2, newdata = income.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.income.H = predict.ictreg(list.2, newdata = income.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -1255,7 +1321,9 @@ income.p["sign"] <- sign
 income.p$income = as.factor(c(1:2))
 income.p$income <- factor(income.p$income, levels = c(1:2), labels = c("Low", "High"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_pointrange(
   data=income.p, 
   mapping=aes(
@@ -1283,7 +1351,9 @@ govtwork.H <- govtwork.L <- dat
 govtwork.H = dat[which(dat$proplabforgovtwork >= quantile(dat$proplabforgovtwork, na.rm = T, prob = 0.75)),]
 govtwork.L = dat[which(dat$proplabforgovtwork >= quantile(dat$proplabforgovtwork, na.rm = T, prob = 0.25)),]
 
-library(list)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
 avg.pred.govtwork.H = predict.ictreg(list.2, newdata = govtwork.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 avg.pred.govtwork.L = predict.ictreg(list.2, newdata = govtwork.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
@@ -1299,7 +1369,9 @@ govtwork.p["sign"] <- sign
 govtwork.p$govtwork = as.factor(c(1:2))
 govtwork.p$govtwork <- factor(govtwork.p$govtwork, levels = c(1:2), labels = c("Large", "Small"))
 
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + 
   geom_pointrange(
     data=govtwork.p, 
@@ -1347,10 +1419,15 @@ colnames(pricing.d)[1] <- "Cheap"
 colnames(pricing.d)[2] <- "Expensive"
 
 # reshaping dataset for density plots
-library(reshape2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(reshape2)
+
 pricing.d<- melt(pricing.d)
 
 # Plot
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot(pricing.d,aes(x=value, fill=variable)) + 
   geom_density(alpha=0.25) +
   xlab("Price for your vote") + 
@@ -1403,11 +1480,8 @@ vcovCluster <- function(
   return(rcse.cov)
 }
 
-
-library(lmtest)
-library(sandwich)
-library(msm) # install.packages("msm")
-
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(lmtest,sandwich,msm)
 
 # make outcome numeric
 d$selected <- as.numeric(d$selected)
@@ -1479,7 +1553,9 @@ acme.d$attribute = c(
 
 
 # Plot
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot() + geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) + 
   geom_pointrange(data=acme.d, 
                   mapping=aes(x=variable, 
