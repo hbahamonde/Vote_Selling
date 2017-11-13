@@ -439,7 +439,6 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 
 # Difference in means 
 
-##install.packages("list")
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
@@ -449,56 +448,6 @@ summary(sum.dif.means)
 
 
 
-# LOGISTIC MODEL
-
-# Direct question
-
-
-### Apr. 2nd, 2016, Zelig wasn't loading the (1) graph nor the (2) Rgraphviz, so I loaded them individually
-### It seemed that these two packages were not available for my R version on CRAN. They were available for latest R from source, though
-### source("https://bioconductor.org/biocLite.R")
-### biocLite("graph")
-### source("https://bioconductor.org/biocLite.R")
-### biocLite("Rgraphviz")
-
-
-
-### Previous Working model:  #age.n + woman + socideo + partyid + reg + trustfed + income.n + educ.n + polknow + #ziplabforce + #zippercamincome + sizetimesincome + proplabforgovtwork, 
-
-
-# install.packages("devtools")
-# library(devtools)
-# install_github("IQSS/Zelig")
-library(Zelig)
-# Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-# working model
-direct.q.zelig <-   zelig(directquestion ~ 
-                            #age.n + 
-                            woman + 
-                            socideo + 
-                            partyid + 
-                            reg + 
-                            trustfed + 
-                            income.n + 
-                            educ.n + 
-                            polknow, 
-                          #ziplabforce + 
-                          #zippercamincome + 
-                          #sizetimesincome + 
-                          #proplabforgovtwork,               
-                          data = dat, 
-                          model = "logit")
-
-
-# first differences RATIO LABOR FORCE / GVT WORK 
-x.high <- setx(direct.q.zelig, proplabforgovtwork = quantile(dat$proplabforgovtwork, prob = 0.75))
-x.low <- setx(direct.q.zelig, proplabforgovtwork = quantile(dat$proplabforgovtwork, prob = 0.25))
-set.seed(602)
-s.out2 <- sim(direct.q.zelig, x = x.high, x1 = x.low)
-summary(s.out2)
-plot(s.out2)
-
 #####
 # Multivariate Analysis of List Experiment: Covariates
 #####
@@ -506,13 +455,12 @@ plot(s.out2)
 # Load Data 
 load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
-# drop missings
-## sapply(dat, function(x) sum(is.na(x)))
-# completeFun <- function(data, desiredCols) {
-#         completeVec <- complete.cases(data[, desiredCols])
-#         return(data[completeVec, ])
-# }
-# dat = completeFun(dat, c("woman", "socideo", "partyid", "reg", "trustfed", "income.n", "educ.n", "polknow")) # variables
+
+control.variables = 
+        paste(
+        c("age.n", "woman", "socideo", "partyid", "reg", "trustfed", "income.n", "educ.n", "polknow"), collapse=" + ")
+
+
 
 ## Setting tolerance
 options(scipen=999)
@@ -522,19 +470,15 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list <- ictreg(ycount ~ 
-                 #age.n + 
-                 woman + 
-                 socideo + 
-                 partyid + 
-                 reg + 
-                 trustfed + 
-                 income.n + 
-                 educ.n + 
-                 polknow, 
-               #ziplabforce + 
-               #zippercamincome + 
-               #sizetimesincome + 
-               #proplabforgovtwork,               
+                       #age.n + 
+                       woman + 
+                       socideo + 
+                       partyid + 
+                       #reg + 
+                       #trustfed + 
+                       income.n + 
+                       #educ.n + 
+                       polknow, 
                data = dat, 
                treat = "treatment", 
                J=3, 
@@ -543,131 +487,382 @@ list <- ictreg(ycount ~
 
 summary(list, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
-## Contextual Economic Model: MODEL ycount ~ zipinequality + sizeofthepoor + income.n + sizetimesincome + proplabforgovtwork
-list.2 <- ictreg(ycount ~ zipinequality:income.n + sizeofthepoor:income.n + proplabforgovtwork,
-                 data = dat, 
-                 treat = "treatment", 
-                 J=3, 
-                 method = "nls", 
-                 maxIter = 200000)
-
-summary(list.2, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
 
-## Soc. Des. Bias comparing list (individual) and list.2 (structural)
-### PENDING!
+######################################################
+# Average predictions
 
-#####
-# Multivariate Analysis of List Experiment: Conjoint
-#####
+## Proportion of affirmative responses to the sensitive item ("proportions of liars estimates")
+list.predicted <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = T, return.draws = T, level = .95)
+title=100*(list.predicted$fit$fit)
+title=round(title, digits = 1)
+plot(list.predicted, main = title) # produces plots with estimated population proportions of respondents answering the sensitive item
+
+## Individual predictions
+### Individual posterior likelihoods of vote-selling
+list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
+list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
+indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
+names(indpred.p)[4] = "se.fit"
+rownames(indpred.p) <- NULL
+indpred.p.fit= indpred.p$fit
+
+## Individual predictions
+### Plot
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+ggplot() + geom_pointrange(data=indpred.p, 
+                           mapping =aes(
+                                   x=1:nrow(indpred.p), 
+                                   y=indpred.p$fit, 
+                                   ymin=indpred.p$lwr, 
+                                   ymax=indpred.p$upr, 
+                                   colour = indpred.p$sign
+                           ), 
+                           size=0.25, 
+                           alpha=.5) + 
+        theme(legend.position="none") + 
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        xlab("Observations") + 
+        ylab("Probability of Vote-Selling") +
+        guides(colour=FALSE) + 
+        theme_bw()
+
+######################################################
+## Estimation of Social Desirability: Direct vs. Indidirect questions
+
+
+
+direct.q <- glm(directquestion ~ 
+                        #age.n + 
+                        woman + 
+                        socideo + 
+                        partyid + 
+                        #reg + 
+                        #trustfed + 
+                        income.n + 
+                        #educ.n + 
+                        polknow, 
+                data = dat, 
+                family = binomial(link = "logit"))
+
+
+avg.pred.social.desirability <- predict.ictreg(list, direct.glm = direct.q, se.fit = TRUE, level = .95, interval = "confidence")
+
+
+socdes.p = data.frame(avg.pred.social.desirability$fit, 
+                      avg.pred.social.desirability$se.fit,
+                      c(1:3),
+                      sign= as.numeric(avg.pred.social.desirability$fit$lwr<=0))
+
+socdes.p$c.1.3 = as.factor(socdes.p$c.1.3)
+socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+
+ggplot() + geom_pointrange(
+        data=socdes.p,
+        mapping=aes(
+                x=socdes.p$c.1.3, 
+                y=socdes.p$fit,
+                ymin=socdes.p$upr,
+                ymax=socdes.p$lwr,
+                colour = socdes.p$sign),size = 0.8) + 
+        theme(legend.position="none") + 
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        xlab("") + 
+        ylab("Probability of Vote-Selling") + 
+        guides(colour=FALSE) +
+        theme_bw()
+
+
+
+
+###########################################################################
+# Democratic Values of the American Public
+###########################################################################
 cat("\014")
 rm(list=ls())
 
-# load conjoint data D
+# Load Data
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
-# load list DAT
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # dat
 
+d <- na.omit(d)
 
-# extract Item Count from List and Append it into the COnjoint Data frame
-ycount = data.frame(rep(dat$ycount, each = 10))
-dat.combined = data.frame(ycount, d); colnames(dat.combined)[1] <- "ycount"
-
-# similarly, pass "treatment" from LIST portion to dat.combined.
-treatment = data.frame(rep(dat$treatment, each = 10))
-dat.combined = data.frame(treatment, dat.combined); colnames(dat.combined)[1] <- "treatment"
+# example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
+# developed in :
+# Causal Inference in Conjoint Analysis:
+# Understanding Multidimensional Choices via Stated Preference Experiments
+# Jens Hainmueller, Daniel Hopkins, Teppei Yamamoto
 
 # function that does clustered SEs
-vcovCluster <- function(model,cluster){
-  require(sandwich)
-  require(lmtest)
-  if(nrow(model.matrix(model))!=length(cluster)){
-    stop("check your data: cluster variable has different N than model")
-  }
-  M <- length(unique(cluster))
-  N <- length(cluster)           
-  K <- model$rank   
-  if(M<50){
-    warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
-  }
-  dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
-  uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
-  rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
-  return(rcse.cov)
+vcovCluster <- function(
+        model,
+        cluster
+)
+{
+        require(sandwich)
+        require(lmtest)
+        if(nrow(model.matrix(model))!=length(cluster)){
+                stop("check your data: cluster variable has different N than model")
+        }
+        M <- length(unique(cluster))
+        N <- length(cluster)           
+        K <- model$rank   
+        if(M<50){
+                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+        }
+        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+        return(rcse.cov)
 }
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(lmtest,sandwich,msm)
 
 
+
 # make outcome numeric
-dat.combined$ycount <- as.numeric(dat.combined$ycount)
+d$selected <- as.numeric(d$selected)
 
 # make treatments factors
-dat.combined$at.run = as.factor(dat.combined$at.run)
-dat.combined$at.asso = as.factor(dat.combined$at.asso)
-dat.combined$at.press = as.factor(dat.combined$at.press)
-dat.combined$at.presaut = as.factor(dat.combined$at.presaut)
-dat.combined$at.vote = as.factor(dat.combined$at.vote)
-
-# change covariates to numeric
-dat.combined$at.run = as.numeric(dat.combined$at.run)
-dat.combined$at.asso = as.numeric(dat.combined$at.asso)
-dat.combined$at.press = as.numeric(dat.combined$at.press)
-dat.combined$at.presaut = as.numeric(dat.combined$at.presaut)
-dat.combined$at.vote = as.numeric(dat.combined$at.vote)
+d$at.run = as.factor(d$at.run)
+d$at.asso = as.factor(d$at.asso)
+d$at.press = as.factor(d$at.press)
+d$at.presaut = as.factor(d$at.presaut)
+d$at.vote = as.factor(d$at.vote)
 
 
+# change reference ctegories
+d <- within(d, at.run <- relevel(at.run, ref = 2))
+d <- within(d, at.asso <- relevel(at.asso, ref = 2))
+d <- within(d, at.press <- relevel(at.press, ref = 2))
+d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
+d <- within(d, at.vote <- relevel(at.vote, ref = 2))
 
-# Estimate the model
+model.1 = lm(selected ~ at.run, data=d)
+model.2 = lm(selected ~ at.asso, data=d)
+model.3 = lm(selected ~ at.press, data=d)
+model.4 = lm(selected ~ at.presaut, data=d)
+model.5 = lm(selected ~ at.vote, data=d)
+
+
+acme.1 = coeftest(model.1, vcov = vcovCluster(model.1, cluster = d$idnum)) # run
+acme.2 = coeftest(model.2, vcov = vcovCluster(model.2, cluster = d$idnum)) # asso
+acme.3 = coeftest(model.3, vcov = vcovCluster(model.3, cluster = d$idnum)) # press
+acme.4 = coeftest(model.4, vcov = vcovCluster(model.4, cluster = d$idnum)) # pres aut
+acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum)) # vote
+
+acme.d <- data.frame(
+        variable = seq(1:10),
+        coefficients = as.numeric(c(
+                acme.1[2], 0, # run
+                acme.5[2], 0, # vote
+                acme.2[2], 0, # assoc
+                acme.3[2], 0, # media
+                acme.4[2], 0 # pres aut
+        )
+        ),
+        se = as.numeric(c(
+                acme.1[4], 0, # run
+                acme.5[4], 0, # vote
+                acme.2[4], 0, # assoc
+                acme.3[4], 0, # media
+                acme.4[4], 0  # pres aut
+        )
+        )
+)
+
+acme.d$upper <-acme.d$coefficients + 1.96*acme.d$se
+acme.d$lower <-acme.d$coefficients - 1.96*acme.d$se
+acme.d$variable = order(acme.d$variable)
+
+
+acme.d$variable <- factor(acme.d$variable,
+                          levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
+                          labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+)
+
+
+acme.d$variable = with(acme.d, factor(variable, levels = rev(levels(variable))))
+
+
+
+# Plot
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+ggplot(acme.d, aes(
+        x = variable, 
+        y = coefficients, 
+        ymin = upper, 
+        ymax = lower)
+) +
+        geom_pointrange() + 
+        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+        coord_flip() + 
+        xlab("") + 
+        ylab("Coefficient") +
+        ggtitle("Democratic Values of the American Public")+
+        guides(colour=FALSE) +
+        theme(legend.position="none") + 
+        theme_bw()
+
+
+
+###########################################################################
+# Predicting Which Of These Dimensions Predict Likely Vote-Sellers
+###########################################################################
+
+
+cat("\014")
+rm(list=ls())
+
+
+# GENERATE VECTOR WITH INDIVUDUAL PREDICTIONS
+
+# load data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+
+
+# run the model
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-
-list.run <- ictreg(ycount ~ at.run*selected,           
-                   data = dat.combined, 
-                   treat = "treatment", 
-                   J=3, 
-                   method = "ml", 
-                   maxIter = 200000)
-
-list.at.asso <- ictreg(ycount ~ at.asso*selected,           
-                       data = dat.combined, 
-                       treat = "treatment", 
-                       J=3, 
-                       method = "ml", 
-                       maxIter = 200000)
-
-
-
+list <- ictreg(ycount ~ 
+                       #age.n + 
+                       woman + 
+                       socideo + 
+                       partyid + 
+                       #reg + 
+                       #trustfed + 
+                       income.n + 
+                       #educ.n + 
+                       polknow, 
+               data = dat, 
+               treat = "treatment", 
+               J=3, 
+               method = "lm", 
+               maxIter = 200000)
 
 
+## Get Individual predictions
+### Individual posterior likelihoods of vote-selling
+list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
+list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
+indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
+names(indpred.p)[4] = "se.fit"
+rownames(indpred.p) <- NULL
+### gen DF with vector of FIT and SIGN
+voteselling.fit = data.frame(indpred.p$fit)
+voteselling.sign = data.frame(indpred.p$sign)
+### REPEAT EACH ROW TEN TIMES, AND KEEP EACH VECTOR AS A DF
+voteselling.fit = data.frame(voteselling.fit[rep(seq_len(nrow(voteselling.fit)), each=10),])
+voteselling.sign = data.frame(voteselling.sign[rep(seq_len(nrow(voteselling.sign)), each=10),])
 
 
 
 
 
-acme.list.run = coeftest(list.run, vcov = vcovCluster(list.run, cluster = dat.combined$idnum)) # run
-acme.list.at.asso = coeftest(list.at.asso, vcov = vcovCluster(list.at.asso, cluster = dat.combined)) # asso
+
+# load conjoint data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
+
+## append voteselling column
+d = data.frame(voteselling.fit,voteselling.sign, d)
+
+## rename
+colnames(d)[1] <- "voteselling"
+colnames(d)[2] <- "sign"
+
+## excluding non-significative values
+d <- d[ which(d$sign==1), ] # optional
+
+# function that does clustered SEs
+vcovCluster <- function(
+        model,
+        cluster
+)
+{
+        require(sandwich)
+        require(lmtest)
+        if(nrow(model.matrix(model))!=length(cluster)){
+                stop("check your data: cluster variable has different N than model")
+        }
+        M <- length(unique(cluster))
+        N <- length(cluster)           
+        K <- model$rank   
+        if(M<50){
+                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+        }
+        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+        return(rcse.cov)
+}
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(lmtest,sandwich,msm)
+
+
+
+# make outcome numeric
+d$voteselling <- as.numeric(d$voteselling)
+
+# make treatments factors
+d$at.run = as.factor(d$at.run)
+d$at.asso = as.factor(d$at.asso)
+d$at.press = as.factor(d$at.press)
+d$at.presaut = as.factor(d$at.presaut)
+d$at.vote = as.factor(d$at.vote)
+
+
+# change reference ctegories
+d <- within(d, at.run <- relevel(at.run, ref = 2))
+d <- within(d, at.asso <- relevel(at.asso, ref = 2))
+d <- within(d, at.press <- relevel(at.press, ref = 2))
+d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
+d <- within(d, at.vote <- relevel(at.vote, ref = 2))
+
+model.vs.1 = lm(voteselling ~ at.run, data=d)
+model.vs.2 = lm(voteselling ~ at.asso, data=d)
+model.vs.3 = lm(voteselling ~ at.press, data=d)
+model.vs.4 = lm(voteselling ~ at.presaut, data=d)
+model.vs.5 = lm(voteselling ~ at.vote, data=d)
+
+
+d <- na.omit(d)
+acme.vs.1 = coeftest(model.vs.1, vcov = vcovCluster(model.vs.1, cluster = d$idnum)) # run
+acme.vs.2 = coeftest(model.vs.2, vcov = vcovCluster(model.vs.2, cluster = d$idnum)) # asso
+acme.vs.3 = coeftest(model.vs.3, vcov = vcovCluster(model.vs.3, cluster = d$idnum)) # press
+acme.vs.4 = coeftest(model.vs.4, vcov = vcovCluster(model.vs.4, cluster = d$idnum)) # pres aut
+acme.vs.5 = coeftest(model.vs.5, vcov = vcovCluster(model.vs.5, cluster = d$idnum)) # vote
 
 acme.vs.d <- data.frame(
-  variable = seq(1:10),
-  coefficients = as.numeric(c(
-    acme.vs.1[2], 0, # run
-    acme.vs.5[2], 0, # vote
-    acme.vs.2[2], 0, # assoc
-    acme.vs.3[2], 0, # media
-    acme.vs.4[2], 0 # pres aut
-  )
-  ),
-  se = as.numeric(c(
-    acme.vs.1[4], 0, # run
-    acme.vs.5[4], 0, # vote
-    acme.vs.2[4], 0, # assoc
-    acme.vs.3[4], 0, # media
-    acme.vs.4[4], 0  # pres aut
-  )
-  )
+        variable = seq(1:10),
+        coefficients = as.numeric(c(
+                acme.vs.1[2], 0, # run
+                acme.vs.5[2], 0, # vote
+                acme.vs.2[2], 0, # assoc
+                acme.vs.3[2], 0, # media
+                acme.vs.4[2], 0 # pres aut
+        )
+        ),
+        se = as.numeric(c(
+                acme.vs.1[4], 0, # run
+                acme.vs.5[4], 0, # vote
+                acme.vs.2[4], 0, # assoc
+                acme.vs.3[4], 0, # media
+                acme.vs.4[4], 0  # pres aut
+        )
+        )
 )
 
 
@@ -688,24 +883,22 @@ acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variab
 
 
 # Plot
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
+library(ggplot2)
 ggplot(acme.vs.d, aes(
-  x = variable, 
-  y = coefficients, 
-  ymin = upper, 
-  ymax = lower)
+        x = variable, 
+        y = coefficients, 
+        ymin = upper, 
+        ymax = lower)
 ) +
-  geom_pointrange() + 
-  geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
-  coord_flip() + 
-  xlab("") + 
-  ylab("Coefficient") +
-  ggtitle("Broken Democratic Dimensions: \n Associationism Predicts Vote Selling")+
-  guides(colour=FALSE) +
-  theme(legend.position="none") + 
-  theme_bw()
+        geom_pointrange() + 
+        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+        coord_flip() + 
+        xlab("") + 
+        ylab("Coefficient") +
+        ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
+        guides(colour=FALSE) +
+        theme(legend.position="none") + 
+        theme_bw()
 
 
 
@@ -750,98 +943,7 @@ dispersiontest(over.disp.test)
 #design <- ict.test(ycount, treat, J=3, gms = TRUE, n.draws = 250000, alpha = 0.05, pi.table = TRUE)
 #print(design) # no design effect
 
-######################################################
-# Average predictions
 
-## Proportion of affirmative responses to the sensitive item ("proportions of liars estimates")
-list.predicted <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = T, return.draws = T, level = .95)
-title=100*(list.predicted$fit$fit)
-title=round(title, digits = 1)
-plot(list.predicted, main = title) # produces plots with estimated population proportions of respondents answering the sensitive item
-
-## Individual predictions
-### Individual posterior likelihoods of vote-selling
-list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
-list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
-list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
-indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
-names(indpred.p)[4] = "se.fit"
-rownames(indpred.p) <- NULL
-indpred.p.fit= indpred.p$fit
-
-
-### Plot
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + geom_pointrange(data=indpred.p, 
-                           mapping =aes(
-                             x=1:nrow(indpred.p), 
-                             y=indpred.p$fit, 
-                             ymin=indpred.p$lwr, 
-                             ymax=indpred.p$upr, 
-                             colour = indpred.p$sign
-                           ), 
-                           size=0.25, 
-                           alpha=.5) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Observations") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) + 
-  theme_bw()
-
-######################################################
-# Estimation of Social Desirability: Direct vs. Indidirect questions
-
-
-direct.q <- glm(directquestion ~ 
-                  #age.n + 
-                  woman + 
-                  socideo + 
-                  partyid + 
-                  reg + 
-                  trustfed + 
-                  income.n + 
-                  educ.n + 
-                  polknow, 
-                #ziplabforce + 
-                #zippercamincome + 
-                #sizetimesincome + 
-                #proplabforgovtwork,               
-                data = dat, 
-                family = binomial(link = "logit"))
-
-
-avg.pred.social.desirability <- predict.ictreg(list, direct.glm = direct.q, se.fit = TRUE)
-
-
-socdes.p = data.frame(avg.pred.social.desirability$fit, 
-                      avg.pred.social.desirability$se.fit,
-                      c(1:3),
-                      sign= as.numeric(avg.pred.social.desirability$fit$lwr<=0))
-
-socdes.p$c.1.3 = as.factor(socdes.p$c.1.3)
-socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List", "Direct", "Soc. Des"))
-
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + geom_pointrange(
-  data=socdes.p,
-  mapping=aes(
-    x=socdes.p$c.1.3, 
-    y=socdes.p$fit,
-    ymin=socdes.p$upr,
-    ymax=socdes.p$lwr,
-    colour = socdes.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("") + 
-  ylab("Probability of Vote-Selling") + 
-  guides(colour=FALSE) +
-  theme_bw()
 
 ######################################################
 # PREDICTIONS
