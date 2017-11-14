@@ -442,25 +442,30 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-dif.means <- ictreg(ycount ~ 1, data = dat, treat = "treatment", J=3, method = "ml")
+dif.means <- ictreg(ycount ~ 1, data = dat, treat = "treatment", J=3, method = "lm")
 sum.dif.means <- summary(dif.means, n.draws = 100000) # quasi-Bayesian approximation based predictions
 summary(sum.dif.means)
 
 
 
-#####
+###########################################################
 # Multivariate Analysis of List Experiment: Covariates
-#####
+###########################################################
+cat("\014")
+rm(list=ls())
+
 
 # Load Data 
 load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
-control.variables = 
-        paste(
-        c("age.n", "woman", "socideo", "partyid", "reg", "trustfed", "income.n", "educ.n", "polknow"), collapse=" + ")
+##############
+# List Low Condition
+##############
 
 
+## subseting leaving only LOW treatment condition
+dat.low <- dat[ which(dat$treatlow==1 | dat$treatment==0), ] 
 
 ## Setting tolerance
 options(scipen=999)
@@ -469,15 +474,15 @@ options(digits=2)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-list <- ictreg(ycount ~ 
-                       #age.n + 
-                       woman + 
+list.low <- ictreg(ycount ~ 
+                       age.n + 
+                       #woman + 
                        socideo + 
                        partyid + 
-                       #reg + 
+                       reg + 
                        #trustfed + 
                        income.n + 
-                       #educ.n + 
+                       educ.n + 
                        polknow, 
                data = dat, 
                treat = "treatment", 
@@ -485,100 +490,233 @@ list <- ictreg(ycount ~
                method = "ml", 
                maxIter = 200000)
 
-summary(list, n.draws = 200000) # quasi-Bayesian approximation based predictions
+summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
+
+
+## Individual predictions
+### Individual posterior likelihoods of vote-selling
+list.low.predicted.2B <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.low.predicted.2B$fit<-round(list.low.predicted.2B$fit, 2)
+list.low.predicted.2B$se.fit<-round(list.low.predicted.2B$se.fit, 2)
+indpred.p.low = data.frame(list.low.predicted.2B$fit, list.low.predicted.2B$se.fit, sign = as.numeric(list.low.predicted.2B$fit$lwr<=0))
+names(indpred.p.low)[4] = "se.fit"
+rownames(indpred.p.low) <- NULL
+indpred.p.low.fit= indpred.p.low$fit
+
+
+##############
+# List High Condition
+##############
+
+
+## subseting leaving only LOW treatment condition
+dat.high <- dat[ which(dat$treatlow==0 | dat$treatment==0), ] 
+
+## Setting tolerance
+options(scipen=999)
+options(digits=2)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(list)
+
+list.high <- ictreg(ycount ~ 
+                            age.n + 
+                            #woman + 
+                            socideo + 
+                            partyid + 
+                            reg + 
+                            #trustfed + 
+                            income.n + 
+                            educ.n + 
+                            polknow, 
+                    data = dat, 
+                    treat = "treatment", 
+                    J=3, 
+                    method = "ml", 
+                    maxIter = 200000)
+
+summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
+
+
+
+## Individual predictions
+### Individual posterior likelihoods of vote-selling
+list.high.predicted.2B <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.high.predicted.2B$fit<-round(list.high.predicted.2B$fit, 2)
+list.high.predicted.2B$se.fit<-round(list.high.predicted.2B$se.fit, 2)
+indpred.p.high = data.frame(list.high.predicted.2B$fit, list.high.predicted.2B$se.fit, sign = as.numeric(list.high.predicted.2B$fit$lwr<=0))
+names(indpred.p.high)[4] = "se.fit"
+rownames(indpred.p.high) <- NULL
+indpred.p.high.fit= indpred.p.high$fit
 
 
 ######################################################
 # Average predictions
-
 ## Proportion of affirmative responses to the sensitive item ("proportions of liars estimates")
-list.predicted <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = T, return.draws = T, level = .95)
-title=100*(list.predicted$fit$fit)
-title=round(title, digits = 1)
-plot(list.predicted, main = title) # produces plots with estimated population proportions of respondents answering the sensitive item
+# list.predicted <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = T, return.draws = T, level = .95)
+# title=100*(list.predicted$fit$fit)
+# title=round(title, digits = 1)
+# plot(list.predicted, main = title) # produces plots with estimated population proportions of respondents answering the sensitive item
+######################################################
 
-## Individual predictions
-### Individual posterior likelihoods of vote-selling
-list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
-list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
-list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
-indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
-names(indpred.p)[4] = "se.fit"
-rownames(indpred.p) <- NULL
-indpred.p.fit= indpred.p$fit
+##############
+# Plot Individual predictions (both High and Low conditions)
+##############
 
-## Individual predictions
-### Plot
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
+# load libraries
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2,grid,gridExtra)
 
-ggplot() + geom_pointrange(data=indpred.p, 
-                           mapping =aes(
-                                   x=1:nrow(indpred.p), 
-                                   y=indpred.p$fit, 
-                                   ymin=indpred.p$lwr, 
-                                   ymax=indpred.p$upr, 
-                                   colour = indpred.p$sign
-                           ), 
-                           size=0.25, 
-                           alpha=.5) + 
+
+
+
+## Low
+ind.pred.low.cond.plot = ggplot() + geom_pointrange(data=indpred.p.low, 
+                                                    mapping =aes(
+                                                            x=1:nrow(indpred.p.low), 
+                                                            y=indpred.p.low$fit, 
+                                                            ymin=indpred.p.low$lwr, 
+                                                            ymax=indpred.p.low$upr, 
+                                                            colour = indpred.p.low$sign), 
+                                                    size=0.25, 
+                                                    alpha=.5) + 
         theme(legend.position="none") + 
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         xlab("Observations") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Probability of Vote-Selling (Low Condition)") +
         guides(colour=FALSE) + 
         theme_bw()
+
+## High
+ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high, 
+                                                     mapping =aes(
+                                                             x=1:nrow(indpred.p.high), 
+                                                             y=indpred.p.high$fit, 
+                                                             ymin=indpred.p.high$lwr, 
+                                                             ymax=indpred.p.high$upr, 
+                                                             colour = indpred.p.high$sign), 
+                                                     size=0.25, 
+                                                     alpha=.5) + 
+        theme(legend.position="none") + 
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        xlab("Observations") + 
+        ylab("Probability of Vote-Selling (High Condition)") +
+        guides(colour=FALSE) + 
+        theme_bw()
+
+## merging the two plots
+grid.arrange(ind.pred.low.cond.plot, ind.pred.high.cond.plot, ncol = 1)
+
 
 ######################################################
 ## Estimation of Social Desirability: Direct vs. Indidirect questions
 
 
+##############
+# Direct: High Condition
+##############
 
-direct.q <- glm(directquestion ~ 
-                        #age.n + 
-                        woman + 
+
+direct.q.high <- glm(directquestion ~ 
+                        age.n + 
+                        #woman + 
                         socideo + 
                         partyid + 
-                        #reg + 
+                        reg + 
                         #trustfed + 
                         income.n + 
-                        #educ.n + 
+                        educ.n + 
                         polknow, 
-                data = dat, 
+                data = dat.high, 
                 family = binomial(link = "logit"))
 
 
-avg.pred.social.desirability <- predict.ictreg(list, direct.glm = direct.q, se.fit = TRUE, level = .95, interval = "confidence")
+##############
+# Direct: Low Condition
+##############
 
 
-socdes.p = data.frame(avg.pred.social.desirability$fit, 
-                      avg.pred.social.desirability$se.fit,
-                      c(1:3),
-                      sign= as.numeric(avg.pred.social.desirability$fit$lwr<=0))
+direct.q.low <- glm(directquestion ~ 
+                             age.n + 
+                             #woman + 
+                             socideo + 
+                             partyid + 
+                             reg + 
+                             #trustfed + 
+                             income.n + 
+                             educ.n + 
+                             polknow, 
+                     data = dat.low, 
+                     family = binomial(link = "logit"))
 
-socdes.p$c.1.3 = as.factor(socdes.p$c.1.3)
-socdes.p$c.1.3 <- factor(socdes.p$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+avg.pred.social.desirability.high <- predict.ictreg(list.high, direct.glm = direct.q.high, se.fit = TRUE, level = .95, interval = "confidence")
+avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct.q.low, se.fit = TRUE, level = .95, interval = "confidence")
 
 
+### DF for individual prediction: High Condition
+socdes.p.high = data.frame(avg.pred.social.desirability.high$fit, 
+                           avg.pred.social.desirability.high$se.fit,
+                           c(1:3),
+                           Significance = as.numeric(avg.pred.social.desirability.high$fit$lwr<=0),
+                           Condition = rep("High"), 3)
+
+# HERE
+
+ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01)) <= 0, 1,0)
+
+
+ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01)) <= 0, 0,1)
+
+ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01)) <= 0, 0,1)
+
+
+
+
+socdes.p.high$c.1.3 = as.factor(socdes.p.high$c.1.3)
+socdes.p.high$c.1.3 <- factor(socdes.p.high$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+socdes.p.high <- socdes.p.high[c("fit", "lwr", "upr", "Significance", "Condition", "c.1.3")]
+
+### DF for individual prediction: Low Condition
+socdes.p.low = data.frame(avg.pred.social.desirability.low$fit, 
+                          avg.pred.social.desirability.low$se.fit,
+                          c(1:3),
+                          Significance = as.numeric(avg.pred.social.desirability.low$fit$lwr<=0),
+                          Condition = rep("Low"), 3)
+
+socdes.p.low$c.1.3 = as.factor(socdes.p.low$c.1.3)
+socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+socdes.p.low <- socdes.p.low[c("fit", "lwr", "upr", "Significance", "Condition", "c.1.3")]
+
+### Rbinding both DF's
+socdes.p.high.low = rbind(socdes.p.high, socdes.p.low)
+rownames(socdes.p.high.low) <- NULL
+socdes.p.high.low$Significance <- factor(socdes.p.high.low$Significance,
+       levels = c(0,1),
+       labels = c("Non-Sign.", "Sign."))
+
+
+
+### Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-
-ggplot() + geom_pointrange(
-        data=socdes.p,
-        mapping=aes(
-                x=socdes.p$c.1.3, 
-                y=socdes.p$fit,
-                ymin=socdes.p$upr,
-                ymax=socdes.p$lwr,
-                colour = socdes.p$sign),size = 0.8) + 
-        theme(legend.position="none") + 
-        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+ggplot(socdes.p.high.low, 
+       aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
+        theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") + 
-        guides(colour=FALSE) +
-        theme_bw()
+        ylab("Probability of Vote-Selling") +
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.2) +
+        geom_pointrange(aes(
+                x = socdes.p.high.low$c.1.3,
+                ymin = socdes.p.high.low$lwr, 
+                ymax = socdes.p.high.low$upr), position = position_dodge(width = 0.25))
+
+       
+
+
+
+
 
 
 
@@ -749,14 +887,14 @@ list <- ictreg(ycount ~
                treat = "treatment", 
                J=3, 
                method = "lm", 
-               maxIter = 200000)
+               maxIter = 2000000)
 
 
 ## Get Individual predictions
 ### Individual posterior likelihoods of vote-selling
 list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
-list.predicted.2B$fit<-round(list.predicted.2B$fit, 2)
-list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 2)
+list.predicted.2B$fit<-round(list.predicted.2B$fit, 10)
+list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 10)
 indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
 names(indpred.p)[4] = "se.fit"
 rownames(indpred.p) <- NULL
@@ -883,7 +1021,9 @@ acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variab
 
 
 # Plot
-library(ggplot2)
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
 ggplot(acme.vs.d, aes(
         x = variable, 
         y = coefficients, 
