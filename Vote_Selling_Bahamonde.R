@@ -453,12 +453,27 @@ summary(sum.dif.means)
 ###########################################################
 cat("\014")
 rm(list=ls())
-
+dev.off();dev.off();dev.off()
 
 # Load Data 
 load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
+# Define Formula
 
+covariates.all = paste(
+        "age.n", 
+        "woman", 
+        "socideo",
+        "partyid",
+        "reg",
+        "trustfed",
+        "income.n",
+        "educ.n",
+        "polknow",
+        sep = " + ")
+
+formula.list = formula(paste("ycount", covariates.all, sep = "~"))
+formula.directquestion = formula(paste("directquestion", covariates.all, sep = "~"))
 ##############
 # List Low Condition
 ##############
@@ -466,6 +481,25 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 
 ## subseting leaving only LOW treatment condition
 dat.low <- dat[ which(dat$treatlow==1 | dat$treatment==0), ] 
+
+# dropping rows with missing data
+completeFun <- function(data, desiredCols) {
+        completeVec <- complete.cases(data[, desiredCols])
+        return(data[completeVec, ])
+}
+
+dat.low = completeFun(dat.low, 
+                c("age.n", 
+                  "woman", 
+                  "socideo", 
+                  "partyid",
+                  "reg",
+                  "trustfed",
+                  "income.n",
+                  "educ.n",
+                  "polknow", 
+                  "zippopdensity")
+                )
 
 ## Setting tolerance
 options(scipen=999)
@@ -475,19 +509,20 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list.low <- ictreg(ycount ~ 
-                       age.n + 
-                       #woman + 
-                       socideo + 
-                       partyid + 
-                       reg + 
-                       #trustfed + 
-                       income.n + 
-                       educ.n + 
-                       polknow, 
-               data = dat, 
+                           age.n + 
+                           woman + 
+                           socideo +
+                           partyid +
+                           reg +
+                           trustfed +
+                           income.n +
+                           educ.n +
+                           polknow +
+                           zippopdensity,
+                   data = dat.low, 
                treat = "treatment", 
                J=3, 
-               method = "ml", 
+               method = "lm", 
                maxIter = 200000)
 
 summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
@@ -513,6 +548,26 @@ indpred.p.low.fit= indpred.p.low$fit
 ## subseting leaving only LOW treatment condition
 dat.high <- dat[ which(dat$treatlow==0 | dat$treatment==0), ] 
 
+# dropping rows with missing data
+completeFun <- function(data, desiredCols) {
+        completeVec <- complete.cases(data[, desiredCols])
+        return(data[completeVec, ])
+}
+
+dat.high = completeFun(dat.high, 
+                      c("age.n", 
+                        "woman", 
+                        "socideo", 
+                        "partyid",
+                        "reg",
+                        "trustfed",
+                        "income.n",
+                        "educ.n",
+                        "polknow", 
+                        "zippopdensity")
+)
+
+
 ## Setting tolerance
 options(scipen=999)
 options(digits=2)
@@ -522,18 +577,19 @@ p_load(list)
 
 list.high <- ictreg(ycount ~ 
                             age.n + 
-                            #woman + 
-                            socideo + 
-                            partyid + 
-                            reg + 
-                            #trustfed + 
-                            income.n + 
-                            educ.n + 
-                            polknow, 
-                    data = dat, 
+                            woman + 
+                            socideo +
+                            partyid +
+                            reg +
+                            trustfed +
+                            income.n +
+                            educ.n +
+                            polknow +
+                            zippopdensity,
+                    data = dat.high, 
                     treat = "treatment", 
                     J=3, 
-                    method = "ml", 
+                    method = "lm", 
                     maxIter = 200000)
 
 summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
@@ -619,17 +675,18 @@ grid.arrange(ind.pred.low.cond.plot, ind.pred.high.cond.plot, ncol = 1)
 
 
 direct.q.high <- glm(directquestion ~ 
-                        age.n + 
-                        #woman + 
-                        socideo + 
-                        partyid + 
-                        reg + 
-                        #trustfed + 
-                        income.n + 
-                        educ.n + 
-                        polknow, 
-                data = dat.high, 
-                family = binomial(link = "logit"))
+                             age.n + 
+                             woman + 
+                             socideo +
+                             partyid +
+                             reg +
+                             trustfed +
+                             income.n +
+                             educ.n +
+                             polknow +
+                             zippopdensity,
+                     data = dat.high, 
+                family = binomial("logit"))
 
 
 ##############
@@ -638,17 +695,18 @@ direct.q.high <- glm(directquestion ~
 
 
 direct.q.low <- glm(directquestion ~ 
-                             age.n + 
-                             #woman + 
-                             socideo + 
-                             partyid + 
-                             reg + 
-                             #trustfed + 
-                             income.n + 
-                             educ.n + 
-                             polknow, 
-                     data = dat.low, 
-                     family = binomial(link = "logit"))
+                            age.n + 
+                            woman + 
+                            socideo +
+                            partyid +
+                            reg +
+                            trustfed +
+                            income.n +
+                            educ.n +
+                            polknow +
+                            zippopdensity,
+                    data = dat.low, 
+                     family = binomial("logit"))
 
 avg.pred.social.desirability.high <- predict.ictreg(list.high, direct.glm = direct.q.high, se.fit = TRUE, level = .95, interval = "confidence")
 avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct.q.low, se.fit = TRUE, level = .95, interval = "confidence")
@@ -658,19 +716,8 @@ avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct
 socdes.p.high = data.frame(avg.pred.social.desirability.high$fit, 
                            avg.pred.social.desirability.high$se.fit,
                            c(1:3),
-                           Significance = as.numeric(avg.pred.social.desirability.high$fit$lwr<=0),
+                           Significance = c(ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01))), 1,0)),
                            Condition = rep("High"), 3)
-
-# HERE
-
-ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01)) <= 0, 1,0)
-
-
-ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01)) <= 0, 0,1)
-
-ifelse(min(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01)) | max(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01)) <= 0, 0,1)
-
-
 
 
 socdes.p.high$c.1.3 = as.factor(socdes.p.high$c.1.3)
@@ -681,7 +728,7 @@ socdes.p.high <- socdes.p.high[c("fit", "lwr", "upr", "Significance", "Condition
 socdes.p.low = data.frame(avg.pred.social.desirability.low$fit, 
                           avg.pred.social.desirability.low$se.fit,
                           c(1:3),
-                          Significance = as.numeric(avg.pred.social.desirability.low$fit$lwr<=0),
+                          Significance = c(ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[1], avg.pred.social.desirability.low$fit$upr[1], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[1], avg.pred.social.desirability.low$fit$upr[1], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[2], avg.pred.social.desirability.low$fit$upr[2], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[2], avg.pred.social.desirability.low$fit$upr[2], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[3], avg.pred.social.desirability.low$fit$upr[3], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[3], avg.pred.social.desirability.low$fit$upr[3], 0.01))), 1,0)),
                           Condition = rep("Low"), 3)
 
 socdes.p.low$c.1.3 = as.factor(socdes.p.low$c.1.3)
@@ -716,188 +763,70 @@ ggplot(socdes.p.high.low,
 
 
 
-
-
-
-
-
-###########################################################################
-# Democratic Values of the American Public
-###########################################################################
-cat("\014")
-rm(list=ls())
-
-# Load Data
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
-
-d <- na.omit(d)
-
-# example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
-# developed in :
-# Causal Inference in Conjoint Analysis:
-# Understanding Multidimensional Choices via Stated Preference Experiments
-# Jens Hainmueller, Daniel Hopkins, Teppei Yamamoto
-
-# function that does clustered SEs
-vcovCluster <- function(
-        model,
-        cluster
-)
-{
-        require(sandwich)
-        require(lmtest)
-        if(nrow(model.matrix(model))!=length(cluster)){
-                stop("check your data: cluster variable has different N than model")
-        }
-        M <- length(unique(cluster))
-        N <- length(cluster)           
-        K <- model$rank   
-        if(M<50){
-                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
-        }
-        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
-        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
-        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
-        return(rcse.cov)
-}
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(lmtest,sandwich,msm)
-
-
-
-# make outcome numeric
-d$selected <- as.numeric(d$selected)
-
-# make treatments factors
-d$at.run = as.factor(d$at.run)
-d$at.asso = as.factor(d$at.asso)
-d$at.press = as.factor(d$at.press)
-d$at.presaut = as.factor(d$at.presaut)
-d$at.vote = as.factor(d$at.vote)
-
-
-# change reference ctegories
-d <- within(d, at.run <- relevel(at.run, ref = 2))
-d <- within(d, at.asso <- relevel(at.asso, ref = 2))
-d <- within(d, at.press <- relevel(at.press, ref = 2))
-d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
-d <- within(d, at.vote <- relevel(at.vote, ref = 2))
-
-model.1 = lm(selected ~ at.run, data=d)
-model.2 = lm(selected ~ at.asso, data=d)
-model.3 = lm(selected ~ at.press, data=d)
-model.4 = lm(selected ~ at.presaut, data=d)
-model.5 = lm(selected ~ at.vote, data=d)
-
-
-acme.1 = coeftest(model.1, vcov = vcovCluster(model.1, cluster = d$idnum)) # run
-acme.2 = coeftest(model.2, vcov = vcovCluster(model.2, cluster = d$idnum)) # asso
-acme.3 = coeftest(model.3, vcov = vcovCluster(model.3, cluster = d$idnum)) # press
-acme.4 = coeftest(model.4, vcov = vcovCluster(model.4, cluster = d$idnum)) # pres aut
-acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum)) # vote
-
-acme.d <- data.frame(
-        variable = seq(1:10),
-        coefficients = as.numeric(c(
-                acme.1[2], 0, # run
-                acme.5[2], 0, # vote
-                acme.2[2], 0, # assoc
-                acme.3[2], 0, # media
-                acme.4[2], 0 # pres aut
-        )
-        ),
-        se = as.numeric(c(
-                acme.1[4], 0, # run
-                acme.5[4], 0, # vote
-                acme.2[4], 0, # assoc
-                acme.3[4], 0, # media
-                acme.4[4], 0  # pres aut
-        )
-        )
-)
-
-acme.d$upper <-acme.d$coefficients + 1.96*acme.d$se
-acme.d$lower <-acme.d$coefficients - 1.96*acme.d$se
-acme.d$variable = order(acme.d$variable)
-
-
-acme.d$variable <- factor(acme.d$variable,
-                          levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
-                          labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
-)
-
-
-acme.d$variable = with(acme.d, factor(variable, levels = rev(levels(variable))))
-
-
-
-# Plot
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot(acme.d, aes(
-        x = variable, 
-        y = coefficients, 
-        ymin = upper, 
-        ymax = lower)
-) +
-        geom_pointrange() + 
-        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
-        coord_flip() + 
-        xlab("") + 
-        ylab("Coefficient") +
-        ggtitle("Democratic Values of the American Public")+
-        guides(colour=FALSE) +
-        theme(legend.position="none") + 
-        theme_bw()
-
-
-
 ###########################################################################
 # Predicting Which Of These Dimensions Predict Likely Vote-Sellers
 ###########################################################################
 
 
-cat("\014")
-rm(list=ls())
+# cat("\014")
+# rm(list=ls())
 
 
-# GENERATE VECTOR WITH INDIVUDUAL PREDICTIONS
+# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: High Condition
+ind.pred.social.desirability.high <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
 
-# load data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-
-
-# run the model
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-list <- ictreg(ycount ~ 
-                       #age.n + 
-                       woman + 
-                       socideo + 
-                       partyid + 
-                       #reg + 
-                       #trustfed + 
-                       income.n + 
-                       #educ.n + 
-                       polknow, 
-               data = dat, 
-               treat = "treatment", 
-               J=3, 
-               method = "lm", 
-               maxIter = 2000000)
+ind.pred.social.desirability.high$fit<-round(ind.pred.social.desirability.high$fit, 10)
+ind.pred.social.desirability.high$se.fit<-round(ind.pred.social.desirability.high$se.fit, 10)
+ind.pred.social.desirability.high.d = data.frame(
+        ind.pred.social.desirability.high$fit, 
+        ind.pred.social.desirability.high$se.fit, 
+        sign = ifelse(sign(ind.pred.social.desirability.high$fit$lwr) == sign(ind.pred.social.desirability.high$fit$upr), 1, 0))
+names(ind.pred.social.desirability.high.d)[4] = "se.fit"
+rownames(ind.pred.social.desirability.high.d) <- NULL
 
 
-## Get Individual predictions
-### Individual posterior likelihoods of vote-selling
-list.predicted.2B <- predict.ictreg(list, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
-list.predicted.2B$fit<-round(list.predicted.2B$fit, 10)
-list.predicted.2B$se.fit<-round(list.predicted.2B$se.fit, 10)
-indpred.p = data.frame(list.predicted.2B$fit, list.predicted.2B$se.fit, sign = as.numeric(list.predicted.2B$fit$lwr<=0))
-names(indpred.p)[4] = "se.fit"
-rownames(indpred.p) <- NULL
+# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: Low Condition
+ind.pred.social.desirability.low <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+
+ind.pred.social.desirability.low$fit<-round(ind.pred.social.desirability.low$fit, 10)
+ind.pred.social.desirability.low$se.fit<-round(ind.pred.social.desirability.low$se.fit, 10)
+ind.pred.social.desirability.low.d = data.frame(
+        ind.pred.social.desirability.low$fit, 
+        ind.pred.social.desirability.low$se.fit, 
+        sign = ifelse(sign(ind.pred.social.desirability.low$fit$lwr) == sign(ind.pred.social.desirability.low$fit$upr), 1, 0))
+names(ind.pred.social.desirability.low.d)[4] = "se.fit"
+rownames(ind.pred.social.desirability.low.d) <- NULL
+
+# cbind regular DFs (with the two conditions) with the predictions
+dat.low.with.predict = data.frame(cbind(dat.low, ind.pred.social.desirability.low.d))
+dat.high.with.predict = data.frame(cbind(dat.high, ind.pred.social.desirability.high.d))
+dat.with.predict = data.frame(rbind(dat.low.with.predict, dat.high.with.predict))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### gen DF with vector of FIT and SIGN
 voteselling.fit = data.frame(indpred.p$fit)
 voteselling.sign = data.frame(indpred.p$sign)
@@ -1039,6 +968,144 @@ ggplot(acme.vs.d, aes(
         guides(colour=FALSE) +
         theme(legend.position="none") + 
         theme_bw()
+
+
+
+
+
+
+
+###########################################################################
+# Democratic Values of the American Public
+###########################################################################
+# cat("\014")
+# rm(list=ls())
+
+# Load Data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
+
+d <- na.omit(d)
+
+# example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
+# developed in :
+# Causal Inference in Conjoint Analysis:
+# Understanding Multidimensional Choices via Stated Preference Experiments
+# Jens Hainmueller, Daniel Hopkins, Teppei Yamamoto
+
+# function that does clustered SEs
+vcovCluster <- function(
+        model,
+        cluster
+)
+{
+        require(sandwich)
+        require(lmtest)
+        if(nrow(model.matrix(model))!=length(cluster)){
+                stop("check your data: cluster variable has different N than model")
+        }
+        M <- length(unique(cluster))
+        N <- length(cluster)           
+        K <- model$rank   
+        if(M<50){
+                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+        }
+        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+        return(rcse.cov)
+}
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(lmtest,sandwich,msm)
+
+
+
+# make outcome numeric
+d$selected <- as.numeric(d$selected)
+
+# make treatments factors
+d$at.run = as.factor(d$at.run)
+d$at.asso = as.factor(d$at.asso)
+d$at.press = as.factor(d$at.press)
+d$at.presaut = as.factor(d$at.presaut)
+d$at.vote = as.factor(d$at.vote)
+
+
+# change reference ctegories
+d <- within(d, at.run <- relevel(at.run, ref = 2))
+d <- within(d, at.asso <- relevel(at.asso, ref = 2))
+d <- within(d, at.press <- relevel(at.press, ref = 2))
+d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
+d <- within(d, at.vote <- relevel(at.vote, ref = 2))
+
+model.1 = lm(selected ~ at.run, data=d)
+model.2 = lm(selected ~ at.asso, data=d)
+model.3 = lm(selected ~ at.press, data=d)
+model.4 = lm(selected ~ at.presaut, data=d)
+model.5 = lm(selected ~ at.vote, data=d)
+
+
+acme.1 = coeftest(model.1, vcov = vcovCluster(model.1, cluster = d$idnum)) # run
+acme.2 = coeftest(model.2, vcov = vcovCluster(model.2, cluster = d$idnum)) # asso
+acme.3 = coeftest(model.3, vcov = vcovCluster(model.3, cluster = d$idnum)) # press
+acme.4 = coeftest(model.4, vcov = vcovCluster(model.4, cluster = d$idnum)) # pres aut
+acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum)) # vote
+
+acme.d <- data.frame(
+        variable = seq(1:10),
+        coefficients = as.numeric(c(
+                acme.1[2], 0, # run
+                acme.5[2], 0, # vote
+                acme.2[2], 0, # assoc
+                acme.3[2], 0, # media
+                acme.4[2], 0 # pres aut
+        )
+        ),
+        se = as.numeric(c(
+                acme.1[4], 0, # run
+                acme.5[4], 0, # vote
+                acme.2[4], 0, # assoc
+                acme.3[4], 0, # media
+                acme.4[4], 0  # pres aut
+        )
+        )
+)
+
+acme.d$upper <-acme.d$coefficients + 1.96*acme.d$se
+acme.d$lower <-acme.d$coefficients - 1.96*acme.d$se
+acme.d$variable = order(acme.d$variable)
+
+
+acme.d$variable <- factor(acme.d$variable,
+                          levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
+                          labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+)
+
+
+acme.d$variable = with(acme.d, factor(variable, levels = rev(levels(variable))))
+
+
+
+# Plot
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+ggplot(acme.d, aes(
+        x = variable, 
+        y = coefficients, 
+        ymin = upper, 
+        ymax = lower)
+) +
+        geom_pointrange() + 
+        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+        coord_flip() + 
+        xlab("") + 
+        ylab("Coefficient") +
+        ggtitle("Democratic Values of the American Public")+
+        guides(colour=FALSE) +
+        theme(legend.position="none") + 
+        theme_bw()
+
 
 
 
