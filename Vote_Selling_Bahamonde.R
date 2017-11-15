@@ -284,7 +284,7 @@ completeFun <- function(data, desiredCols) {
 
 dat.low = completeFun(dat.low, 
                       c(
-                              "age.n", 
+                              #"age.n", 
                               #"woman", 
                               "socideo", 
                               "partyid",
@@ -304,7 +304,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list.low <- ictreg(ycount ~ 
-                           age.n + 
+                           #age.n + 
                            #woman + 
                            socideo +
                            partyid +
@@ -350,7 +350,7 @@ completeFun <- function(data, desiredCols) {
 
 dat.high = completeFun(dat.high, 
                       c(
-                              "age.n", 
+                              #"age.n", 
                               #"woman", 
                               "socideo", 
                               "partyid",
@@ -371,7 +371,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list.high <- ictreg(ycount ~ 
-                            age.n + 
+                            #age.n + 
                             #woman + 
                             socideo +
                             partyid +
@@ -469,7 +469,7 @@ grid.arrange(ind.pred.low.cond.plot, ind.pred.high.cond.plot, ncol = 1)
 
 
 direct.q.high <- glm(directquestion ~ 
-                             age.n + 
+                             #age.n + 
                              #woman + 
                              socideo +
                              partyid +
@@ -488,7 +488,7 @@ direct.q.high <- glm(directquestion ~
 
 
 direct.q.low <- glm(directquestion ~ 
-                            age.n + 
+                            #age.n + 
                             #woman + 
                             socideo +
                             partyid +
