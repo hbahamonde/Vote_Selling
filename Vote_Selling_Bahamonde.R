@@ -115,216 +115,6 @@ dat$idnum = NULL
 # Saving Data
 save(dat, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # in paper's folder
 
-############################## 
-# CONJOINT Experiment DATA CLEANING
-##############################
-cat("\014")
-rm(list=ls())
-
-# C
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData")
-c = dat
-
-
-# check for complete cases in CONJOINT and LIST treatments
-c = subset(c, select = c("cj_1", "cj_2", "cj_3", "cj_4", "cj_5", "f_1_1_1",  "f_1_1_2", "f_1_1_3", "f_1_1_4", "f_1_1_5", "f_1_2_1", "f_1_2_2", "f_1_2_3", "f_1_2_4", "f_1_2_5", "f_2_1_1",  "f_2_1_2", "f_2_1_3", "f_2_1_4", "f_2_1_5", "f_2_2_1", "f_2_2_2", "f_2_2_3", "f_2_2_4", "f_2_2_5", "f_3_1_1", "f_3_1_2", "f_3_1_3", "f_3_1_4", "f_3_1_5", "f_3_2_1", "f_3_2_2", "f_3_2_3", "f_3_2_4", "f_3_2_5", "f_4_1_1", "f_4_1_2", "f_4_1_3", "f_4_1_4", "f_4_1_5", "f_4_2_1", "f_4_2_2", "f_4_2_3", "f_4_2_4", "f_4_2_5", "f_5_1_1", "f_5_1_2", "f_5_1_3", "f_5_1_4", "f_5_1_5", "f_5_2_1", "f_5_2_2", "f_5_2_3", "f_5_2_4", "f_5_2_5"))
-
-# change names again
-all_d = subset(c, select = c("cj_1", "cj_2", "cj_3", "cj_4", "cj_5"))
-colnames(all_d)[which(names(all_d) == "cj_1")] <- "d1"
-colnames(all_d)[which(names(all_d) == "cj_2")] <- "d2"
-colnames(all_d)[which(names(all_d) == "cj_3")] <- "d3"
-colnames(all_d)[which(names(all_d) == "cj_4")] <- "d4"
-colnames(all_d)[which(names(all_d) == "cj_5")] <- "d5"
-
-c$idnum = rep(1:nrow(c))
-nrowc = nrow(c) # I will use this here to entry the number of VALID subjects I've got
-
-# leave main dataframe with just the attributes and idnum
-c = subset(c, select = -c(cj_1, cj_2, cj_3, cj_4, cj_5) )
-
-# reshape dataset vertically
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(reshape)
-
-c = melt(c, id="idnum")
-
-# create code variable
-c$variable = as.character(c$variable)
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(stringr)
-
-c.string = data.frame(str_split_fixed(c$variable, "_", 4))
-colnames(c.string) = c("drop", "pair", "candidate", "attribute")
-
-# merge c.string and c dataframes
-c = data.frame(c, c.string)
-c = subset(c, select = -c(drop, variable, attribute))
-
-# generate a variable which writes the TYPE OF ATTRIBUTE
-c$type = ifelse(c$value == "Citizens CAN associate with others and form groups", "RightToAssociate", 
-                ifelse(c$value == "Citizens CANNOT associate with others and form groups", "RightToAssociate", 
-                       ifelse(c$value == "Citizens CAN run for office for the next two elections", "RightToRun", 
-                              ifelse(c$value == "Citizens CANNOT run for office for the next two elections", "RightToRun", 
-                                     ifelse(c$value == "Citizens CAN vote in the next two elections", "RightToVote", 
-                                            ifelse(c$value == "Citizens CANNOT vote in the next two elections", "RightToVote", 
-                                                   ifelse(c$value == "Media CAN confront the Government", "FreePress", 
-                                                          ifelse(c$value == "Media CANNOT confront the Government", "FreePress", 
-                                                                 ifelse(c$value == "President CAN rule without Congress", "PresAutonomy", 
-                                                                        ifelse(c$value == "President CANNOT rule without Congress", "PresAutonomy", NA
-                                                                        ))))))))))
-
-###
-c$code = paste(c$idnum,c$pair,c$candidate,sep = "-")
-colnames(c)[2] <- "caracteristica"
-colnames(c)[5] <- "descripcion"
-c$descripcion = as.character(c$descripcion)
-c$caracteristica = as.character(c$caracteristica)
-
-
-
-# D (empty dataset)
-idnum = rep(1:nrowc, each = 10)
-pair = rep(c(1,1,2,2,3,3,4,4,5,5), times = nrowc) # this is the number of TASKS
-candidate = rep(c(1,2), times = (nrowc*10)/2)
-at.run = rep(NA,nrowc*10)
-at.asso = rep(NA,nrowc*10)
-at.press = rep(NA,nrowc*10)
-at.presaut = rep(NA,nrowc*10)
-at.vote = rep(NA,nrowc*10)
-selected = as.character(rep(NA,nrowc*10))
-code = paste(idnum,pair,candidate,sep = "-")
-d = data.frame(code,idnum,pair,candidate,at.run, at.asso, at.press, at.presaut, at.vote,selected) # conjoint dataset
-
-
-# Loops to populate d dataset
-for (i in code) { # RightToRun
-  d$at.run[d$code==i] = c$caracteristica[c$descripcion=="RightToRun" & c$code==i]
-}
-
-for (i in code) { # RightToAssociate
-  d$at.asso[d$code==i] = c$caracteristica[c$descripcion=="RightToAssociate" & c$code==i]
-}
-
-
-for (i in code) { # FreePress
-  d$at.press[d$code==i] = c$caracteristica[c$descripcion=="FreePress" & c$code==i]
-}
-
-
-for (i in code) { # PresAutonomy
-  d$at.presaut[d$code==i] = c$caracteristica[c$descripcion=="PresAutonomy" & c$code==i]
-}
-
-
-for (i in code) { # RightToVote
-  d$at.vote[d$code==i] = c$caracteristica[c$descripcion=="RightToVote" & c$code==i]
-}
-
-# Generate "outcome" dataset
-
-# E
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData")
-
-e = dat
-
-idnum.e = rep(1:nrow(e), times = 10)
-pair.e = rep(c(1,1,2,2,3,3,4,4,5,5), each = nrow(e)) # this is the number of TASKS
-candidate.e = rep(c(1,2), each = nrow(e), times = 5)
-code.e = paste(idnum.e, pair.e, candidate.e, sep = "-")
-
-woman.e = c(e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman)
-socideo.e = c(e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo)
-partyid.e = c(e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid)
-reg.e = c(e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg)
-trustfed.e = c(e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed)
-income.n.e = c(e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income)
-educ.n.e = c(e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ)
-polknow.e = c(e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow)
-zipinequality.e = c(e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality)
-sizeofthepoor.e = c(e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor)
-proplabforgovtwork.e = c(e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork)
-
-
-# match with D
-d$woman = rep(NA, nrowc*10)
-d$socideo = rep(NA, nrowc*10)
-d$partyid = rep(NA, nrowc*10)
-d$reg = rep(NA, nrowc*10)
-d$trustfed = rep(NA, nrowc*10)
-d$income.n = rep(NA, nrowc*10)
-d$educ.n = rep(NA, nrowc*10)
-d$polknow = rep(NA, nrowc*10)
-d$selected = rep(NA, nrowc*10)
-
-
-d1.0 = c(e$cj_1)
-d1 = c(d1.0,d1.0)
-d2.0 = c(e$cj_2)
-d2 = c(d2.0,d2.0)
-d3.0 = c(e$cj_3)
-d3 = c(d3.0,d3.0)
-d4.0 = c(e$cj_4)
-d4 = c(d4.0,d4.0)
-d5.0 = c(e$cj_5)
-d5 = c(d5.0,d5.0)
-
-all_d = c(d1,d2,d3,d4,d5)
-
-###
-
-outcome = data.frame(code.e,idnum.e, pair.e, candidate.e,all_d, woman.e, socideo.e, partyid.e, reg.e, trustfed.e, income.n.e, educ.n.e, polknow.e)
-
-
-# LOOPS: populating D dataset
-for (i in code) {# selected
-  d$selected2[d$code==i] = outcome$all_d[outcome$code.e==i] 
-}
-
-for (i in code) {# woman
-  d$woman[d$code==i] = outcome$woman[outcome$code==i]
-}
-
-for (i in code) {# socideo
-  d$socideo[d$code==i] = outcome$socideo[outcome$code==i]
-}
-
-for (i in code) {# partyid
-  d$partyid[d$code==i] = outcome$partyid[outcome$code==i]
-}
-
-for (i in code) {# reg
-  d$reg[d$code==i] = outcome$reg[outcome$code==i]
-}
-
-for (i in code) {# trustfed
-  d$trustfed[d$code==i] = outcome$trustfed[outcome$code==i]
-}
-
-for (i in code) {# income.n
-  d$income.n[d$code==i] = outcome$income.n[outcome$code==i]
-}
-
-for (i in code) {# educ.n
-  d$educ.n[d$code==i] = outcome$educ.n[outcome$code==i]
-}
-
-for (i in code) {# polknow
-  d$polknow[d$code==i] = outcome$polknow[outcome$code==i]
-}
-
-
-# selected
-d$vote = ifelse(d$candidate == d$selected2, 1, 0)
-d$selected = d$vote
-d$selected2 = NULL
-d$vote = NULL
-
-
-# Saving Data
-save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData")
-
 
 ###############################################
 # LIST  Experiment DESCRIPTIVES
@@ -456,7 +246,7 @@ rm(list=ls())
 dev.off();dev.off();dev.off()
 
 # Load Data 
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # Define Formula
 
@@ -802,52 +592,249 @@ dat.low.with.predict = data.frame(cbind(dat.low, ind.pred.social.desirability.lo
 dat.high.with.predict = data.frame(cbind(dat.high, ind.pred.social.desirability.high.d))
 dat.with.predict = data.frame(rbind(dat.low.with.predict, dat.high.with.predict))
 
+# Saving Data
+save(dat.with.predict, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData")
+
+
+############################## 
+# CONJOINT Experiment DATA CLEANING
+##############################
+cat("\014")
+rm(list=ls())
+
+# C
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData")
+c = dat.with.predict
+
+
+# check for complete cases in CONJOINT and LIST treatments
+c = subset(c, select = c("cj_1", "cj_2", "cj_3", "cj_4", "cj_5", "f_1_1_1",  "f_1_1_2", "f_1_1_3", "f_1_1_4", "f_1_1_5", "f_1_2_1", "f_1_2_2", "f_1_2_3", "f_1_2_4", "f_1_2_5", "f_2_1_1",  "f_2_1_2", "f_2_1_3", "f_2_1_4", "f_2_1_5", "f_2_2_1", "f_2_2_2", "f_2_2_3", "f_2_2_4", "f_2_2_5", "f_3_1_1", "f_3_1_2", "f_3_1_3", "f_3_1_4", "f_3_1_5", "f_3_2_1", "f_3_2_2", "f_3_2_3", "f_3_2_4", "f_3_2_5", "f_4_1_1", "f_4_1_2", "f_4_1_3", "f_4_1_4", "f_4_1_5", "f_4_2_1", "f_4_2_2", "f_4_2_3", "f_4_2_4", "f_4_2_5", "f_5_1_1", "f_5_1_2", "f_5_1_3", "f_5_1_4", "f_5_1_5", "f_5_2_1", "f_5_2_2", "f_5_2_3", "f_5_2_4", "f_5_2_5"))
+
+# change names again
+all_d = subset(c, select = c("cj_1", "cj_2", "cj_3", "cj_4", "cj_5"))
+colnames(all_d)[which(names(all_d) == "cj_1")] <- "d1"
+colnames(all_d)[which(names(all_d) == "cj_2")] <- "d2"
+colnames(all_d)[which(names(all_d) == "cj_3")] <- "d3"
+colnames(all_d)[which(names(all_d) == "cj_4")] <- "d4"
+colnames(all_d)[which(names(all_d) == "cj_5")] <- "d5"
+
+c$idnum = rep(1:nrow(c))
+nrowc = nrow(c) # I will use this here to entry the number of VALID subjects I've got
+
+# leave main dataframe with just the attributes and idnum
+c = subset(c, select = -c(cj_1, cj_2, cj_3, cj_4, cj_5) )
+
+# reshape dataset vertically
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(reshape)
+
+c = melt(c, id="idnum")
+
+# create code variable
+c$variable = as.character(c$variable)
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(stringr)
+
+c.string = data.frame(str_split_fixed(c$variable, "_", 4))
+colnames(c.string) = c("drop", "pair", "candidate", "attribute")
+
+# merge c.string and c dataframes
+c = data.frame(c, c.string)
+c = subset(c, select = -c(drop, variable, attribute))
+
+# generate a variable which writes the TYPE OF ATTRIBUTE
+c$type = ifelse(c$value == "Citizens CAN associate with others and form groups", "RightToAssociate", 
+                ifelse(c$value == "Citizens CANNOT associate with others and form groups", "RightToAssociate", 
+                       ifelse(c$value == "Citizens CAN run for office for the next two elections", "RightToRun", 
+                              ifelse(c$value == "Citizens CANNOT run for office for the next two elections", "RightToRun", 
+                                     ifelse(c$value == "Citizens CAN vote in the next two elections", "RightToVote", 
+                                            ifelse(c$value == "Citizens CANNOT vote in the next two elections", "RightToVote", 
+                                                   ifelse(c$value == "Media CAN confront the Government", "FreePress", 
+                                                          ifelse(c$value == "Media CANNOT confront the Government", "FreePress", 
+                                                                 ifelse(c$value == "President CAN rule without Congress", "PresAutonomy", 
+                                                                        ifelse(c$value == "President CANNOT rule without Congress", "PresAutonomy", NA
+                                                                        ))))))))))
+
+###
+c$code = paste(c$idnum,c$pair,c$candidate,sep = "-")
+colnames(c)[2] <- "caracteristica"
+colnames(c)[5] <- "descripcion"
+c$descripcion = as.character(c$descripcion)
+c$caracteristica = as.character(c$caracteristica)
 
 
 
+# D (empty dataset)
+idnum = rep(1:nrowc, each = 10)
+pair = rep(c(1,1,2,2,3,3,4,4,5,5), times = nrowc) # this is the number of TASKS
+candidate = rep(c(1,2), times = (nrowc*10)/2)
+at.run = rep(NA,nrowc*10)
+at.asso = rep(NA,nrowc*10)
+at.press = rep(NA,nrowc*10)
+at.presaut = rep(NA,nrowc*10)
+at.vote = rep(NA,nrowc*10)
+selected = as.character(rep(NA,nrowc*10))
+code = paste(idnum,pair,candidate,sep = "-")
+d = data.frame(code,idnum,pair,candidate,at.run, at.asso, at.press, at.presaut, at.vote,selected) # conjoint dataset
 
 
+# Loops to populate d dataset
+for (i in code) { # RightToRun
+        d$at.run[d$code==i] = c$caracteristica[c$descripcion=="RightToRun" & c$code==i]
+}
+
+for (i in code) { # RightToAssociate
+        d$at.asso[d$code==i] = c$caracteristica[c$descripcion=="RightToAssociate" & c$code==i]
+}
 
 
+for (i in code) { # FreePress
+        d$at.press[d$code==i] = c$caracteristica[c$descripcion=="FreePress" & c$code==i]
+}
 
 
+for (i in code) { # PresAutonomy
+        d$at.presaut[d$code==i] = c$caracteristica[c$descripcion=="PresAutonomy" & c$code==i]
+}
 
 
+for (i in code) { # RightToVote
+        d$at.vote[d$code==i] = c$caracteristica[c$descripcion=="RightToVote" & c$code==i]
+}
+
+# Generate "outcome" dataset
+
+# E
+# load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData")
+
+e = dat.with.predict
+
+idnum.e = rep(1:nrow(e), times = 10)
+pair.e = rep(c(1,1,2,2,3,3,4,4,5,5), each = nrow(e)) # this is the number of TASKS
+candidate.e = rep(c(1,2), each = nrow(e), times = 5)
+code.e = paste(idnum.e, pair.e, candidate.e, sep = "-")
+
+woman.e = c(e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman,e$woman)
+socideo.e = c(e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo,e$socideo)
+partyid.e = c(e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid,e$partyid)
+reg.e = c(e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg,e$reg)
+trustfed.e = c(e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed,e$trustfed)
+income.n.e = c(e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income,e$income)
+educ.n.e = c(e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ,e$educ)
+polknow.e = c(e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow,e$polknow)
+zipinequality.e = c(e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality,e$zipinequality)
+sizeofthepoor.e = c(e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor,e$sizeofthepoor)
+proplabforgovtwork.e = c(e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork,e$proplabforgovtwork)
+fit.e = c(e$fit,e$fit,e$fit,e$fit,e$fit,e$fit,e$fit,e$fit,e$fit,e$fit)
+lwr.e = c(e$lwr,e$lwr,e$lwr,e$lwr,e$lwr,e$lwr,e$lwr,e$lwr,e$lwr,e$lwr)
+upr.e = c(e$upr,e$upr,e$upr,e$upr,e$upr,e$upr,e$upr,e$upr,e$upr,e$upr)
+sign.e = c(e$sign,e$sign,e$sign,e$sign,e$sign,e$sign,e$sign,e$sign,e$sign,e$sign)
+
+# match with D
+d$woman = rep(NA, nrowc*10)
+d$socideo = rep(NA, nrowc*10)
+d$partyid = rep(NA, nrowc*10)
+d$reg = rep(NA, nrowc*10)
+d$trustfed = rep(NA, nrowc*10)
+d$income.n = rep(NA, nrowc*10)
+d$educ.n = rep(NA, nrowc*10)
+d$polknow = rep(NA, nrowc*10)
+d$selected = rep(NA, nrowc*10)
+d$fit = rep(NA, nrowc*10)
+d$lwr = rep(NA, nrowc*10)
+d$upr = rep(NA, nrowc*10)
+d$sign = rep(NA, nrowc*10)
+
+d1.0 = c(e$cj_1)
+d1 = c(d1.0,d1.0)
+d2.0 = c(e$cj_2)
+d2 = c(d2.0,d2.0)
+d3.0 = c(e$cj_3)
+d3 = c(d3.0,d3.0)
+d4.0 = c(e$cj_4)
+d4 = c(d4.0,d4.0)
+d5.0 = c(e$cj_5)
+d5 = c(d5.0,d5.0)
+
+all_d = c(d1,d2,d3,d4,d5)
+
+###
+
+outcome = data.frame(code.e,idnum.e, pair.e, candidate.e,all_d, woman.e, socideo.e, partyid.e, reg.e, trustfed.e, income.n.e, educ.n.e, polknow.e, fit.e, lwr.e, upr.e, sign.e)
 
 
+# LOOPS: populating D dataset
+for (i in code) {# selected
+        d$selected2[d$code==i] = outcome$all_d[outcome$code.e==i] 
+}
+
+for (i in code) {# woman
+        d$woman[d$code==i] = outcome$woman[outcome$code==i]
+}
+
+for (i in code) {# socideo
+        d$socideo[d$code==i] = outcome$socideo[outcome$code==i]
+}
+
+for (i in code) {# partyid
+        d$partyid[d$code==i] = outcome$partyid[outcome$code==i]
+}
+
+for (i in code) {# reg
+        d$reg[d$code==i] = outcome$reg[outcome$code==i]
+}
+
+for (i in code) {# trustfed
+        d$trustfed[d$code==i] = outcome$trustfed[outcome$code==i]
+}
+
+for (i in code) {# income.n
+        d$income.n[d$code==i] = outcome$income.n[outcome$code==i]
+}
+
+for (i in code) {# educ.n
+        d$educ.n[d$code==i] = outcome$educ.n[outcome$code==i]
+}
+
+for (i in code) {# polknow
+        d$polknow[d$code==i] = outcome$polknow[outcome$code==i]
+}
+
+for (i in code) {# fit
+        d$fit[d$code==i] = outcome$fit[outcome$code==i]
+}
+
+for (i in code) {# lwr
+        d$lwr[d$code==i] = outcome$lwr[outcome$code==i]
+}
+
+for (i in code) {# upr
+        d$upr[d$code==i] = outcome$upr[outcome$code==i]
+}
+
+for (i in code) {# sign
+        d$sign[d$code==i] = outcome$sign[outcome$code==i]
+}
+
+# selected
+d$vote = ifelse(d$candidate == d$selected2, 1, 0)
+d$selected = d$vote
+d$selected2 = NULL
+d$vote = NULL
 
 
+# Saving Data
+save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData")
 
 
-
-
-
-
-
-
-
-
-### gen DF with vector of FIT and SIGN
-voteselling.fit = data.frame(indpred.p$fit)
-voteselling.sign = data.frame(indpred.p$sign)
-### REPEAT EACH ROW TEN TIMES, AND KEEP EACH VECTOR AS A DF
-voteselling.fit = data.frame(voteselling.fit[rep(seq_len(nrow(voteselling.fit)), each=10),])
-voteselling.sign = data.frame(voteselling.sign[rep(seq_len(nrow(voteselling.sign)), each=10),])
-
-
-
-
+######################################################################################
+# Conjoint Analysis: Conjoint and List Data
+######################################################################################
 
 
 # load conjoint data
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
-
-## append voteselling column
-d = data.frame(voteselling.fit,voteselling.sign, d)
-
-## rename
-colnames(d)[1] <- "voteselling"
-colnames(d)[2] <- "sign"
 
 ## excluding non-significative values
 d <- d[ which(d$sign==1), ] # optional
@@ -881,7 +868,7 @@ p_load(lmtest,sandwich,msm)
 
 
 # make outcome numeric
-d$voteselling <- as.numeric(d$voteselling)
+d$voteselling <- as.numeric(d$fit)
 
 # make treatments factors
 d$at.run = as.factor(d$at.run)
