@@ -249,7 +249,6 @@ dev.off();dev.off();dev.off()
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # Define Formula
-
 covariates.all = paste(
         "age.n", 
         "woman", 
@@ -264,6 +263,11 @@ covariates.all = paste(
 
 formula.list = formula(paste("ycount", covariates.all, sep = "~"))
 formula.directquestion = formula(paste("directquestion", covariates.all, sep = "~"))
+
+
+# customization of ictreg
+method = as.character("lm")
+maxIter = as.numeric(200000)
 ##############
 # List Low Condition
 ##############
@@ -279,16 +283,17 @@ completeFun <- function(data, desiredCols) {
 }
 
 dat.low = completeFun(dat.low, 
-                c("age.n", 
-                  "woman", 
-                  "socideo", 
-                  "partyid",
-                  "reg",
-                  "trustfed",
-                  "income.n",
-                  "educ.n",
-                  "polknow", 
-                  "zippopdensity")
+                      c(
+                              #"age.n", 
+                              #"woman", 
+                              "socideo", 
+                              "partyid",
+                              #"reg",
+                              #"trustfed",
+                              "income.n",
+                              "educ.n"#,
+                              #"polknow"
+                              )
                 )
 
 ## Setting tolerance
@@ -299,21 +304,20 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list.low <- ictreg(ycount ~ 
-                           age.n + 
-                           woman + 
+                           #age.n + 
+                           #woman + 
                            socideo +
                            partyid +
-                           reg +
-                           trustfed +
+                           #reg +
+                           #trustfed +
                            income.n +
-                           educ.n +
-                           polknow +
-                           zippopdensity,
+                           educ.n,# +
+                           #polknow, 
                    data = dat.low, 
                treat = "treatment", 
                J=3, 
-               method = "lm", 
-               maxIter = 200000)
+               method = method, 
+               maxIter = maxIter)
 
 summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
@@ -345,17 +349,18 @@ completeFun <- function(data, desiredCols) {
 }
 
 dat.high = completeFun(dat.high, 
-                      c("age.n", 
-                        "woman", 
-                        "socideo", 
-                        "partyid",
-                        "reg",
-                        "trustfed",
-                        "income.n",
-                        "educ.n",
-                        "polknow", 
-                        "zippopdensity")
-)
+                      c(
+                              #"age.n", 
+                              #"woman", 
+                              "socideo", 
+                              "partyid",
+                              #"reg",
+                              #"trustfed",
+                              "income.n",
+                              "educ.n"#,
+                              #"polknow"
+                      )
+                      )
 
 
 ## Setting tolerance
@@ -366,21 +371,20 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 list.high <- ictreg(ycount ~ 
-                            age.n + 
-                            woman + 
+                            #age.n + 
+                            #woman + 
                             socideo +
                             partyid +
-                            reg +
-                            trustfed +
+                            #reg +
+                            #trustfed +
                             income.n +
-                            educ.n +
-                            polknow +
-                            zippopdensity,
+                            educ.n,# +
+                    #polknow, 
                     data = dat.high, 
                     treat = "treatment", 
                     J=3, 
-                    method = "lm", 
-                    maxIter = 200000)
+                    method = method, 
+                    maxIter = maxIter)
 
 summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
@@ -465,16 +469,15 @@ grid.arrange(ind.pred.low.cond.plot, ind.pred.high.cond.plot, ncol = 1)
 
 
 direct.q.high <- glm(directquestion ~ 
-                             age.n + 
-                             woman + 
+                             #age.n + 
+                             #woman + 
                              socideo +
                              partyid +
-                             reg +
-                             trustfed +
+                             #reg +
+                             #trustfed +
                              income.n +
-                             educ.n +
-                             polknow +
-                             zippopdensity,
+                             educ.n,# +
+                     #polknow, 
                      data = dat.high, 
                 family = binomial("logit"))
 
@@ -485,16 +488,15 @@ direct.q.high <- glm(directquestion ~
 
 
 direct.q.low <- glm(directquestion ~ 
-                            age.n + 
-                            woman + 
+                            #age.n + 
+                            #woman + 
                             socideo +
                             partyid +
-                            reg +
-                            trustfed +
+                            #reg +
+                            #trustfed +
                             income.n +
-                            educ.n +
-                            polknow +
-                            zippopdensity,
+                            educ.n,# +
+                    #polknow, 
                     data = dat.low, 
                      family = binomial("logit"))
 
