@@ -248,26 +248,11 @@ dev.off();dev.off();dev.off()
 # Load Data 
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
-# Define Formula
-covariates.all = paste(
-        "age.n", 
-        "woman", 
-        "socideo",
-        "partyid",
-        "reg",
-        "trustfed",
-        "income.n",
-        "educ.n",
-        "polknow",
-        sep = " + ")
-
-formula.list = formula(paste("ycount", covariates.all, sep = "~"))
-formula.directquestion = formula(paste("directquestion", covariates.all, sep = "~"))
-
-
 # customization of ictreg
 method = as.character("ml")
 maxIter = as.numeric(200000)
+
+
 ##############
 # List Low Condition
 ##############
@@ -328,7 +313,12 @@ summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predict
 list.low.predicted.2B <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
 list.low.predicted.2B$fit<-round(list.low.predicted.2B$fit, 2)
 list.low.predicted.2B$se.fit<-round(list.low.predicted.2B$se.fit, 2)
-indpred.p.low = data.frame(list.low.predicted.2B$fit, list.low.predicted.2B$se.fit, sign = as.numeric(list.low.predicted.2B$fit$lwr<=0))
+indpred.p.low = data.frame(
+        list.low.predicted.2B$fit, 
+        list.low.predicted.2B$se.fit, 
+        Significance = as.numeric(ifelse(sign(list.low.predicted.2B$fit$lwr) == sign(list.low.predicted.2B$fit$upr), 1,0)))
+indpred.p.low$Significance[indpred.p.low$Significance==1] <- "Yes"
+indpred.p.low$Significance[indpred.p.low$Significance==0] <- "No"
 names(indpred.p.low)[4] = "se.fit"
 rownames(indpred.p.low) <- NULL
 indpred.p.low.fit= indpred.p.low$fit
@@ -395,7 +385,12 @@ summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predic
 list.high.predicted.2B <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
 list.high.predicted.2B$fit<-round(list.high.predicted.2B$fit, 2)
 list.high.predicted.2B$se.fit<-round(list.high.predicted.2B$se.fit, 2)
-indpred.p.high = data.frame(list.high.predicted.2B$fit, list.high.predicted.2B$se.fit, sign = as.numeric(list.high.predicted.2B$fit$lwr<=0))
+indpred.p.high = data.frame(
+        list.high.predicted.2B$fit, 
+        list.high.predicted.2B$se.fit, 
+        Significance = as.numeric(ifelse(sign(list.high.predicted.2B$fit$lwr) == sign(list.high.predicted.2B$fit$up), 1,0)))
+indpred.p.high$Significance[indpred.p.high$Significance==1] <- "Yes"
+indpred.p.high$Significance[indpred.p.high$Significance==0] <- "No"
 names(indpred.p.high)[4] = "se.fit"
 rownames(indpred.p.high) <- NULL
 indpred.p.high.fit= indpred.p.high$fit
@@ -428,14 +423,14 @@ ind.pred.low.cond.plot = ggplot() + geom_pointrange(data=indpred.p.low,
                                                             y=indpred.p.low$fit, 
                                                             ymin=indpred.p.low$lwr, 
                                                             ymax=indpred.p.low$upr, 
-                                                            colour = indpred.p.low$sign), 
+                                                            colour = Significance), 
                                                     size=0.25, 
                                                     alpha=.5) + 
-        theme(legend.position="none") + 
+        #theme(legend.position="none") + 
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         xlab("Observations") + 
-        ylab("Probability of Vote-Selling (Low Condition)") +
-        guides(colour=FALSE) + 
+        ylab("Probability of Vote-Selling\n(Low Condition)") +
+        #guides(colour=FALSE) + 
         theme_bw()
 
 ## High
@@ -445,18 +440,90 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
                                                              y=indpred.p.high$fit, 
                                                              ymin=indpred.p.high$lwr, 
                                                              ymax=indpred.p.high$upr, 
-                                                             colour = indpred.p.high$sign), 
+                                                             colour = indpred.p.high$Significance), 
                                                      size=0.25, 
                                                      alpha=.5) + 
-        theme(legend.position="none") + 
+        #theme(legend.position="none") + 
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         xlab("Observations") + 
-        ylab("Probability of Vote-Selling (High Condition)") +
-        guides(colour=FALSE) + 
+        ylab("Probability of Vote-Selling\n(High Condition)") +
+        #guides(colour=FALSE) + 
         theme_bw()
 
 ## merging the two plots
-grid.arrange(ind.pred.low.cond.plot, ind.pred.high.cond.plot, ncol = 1)
+# load libraries
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2,gridExtra)
+
+
+
+# To force GGplots to share same legend.
+grid_arrange_shared_legend <- function(...) {
+        require(ggplot2)
+        require(gridExtra)
+        plots <- list(...)
+        g <- ggplotGrob(plots[[1]] + theme(legend.position="bottom"))$grobs
+        legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+        lheight <- sum(legend$height)
+        grid.arrange(
+                do.call(arrangeGrob, lapply(plots, function(x)
+                        x + theme(legend.position="none"))),
+                legend,
+                ncol = 1,
+                heights = grid::unit.c(unit(1, "npc") - lheight, lheight))
+}
+
+#### multiplot
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+        library(grid)
+        
+        # Make a list from the ... arguments and plotlist
+        plots <- c(list(...), plotlist)
+        
+        numPlots = length(plots)
+        
+        # If layout is NULL, then use 'cols' to determine layout
+        if (is.null(layout)) {
+                # Make the panel
+                # ncol: Number of columns of plots
+                # nrow: Number of rows needed, calculated from # of cols
+                layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                                 ncol = cols, nrow = ceiling(numPlots/cols))
+        }
+        
+        if (numPlots==1) {
+                print(plots[[1]])
+                
+        } else {
+                # Set up the page
+                grid.newpage()
+                pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+                
+                # Make each plot, in the correct location
+                for (i in 1:numPlots) {
+                        # Get the i,j matrix positions of the regions that contain this subplot
+                        matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+                        
+                        print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                                        layout.pos.col = matchidx$col))
+                }
+        }
+}
+
+
+grid_arrange_shared_legend(
+        ind.pred.low.cond.plot, 
+        ind.pred.high.cond.plot,
+        ncol = 1, nrow = 2)
+
+# use this to explain plot in the paper
+# outputstitle <- paste(
+# "Industrial and Agricultural Outputs, and The Passage of the Income Tax Law",
+ #       "\\\\\\hspace{\\textwidth}", 
+ #       "{\\bf Note}: Figure shows historical sectoral outputs, and year of the passage of the income tax law. Following convention, the figure shows logged values.",
+ #       "\\\\\\hspace{\\textwidth}", 
+ #       paste("{\\bf Source}: \\href{http://moxlad-staging.herokuapp.com/home/en?}{MOxLAD} and other souces compiled by the author (see \\autoref{sample:data:income:tax:tab})."),
+ #       "\n")
 
 
 ######################################################
@@ -973,6 +1040,10 @@ ggplot(acme.vs.d, aes(
 # Load Data
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
 
+
+## excluding non-significative values
+# d <- d[ which(d$sign==1), ] # optional
+
 d <- na.omit(d)
 
 # example script to implement estimators of Average Marginal Component Effects (ACMEs) for Conjoint Data
@@ -1145,62 +1216,10 @@ dispersiontest(over.disp.test)
 # PREDICTIONS
 ######################################################
 
-# 1 woman
-# 2 socideo
-# 3 partyid
-# 4 reg
-# 5 trustfed
-# 6 income
-
 
 ######################################################
-# 1 WOMAN
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+# 2 socideo (ok)
 
-womanW <- womanM <- dat
-womanW <- dat[which(dat$woman=="Woman"), ] 
-womanM <- dat[which(dat$woman=="Man"), ] 
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-avg.pred.womanW  <- predict.ictreg(list, newdata = womanW, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.womanM  <- predict.ictreg(list, newdata = womanM, avg = TRUE, se.fit = TRUE, interval = "confidence")
-
-
-woman.p = data.frame(
-  t(avg.pred.womanW$fit), 
-  t(avg.pred.womanM$fit)
-)
-
-woman.p = data.frame(t(woman.p))
-sign = as.numeric(woman.p$lwr<=0)
-woman.p["sign"] <- sign
-
-woman.p$gender = as.factor(c(1,0))
-woman.p$gender <- factor(woman.p$gender, levels = c(1,0), labels = c("Woman", "Man"))
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + 
-  geom_pointrange(
-    data=woman.p, 
-    mapping=aes(
-      x=woman.p$gender, 
-      y=woman.p$fit, 
-      ymin=woman.p$lwr, 
-      ymax=woman.p$upr,
-      colour = woman.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Gender") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
-
-######################################################
-# 2 socideo
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
@@ -1214,48 +1233,84 @@ socideoVC <- dat[which(dat$socideo == levels(dat$socideo)[5]),]
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-avg.pred.socideoVL <- predict.ictreg(list, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoL <- predict.ictreg(list, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoM <- predict.ictreg(list, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoC <- predict.ictreg(list, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoVC <- predict.ictreg(list, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
-socideo.p = data.frame(
-  t(avg.pred.socideoVL$fit), 
-  t(avg.pred.socideoL$fit), 
-  t(avg.pred.socideoM$fit), 
-  t(avg.pred.socideoC$fit), 
-  t(avg.pred.socideoVC$fit)
+
+## low
+avg.pred.socideoVL.low <- predict.ictreg(list.low, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoL.low <- predict.ictreg(list.low, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoM.low <- predict.ictreg(list.low, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoC.low <- predict.ictreg(list.low, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoVC.low <- predict.ictreg(list.low, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+socideo.p.low = data.frame(
+        t(avg.pred.socideoVL.low$fit), 
+        t(avg.pred.socideoL.low$fit), 
+        t(avg.pred.socideoM.low$fit), 
+        t(avg.pred.socideoC.low$fit), 
+        t(avg.pred.socideoVC.low$fit)
 )
 
-socideo.p = data.frame(t(socideo.p))
-sign = as.numeric(socideo.p$lwr<=0)
-socideo.p["sign"] <- sign
+socideo.p.low = data.frame(t(socideo.p.low))
+Significance = as.numeric(ifelse(sign(socideo.p.low$lwr) == sign(socideo.p.low$upr), 1,0))
+socideo.p.low["Significance"] <- Significance
+socideo.p.low$Significance[socideo.p.low$Significance==1] <- "Yes"
+socideo.p.low$Significance[socideo.p.low$Significance==0] <- "No"
+socideo.p.low$socioideo = as.factor(c(1:5))
+socideo.p.low$socioideo <- factor(socideo.p.low$socioideo, levels = c(1:5), labels = c("Very \n Liberal", "Liberal", "Moderate", "Conservative", "Very \n Conservative"))
+socideo.p.low$'Experimental Condition' <- "Low"
 
-socideo.p$socioideo = as.factor(c(1:5))
-socideo.p$socioideo <- factor(socideo.p$socioideo, levels = c(1:5), labels = c("Very \n Liberal", "Liberal", "Moderate", "Conservative", "Very \n Conservative"))
 
+
+## high
+avg.pred.socideoVL.high <- predict.ictreg(list.high, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoL.high <- predict.ictreg(list.high, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoM.high <- predict.ictreg(list.high, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoC.high <- predict.ictreg(list.high, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoVC.high <- predict.ictreg(list.high, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+socideo.p.high = data.frame(
+        t(avg.pred.socideoVL.high$fit), 
+        t(avg.pred.socideoL.high$fit), 
+        t(avg.pred.socideoM.high$fit), 
+        t(avg.pred.socideoC.high$fit), 
+        t(avg.pred.socideoVC.high$fit)
+)
+
+socideo.p.high = data.frame(t(socideo.p.high))
+Significance = as.numeric(ifelse(sign(socideo.p.high$lwr) == sign(socideo.p.high$upr), 1,0))
+socideo.p.high["Significance"] <- Significance
+socideo.p.high$Significance[socideo.p.high$Significance==1] <- "Yes"
+socideo.p.high$Significance[socideo.p.high$Significance==0] <- "No"
+socideo.p.high$socioideo = as.factor(c(1:5))
+socideo.p.high$socioideo <- factor(socideo.p.high$socioideo, levels = c(1:5), labels = c("Very \n Liberal", "Liberal", "Moderate", "Conservative", "Very \n Conservative"))
+socideo.p.high$'Experimental Condition' <- "High"
+
+
+# Plot: High and Low
+## merge both datasets
+socideo.plot.d = data.frame(rbind(socideo.p.high, socideo.p.low))
+names(socideo.plot.d)[names(socideo.plot.d) == "Experimental.Condition"] <- "Experimental Condition"
+
+## plots
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot() + 
-  geom_pointrange(
-    data=socideo.p, 
-    mapping=aes(
-      x=socideo.p$socioideo, 
-      y=socideo.p$fit, 
-      ymin=socideo.p$lwr, 
-      ymax=socideo.p$upr,
-      colour = socideo.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Social Ideology") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
+socio.plot = ggplot(socideo.plot.d, 
+                    aes(sign, fit, colour = `Experimental Condition`)) + 
+        theme_bw() +
+        xlab("") + 
+        ylab("Probability of Vote-Selling") +
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        geom_pointrange(aes(
+                x = socideo.plot.d$socioideo,
+                ymin = socideo.plot.d$lwr, 
+                ymax = socideo.plot.d$upr), 
+                position = position_dodge(width = 0.25))
+
+
 
 ######################################################
-# 3 partyid
+# 3 partyid (ok)
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
@@ -1269,151 +1324,80 @@ partyidSE <- dat[which(dat$partyid == levels(dat$partyid)[4]),]
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-avg.pred.partyidD  <- predict.ictreg(list, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidR  <- predict.ictreg(list, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidI  <- predict.ictreg(list, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidSE  <- predict.ictreg(list, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
-partyid.p = data.frame(
-  t(avg.pred.partyidD$fit), 
-  t(avg.pred.partyidR$fit), 
-  t(avg.pred.partyidI$fit), 
-  t(avg.pred.partyidSE$fit)
+## low
+avg.pred.partyidD.low  <- predict.ictreg(list.low, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidR.low  <- predict.ictreg(list.low, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidI.low  <- predict.ictreg(list.low, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidSE.low  <- predict.ictreg(list.low, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+partyid.p.low = data.frame(
+        t(avg.pred.partyidD.low$fit), 
+        t(avg.pred.partyidR.low$fit), 
+        t(avg.pred.partyidI.low$fit), 
+        t(avg.pred.partyidSE.low$fit)
 )
 
-partyid.p = data.frame(t(partyid.p))
-sign = as.numeric(partyid.p$lwr<=0)
-partyid.p["sign"] <- sign
+partyid.p.low = data.frame(t(partyid.p.low))
+Significance = as.numeric(ifelse(sign(partyid.p.low$lwr) == sign(partyid.p.low$upr), 1,0))
+partyid.p.low["Significance"] <- Significance
+partyid.p.low$Significance[partyid.p.low$Significance==1] <- "Yes"
+partyid.p.low$Significance[partyid.p.low$Significance==0] <- "No"
+partyid.p.low$partyid = as.factor(c(1:4))
+partyid.p.low$partyid <- factor(partyid.p.low$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+partyid.p.low$'Experimental Condition' <- "Low"
 
-partyid.p$partyid = as.factor(c(1:4))
-partyid.p$partyid <- factor(partyid.p$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+
+## high
+avg.pred.partyidD.high  <- predict.ictreg(list.high, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidR.high  <- predict.ictreg(list.high, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidI.high  <- predict.ictreg(list.high, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidSE.high  <- predict.ictreg(list.high, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+partyid.p.high = data.frame(
+        t(avg.pred.partyidD.high$fit), 
+        t(avg.pred.partyidR.high$fit), 
+        t(avg.pred.partyidI.high$fit), 
+        t(avg.pred.partyidSE.high$fit)
+)
+
+partyid.p.high = data.frame(t(partyid.p.high))
+Significance = as.numeric(ifelse(sign(partyid.p.high$lwr) == sign(partyid.p.high$upr), 1,0))
+partyid.p.high["Significance"] <- Significance
+partyid.p.high$Significance[partyid.p.high$Significance==1] <- "Yes"
+partyid.p.high$Significance[partyid.p.high$Significance==0] <- "No"
+partyid.p.high$partyid = as.factor(c(1:4))
+partyid.p.high$partyid <- factor(partyid.p.high$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+partyid.p.high$'Experimental Condition' <- "High"
+
+
+# Plot: High and Low
+## merge both datasets
+partyid.plot.d = data.frame(rbind(partyid.p.high, partyid.p.low))
+names(partyid.plot.d)[names(partyid.plot.d) == "Experimental.Condition"] <- "Experimental Condition"
+
+
+## plot
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
 
-ggplot() + 
-  geom_pointrange(
-    data=partyid.p, 
-    mapping=aes(
-      x=partyid.p$partyid, 
-      y=partyid.p$fit, 
-      ymin=partyid.p$lwr, 
-      ymax=partyid.p$upr,
-      colour = partyid.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Party Id.") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
-
-######################################################
-# 4 reg
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-
-
-regR <- regU <- dat
-
-regR <- dat[which(dat$reg == levels(dat$reg)[1]),]
-regU <- dat[which(dat$reg == levels(dat$reg)[2]),]
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-avg.pred.regR  <- predict.ictreg(list, newdata = regR, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.regU  <- predict.ictreg(list, newdata = regU, avg = TRUE, se.fit = TRUE, interval = "confidence")
-
-reg.p = data.frame(
-  t(avg.pred.regR$fit), 
-  t(avg.pred.regU$fit)
-)
-
-reg.p = data.frame(t(reg.p))
-sign = as.numeric(reg.p$lwr<=0)
-reg.p["sign"] <- sign
-
-reg.p$registered = as.factor(c(1:2))
-reg.p$registered <- factor(reg.p$registered, levels = c(1:2), labels = c("Registered", "Not Registered"))
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + 
-  geom_pointrange(
-    data=reg.p, 
-    mapping=aes(
-      x=reg.p$registered, 
-      y=reg.p$fit, 
-      ymin=reg.p$lwr, 
-      ymax=reg.p$upr,
-      colour = reg.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Registered to Vote") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
-
-######################################################
-# 5 trustfed
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-
-
-trustfed.NTAA <- trustfed.NVMT <- trustfed.I <- trustfed.FAOT <- trustfed.AGDOT <- dat
-
-trustfed.NTAA = dat[which(dat$trustfed == levels(dat$trustfed)[1]),]
-trustfed.NVMT = dat[which(dat$trustfed == levels(dat$trustfed)[2]),]
-trustfed.I = dat[which(dat$trustfed == levels(dat$trustfed)[3]),]
-trustfed.FAOT = dat[which(dat$trustfed == levels(dat$trustfed)[4]),]
-trustfed.AGDOT= dat[which(dat$trustfed == levels(dat$trustfed)[5]),]
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-avg.pred.trustfed.NTAA = predict.ictreg(list, newdata = trustfed.NTAA, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.trustfed.NVMT = predict.ictreg(list, newdata = trustfed.NVMT, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.trustfed.I = predict.ictreg(list, newdata = trustfed.I, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.trustfed.FAOT = predict.ictreg(list, newdata = trustfed.FAOT, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.trustfed.AGDOT= predict.ictreg(list, newdata = trustfed.AGDOT, avg = TRUE, se.fit = TRUE, interval = "confidence")
-
-trustfed.p = data.frame(
-  t(avg.pred.trustfed.NTAA$fit),
-  t(avg.pred.trustfed.NVMT$fit),
-  t(avg.pred.trustfed.I$fit),
-  t(avg.pred.trustfed.FAOT$fit),
-  t(avg.pred.trustfed.AGDOT$fit)
-)
-
-trustfed.p = data.frame(t(trustfed.p))
-sign = as.numeric(trustfed.p$lwr<=0)
-trustfed.p["sign"] <- sign
-
-trustfed.p$trustfed = as.factor(c(1:5))
-trustfed.p$trustfed <- factor(trustfed.p$trustfed, levels = c(1:5), labels = c("No Trust \n At All", "Not Very \n Much Trust", "Indifferent", "Fair Amount \n Of Trust", "A Great Deal \n Of Trust"))
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + 
-  geom_pointrange(
-    data=trustfed.p, 
-    mapping=aes(
-      x=trustfed.p$trustfed, 
-      y=trustfed.p$fit, 
-      ymin=trustfed.p$lwr, 
-      ymax=trustfed.p$upr,
-      colour = trustfed.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Trust in the Federal Government in Washington, DC") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
+partyid.plot = ggplot(partyid.plot.d, 
+                      aes(sign, fit, colour = `Experimental Condition`)) + 
+        theme_bw() +
+        xlab("") + 
+        ylab("Probability of Vote-Selling") +
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        geom_pointrange(aes(
+                x = partyid.plot.d$partyid,
+                ymin = partyid.plot.d$lwr, 
+                ymax = partyid.plot.d$upr), 
+                position = position_dodge(width = 0.25))
 
 
 ######################################################
-# 6 educ
+# 6 educ (ok)
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
@@ -1430,261 +1414,299 @@ educ.GS = dat[which(dat$educ == levels(dat$educ)[7]),]
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-avg.pred.educ.SHS = predict.ictreg(list, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.HS = predict.ictreg(list, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.T = predict.ictreg(list, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.SC = predict.ictreg(list, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.AD = predict.ictreg(list, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.BD = predict.ictreg(list, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.GS = predict.ictreg(list, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+## low
 
-educ.p = data.frame(
-  t(avg.pred.educ.SHS$fit), 
-  t(avg.pred.educ.HS$fit), 
-  t(avg.pred.educ.T$fit), 
-  t(avg.pred.educ.SC$fit), 
-  t(avg.pred.educ.AD$fit), 
-  t(avg.pred.educ.BD$fit), 
-  t(avg.pred.educ.GS$fit)
+avg.pred.educ.SHS.low = predict.ictreg(list.low, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.HS.low = predict.ictreg(list.low, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.T.low = predict.ictreg(list.low, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.SC.low = predict.ictreg(list.low, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.AD.low = predict.ictreg(list.low, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.BD.low = predict.ictreg(list.low, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.GS.low = predict.ictreg(list.low, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+educ.p.low = data.frame(
+        t(avg.pred.educ.SHS.low$fit), 
+        t(avg.pred.educ.HS.low$fit), 
+        t(avg.pred.educ.T.low$fit), 
+        t(avg.pred.educ.SC.low$fit), 
+        t(avg.pred.educ.AD.low$fit), 
+        t(avg.pred.educ.BD.low$fit), 
+        t(avg.pred.educ.GS.low$fit)
 )
 
-educ.p = data.frame(t(educ.p))
-sign = as.numeric(educ.p$lwr<=0)
-educ.p["sign"] <- sign
+educ.p.low = data.frame(t(educ.p.low))
+Significance = as.numeric(ifelse(sign(educ.p.low$lwr) == sign(educ.p.low$upr), 1,0))
+educ.p.low["Significance"] <- Significance
+educ.p.low$Significance[educ.p.low$Significance==1] <- "Yes"
+educ.p.low$Significance[educ.p.low$Significance==0] <- "No"
+educ.p.low$education = as.factor(c(1:7))
+educ.p.low$education <- factor(educ.p.low$education, levels = c(1:7), labels = c("Some \n High  \n School", "High \n  School \n  Graduate", "Technical \n  School", "Some  \n College", "Associate \n  Degree", "Bachelor's \n  Degree", "Graduate \n  School")
+)
+educ.p.low$'Experimental Condition' <- "Low"
 
-educ.p$education = as.factor(c(1:7))
-educ.p$education <- factor(educ.p$education, levels = c(1:7), labels = c("Some \n High  \n School", "High \n  School \n  Graduate", "Technical \n  School", "Some  \n College", "Associate \n  Degree", "Bachelor's \n  Degree", "Graduate \n  School")
+
+## high
+avg.pred.educ.SHS.high = predict.ictreg(list.high, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.HS.high = predict.ictreg(list.high, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.T.high = predict.ictreg(list.high, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.SC.high = predict.ictreg(list.high, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.AD.high = predict.ictreg(list.high, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.BD.high = predict.ictreg(list.high, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.GS.high = predict.ictreg(list.high, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+
+educ.p.high = data.frame(
+        t(avg.pred.educ.SHS.high$fit), 
+        t(avg.pred.educ.HS.high$fit), 
+        t(avg.pred.educ.T.high$fit), 
+        t(avg.pred.educ.SC.high$fit), 
+        t(avg.pred.educ.AD.high$fit), 
+        t(avg.pred.educ.BD.high$fit), 
+        t(avg.pred.educ.GS.high$fit)
 )
 
+educ.p.high = data.frame(t(educ.p.high))
+Significance = as.numeric(ifelse(sign(educ.p.high$lwr) == sign(educ.p.high$upr), 1,0))
+educ.p.high["Significance"] <- Significance
+educ.p.high$Significance[educ.p.high$Significance==1] <- "Yes"
+educ.p.high$Significance[educ.p.high$Significance==0] <- "No"
+educ.p.high$education = as.factor(c(1:7))
+educ.p.high$education <- factor(educ.p.high$education, levels = c(1:7), labels = c("Some \n High  \n School", "High \n  School \n  Graduate", "Technical \n  School", "Some  \n College", "Associate \n  Degree", "Bachelor's \n  Degree", "Graduate \n  School")
+)
+educ.p.high$'Experimental Condition' <- "High"
+
+# Plot: High and Low
+## merge both datasets
+educ.plot.d = data.frame(rbind(educ.p.high, educ.p.low))
+names(educ.plot.d)[names(educ.plot.d) == "Experimental.Condition"] <- "Experimental Condition"
+
+
+## plots
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot() + 
-  geom_pointrange(
-    data=educ.p, 
-    mapping=aes(
-      x=educ.p$education, 
-      y=educ.p$fit, 
-      ymin=educ.p$lwr, 
-      ymax=educ.p$upr,
-      colour = educ.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Type of Education") + 
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
+
+educ.plot = ggplot(educ.plot.d, 
+                   aes(sign, fit, colour = `Experimental Condition`)) + 
+        theme_bw() +
+        xlab("") + 
+        ylab("Probability of Vote-Selling") +
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        geom_pointrange(aes(
+                x = educ.plot.d$education,
+                ymin = educ.plot.d$lwr, 
+                ymax = educ.plot.d$upr), 
+                position = position_dodge(width = 0.25))
 
 ######################################################
-# 6 income.n PENDING!!
-
-
-
-
-
-######################################################
-#### CONTEXTUAL ECONOMIC MODEL
-
-# model: zipinequality:income.n + sizeofthepoor:income.n + income.n + proplabforgovtwork
-
-# 1 zipinequality:income.n
-# 2 sizeofthepoor:income.n
-# 3 income.n
-# 4 proplabforgovtwork
-
-######################################################
-# 1 zipinequality:income.n
+# 6 income.n (ok)
 
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
-inequality.L <- inequality.H <- dat
+income.1 <- income.2 <- income.3 <- income.4 <- income.5 <- income.6 <- income.7 <- income.8 <- income.9 <- income.10 <- income.11 <- income.12 <- income.13 <- income.14 <- dat
 
-inequality.L = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.25, na.rm = T)),]
-inequality.H = dat[which(dat$zipinequality >= quantile(dat$zipinequality, prob = 0.75, na.rm = T)),]
+income.1  = dat[which(dat$income.n == 1),]
+income.2  = dat[which(dat$income.n == 2),]
+income.3  = dat[which(dat$income.n == 3),]
+income.4  = dat[which(dat$income.n == 4),]
+income.5  = dat[which(dat$income.n == 5),]
+income.6  = dat[which(dat$income.n == 6),]
+income.7  = dat[which(dat$income.n == 7),]
+income.8  = dat[which(dat$income.n == 8),]
+income.9  = dat[which(dat$income.n == 9),]
+income.10 = dat[which(dat$income.n == 10),] 
+income.11 = dat[which(dat$income.n == 11),] 
+income.12 = dat[which(dat$income.n == 12),] 
+income.13 = dat[which(dat$income.n == 13),] 
+income.14 = dat[which(dat$income.n == 14),] 
+
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
-avg.pred.inequality.L = predict.ictreg(list.2, newdata = inequality.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.inequality.H = predict.ictreg(list.2, newdata = inequality.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
 
-inequality.p = data.frame(
-  t(avg.pred.inequality.L$fit), 
-  t(avg.pred.inequality.H$fit)
+## low
+income.low.1  = predict.ictreg(list.low, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.2  = predict.ictreg(list.low, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.3  = predict.ictreg(list.low, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.4  = predict.ictreg(list.low, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.5  = predict.ictreg(list.low, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.6  = predict.ictreg(list.low, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.7  = predict.ictreg(list.low, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.8  = predict.ictreg(list.low, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.9  = predict.ictreg(list.low, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.low.10 = predict.ictreg(list.low, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.low.11 = predict.ictreg(list.low, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.low.12 = predict.ictreg(list.low, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.low.13 = predict.ictreg(list.low, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.low.14 = predict.ictreg(list.low, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+
+
+income.p.low = data.frame(
+        t(income.low.1$fit), 
+        t(income.low.2$fit), 
+        t(income.low.3$fit), 
+        t(income.low.4$fit), 
+        t(income.low.5$fit), 
+        t(income.low.6$fit), 
+        t(income.low.7$fit), 
+        t(income.low.8$fit), 
+        t(income.low.9$fit), 
+        t(income.low.10$fit), 
+        t(income.low.11$fit), 
+        t(income.low.12$fit), 
+        t(income.low.13$fit), 
+        t(income.low.14$fit)
 )
 
-inequality.p = data.frame(t(inequality.p))
-sign = as.numeric(inequality.p$lwr<=0)
-inequality.p["sign"] <- sign
+income.p.low = data.frame(t(income.p.low))
+Significance = as.numeric(ifelse(sign(income.p.low$lwr) == sign(income.p.low$upr), 1,0))
+income.p.low["Significance"] <- Significance
+income.p.low$Significance[income.p.low$Significance==1] <- "Yes"
+income.p.low$Significance[income.p.low$Significance==0] <- "No"
+income.p.low$income = as.factor(c(1:14))
+income.p.low$income <- factor(income.p.low$income, levels = c(1:14), labels = c("Less\nthan\n$20,000", "$20,000\nto\n$24,999", "$25,000\nto\n$29,999", "$30,000\nto\n$34,999", "$35,000\nto\n$39,999", "$40,000\nto\n$49,999", "$50,000\nto\n$59,999", "$60,000\nto\n$74,999", "$75,000\nto\n$84,999", "$85,000\nto\n$99,999", "$100,00\n to\n $124,999", "$125,00\n to\n $149,999", "$150,00\n to\n $174,999", "$175,000\nor\nmore")
+)
+income.p.low$'Experimental Condition' <- "Low"
 
-inequality.p$inequality = as.factor(c(1:2))
-inequality.p$inequality <- factor(inequality.p$inequality, levels = c(1:2), labels = c(
-  "Low", 
-  "High"))
 
+## high
+income.high.1  = predict.ictreg(list.high, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.2  = predict.ictreg(list.high, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.3  = predict.ictreg(list.high, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.4  = predict.ictreg(list.high, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.5  = predict.ictreg(list.high, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.6  = predict.ictreg(list.high, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.7  = predict.ictreg(list.high, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.8  = predict.ictreg(list.high, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.9  = predict.ictreg(list.high, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence")
+income.high.10 = predict.ictreg(list.high, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.high.11 = predict.ictreg(list.high, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.high.12 = predict.ictreg(list.high, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.high.13 = predict.ictreg(list.high, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.high.14 = predict.ictreg(list.high, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+
+
+income.p.high = data.frame(
+        t(income.high.1$fit), 
+        t(income.high.2$fit), 
+        t(income.high.3$fit), 
+        t(income.high.4$fit), 
+        t(income.high.5$fit), 
+        t(income.high.6$fit), 
+        t(income.high.7$fit), 
+        t(income.high.8$fit), 
+        t(income.high.9$fit), 
+        t(income.high.10$fit), 
+        t(income.high.11$fit), 
+        t(income.high.12$fit), 
+        t(income.high.13$fit), 
+        t(income.high.14$fit)
+)
+
+income.p.high = data.frame(t(income.p.high))
+Significance = as.numeric(ifelse(sign(income.p.high$lwr) == sign(income.p.high$upr), 1,0))
+income.p.high["Significance"] <- Significance
+income.p.high$Significance[income.p.high$Significance==1] <- "Yes"
+income.p.high$Significance[income.p.high$Significance==0] <- "No"
+income.p.high$income = as.factor(c(1:14))
+income.p.high$income <- factor(income.p.high$income, levels = c(1:14), labels = c("Less\nthan\n$20,000", "$20,000\nto\n$24,999", "$25,000\nto\n$29,999", "$30,000\nto\n$34,999", "$35,000\nto\n$39,999", "$40,000\nto\n$49,999", "$50,000\nto\n$59,999", "$60,000\nto\n$74,999", "$75,000\nto\n$84,999", "$85,000\nto\n$99,999", "$100,00\n to\n $124,999", "$125,00\n to\n $149,999", "$150,00\n to\n $174,999", "$175,000\nor\nmore")
+)
+income.p.high$'Experimental Condition' <- "High"
+
+
+# Plot: High and Low
+## merge both datasets
+income.plot.d = data.frame(rbind(income.p.high, income.p.low))
+names(income.plot.d)[names(income.plot.d) == "Experimental.Condition"] <- "Experimental Condition"
+
+
+## plots
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot() + geom_pointrange(
-  data=inequality.p, 
-  mapping=aes(
-    x=inequality.p$inequality, 
-    y=inequality.p$fit, 
-    ymin=inequality.p$lwr, 
-    ymax=inequality.p$upr,
-    colour = inequality.p$sign), 
-  size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Zip-Inequality") +
-  ylab("Probability of Vote-Selling") +
-  ggtitle("Interaction between Individual Income \nand Inequality at the Zip Level") +
-  guides(colour=FALSE) +
-  theme_bw()
-
-######################################################
-# 2 sizeofthepoor:income.n
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-
-
-sizeofthepoor.L <- sizeofthepoor.S <- dat
-
-sizeofthepoor.L = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.75, na.rm = T)),]
-sizeofthepoor.S = dat[which(dat$sizeofthepoor >= quantile(dat$sizeofthepoor, prob = 0.25, na.rm = T)),]
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-avg.pred.sizeofthepoor.L = predict.ictreg(list.2, newdata = sizeofthepoor.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.sizeofthepoor.S = predict.ictreg(list.2, newdata = sizeofthepoor.S, avg = TRUE, se.fit = TRUE, interval = "confidence")
-
-sizeofthepoor.p = data.frame(
-  t(avg.pred.sizeofthepoor.L$fit), 
-  t(avg.pred.sizeofthepoor.S$fit)
-)
-
-sizeofthepoor.p = data.frame(t(sizeofthepoor.p))
-sign = as.numeric(sizeofthepoor.p$lwr<=0)
-sizeofthepoor.p["sign"] <- sign
-
-sizeofthepoor.p$sizeofthepoor = as.factor(c(1:2))
-sizeofthepoor.p$sizeofthepoor <- factor(sizeofthepoor.p$sizeofthepoor, levels = c(1:2), labels = c("Large", "Small"))
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + geom_pointrange(
-  data=sizeofthepoor.p, 
-  mapping=aes(
-    x=sizeofthepoor.p$sizeofthepoor, 
-    y=sizeofthepoor.p$fit, 
-    ymin=sizeofthepoor.p$lwr, 
-    ymax=sizeofthepoor.p$upr,
-    colour = sizeofthepoor.p$sign), 
-  size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Size of the Poor") +
-  ylab("Probability of Vote-Selling") +
-  ggtitle("Interaction between Individual Income \nand Size of the Poor at the Zip Level") +
-  guides(colour=FALSE) +
-  theme_bw()
-
-
-######################################################
-# 3 income.n
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
-
-income.L <- income.H <- dat
-
-income.L = dat[which(dat$income.n >= quantile(dat$income.n, prob = 0.25, na.rm = T)),]
-income.H = dat[which(dat$income.n >= quantile(dat$income.n, prob = 0.75, na.rm = T)),]
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
-
-avg.pred.income.L = predict.ictreg(list.2, newdata = income.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.income.H = predict.ictreg(list.2, newdata = income.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
-
-income.p = data.frame(
-  t(avg.pred.income.L$fit), 
-  t(avg.pred.income.H$fit)
-)
-
-income.p = data.frame(t(income.p))
-sign = as.numeric(income.p$lwr<=0)
-income.p["sign"] <- sign
-
-income.p$income = as.factor(c(1:2))
-income.p$income <- factor(income.p$income, levels = c(1:2), labels = c("Low", "High"))
-
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + geom_pointrange(
-  data=income.p, 
-  mapping=aes(
-    x=income.p$income, 
-    y=income.p$fit, 
-    ymin=income.p$lwr, 
-    ymax=income.p$upr,
-    colour = income.p$sign), 
-  size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Income") +
-  ylab("Probability of Vote-Selling") +
-  ggtitle("Individual Income Levels") +
-  guides(colour=FALSE) +
-  theme_bw()
+income.plot = ggplot(income.plot.d, 
+                     aes(sign, fit, colour = `Experimental Condition`)) + 
+        theme_bw() +
+        xlab("") + 
+        ylab("Probability of Vote-Selling") +
+        geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        geom_pointrange(aes(
+                x = income.plot.d$income,
+                ymin = income.plot.d$lwr, 
+                ymax = income.plot.d$upr), 
+                position = position_dodge(width = 0.25))
 
 
 ######################################################
-# 4 proplabforgovtwork
-load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+#### MERGING ALL PLOTS
 
-govtwork.H <- govtwork.L <- dat
+# load libraries
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2,gridExtra)
 
-govtwork.H = dat[which(dat$proplabforgovtwork >= quantile(dat$proplabforgovtwork, na.rm = T, prob = 0.75)),]
-govtwork.L = dat[which(dat$proplabforgovtwork >= quantile(dat$proplabforgovtwork, na.rm = T, prob = 0.25)),]
 
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(list)
 
-avg.pred.govtwork.H = predict.ictreg(list.2, newdata = govtwork.H, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.govtwork.L = predict.ictreg(list.2, newdata = govtwork.L, avg = TRUE, se.fit = TRUE, interval = "confidence")
+# To force GGplots to share same legend.
+grid_arrange_shared_legend <- function(...) {
+        require(ggplot2)
+        require(gridExtra)
+        plots <- list(...)
+        g <- ggplotGrob(plots[[1]] + theme(legend.position="bottom"))$grobs
+        legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+        lheight <- sum(legend$height)
+        grid.arrange(
+                do.call(arrangeGrob, lapply(plots, function(x)
+                        x + theme(legend.position="none"))),
+                legend,
+                ncol = 1,
+                heights = grid::unit.c(unit(1, "npc") - lheight, lheight))
+}
 
-govtwork.p = data.frame(
-  t(avg.pred.govtwork.H$fit), 
-  t(avg.pred.govtwork.L$fit)
-)
+#### multiplot
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+        library(grid)
+        
+        # Make a list from the ... arguments and plotlist
+        plots <- c(list(...), plotlist)
+        
+        numPlots = length(plots)
+        
+        # If layout is NULL, then use 'cols' to determine layout
+        if (is.null(layout)) {
+                # Make the panel
+                # ncol: Number of columns of plots
+                # nrow: Number of rows needed, calculated from # of cols
+                layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                                 ncol = cols, nrow = ceiling(numPlots/cols))
+        }
+        
+        if (numPlots==1) {
+                print(plots[[1]])
+                
+        } else {
+                # Set up the page
+                grid.newpage()
+                pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+                
+                # Make each plot, in the correct location
+                for (i in 1:numPlots) {
+                        # Get the i,j matrix positions of the regions that contain this subplot
+                        matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+                        
+                        print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                                        layout.pos.col = matchidx$col))
+                }
+        }
+}
 
-govtwork.p = data.frame(t(govtwork.p))
-sign = as.numeric(govtwork.p$lwr<=0)
-govtwork.p["sign"] <- sign
 
-govtwork.p$govtwork = as.factor(c(1:2))
-govtwork.p$govtwork <- factor(govtwork.p$govtwork, levels = c(1:2), labels = c("Large", "Small"))
+grid_arrange_shared_legend(
+        income.plot, 
+        educ.plot,
+        partyid.plot,
+        socio.plot,
+        ncol = 2, nrow = 2)
 
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(ggplot2)
-
-ggplot() + 
-  geom_pointrange(
-    data=govtwork.p, 
-    mapping=aes(
-      x=govtwork.p$govtwork, 
-      y=govtwork.p$fit, 
-      ymin=govtwork.p$lwr, 
-      ymax=govtwork.p$upr,
-      colour = govtwork.p$sign),size = 0.8) + 
-  theme(legend.position="none") + 
-  geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
-  xlab("Size of the Government at the ZIP Level") + 
-  ggtitle("") +
-  ylab("Probability of Vote-Selling") +
-  guides(colour=FALSE) +
-  theme_bw()
 
 
 ###############################################
@@ -1695,14 +1717,17 @@ clientelism = datLAPOP$clien1
 clientelism <- factor(clientelism, labels = c("Often", "Sometines", "Never"))
 clientelism <- na.omit(clientelism)
 
-ggplot(, aes(x=clientelism)) + 
-  geom_histogram(binwidth=.5, fill = I("grey50"), colour="black") + 
-  xlab("Clientelism") + 
-  ylab("Subjects(N)") +
-  theme(plot.margin=unit(c(1,1,1,1),"cm")) + 
-  ggsave(file="/Users/hectorbahamonde/RU/research/Vote_Selling/Proposal_CESPS/PreTest/clien1.pdf", width = 5, height = 5)
-dev.off()
-dev.off()
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(data.table)
+
+clientelism = data.table(clientelism)
+
+
+ggplot(clientelism, aes(clientelism)) +
+        geom_bar(stat="count", width = 0.5) + 
+        theme_bw() +
+        xlab("Frequency of Clientelism") + 
+        ylab("Subjects (N)")
 
 ###############################################
 # Vote-selling Pricing Survey Plot
