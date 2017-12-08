@@ -18,9 +18,9 @@
 *.fdb_latexmk
 *.fls
 *.Rhistory
-*.tex
 *.md
 
+Bahamonde_VoteSellingUS.tex
 
 
 # don't ignore the .gitignore file
