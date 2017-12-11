@@ -1750,16 +1750,87 @@ pricing.d<- melt(pricing.d)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot(pricing.d,aes(x=value, fill=variable)) + 
-  geom_density(alpha=0.25) +
-  xlab("Price for your vote") + 
-  ylab("Density") +
-  scale_fill_discrete("") + #Price for Your Vote
-  theme_bw() +
-  theme(legend.position="bottom", legend.direction="horizontal")
+price.plot = ggplot(pricing.d,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + 
+        xlab("Price for your vote") + 
+        ylab("Density") +
+        scale_fill_discrete("") + #Price for Your Vote
+        theme_bw() +
+        theme(legend.position="bottom", legend.direction="horizontal")
+
+
+## getting intersecting price
+pricing.d2 = data.frame(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))
+
+#sapply(dat, function(x) sum(is.na(x)))
+#completeFun <- function(data, desiredCols) {
+        # completeVec <- complete.cases(data[, desiredCols])
+        # return(data[completeVec, ])
+# }
+# pricing.d2 = completeFun(pricing.d2)
+# row.names(pricing.d2) <- NULL
+
+
+# read data in the table
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(gdata)
+price.plot.d = ggplot_build(price.plot)
+price.plot.d = data.frame(price.plot.d$data[[1]])
+
+
+### https://github.com/andrewheiss/reconPlots
+### https://www.andrewheiss.com/blog/2017/09/15/create-supply-and-demand-economics-curves-with-ggplot2/
+# if (!require("pacman")) install.packages("pacman"); library(pacman) 
+# p_load(devtools)
+# install_github("andrewheiss/reconPlots")
+# library(reconPlots)
+# line_intersection <- curve_intersect(price.plot.d$x, price.plot.d$y)
+
+
+fun_supply <- approxfun(price.plot.d$x, price.plot.d$y, rule = 2)
+uniroot(function(x) fun_supply(x), c(1:1000))
+
+
+# HERE
+
+fun_demand <- approxfun(pricing.d2$dat.pricecheap, pricing.d2$dat.priceexpensive, rule = 2)
+uniroot(function(x)  fun_demand(x), c(1, 9))
 
 
 
+fun_supply(c(2, 6, 8))
+
+
+intersection_funs <-  uniroot(function(x) fun_supply(x) - fun_demand(x), c(1, 9))
+intersection_funs
+
+
+
+
+
+
+
+
+
+
+
+v0 <- 10
+f1 = approxfun(pricing.d2$dat.pricecheap, pricing.d2$dat.priceexpensive)
+f1(v0)
+
+optimize(function(t0) abs(f1(t0) - v0), interval = range(0:1000))
+
+
+
+
+data.frame(
+        ordered.dat.pricecheap = pricing.d2[with(pricing.d2, order(+dat.pricecheap)), ][,1],
+        ordered.dat.priceexpensive = pricing.d2[with(pricing.d2, order(+dat.priceexpensive)), ][,2]
+)
+
+
+
+pricing.d2.dat.pricecheap = pricing.d2[with(pricing.d2, order(+dat.pricecheap)), ][,1]
+pricing.d2.dat.priceexpensive = pricing.d2[with(pricing.d2, order(+dat.priceexpensive)), ][,2]
 
 
 
