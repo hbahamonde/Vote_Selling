@@ -1712,9 +1712,13 @@ grid_arrange_shared_legend(
 ###############################################
 # Direct CLIENTELISM question plot from LAPOP
 ###############################################
+
+## ---- lapop:bar:chart:data ----
+cat("\014")
+rm(list=ls())
 load("/Users/hectorbahamonde/RU/Term5/Experiments_Redlawsk/Experiment/Data/LAPOP/datLAPOP.rdata")
 clientelism = datLAPOP$clien1
-clientelism <- factor(clientelism, labels = c("Often", "Sometines", "Never"))
+clientelism <- factor(clientelism, labels = c("Often", "Sometimes", "Never"))
 clientelism <- na.omit(clientelism)
 
 if (!require("pacman")) install.packages("pacman"); library(pacman)
@@ -1722,12 +1726,49 @@ p_load(data.table)
 
 clientelism = data.table(clientelism)
 
-
-ggplot(clientelism, aes(clientelism)) +
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2)
+lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) + 
         geom_bar(stat="count", width = 0.5) + 
         theme_bw() +
-        xlab("Frequency of Clientelism") + 
-        ylab("Subjects (N)")
+        xlab("") + 
+        ylab("Subjects (N)") +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
+
+lapop.bar.chart.N = nrow(clientelism)
+
+# HERE
+
+round(
+        as.numeric(table(clientelism)["Often"]) + as.numeric(table(clientelism)["Sometimes"]) * 100 / lapop.bar.chart.N, 0)
+
+round(as.numeric(table(clientelism)["Never"])*100/lapop.bar.chart.N, 0)
+
+
+
+
+## ----
+
+## ---- lapop:bar:chart:plot ----
+### calling plot
+lapop.bar.chart.p
+### defining legend, title and notes.
+lapop.bar.chart.p.note <- paste(
+        "Frequency of Clientelism",
+        "\\\\\\hspace{\\textwidth}", 
+        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N =", paste(lapop.bar.chart.N, ".", sep = "")),
+        "\\\\\\hspace{\\textwidth}", 
+        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: \\emph{In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?}"),
+        "\n")
+## ----
+
 
 ###############################################
 # Vote-selling Pricing Survey Plot

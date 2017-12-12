@@ -55,25 +55,52 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% knitr stuff
+% begin knitr stuff
 <<setup, include=FALSE, cache=FALSE>>=
 library(knitr)
 
 @
 
+<<echo=FALSE, cache= F, warning = FALSE, message = F, eval=TRUE>>=
+read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamonde.R')
+
+@
+
+
+
+<<lapop:bar:chart:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
+
+% end knitr stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\section{Introduction}
+
+The literature on vote-buying has prescribed that in affluent societies vote-buying should decline. Given that personal incomes has risen in these societies, vote-buying has became a more expensive Building on modernization theory,\footnote{For instance, \citet[71]{Lipset1959}  explains that ``comprising industrialization, wealth, urbanization, and education [should foster] democratic political system[s].''} \citet[201]{Stokes:2013cj} ``show that industrialization [...] increased the size and average income of the electorate, [making] it harder for parties to discern people's votes.'' 
+
+% LAPOP Bar Chart
+<<lapop:bar:chart:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=lapop.bar.chart.p.note, fig.align='center', fig.width=4, fig.height=2,dpi=100 ,cache = FALSE>>=
+
+
+@
+
+In fact, recently collected survey data show that in 2010 in the United States, % HERE PUT % 
+
+  
 
 
 
 
-Associationalism
 
-Alexis de Tocqueville's idea of associationalism ``...stressed volunteerism, community spirit and independent associational life as protections against the domination of society by the state, and indeed as a counterbalance which helped to keep the state accountable and effective''
-
-
-
-
+TEST
 
 \section{Appendix}
+
+TEST
 
 \subsection{Experimental Manipulations and Vignettes}
 
