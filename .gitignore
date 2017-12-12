@@ -17,13 +17,10 @@
 *.gz
 *.fdb_latexmk
 *.fls
-*.RData
 *.Rhistory
-*.pdf
-*.tex
 *.md
-*.dta
 
+Bahamonde_VoteSellingUS.tex
 
 
 # don't ignore the .gitignore file

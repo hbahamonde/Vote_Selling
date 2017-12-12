@@ -1759,6 +1759,8 @@ price.plot = ggplot(pricing.d,aes(x=value, fill=variable)) + geom_density(alpha=
 
 price.plot # calling the plot // need to save it to get the intersecting point.
 
+## getting intersecting price
+pricing.d2 = data.frame(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))
 
 # Getting the intersecting point.
 ## read data in the table

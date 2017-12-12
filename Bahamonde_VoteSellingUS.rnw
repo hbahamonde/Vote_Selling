@@ -16,7 +16,7 @@
 
 \author[1]{
 \large
-\textsc{H\'ector Bahamonde, PhD}\\ 
+\textsc{H\'ector Bahamonde}\\ 
 \thanks{I thank Richard Lau, David Redlawsk, the 2016 Experimental Research Group in Political Psychology at Rutgers and Kosuke Imai. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University).}
 \normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
 \normalsize \texttt{e:}\href{mailto:\filetext}{\texttt{\filetext}}\\
@@ -50,7 +50,6 @@
 
 
 
-\clearpage
 
 
 
@@ -63,10 +62,99 @@ library(knitr)
 @
 
 
-\section{Introduction}
 
 
-\newpage
+
+Associationalism
+
+Alexis de Tocqueville's idea of associationalism ``...stressed volunteerism, community spirit and independent associational life as protections against the domination of society by the state, and indeed as a counterbalance which helped to keep the state accountable and effective''
+
+
+
+
+
+\section{Appendix}
+
+\subsection{Experimental Manipulations and Vignettes}
+
+Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read the next paragraph. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-buying. Additionally, in several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the framing paragraph was to define this concept.
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+Washington, D.C. - A department store downtown had a robbery incident last week, reporting several missing iPods from their inventory. Authorities also inform that a group of local residents are trying to ``sell'' their votes to political candidates ahead of a local election for city council. Residents approached some of the candidates running for office and offered to vote for that candidate in return for monetary compensation. In a different subject matter, the local police station released a report on driving habits and behaviors in the Capitol district last week. Finally, cyber-crime has become an increasingly serious issue in the area in the past few year.
+\end{lstlisting}
+
+
+\paragraph{Direct Question} Next, all subjects read the following paragraph:
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+Now you will be entered into a random lottery for the opportunity to do ONE of the illegal things you just read before. This means that you might be randomly offered to hypothetically do ANY of the activities mentioned before.
+\end{lstlisting}
+
+Despite faking a random assignment, \emph{all} subjects in the control condition read the following paragraph, where they were directly asked whether they would sell their votes.
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+After a random assignment, you have been selected for the opportunity to hypothetically sell your vote. This means that you will have the hypothetical opportunity to accept money from a candidate for your vote. Would you be willing to accept the offer, assuming you would not go to jail? By selecting ``Yes,'' you could earn up to $1,000.
+\end{lstlisting}
+
+
+Next, they read the following paragraph:
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+Which of the following  prices (in USD $) would you consider...
+
+too cheap for your vote? [slider going from $ 0 to $ 1000]
+too expensive for your vote? [slider going from $ 0 to $ 1000]
+\end{lstlisting}
+
+\paragraph{List Experiment} Next, subjects were randomly assigned to treatment or control conditions. There were three manipulations: one control (without the sensitive vote-selling item), and two treatments, each with different vote-selling prices.
+
+Subjects assigned to the control condition answered the following question:
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
+Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
+
+(1) steal an iPod from a large department store
+(2) speed on the highway because you're late for work/school
+(3) download your favorite music from the internet illegally
+
+Type in HOW MANY (NOT WHICH), if any, of these things you would do.
+\end{lstlisting}
+
+Subjects assigned to the treatment condition answering one of the following two treatments. Each treatment condition had different vote-selling prices.
+
+
+The low price vote-selling list experiment read as follows:
+
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
+Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
+
+(1) steal an iPod from a large department store
+(2) speed on the highway because you're late for work/school
+(3) sell your vote to a candidate for $100
+(4) download your favorite music from the internet illegally
+
+Type in HOW MANY (NOT WHICH), if any, of these things you would do.
+\end{lstlisting}
+
+
+while the high price vote-selling list experiment read as follows:
+
+
+\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
+Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
+
+(1) steal an iPod from a large department store
+(2) speed on the highway because you're late for work/school
+(3) sell your vote to a candidate for $500
+(4) download your favorite music from the internet illegally
+
+Type in HOW MANY (NOT WHICH), if any, of these things you would do.
+\end{lstlisting}
+
+
+It is important to add that the ordering of the direct question and list experiment portions were randomized. Next, the entire subject pool answered the conjoint experiment.
+
 
 \bibliography{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/library,/Users/hectorbahamonde/RU/Bibliografia_PoliSci/Bahamonde_BibTex2013}
 \bibliographystyle{plainnat}
