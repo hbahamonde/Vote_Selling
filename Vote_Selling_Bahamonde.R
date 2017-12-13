@@ -241,6 +241,7 @@ summary(sum.dif.means)
 ###########################################################
 # Multivariate Analysis of List Experiment: Covariates
 ###########################################################
+# HERE
 cat("\014")
 rm(list=ls())
 dev.off();dev.off();dev.off()
@@ -266,7 +267,6 @@ completeFun <- function(data, desiredCols) {
         completeVec <- complete.cases(data[, desiredCols])
         return(data[completeVec, ])
 }
-
 dat.low = completeFun(dat.low, 
                       c(
                               #"age.n", 
@@ -509,7 +509,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
                 }
         }
 }
-
+# HERE 
 
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
@@ -1743,17 +1743,6 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
               legend.position="bottom")
 
 lapop.bar.chart.N = nrow(clientelism)
-
-# HERE
-
-round(
-        as.numeric(table(clientelism)["Often"]) + as.numeric(table(clientelism)["Sometimes"]) * 100 / lapop.bar.chart.N, 0)
-
-round(as.numeric(table(clientelism)["Never"])*100/lapop.bar.chart.N, 0)
-
-
-
-
 ## ----
 
 ## ---- lapop:bar:chart:plot ----

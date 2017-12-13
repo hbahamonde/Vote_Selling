@@ -75,12 +75,51 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 % end knitr stuff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+
+\section{Vote-Sellers and Vote-Buyers: Two Sides of the Same Coin?}
+
+% % general hook on advanced democracies, and the decline on clientelism// US Context.
+Many advanced democracies were first very clientelistic political systems. For instance, \citet[200]{Stokes:2013cj} explains that the nineteenth-century United States ``vote buying was commonplace.'' In Chicago, New York City, Newark and other big cities, votes were exchanged for ``cash, food, alcohol, health care, poverty relief, and myriad other benefits,''\footnote{\citet[200]{Stokes:2013cj}.} even resembling the worst practices in the current developing world. The street price of the right to vote freely seemed to be very low. Bensel explains that ``[voters] handed in a party ticket in return for a shot of whiskey, a pair of boots, or a small amount of money.''\footnote{In \citet[227]{Stokes:2013cj}.} Vote buying, besides being cheap, it was ``the major urban political institution in the late nineteenth century''\footnote{\citet[2]{Erie:1990aa}.} in ``one-half of the nation's twenty largest cities''\footnote{\citet[2]{Erie:1990aa}.} in the United States. Other students of American political development have analyzed vote-buying in more detail, confirming both its early and generalized occurrence.\footnote{See particularly \citet{Bensel:2004aa} and \citet{Campbell:2005aa}.} However, nowadays vote-buying seemed to have declined considerably.  For instance, \citet[201]{Stokes:2013cj} has shown that industrialization has driven up the median income of the electorate, making vote-buying a more expensive strategy for party machines.\footnote{However, see \citet[320]{Kitschelt2007}, who explains that ``it is not economic development that accounts for the emergence and decline of varying linkage practices and not even the nature of formal democratic institutions,'' but higher levels of ``[s]tate involvement in the public sector.''} In fact, \autoref{fig:lapop:bar:chart:plot} suggests---using survey data---that $\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)}$\% of respondents have \emph{never} received a clientelistic offer from a political party.\footnote{A very small percentage ($\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Often"]) + as.numeric(table(clientelism)["Sometimes"]) * 100 ) / lapop.bar.chart.N, 1)}$\%) reports to have received some kind of clientelistic offer from a political party.}
 
 
 
-\section{Introduction}
+% Hook
+\emph{Has the decline in vote-buying in the United States been paired with an improvement in the democratic values of U.S. voters?} This question is of the highest relevance given the narrow focus of prior studies. Except for a number of exceptions,\footnote{See for instance \citet{Hicken2015}.} the emphasis in the literature has been on vote-\emph{buying} (rather that vote-\emph{selling}). That is, often times studies usually focus on whether \emph{parties} have attempted to buy votes, overlooking whether voters have attempted to \emph{sell} their votes. For instance, \autoref{fig:lapop:bar:chart:plot} shows responses to whether \emph{a candidate or someone from a political party} has offered something in exchange for people's votes. I contend that this \emph{demand-side bias} gives an incomplete picture. For one, it might give the false impression that voters have \emph{healthier} democratic values, ``thus'' engaging almost ``never'' in clientelism. Moreover, demand-side studies of clientelism have traditionally, except for a number of exceptions,\footnote{Notably, \citet{Zarazaga2015a} interviewed 120 brokers in Argentina.} studied \emph{what parties do} by \emph{asking voters} about \emph{party's behavior}. This \emph{reverse demand-side bias} might cause other problems too.\todo{like what?} 
 
-The literature on vote-buying has prescribed that in affluent societies vote-buying should decline. Given that personal incomes has risen in these societies, vote-buying has became a more expensive Building on modernization theory,\footnote{For instance, \citet[71]{Lipset1959}  explains that ``comprising industrialization, wealth, urbanization, and education [should foster] democratic political system[s].''} \citet[201]{Stokes:2013cj} ``show that industrialization [...] increased the size and average income of the electorate, [making] it harder for parties to discern people's votes.'' 
+More than criticizing demand-side-based research, I contend that it is also just as important to think about the supply-side. I collected a novel dataset representative at the national level in the U.S. ($\Sexpr{nrow(indpred.p.high)+nrow(indpred.p.low)}$). Leveraging 
+
+\todo{put number in line 244}
+
+
+
+
+Using a list experiment in a novel sample representative at the , I identify the conditions under which U.S. voters 
+
+Particularly, I show whether \emph{voters} would sell their votes, at what price, and what specific dimension of ``democratic support'' should fail to produce vote-sellers.
+
+% argument
+Leaving aside concerns of social desirability bias (which this paper does address via an experimental design), while it seems clear that parties in the U.S. ``never'' buy people's votes, \emph{Would voters still sell them to party machines?} This 
+
+Moreover, \emph{Are U.S. voters interested in selling their right to vote, and at what price?}
+
+
+Democratic disconnect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % LAPOP Bar Chart
 <<lapop:bar:chart:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=lapop.bar.chart.p.note, fig.align='center', fig.width=4, fig.height=2,dpi=100 ,cache = FALSE>>=
