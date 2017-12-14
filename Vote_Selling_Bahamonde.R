@@ -1768,6 +1768,7 @@ lapop.bar.chart.p.note <- paste(
 # Vote-selling Pricing Survey Plot
 ###############################################
 
+## ---- pricing:experiment:data ----
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # building auxiliary dataset
@@ -1791,8 +1792,6 @@ price.plot = ggplot(pricing.d,aes(x=value, fill=variable)) + geom_density(alpha=
         scale_fill_discrete("") + #Price for Your Vote
         theme_bw() +
         theme(legend.position="bottom", legend.direction="horizontal")
-
-price.plot # calling the plot // need to save it to get the intersecting point.
 
 ## getting intersecting price
 pricing.d2 = data.frame(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))
@@ -1820,9 +1819,10 @@ price.plot.d.2 <- price.plot.d.2[order(price.plot.d.2$x),] # sort by x
 ### It looks very new, and the arguments might not work in the future
 ### Today it was compiling good. 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(devtools)
+p_load(devtools,Hmisc) # reconPlots needs, during installing process, Hmisc
 install_github("andrewheiss/reconPlots")
 library(reconPlots)
+
 
 #### define x and y // package WONT work if these columns don't have same name
 curve.1 = data.frame(price.plot.d.1$density, price.plot.d.1$x)
@@ -1835,6 +1835,13 @@ colnames(curve.2)[1] <- "y"
 colnames(curve.2)[2] <- "x"
 
 line_intersection <- curve_intersect(curve.1, curve.2)
+## ---- 
+
+
+## ---- pricing:experiment:plot ----
+price.plot # calling the plot // need to save it to get the intersecting point.
+## ---- 
+
 
 ############################## 
 # CONJOINT Experiment DATA ANALYSES
