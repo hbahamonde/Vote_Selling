@@ -237,14 +237,13 @@ sum.dif.means <- summary(dif.means, n.draws = 100000) # quasi-Bayesian approxima
 summary(sum.dif.means)
 
 
-
 ###########################################################
 # Multivariate Analysis of List Experiment: Covariates
 ###########################################################
-# HERE
-cat("\014")
-rm(list=ls())
-dev.off();dev.off();dev.off()
+
+## ---- list:analysis:data ----
+# cat("\014")
+# rm(list=ls())
 
 # Load Data 
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
@@ -304,7 +303,7 @@ list.low <- ictreg(ycount ~
                method = method, 
                maxIter = maxIter)
 
-summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
+# summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
 
 
@@ -376,7 +375,7 @@ list.high <- ictreg(ycount ~
                     method = method, 
                     maxIter = maxIter)
 
-summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
+# summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
 
 
@@ -450,6 +449,10 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
         #guides(colour=FALSE) + 
         theme_bw()
 
+# computing the sample size of the list experiment (which also determines the sample size in the conjoint portion) for the paper
+total.sample.size = formatC(nrow(indpred.p.high) + nrow(indpred.p.low), format="d", big.mark=",")
+
+
 ## merging the two plots
 # load libraries
 if (!require("pacman")) install.packages("pacman"); library(pacman)
@@ -509,7 +512,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
                 }
         }
 }
-# HERE 
+## ---- 
 
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
@@ -1714,8 +1717,8 @@ grid_arrange_shared_legend(
 ###############################################
 
 ## ---- lapop:bar:chart:data ----
-cat("\014")
-rm(list=ls())
+# cat("\014")
+# rm(list=ls())
 load("/Users/hectorbahamonde/RU/Term5/Experiments_Redlawsk/Experiment/Data/LAPOP/datLAPOP.rdata")
 clientelism = datLAPOP$clien1
 clientelism <- factor(clientelism, labels = c("Often", "Sometimes", "Never"))
@@ -1743,6 +1746,8 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
               legend.position="bottom")
 
 lapop.bar.chart.N = nrow(clientelism)
+
+percentage.never = round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)
 ## ----
 
 ## ---- lapop:bar:chart:plot ----
