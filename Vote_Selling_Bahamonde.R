@@ -514,6 +514,10 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 }
 ## ---- 
 
+
+
+
+## ---- list:analysis:individual:predictions:plot
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
         ind.pred.high.cond.plot,
@@ -527,6 +531,8 @@ grid_arrange_shared_legend(
  #       "\\\\\\hspace{\\textwidth}", 
  #       paste("{\\bf Source}: \\href{http://moxlad-staging.herokuapp.com/home/en?}{MOxLAD} and other souces compiled by the author (see \\autoref{sample:data:income:tax:tab})."),
  #       "\n")
+## ----
+
 
 
 ######################################################
@@ -537,7 +543,7 @@ grid_arrange_shared_legend(
 # Direct: High Condition
 ##############
 
-
+## ---- list:analysis:social:desirability:data
 direct.q.high <- glm(directquestion ~ 
                              #age.n + 
                              #woman + 
@@ -603,9 +609,11 @@ rownames(socdes.p.high.low) <- NULL
 socdes.p.high.low$Significance <- factor(socdes.p.high.low$Significance,
        levels = c(0,1),
        labels = c("Non-Sign.", "Sign."))
+## ----
 
 
 
+## ---- list:analysis:social:desirability:plot
 ### Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
@@ -621,7 +629,8 @@ ggplot(socdes.p.high.low,
                 ymin = socdes.p.high.low$lwr, 
                 ymax = socdes.p.high.low$upr), position = position_dodge(width = 0.25))
 
-       
+## ----
+
 
 
 
