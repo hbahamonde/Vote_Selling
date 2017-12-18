@@ -141,6 +141,26 @@ Associationalism: Alexis de Tocqueville's idea of associationalism ``...stressed
 
 	\citet[4]{Erie:1990aa}: ``Yet the once mighty Irish machines are now in eclipse. Government bureaucracies and labor unions have assumed the welfare and employment functions once fulfilled by the machines.'' 
 
+
+
+	\citet[11]{Bensel:2004aa}: ``To address the voting window and thus attract the attention of election officials, the voter had to ascend this platform. While thus physical arrangement protected election officials from the jostling of partisans outside the building, it also exposed voters to the crowd around the polls. The platform became the prime site of contestation as the dominant party attempted to take possession, refusing access to all but those who seemed certain to vote their way.''
+
+	\citet[13]{Bensel:2004aa}: ``Almost anything was permitted in this public space in terms of speech, electioneering, and, all too often, physical intimidation. Under the law and almost inevitably in practice, election officials had no authority to maintain order outside the voting window. This, in many instances ,was for their protection because the kinds of physical and verbal abuse meted out to potential voters could also me aimed at them.''
+
+	\citet[16]{Bensel:2004aa}: ``the ticket system demanded that political parties develop extensive, highly structured organizations.''
+
+	\citet[17]{Bensel:2004aa}: ``The ticket system also required the stationing of party workers for the distribution of tickets at the polls on election day. Although some of these workers were little more than hired hands, most had a substantial reason to favor their party. Many, for example, enjoyed the patronage of elected party officials by holding government jobs, drawing public pensions, servicing government contracts, or enjoying special licensing privileges of one sort or another.''
+
+	\citet[17]{Bensel:2004aa}: ``When a voter presented himself, he was always asked his name. Most judges were chosen as representatives of the major parties; sometimes there were two, sometimes three, but they were almost always drawn from opposing parties. The judges were thus in a position to monitor both the qualifications of individual voters and each other's official behavior.''
+
+	% best quote ever.
+		\citet[20]{Bensel:2004aa}: ``For another, the polls on election day were frequently places in which liquor was both freely available and consumed to excess. The parties often provided, either as courtesy or as bribe, free drinks to prospective voters, challengers, and election officials. As a results, the street or square outside the voting window frequently became a kind of alcoholic festival in which many men were clearly and spectacularly drunk.''
+
+		\citet[20, FN 34]{Bensel:2004aa}: ``Some men were so drunk that they subsequently could not remember whether or not they had voted.''
+
+	\citet[43]{Bensel:2004aa}: ``Party organizations and their agents monitored their ostensible supporters in many different ways. ''
+
+
 % read:
 		1. \citet{Erie:1990aa}:
 			- 
