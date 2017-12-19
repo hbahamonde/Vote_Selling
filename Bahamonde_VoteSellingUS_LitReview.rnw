@@ -121,11 +121,33 @@ Associationalism: Alexis de Tocqueville's idea of associationalism ``...stressed
 	In cases such as the U.S., Müller  \citet[252]{Kitschelt2007} explains that ``Cox and McCubbins (2001: 39) argue that legislative decentralization helps individual legislators to extract resources from the executive.''
 
 
+
+
 	The US had ``[medium] levels of party patronage in the post-war period.'' % Müller in Kitschelt2007 p. 252
 
-	\citet[200]{Stokes:2013cj}: ``In the nineteenth-century Britain and the United States, vote buying was commonplace. Parties gave voters cash, food, alcohol, health care, poverty relief, and myriad other benefits in exchange for their votes. To gain leverage over them, parties gathered information about voter's debts, their crimes, even their infidelities. Today, these forms of distributive politics have basically disappeared from both countries.''
+
+		% common
+		
+			\citet[200]{Stokes:2013cj}: ``In the nineteenth-century Britain and the United States, vote buying was commonplace. Parties gave voters cash, food, alcohol, health care, poverty relief, and myriad other benefits in exchange for their votes. To gain leverage over them, parties gathered information about voter's debts, their crimes, even their infidelities. Today, these forms of distributive politics have basically disappeared from both countries.''
+
+
+					% But eventually, this practice became less common. Though, still practiced it.
+					\citet[243-244]{Campbell:2005aa}: explains how a Democratic leader in Logan County, West Virginia, accepted \$ 35,000 in cash in exchange of supporting Senator Kennedy. As the Democratic leader explains it, ``this money was for one purpose: `We bought votes with it. Regardless of what you want to believe, that's the way real politics works'.'' Other examples are the famous primary election in March 1972 in Chicago, where 20 \emph{Tribune} reporters managed to act as precinct officials. For instance, when ``one voter was offered a ballot by a precinct official, the voters casually replied, `I already have one'.'' (in \citet[262]{Campbell:2005aa}). Later, in the 1980s, in the coal-rich Appalachian mountains ``Coal companies still exercised considerable leverage in election contests [there] long-held customs that surrounded Election Day were difficult to change. Liquor and cash were displayed in large quantities'' (\citet[275]{Campbell:2005aa}.)
+
+
+			\citet[5]{Campbell:2005aa}: ``In running for the Virginia House of Burgesses in 1758, George Washington spent nearly 40 pounds---a considerable sum for the day---for gallons of rum, wine, brandy, and beer, all used to win over the votes of his neighbors.''
+
+			\citet[3]{Campbell:2005aa}: ``The thick crowds on Election Day were often drunk and unruly, and many Philadelphians became accustomed to fights and brawls outside the venerable hall.''
+
+			\citet[194]{Reynolds1980}: ``perhaps as much as one third of the electorate commonly accepted money for their votes.'' % he's talking about NJ.
+
+			\citet[195]{Reynolds1980}: ``By the Gilded Age (1877-1896) parties had so integrated vote buying into their operations that the transactions were common everywhere. Estimates of the number of citizens receiving money regularly appeared in the press. The \emph{Newark Evening News} reported in 1889 that roughly 8,000 of Essex county's and 45,000 voters were known to be purchasable. Jersey City, New Brunswick, Orange, Trenton, Long Branch and Atlantic City were all condemned at one time or another as major electoral marketplaces.''
+
+
 
 	\citet[201]{Stokes:2013cj}: ``What, then, killed vote buying in Britain and the United States? The explanation we offer in this chapter focuses on changes in the electorate, changes that were the effects of industrialization and economic growth. We show that industrialization in both countries increased the size and average income of the electorate, made it harder for parties to discern people's votes and monitor their electoral behavior.''
+
+	\citet[193]{Reynolds1980}: ``The space around the polling place was invariably crowded with partisans and officials of various persuasions keeping an eye on the proceedings. Yet many voters in the nineteenth century were not at all shy about revealing their partisans affiliations, and they often flaunted their tickets as they approached the polling place.''
 
 		- industrialization drives up the median income of the electorate (paraphrased from \citet[210]{Stokes:2013cj})
 
@@ -142,24 +164,97 @@ Associationalism: Alexis de Tocqueville's idea of associationalism ``...stressed
 	\citet[4]{Erie:1990aa}: ``Yet the once mighty Irish machines are now in eclipse. Government bureaucracies and labor unions have assumed the welfare and employment functions once fulfilled by the machines.'' 
 
 
+% it's important to focus on vote-selling
 
-	\citet[11]{Bensel:2004aa}: ``To address the voting window and thus attract the attention of election officials, the voter had to ascend this platform. While thus physical arrangement protected election officials from the jostling of partisans outside the building, it also exposed voters to the crowd around the polls. The platform became the prime site of contestation as the dominant party attempted to take possession, refusing access to all but those who seemed certain to vote their way.''
+	\citet[196]{Reynolds1980}: ``the price could exceed [the one to five dollars price] if a close contest was expected. In these instances, vote sellers could sometimes be seen loitering about the polls in hopes of negotiating a better deal as the day wore on.'' As one party tries to anticipate the other party's budget aimed to buy votes, the market for votes was a very contested one: ``Several letters requested money for votes and warned that the Democrats were expected to invest heavily in their districts [in] New Brunswick [it was] disclosed that [...] Democrats would `swamp' the area with money.'' (in \citet[197-198]{Reynolds1980})
+
+
+
+% things that made easier vote-selling
+
+				\citet[11]{Bensel:2004aa}: ``To address the voting window and thus attract the attention of election officials, the voter had to ascend this platform. While thus physical arrangement protected election officials from the jostling of partisans outside the building, it also exposed voters to the crowd around the polls. The platform became the prime site of contestation as the dominant party attempted to take possession, refusing access to all but those who seemed certain to vote their way.''
+
+				\citet[46]{Bensel:2004aa}: ``Most challengers became (or so they claimed) at recognizing even small differences in the coloring or texture of competing party tickets. Much of this variation was unintentional; the size and shape of tickets offered at the polls varied quite a but simply because there was little or no coordination between the parties. Given the absence of standardization, in fact, it would have been surprising if the tickers offered to voters had been similar in appearance. Even so, parties sometimes intentionally designed their tickets so that they could be readily distinguished from those used by the opposition. Since differences in color and size were features easily spotted ,even fro ma distance, they were common ways in which tickets were marked.''
+
+				\citet[17]{Bensel:2004aa}: ``The ticket system also required the stationing of party workers for the distribution of tickets at the polls on election day. Although some of these workers were little more than hired hands, most had a substantial reason to favor their party. Many, for example, enjoyed the patronage of elected party officials by holding government jobs, drawing public pensions, servicing government contracts, or enjoying special licensing privileges of one sort or another.''
+
+				\citet[16]{Bensel:2004aa}: ``the ticket system demanded that political parties develop extensive, highly structured organizations.'' For instance, ``In total, Ellsworth had employed almost 200 men on election day `to distribute tickets; employed to do all they could to secure Mr. Sickel's election...some stayed at poll, and some hunted up voters for Mr. Sickel's.' Most of these men, 134 in all, were paid five dollars each; the remainder received more money [...] In total, Ellsworth estimated that he had spent somewhere between six and eight hundred dollars employing men in the campaign.'' (in \citet[65]{Bensel:2004aa})
+
+
+				\citet[54]{Bensel:2004aa}: ``In Philadelphia, the ballot box was counted at hourly intervals in such a way that discrepancies between the number of tickers and the number of voters could be detected.''
+
+				\citet[54]{Bensel:2004aa}: ``In some states, such as Kentucky and Missouri, voters verbally announced their choices in the polling places instead of using tickets. While the law required the voter to announce publicly his preferred choice for each race, practice varied quite a bit from the statues. The primary reason for variance was that voters, whether or not they were literate, found it difficult to memorize the names of the candidates for office.''
+
+				% in fact the viva voce method was substituted for the ticket system NOT FOR PRIVACY reasons
+					
+					``it was logistical necessity, not the integrity of voting, that motivated the change from voice voting to tickets [...] when [counties and cities] contained a population of only some fort to fifty thousands, [it] became too cumbersome and expensive to be allowed to remain; for although the polls were kept open for three consecutive days, it became almost impossible to take all the votes in that time.''
+
+					\citet[191]{Reynolds1980}: ``By requiring electors to openly express their preference under the watchful eyes of candidates or their surrogates, this system at least allowed for the possibility of sanctions or rewards being meted out after the contest.''
+
+
+				% demographics that made vote-selling easier
+				
+					\citet[195]{Reynolds1980}: ``The men who took the money were most often characterized as among the poorest class of citizens, usually residing in the run down `lodging house' districts of the major cities. One observer presented a standard stereotype of vote sellers as `largely persons in whom self respect has been deadened or extinguished by habitual intemperance.' Because so many of these `venal voters' were reputed to be transients, they were branded the `floating' or `lodging house' vote.'' However, it wasn't only the poor. ``the evil exists to a much greater extent in many rural sections, where even well-to-do farmers except to be paid well for the loss of time in going to the polls for themselves and their laborers.'' (in \citet[196]{Reynolds1980}).
+
+					While there existed property qualifications, it was hard to evaluate a man's land ownership. Furthermore, ``In many local elections, office-seekers and their supporters often purchased freeholds for landless men in return for their vote, a process termed `fagot voting.' After the election, the land was simply returned to the original owner.''(in \citet[6]{Campbell:2005aa}).
+
+
 
 	\citet[13]{Bensel:2004aa}: ``Almost anything was permitted in this public space in terms of speech, electioneering, and, all too often, physical intimidation. Under the law and almost inevitably in practice, election officials had no authority to maintain order outside the voting window. This, in many instances ,was for their protection because the kinds of physical and verbal abuse meted out to potential voters could also me aimed at them.''
 
-	\citet[16]{Bensel:2004aa}: ``the ticket system demanded that political parties develop extensive, highly structured organizations.''
 
-	\citet[17]{Bensel:2004aa}: ``The ticket system also required the stationing of party workers for the distribution of tickets at the polls on election day. Although some of these workers were little more than hired hands, most had a substantial reason to favor their party. Many, for example, enjoyed the patronage of elected party officials by holding government jobs, drawing public pensions, servicing government contracts, or enjoying special licensing privileges of one sort or another.''
 
 	\citet[17]{Bensel:2004aa}: ``When a voter presented himself, he was always asked his name. Most judges were chosen as representatives of the major parties; sometimes there were two, sometimes three, but they were almost always drawn from opposing parties. The judges were thus in a position to monitor both the qualifications of individual voters and each other's official behavior.''
 
-	% best quote ever.
+
+	\citet[43]{Bensel:2004aa}: ``Party organizations and their agents monitored their ostensible supporters in many different ways. ''
+
+
+	\citet[45]{Bensel:2004aa}: ``Because negotiations between the party agents and men approaching the polls would be embarrassing, if made public, ticket distributors tended to hover around the perimeter of the crowd of men surrounding the window. They rarely operated very close to the window itself.''
+
+
+
+	% despite the laws, vote-buying was practiced
+	
+		\citet[59]{Bensel:2004aa}: ``[All states] made the bribery of voters illegal [...] However [...] such laws were simply unenforceable.'' (\citet[59]{Bensel:2004aa}). ``The small sums involved in all these instances, along with the at least remotely plausible explanations offered for their payment, tended to be accepted as a normal part of election day ritual.''
+
+		\citet[59]{Bensel:2004aa}: `` `After the House contest of 1772, the two successful candidates went to the local tavern with their supporters and ran up a bull of 37 mugs of beer, 38 jills of rum, 47 bowls of punch, 141 bowls of sangarie, 37 bottles of wine 35 bowls of toddy, 89 dinners plus 33 quarts of oats for the people's horses.' Such largesse had been outlawed by the New Jersey legislature as early as 1725, though the effect of this and other later such statues is clearly in question.''
+
+
+
+	% price of vote-selling: it was cheap PARTIES WHOULD SPONSOR PUBLIC DRINKING 
+
+		\citet[45, FN 47]{Bensel:2004aa}: ``a Republican ticket distributor conducted his negotiations with incoming voters, offering five-dollar bills along with their tickets.''
+
+
+		\citet[57]{Bensel:2004aa}: ``As men moved about the polling place, party agents would often offer them liquid refreshment, almost always whisky, as an enticement to vote their ticket. In some cases, these libations came out of a common jug or barrel. In others, the party agent would provide a small sum of money so that the voter could purchase his drink at a nearby saloon. In some cases, one or both of the parties offered almost unlimited drinks to voters who, as a result, were throughly inebriated by the time they turned in their ticket.''
+
+
+		% low price // 
+			
+			\citet[58-59]{Bensel:2004aa}: ``Although some men reported that they had been paid a hundred dollars or more for their votes, their accounts seem suspect. Individual votes were simply not worth more than a dollar or so in the vast majority of elections. At least a dollar was the most common sum men reported as the going rate for votes at most precincts in the middle of the nineteenth century. In lieu of cash, party agents sometimes gave voters a pair of shoes, pants, or bushels of corn. In other cases, they paid men money in order to defray the alleged costs of their transportation to the polls.''
+
+			\citet[196]{Reynolds1980}: ``Other exposes claimed that the proceedings [of vote-buying] followed the same format as an auction [...] but this seems rather sensationalized [...] The going rate was usually reported at one to five dollars.'' 
+
+			\citet[59, FN 74]{Bensel:2004aa}: ``Mark Summers concluded that most voters  `would settle for a dollar or two, though ten dollars became the customary rate in New Jersey'.'' % this quote is from this book I a am supposed to pick up from the library.
+
+			In May 1987, during the Democratic primary in Magoffin County KY, ``a liquor store [payed] people five to ten dollars per vote.'' (in \citet[276]{Campbell:2005aa}).
+
+
+		% where did all this money come from?
+		\citet[197]{Reynolds1980}: ``Political appointees, all the way from janitor to secretary of state, donated yearly kickbacks on their salaries which, in the case of the state's postal employees in 1880, amounted to two dollars to the state G.O.P. Corporations were even more generous [...] Parties absorbed these enormous sums even though most campaign activities did not require much cash. Media coverage was provided gratis by the partisan press, making political advertisement unnecessary. The immense manpower required to sponsor party spectacles or to get men to the polls [...] came from a large pool of loyal supporters [...] This left a very substantial portion, some claimed as much as one half, of the parties' financial resources available to purchase votes.''
+
+
+
+
+	% best quote ever // alcohol // vote-sellers
 		\citet[20]{Bensel:2004aa}: ``For another, the polls on election day were frequently places in which liquor was both freely available and consumed to excess. The parties often provided, either as courtesy or as bribe, free drinks to prospective voters, challengers, and election officials. As a results, the street or square outside the voting window frequently became a kind of alcoholic festival in which many men were clearly and spectacularly drunk.''
 
 		\citet[20, FN 34]{Bensel:2004aa}: ``Some men were so drunk that they subsequently could not remember whether or not they had voted.''
 
-	\citet[43]{Bensel:2004aa}: ``Party organizations and their agents monitored their ostensible supporters in many different ways. ''
 
+		\citet[200]{Reynolds1980}: ``I took it because it was there to take. I know it isn't right, but this has been going on for so long that we no longer looked upon it as a crime.'' (American vote seller, 1910.)
+	
 
 % read:
 		1. \citet{Erie:1990aa}:
@@ -169,7 +264,6 @@ Associationalism: Alexis de Tocqueville's idea of associationalism ``...stressed
 		3. \citet{Gosnell:1968aa} (already have it in hard copy).
 		4. \citet{Callow:1976aa}, pp. 91–138 (bought on Amazon).
 		5. \citet{Erie:1990aa} (bought on Amazon).
-		6. \citet{Bensel:2004aa} (bought on Amazon).
 
 
 % definition of democracy
