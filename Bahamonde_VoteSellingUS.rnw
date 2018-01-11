@@ -17,7 +17,7 @@
 \author[1]{
 \large
 \textsc{H\'ector Bahamonde}\\ 
-\thanks{I thank Richard Lau, David Redlawsk, the 2016 Experimental Research Group in Political Psychology at Rutgers and Kosuke Imai. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University).}
+\thanks{I thank Virginia Oliveros, Richard Lau, David Redlawsk, the 2016 Experimental Research Group in Political Psychology at Rutgers and Kosuke Imai. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University).}
 \normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
 \normalsize \texttt{e:}\href{mailto:\filetext}{\texttt{\filetext}}\\
 \normalsize \texttt{w:}\href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
