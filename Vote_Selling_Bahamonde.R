@@ -430,7 +430,15 @@ ind.pred.low.cond.plot = ggplot() + geom_pointrange(data=indpred.p.low,
         xlab("Observations") + 
         ylab("Probability of Vote-Selling\n(Low Condition)") +
         #guides(colour=FALSE) + 
-        theme_bw()
+        theme_bw() +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 ## High
 ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high, 
@@ -447,7 +455,15 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
         xlab("Observations") + 
         ylab("Probability of Vote-Selling\n(High Condition)") +
         #guides(colour=FALSE) + 
-        theme_bw()
+        theme_bw() +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 # computing the sample size of the list experiment (which also determines the sample size in the conjoint portion) for the paper
 total.sample.size = formatC(nrow(indpred.p.high) + nrow(indpred.p.low), format="d", big.mark=",")
@@ -518,19 +534,16 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 
 
 ## ---- list:analysis:individual:predictions:plot
+# use this to explain plot in the paper
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
         ind.pred.high.cond.plot,
         ncol = 1, nrow = 2)
-
-# use this to explain plot in the paper
-# outputstitle <- paste(
-# "Industrial and Agricultural Outputs, and The Passage of the Income Tax Law",
- #       "\\\\\\hspace{\\textwidth}", 
- #       "{\\bf Note}: Figure shows historical sectoral outputs, and year of the passage of the income tax law. Following convention, the figure shows logged values.",
- #       "\\\\\\hspace{\\textwidth}", 
- #       paste("{\\bf Source}: \\href{http://moxlad-staging.herokuapp.com/home/en?}{MOxLAD} and other souces compiled by the author (see \\autoref{sample:data:income:tax:tab})."),
- #       "\n")
+individual.predictions.plot.note <- paste(
+ "Individual Estimated Probabilities of Vote-Selling",
+       "\\\\\\hspace{\\textwidth}", 
+       "{\\bf Note}: Figure shows the individual probability of vote-selling, under the 'low' and 'high' conditions, i.e. when they were asked in the list experiment whether they would sell their vote for \\$100 or \\$ 500. Then, these individual prediction were paired with the conjoint data.",
+        "\n")
 ## ----
 
 
@@ -585,7 +598,7 @@ socdes.p.high = data.frame(avg.pred.social.desirability.high$fit,
                            avg.pred.social.desirability.high$se.fit,
                            c(1:3),
                            Significance = c(ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[1], avg.pred.social.desirability.high$fit$upr[1], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[2], avg.pred.social.desirability.high$fit$upr[2], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01))) == sign(max(seq(avg.pred.social.desirability.high$fit$lwr[3], avg.pred.social.desirability.high$fit$upr[3], 0.01))), 1,0)),
-                           Condition = rep("High"), 3)
+                           Condition = rep("High ($500)"), 3)
 
 
 socdes.p.high$c.1.3 = as.factor(socdes.p.high$c.1.3)
@@ -597,7 +610,7 @@ socdes.p.low = data.frame(avg.pred.social.desirability.low$fit,
                           avg.pred.social.desirability.low$se.fit,
                           c(1:3),
                           Significance = c(ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[1], avg.pred.social.desirability.low$fit$upr[1], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[1], avg.pred.social.desirability.low$fit$upr[1], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[2], avg.pred.social.desirability.low$fit$upr[2], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[2], avg.pred.social.desirability.low$fit$upr[2], 0.01))), 1,0), ifelse(sign(min(seq(avg.pred.social.desirability.low$fit$lwr[3], avg.pred.social.desirability.low$fit$upr[3], 0.01))) == sign(max(seq(avg.pred.social.desirability.low$fit$lwr[3], avg.pred.social.desirability.low$fit$upr[3], 0.01))), 1,0)),
-                          Condition = rep("Low"), 3)
+                          Condition = rep("Low ($100)"), 3)
 
 socdes.p.low$c.1.3 = as.factor(socdes.p.low$c.1.3)
 socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List", "Direct", "Soc. Des."))
@@ -609,17 +622,14 @@ rownames(socdes.p.high.low) <- NULL
 socdes.p.high.low$Significance <- factor(socdes.p.high.low$Significance,
        levels = c(0,1),
        labels = c("Non-Sign.", "Sign."))
-## ----
 
 
-
-## ---- list:analysis:social:desirability:plot
 ### Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot(socdes.p.high.low, 
-       aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
+soc.des.plot = ggplot(socdes.p.high.low, 
+                   aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
         theme_bw() +
         xlab("") + 
         ylab("Probability of Vote-Selling") +
@@ -627,7 +637,29 @@ ggplot(socdes.p.high.low,
         geom_pointrange(aes(
                 x = socdes.p.high.low$c.1.3,
                 ymin = socdes.p.high.low$lwr, 
-                ymax = socdes.p.high.low$upr), position = position_dodge(width = 0.25))
+                ymax = socdes.p.high.low$upr), position = position_dodge(width = 0.25)) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
+
+## ----
+
+
+## ---- list:analysis:social:desirability:plot
+### Plot
+soc.des.plot
+soc.des.plot.note <- paste(
+        "Declared and Predicted Vote-Sellers",
+        "\\\\\\hspace{\\textwidth}", 
+        "{\\bf Note}: Figure shows the frequency of declared and predicted vote-sellers, and its difference, or liars",
+        "\\\\\\hspace{\\textwidth}",
+        "\n")
+
 
 ## ----
 
@@ -913,6 +945,7 @@ save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.R
 # Conjoint Analysis: Conjoint and List Data
 ######################################################################################
 
+## ---- conjoint:analysis:predicting:vote:selling:data
 
 # load conjoint data
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
@@ -1021,25 +1054,34 @@ acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variab
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot(acme.vs.d, aes(
+
+predicting.vote.selling.plot = ggplot(acme.vs.d, aes(
         x = variable, 
         y = coefficients, 
         ymin = upper, 
         ymax = lower)
-) +
+        ) +
         geom_pointrange() + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
         xlab("") + 
         ylab("Coefficient") +
-        ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
+        #ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
         guides(colour=FALSE) +
         theme(legend.position="none") + 
         theme_bw()
+## ----
 
 
+## ---- conjoint:analysis:predicting:vote:selling:plot
+predicting.vote.selling.plot
+predicting.vote.selling.plot.note <- paste(
+        "Predicting Vote Selling: Broken Democratic Dimensions",
+        "\\\\\\hspace{\\textwidth}", 
+        paste("{\\bf Note}: Figure shows the estimated dimension associated with vote-selling. After estimating the individual propensities for vote-selling via the list experiment (\\autoref{list:analysis:individual:predictions:plot}), those estimations became the dependent variable in the conjoint portion. The plot shows which of Dahl's dimensions are associated with vote-selling."),
+        "\n")
 
-
+## ----
 
 
 
@@ -1229,7 +1271,7 @@ dispersiontest(over.disp.test)
 ######################################################
 
 
-######################################################
+## ---- predictions:independent:variables:plot ----
 # 2 socideo (ok)
 
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
@@ -1317,7 +1359,15 @@ socio.plot = ggplot(socideo.plot.d,
                 x = socideo.plot.d$socioideo,
                 ymin = socideo.plot.d$lwr, 
                 ymax = socideo.plot.d$upr), 
-                position = position_dodge(width = 0.25))
+                position = position_dodge(width = 0.25)) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 
 
@@ -1405,7 +1455,15 @@ partyid.plot = ggplot(partyid.plot.d,
                 x = partyid.plot.d$partyid,
                 ymin = partyid.plot.d$lwr, 
                 ymax = partyid.plot.d$upr), 
-                position = position_dodge(width = 0.25))
+                position = position_dodge(width = 0.25)) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 
 ######################################################
@@ -1646,7 +1704,15 @@ income.plot = ggplot(income.plot.d,
                 x = income.plot.d$income,
                 ymin = income.plot.d$lwr, 
                 ymax = income.plot.d$upr), 
-                position = position_dodge(width = 0.25))
+                position = position_dodge(width = 0.25)) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 
 ######################################################
@@ -1718,6 +1784,7 @@ grid_arrange_shared_legend(
         partyid.plot,
         socio.plot,
         ncol = 2, nrow = 2)
+## ---- 
 
 
 
