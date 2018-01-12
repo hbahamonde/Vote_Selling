@@ -951,7 +951,7 @@ save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.R
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
 
 ## excluding non-significative values
-d <- d[ which(d$sign==1), ] # optional
+# d <- d[ which(d$sign==1), ] # optional
 
 # function that does clustered SEs
 vcovCluster <- function(
@@ -997,7 +997,7 @@ d <- within(d, at.run <- relevel(at.run, ref = 2))
 d <- within(d, at.asso <- relevel(at.asso, ref = 2))
 d <- within(d, at.press <- relevel(at.press, ref = 2))
 d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
-d <- within(d, at.vote <- relevel(at.vote, ref = 2))
+d <- within(d, at.vote <- relevel(at.vote, ref = 1))
 
 model.vs.1 = lm(voteselling ~ at.run, data=d)
 model.vs.2 = lm(voteselling ~ at.asso, data=d)
@@ -1042,7 +1042,7 @@ acme.vs.d$variable = order(acme.vs.d$variable)
 
 acme.vs.d$variable <- factor(acme.vs.d$variable,
                              levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
-                             labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+                             labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CANNOT vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
 )
 
 
