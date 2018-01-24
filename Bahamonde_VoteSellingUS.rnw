@@ -86,6 +86,9 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 @
 
+<<barplot:data:control:treatment, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
 
 % end knitr stuff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -99,7 +102,7 @@ Many advanced democracies were first very clientelistic political systems. For i
 
 
 % Hook 1
-We seem to know that vote-\emph{buyers} cannot afford this strategy any longer, not at least in a massive scale, thus making vote-buying a rare event. However, several questions remain unanswered. And worryingly, most of them pertain to vote-\emph{sellers}. \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling because they {\bf oppose} vote-selling?}\footnote{In a similar vein, \citet{Weitz-shapiro} explains that vote-buyers in Argentina would opt-out of clientelism in scenarios where the middle class, due to ``moral or normative'' reasons, would /fail to support clientelistic politicians.} Given that the emphasis so far has been devoted to studying vote-\emph{buying}, ignoring the micro-dynamics of vote-\emph{selling}, prior studies do not offer satisfactory answers to these questions.\footnote{\citet{Hicken2014,Hicken2015} constitute two very important exceptions.} 
+We seem to know that vote-\emph{buyers} cannot afford this strategy any longer, not at least in a massive scale, thus making vote-buying a rare event. However, several questions remain unanswered. And worryingly, most of them pertain to vote-\emph{sellers}. \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?}\footnote{In a similar vein, \citet{Weitz-shapiro} explains that vote-buyers in Argentina would opt-out of clientelism in scenarios where the middle class, due to ``moral or normative'' reasons, would /fail to support clientelistic politicians.} Given that the emphasis so far has been devoted to studying vote-\emph{buying}, ignoring the micro-dynamics of vote-\emph{selling}, prior studies do not offer satisfactory answers to these questions.\footnote{\citet{Hicken2014,Hicken2015} constitute two very important exceptions.} 
 
 % Hook 2
 
@@ -150,35 +153,78 @@ While the \emph{modus operandi} of clientelism has changed, and both the frequen
 
 
 % Motivating next section
-On the one hand, we know that there are a number of long-term structural and institutional factors that have ended vote-buying as a feasible electoral strategy to win votes.\footnote{See for instance \citet{Stokes:2013cj} and \citet{Kitschelt2007}.} On the demand side, then, there does not seem enough incentives to buy votes anymore. However, what do we know about vote-\emph{sellers}? In a highly controversial pair of articles,\footnote{See also \citet{Foa2017b}.} \citet[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States (including a number of European countries). They find that only 10\% of citizens born in the inter-war period, 14\% of baby-boomers, and 26\% of millennials, say that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections.''\footnote{\citet[10]{Foa2016a}.} Unfortunately, there have not been efforts dedicated to investigate these matters employing experimental designs. \emph{What would voters do if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?} 
-
-
-
-
-
-
+On the one hand, we know that there are a number of long-term structural and institutional factors that have ended vote-buying as a feasible electoral strategy to win votes.\footnote{See for instance \citet{Stokes:2013cj} and \citet{Kitschelt2007}.} On the demand side, then, there does not seem enough incentives to buy votes anymore. However, what do we know about vote-\emph{sellers}? In a highly controversial pair of articles,\footnote{See also \citet{Foa2017b}.} \citet[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States (including a number of European countries). They find that only 10\% of citizens born in the inter-war period, 14\% of baby-boomers, and 26\% of millennials, say that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections.''\footnote{\citet[10]{Foa2016a}.} Unfortunately, there have not been efforts dedicated to investigate these matters employing experimental designs. Following \citet{GonzalezOcantos2014}, who also use an hypothetical situation to study vote-buying norms in Latin America, I implement a list experiment designed to elicit truthful answers to vote-selling: \emph{What would voters do if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?} 
 
 
 \section{Vote-Selling in an Experimental Context: A List Experiment in an Industrialized Democracy}
 
+\paragraph{Experimental Design.}\hypertarget{data:analyses}{There is an increasing literature dedicated to elicit truthful answers to sensitive questions via list experiments, including clientelism}.\footnote{See for example \citet{Gonzalez-Ocantos2012}.} This has skyrocketed a number of methodological advances in the statistical study of these kinds of experiments.\footnote{\citet{Corstange2008a,Corstange2008,Blair2012}.} Following their advice, a novel dataset (N=$\Sexpr{total.sample.size}$) representative at the national level was collected in 2016. Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read \hyperlink{distractor.vignette}{a distractor paragraph}. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-buying. In the paragraph four illegal activities were described. Additionally, according to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the distractor paragraph was to define the concept. 
 
-% \hypertarget{data:analyses}{First word here}
 
+% figure: experimental design.
 \begin{figure}[h]
 \includegraphics[scale=.9, center]{Experimental_Flow_Figure.pdf}
-\caption{Experimental Design\label{experimental:design:fig}}\centering
+\caption{Experimental Flow\label{experimental:design:fig}}\centering
 \end{figure}
 \pagebreak
 \vspace*{\fill}
 
 
+Then, and as suggested in \autoref{experimental:design:fig}, subjects were randomly assigned the order in which they saw the direct question and the list experiment. Eventually, all subjects answered both the direct question \emph{and} the list experiment. The \hyperlink{direct.question}{direct question} posited that there was going to be assigned at random the hypothetical possibility to do one of the illegal things mentioned in the distractor paragraph. However, and despite faking random assignment, all subjects were directly asked whether they would be interested in selling their votes. Immediately after, they answered a \hyperlink{pricing.experiment}{pricing experiment}, where they were asked for the right price for their votes.\todo{find literature on this.}
+
+The list experiment contemplated one control (without any sensitive vote-selling item), and two treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider an arbitrarily low (\$100) and an arbitrarily high price (\$500) delivered via two different treatments. More than being hard pricing tests, these two treatments control for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income. Subjects randomly assigned to the control condition, answered the following question:
+
+\begin{lstlisting}[frame=lrtb]
+Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
+
+(1) steal an iPod from a large department store
+(2) speed on the highway because you're late for work/school
+(3) download your favorite music from the internet illegally
+
+Type in HOW MANY (NOT WHICH), if any, of these things you would do.
+\end{lstlisting}
+
+Subjects assigned to the treatment condition answered \emph{one} the following two treatments. The ones assigned to the low price item, read and answered the following question:
 
 
-% list:analysis:social:desirability:plot
-<<list:analysis:social:desirability:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=soc.des.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100 ,cache = FALSE>>=
+\begin{lstlisting}[frame=lrtb]
+Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
+
+(1) steal an iPod from a large department store
+(2) speed on the highway because you're late for work/school
+(3) sell your vote to a candidate for $100
+(4) download your favorite music from the internet illegally
+
+Type in HOW MANY (NOT WHICH), if any, of these things you would do.
+\end{lstlisting}
+
+
+However, the ones assigned to the high price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. 
+
+
+
+% barplot:figure:control:treatment
+<<barplot:figure:control:treatment, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=barplot.descriptive.plot.note, fig.align='center', fig.width=4, fig.height=3.5,dpi=100 ,cache = FALSE>>=
 
 
 @
+
+
+\paragraph{Data Analyses.} \emph{Would U.S. citizens sell their vote?} Following the advice of \citet{Blair2012} and \citet{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{\autoref{tab:regression} shows the regression table.} These analyses allow estimating the probability of selling one's vote indirectly, via the list experiment. \autoref{fig:list:analysis:social:desirability:plot} suggests that $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote (both in \$100 or \$500).\footnote{This probability was obtained by computing the probability of the `high' and `low' conditions, and then dividing them by two.} Since differences are not statistically significant, there are not treatment-specific price elasticities. When subjects are directly asked about selling their votes, they systematically under-report (due to social desirability bias). Particularly, around $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it. 
+
+
+
+% list:analysis:social:desirability:plot
+<<list:analysis:social:desirability:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=soc.des.plot.note, fig.align='center', fig.width=3.5, fig.height=3,dpi=100 ,cache = FALSE>>=
+
+
+@
+
+
+
+
+
+
 \pagebreak
 \vspace*{\fill}
 
@@ -261,90 +307,70 @@ count <- comma(as.numeric(count)) # add comma
 
 \subsection{Experimental Manipulations and Vignettes}
 
-Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read the next paragraph. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-buying. Additionally, in several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the framing paragraph was to define this concept.
 
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
-Washington, D.C. - A department store downtown had a robbery incident last week, reporting several missing iPods from their inventory. Authorities also inform that a group of local residents are trying to ``sell'' their votes to political candidates ahead of a local election for city council. Residents approached some of the candidates running for office and offered to vote for that candidate in return for monetary compensation. In a different subject matter, the local police station released a report on driving habits and behaviors in the Capitol district last week. Finally, cyber-crime has become an increasingly serious issue in the area in the past few year.
+\paragraph{Distractor Paragraph} \hypertarget{distractor.vignette}{The next paragraph} was used to distract subjects from the main purpose of the study, and also to define what vote-selling was.
+
+\begin{lstlisting}[frame=lrtb]
+Washington, D.C.- A department store downtown had a robbery incident last week, reporting several missing iPods from their inventory. Authorities also inform that a group of local residents are trying to ``sell'' their votes to political candidates ahead of a local election for city council. Residents approached some of the candidates running for office and offered to vote for that candidate in return for monetary compensation. In a different subject matter, the local police station released a report on driving habits and behaviors in the Capitol district last week. Finally, cyber-crime has become an increasingly serious issue in the area in the past few year.
 \end{lstlisting}
 
 
-\paragraph{Direct Question} Next, all subjects read the following paragraph:
+\paragraph{Direct Question} \hypertarget{direct.question}{All subjects} read the next paragraph, and then answered the direct question:
 
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+\begin{lstlisting}[frame=lrtb]
 Now you will be entered into a random lottery for the opportunity to do ONE of the illegal things you just read before. This means that you might be randomly offered to hypothetically do ANY of the activities mentioned before.
 \end{lstlisting}
 
-Despite faking a random assignment, \emph{all} subjects in the control condition read the following paragraph, where they were directly asked whether they would sell their votes.
 
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+\begin{lstlisting}[frame=lrtb]
 After a random assignment, you have been selected for the opportunity to hypothetically sell your vote. This means that you will have the hypothetical opportunity to accept money from a candidate for your vote. Would you be willing to accept the offer, assuming you would not go to jail? By selecting ``Yes,'' you could earn up to $1,000.
 \end{lstlisting}
 
 
-Next, they read the following paragraph:
 
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{lightgray}]
+\paragraph{Pricing Experiment} \hypertarget{pricing.experiment}{Immediately after answering} the direct question, they were asked for the right price of their votes. 
+
+
+\begin{lstlisting}[frame=lrtb]
 Which of the following  prices (in USD $) would you consider...
 
 too cheap for your vote? [slider going from $ 0 to $ 1000]
 too expensive for your vote? [slider going from $ 0 to $ 1000]
 \end{lstlisting}
 
-\paragraph{List Experiment} Next, subjects were randomly assigned to treatment or control conditions. There were three manipulations: one control (without the sensitive vote-selling item), and two treatments, each with different vote-selling prices.
 
-Subjects assigned to the control condition answered the following question:
-
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
-Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
-
-(1) steal an iPod from a large department store
-(2) speed on the highway because you're late for work/school
-(3) download your favorite music from the internet illegally
-
-Type in HOW MANY (NOT WHICH), if any, of these things you would do.
-\end{lstlisting}
-
-Subjects assigned to the treatment condition answering one of the following two treatments. Each treatment condition had different vote-selling prices.
+\subsection{Statistical Analysis of the List Experiment: Regression Table}
 
 
-The low price vote-selling list experiment read as follows:
 
+\begin{table}[]
+\centering
+\caption{Statistical Analysis of the List Experiment: Estimated coefficients from regression model where the outcome variables are whether or not subjects would sell their vote to a candidate for \$100 o \$500.}
+\label{tab:regression}
+\begin{tabular}{c|cc|cc|cc|ll|}
+\cline{2-9}
+                   & \multicolumn{4}{c|}{\textbf{Sensitive Items}}                                        & \multicolumn{4}{c|}{\textbf{Control Items}}                                                                    \\ \cline{2-9} 
+                   & \multicolumn{2}{c|}{{ \textit{Low Treatment}}} & \multicolumn{2}{c|}{{ \textit{High Treatment}}} & \multicolumn{2}{c}{{ \textit{Low Condition}}} & \multicolumn{2}{l|}{{ \textit{High Condition}}}                            \\ \hline
+\textit{Variables} & \textit{Est.}        & \textit{SE}       & \textit{Est.}        & \textit{SE}        & \textit{Est.}       & \textit{SE}       & \multicolumn{1}{c}{\textit{Est.}} & \multicolumn{1}{c|}{\textit{SE}} \\ \hline
+Intercept & $\Sexpr{as.numeric(coeffs.treat.list.low[1])}$ & $\Sexpr{as.numeric(se.treat.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[1])}$ & $\Sexpr{as.numeric(se.treat.list.high[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[1])}$ & $\Sexpr{as.numeric(se.cont.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[1])}$ & $\Sexpr{as.numeric(se.cont.list.high[1])}$\\
+Ideology$_{\text{Liberal}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[2])}$ & $\Sexpr{as.numeric(se.treat.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[2])}$ & $\Sexpr{as.numeric(se.treat.list.high[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[2])}$ & $\Sexpr{as.numeric(se.cont.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[2])}$ & $\Sexpr{as.numeric(se.cont.list.high[2])}$\\
+Ideology$_{\text{Moderate}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[3])}$ & $\Sexpr{as.numeric(se.treat.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[3])}$ & $\Sexpr{as.numeric(se.treat.list.high[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[3])}$ & $\Sexpr{as.numeric(se.cont.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[3])}$ & $\Sexpr{as.numeric(se.cont.list.high[3])}$\\
+Ideology$_{\text{Conservative}}$& $\Sexpr{as.numeric(coeffs.treat.list.low[4])}$ & $\Sexpr{as.numeric(se.treat.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[4])}$ & $\Sexpr{as.numeric(se.treat.list.high[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[4])}$ & $\Sexpr{as.numeric(se.cont.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[4])}$ & $\Sexpr{as.numeric(se.cont.list.high[4])}$\\
+Ideology$_{\text{VeryConservative}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[5])}$ & $\Sexpr{as.numeric(se.treat.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[5])}$ & $\Sexpr{as.numeric(se.treat.list.high[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[5])}$ & $\Sexpr{as.numeric(se.cont.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[5])}$ & $\Sexpr{as.numeric(se.cont.list.high[5])}$\\
+Party Id$_{\text{Republican}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[6])}$ & $\Sexpr{as.numeric(se.treat.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[6])}$ & $\Sexpr{as.numeric(se.treat.list.high[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[6])}$ & $\Sexpr{as.numeric(se.cont.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[6])}$ & $\Sexpr{as.numeric(se.cont.list.high[6])}$\\
+Party Id$_{\text{Independent}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[7])}$ & $\Sexpr{as.numeric(se.treat.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[7])}$ & $\Sexpr{as.numeric(se.treat.list.high[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[7])}$ & $\Sexpr{as.numeric(se.cont.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[7])}$ & $\Sexpr{as.numeric(se.cont.list.high[7])}$\\
+Party Id$_{\text{SomethingElse}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[8])}$ & $\Sexpr{as.numeric(se.treat.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[8])}$ & $\Sexpr{as.numeric(se.treat.list.high[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[8])}$ & $\Sexpr{as.numeric(se.cont.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[8])}$ & $\Sexpr{as.numeric(se.cont.list.high[8])}$\\
+Income & $\Sexpr{as.numeric(coeffs.treat.list.low[9])}$ & $\Sexpr{as.numeric(se.treat.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[9])}$ & $\Sexpr{as.numeric(se.treat.list.high[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[9])}$ & $\Sexpr{as.numeric(se.cont.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[9])}$ & $\Sexpr{as.numeric(se.cont.list.high[9])}$\\
+Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric(se.treat.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[10])}$ & $\Sexpr{as.numeric(se.treat.list.high[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[10])}$ & $\Sexpr{as.numeric(se.cont.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[10])}$ & $\Sexpr{as.numeric(se.cont.list.high[10])}$\\
+\hline
 
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
-Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
-
-(1) steal an iPod from a large department store
-(2) speed on the highway because you're late for work/school
-(3) sell your vote to a candidate for $100
-(4) download your favorite music from the internet illegally
-
-Type in HOW MANY (NOT WHICH), if any, of these things you would do.
-\end{lstlisting}
-
-
-while the high price vote-selling list experiment read as follows:
-
-
-\begin{lstlisting}[frame=lrtb, backgroundcolor=\color{ForestGreen}]
-Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
-
-(1) steal an iPod from a large department store
-(2) speed on the highway because you're late for work/school
-(3) sell your vote to a candidate for $500
-(4) download your favorite music from the internet illegally
-
-Type in HOW MANY (NOT WHICH), if any, of these things you would do.
-\end{lstlisting}
-
-
-It is important to add that the ordering of the direct question and list experiment portions were randomized. 
+\end{tabular}
+\end{table}
 
 
 
 
-
-
-
+\clearpage 
 \newpage
 \bibliography{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/library,/Users/hectorbahamonde/RU/Bibliografia_PoliSci/Bahamonde_BibTex2013}
 \bibliographystyle{plainnat}

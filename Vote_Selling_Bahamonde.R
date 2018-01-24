@@ -122,6 +122,9 @@ save(dat, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData
 cat("\014")
 rm(list=ls())
 
+
+## ---- barplot:data:control:treatment ----
+
 # Load Data
 load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
@@ -134,13 +137,29 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 # Plot
-ggplot(dat, aes(x=ycount)) + 
-  geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
-  geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
-  facet_grid(.~ treatment.f) + 
-  xlab("Items") + 
-  ylab("Item Count") +
-  theme_bw()
+barplot.descriptive.plot = ggplot(dat, aes(x=ycount)) + 
+        geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
+        geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
+        facet_grid(.~ treatment.f) + 
+        xlab("Number of Items") + 
+        ylab("Frequency") +
+        theme_bw()
+## ----
+
+
+
+
+## ---- barplot:figure:control:treatment
+# use this to explain plot in the paper
+barplot.descriptive.plot
+barplot.descriptive.plot.note <- paste(
+        "Frequencies of the different items asked in the list experiment.",
+        "\\\\\\hspace{\\textwidth}", 
+        "{\\bf Note}: Figure shows the number of times each item was selected. Both 'low' and 'high' treatments are combined. That is why the treatment panel has more observations. In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
+        "\n")
+## ----
+
+
 
 # Histogram for Direct Question
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
@@ -305,6 +324,15 @@ list.low <- ictreg(ycount ~
 
 # summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
+## this is to construct a table later
+n.draws = 200000
+coeffs.treat.list.low = as.data.frame(summary(list.low, n.draws = n.draws)["par.treat"])[1:10,]
+se.treat.list.low = as.data.frame(summary(list.low, n.draws = n.draws)["se.treat"])[1:10,]
+coeffs.cont.list.low = as.data.frame(summary(list.low, n.draws = n.draws)["par.control"])[1:10,]
+se.cont.list.low = as.data.frame(summary(list.low, n.draws = n.draws)["se.control"])[1:10,]
+
+
+
 
 
 ## Individual predictions
@@ -377,6 +405,11 @@ list.high <- ictreg(ycount ~
 
 # summary(list.high, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
+## this is to construct a table later
+coeffs.treat.list.high = as.data.frame(summary(list.high, n.draws = n.draws)["par.treat"])[1:10,]
+se.treat.list.high = as.data.frame(summary(list.high, n.draws = n.draws)["se.treat"])[1:10,]
+coeffs.cont.list.high = as.data.frame(summary(list.high, n.draws = n.draws)["par.control"])[1:10,]
+se.cont.list.high = as.data.frame(summary(list.high, n.draws = n.draws)["se.control"])[1:10,]
 
 
 ## Individual predictions
@@ -393,6 +426,12 @@ indpred.p.high$Significance[indpred.p.high$Significance==0] <- "No"
 names(indpred.p.high)[4] = "se.fit"
 rownames(indpred.p.high) <- NULL
 indpred.p.high.fit= indpred.p.high$fit
+
+
+
+######################################################
+# table
+
 
 
 ######################################################
@@ -644,8 +683,7 @@ soc.des.plot = ggplot(socdes.p.high.low,
               axis.title.x = element_text(size=7), 
               legend.text=element_text(size=7), 
               legend.title=element_text(size=7),
-              plot.title = element_text(size=7),
-              legend.position="bottom")
+              plot.title = element_text(size=7))
 
 ## ----
 
@@ -656,7 +694,7 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "Declared and Predicted Vote-Sellers",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: Figure shows the frequency of declared and predicted vote-sellers, and its difference, or liars",
+        "{\\bf Note}: Figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars').",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 
