@@ -80,9 +80,9 @@ Associationalism: Alexis de Tocqueville's idea of associationalism ``...stressed
 
 % issue in Journal of Democracy about de-democratization
 	
-	Highly controversial pair of articles,\footnote{\citet{Alexander2017}, \citet{Norris2017}, \citet{Voeten2017}.} \citet{Foa2016a,Foa2017b} document, using survey-data, a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in a number of European countries as well as the United States. % rephrase this quote.
+	%Highly controversial pair of articles,\footnote{\citet{Alexander2017}, \citet{Norris2017}, \citet{Voeten2017}.} \citet{Foa2016a,Foa2017b} document, using survey-data, a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in a number of European countries as well as the United States. % rephrase this quote.
 
-		- ``In the United States, for example, only 10 percent of citizens born in the interwar years and 14 percent of baby-boomers say that it is `unimportant' in a democracy for people to `choose their leaders in free elections' (with `unimportant' defined as 1 to 5 on a 10-point scale of importance). Among millennials, this figure rises to 26 percent.'' % Foa2016a, 10.
+	%	- ``In the United States, for example, only 10 percent of citizens born in the interwar years and 14 percent of baby-boomers say that it is `unimportant' in a democracy for people to `choose their leaders in free elections' (with `unimportant' defined as 1 to 5 on a 10-point scale of importance). Among millennials, this figure rises to 26 percent.'' % Foa2016a, 10.
 
 		- ``political scientists have abstained from pursuing questions that would seem to be among the most fundamental for the discipline [...] Do empirical indicators give us reason to believe that seemingly stable democracies may be in trouble?'' % Foa2016a, 14-15
 
