@@ -133,17 +133,47 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 dat$treatment.f = factor(dat$treatment, levels = c(0,1), labels=c("Control", "Treatment"))
 
 
+treat.cont.bar.plot.d = data.frame(
+        ycount = c(
+                c(table(factor(dat$treatment100, levels = c(0,1,2,3,4), labels=c("0", "1", "2", "3", "4")))),
+                c(table(factor(dat$treatment500, levels = c(0,1,2,3,4), labels=c("0", "1", "2", "3", "4")))),
+                c(table(factor(dat$control, levels = c(0,1,2,3), labels=c("0", "1", "2", "3"))))
+                ),
+        Condition = c(
+                rep("Low Treatment ($ 100)", 5),
+                rep("High Treatment ($ 500)", 5),
+                rep("Control", 4)
+                ),
+        xcount = c(
+                0,1,2,3,4,#
+                0,1,2,3,4,#
+                0,1,2,3#
+        ),
+        n.items = c(
+                rep("NonSens", 4), "Sens",
+                rep("NonSens", 4), "Sens",
+                rep("NonSens", 4)
+        )
+)
+
+
+
+# Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-# Plot
-barplot.descriptive.plot = ggplot(dat, aes(x=ycount)) + 
-        geom_histogram(data=subset(dat, ycount>3), fill="red", binwidth=.5) +
-        geom_histogram(data=subset(dat, ycount<=3), fill="forestgreen", binwidth=.5) +
-        facet_grid(.~ treatment.f) + 
+barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d, 
+                                  aes(x=xcount, 
+                                      y = ycount,
+                                      fill=n.items)) + 
+        geom_bar(stat = "identity") + 
+        facet_grid(.~ Condition) + 
         xlab("Number of Items") + 
         ylab("Frequency") +
-        theme_bw()
+        theme_bw() +
+        theme(legend.position="none") +
+        scale_fill_manual(values=c("forestgreen", "red"))
+
 ## ----
 
 
@@ -155,7 +185,7 @@ barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
         "Frequencies of the different items asked in the list experiment.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: Figure shows the number of times each item was selected. Both 'low' and 'high' treatments are combined. That is why the treatment panel has more observations. In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
+        "{\\bf Note}: Figure shows the frequency of the number of items selected. In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
         "\n")
 ## ----
 

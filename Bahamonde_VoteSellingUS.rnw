@@ -158,21 +158,22 @@ On the one hand, we know that there are a number of long-term structural and ins
 
 \section{Vote-Selling in an Experimental Context: A List Experiment in an Industrialized Democracy}
 
-\paragraph{Experimental Design.}\hypertarget{data:analyses}{There is an increasing literature dedicated to elicit truthful answers to sensitive questions via list experiments, including clientelism}.\footnote{See for example \citet{Gonzalez-Ocantos2012}.} This has skyrocketed a number of methodological advances in the statistical study of these kinds of experiments.\footnote{\citet{Corstange2008a,Corstange2008,Blair2012}.} Following their advice, a novel dataset (N=$\Sexpr{total.sample.size}$) representative at the national level was collected in 2016. Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read \hyperlink{distractor.vignette}{a distractor paragraph}. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-buying. In the paragraph four illegal activities were described. Additionally, according to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the distractor paragraph was to define the concept. 
-
-
 % figure: experimental design.
 \begin{figure}[h]
 \includegraphics[scale=.9, center]{Experimental_Flow_Figure.pdf}
 \caption{Experimental Flow\label{experimental:design:fig}}\centering
 \end{figure}
-\pagebreak
-\vspace*{\fill}
 
 
-Then, and as suggested in \autoref{experimental:design:fig}, subjects were randomly assigned the order in which they saw the direct question and the list experiment. Eventually, all subjects answered both the direct question \emph{and} the list experiment. The \hyperlink{direct.question}{direct question} posited that there was going to be assigned at random the hypothetical possibility to do one of the illegal things mentioned in the distractor paragraph. However, and despite faking random assignment, all subjects were directly asked whether they would be interested in selling their votes. Immediately after, they answered a \hyperlink{pricing.experiment}{pricing experiment}, where they were asked for the right price for their votes.\todo{find literature on this.}
+\paragraph{Experimental Design.}\hypertarget{data:analyses}{There is an increasing literature dedicated to elicit truthful answers to sensitive questions via list experiments, including clientelism}.\footnote{See for example \citet{Gonzalez-Ocantos2012}.} This has skyrocketed a number of methodological advances in the statistical study of these kinds of experiments.\footnote{\citet{Corstange2008a,Corstange2008,Blair2012}.} Following their advice, a novel dataset (N=$\Sexpr{total.sample.size}$) representative at the national level was collected in 2016. Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read \hyperlink{distractor.vignette}{a distractor paragraph}. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-selling. In the paragraph, four illegal activities were described, all of them formatted as pieces of news. Additionally, according to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the distractor paragraph was to define the concept. 
 
-The list experiment contemplated one control (without any sensitive vote-selling item), and two treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider an arbitrarily low (\$100) and an arbitrarily high price (\$500) delivered via two different treatments. More than being hard pricing tests, these two treatments control for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income. Subjects randomly assigned to the control condition, answered the following question:
+
+Then, and as suggested in \autoref{experimental:design:fig}, the order in which they saw the direct question and the list experiment was randomly assigned. Eventually, all subjects answered both the direct question \emph{and} the list experiment. The \hyperlink{direct.question}{direct question} stated that there was going to be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned in the distractor paragraph. However, and despite faking random assignment, \emph{all} subjects were directly asked whether they would be interested in selling their votes. Direct answers then were used to estimate the number of ``liars,'' a process which I describe below. Immediately after the direct question, subjects answered a \hyperlink{pricing.experiment}{pricing experiment}, where they were asked for the right price for their votes. Following standard practice in marketing research, experimental subjects would slide two 	handles, one indicating which price was considered ``too cheap,'' and another one indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000. As I explain below, the intersection of the ``too cheap'' and ``too high'' distributions, was used to estimate the optimal price for a vote.
+
+
+The list experiment contemplated one control (without any sensitive vote-selling item), and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider an arbitrarily low (\$100), and an arbitrarily high price (\$500), delivered via two different treatments. More than being hard pricing tests, these two treatments control for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income. To be sure, subjects randomly assigned to the treatment condition, only answered \emph{one} of these treatments. 
+
+Moving forward, subjects randomly assigned to the control condition,\footnote{This is an hypothetical situation. To isolate the risks and costs associated with engaging in any illegal activity, it was included a ``assuming you would not go to jail'' sentence.} answered the following question:
 
 \begin{lstlisting}[frame=lrtb]
 Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
@@ -184,7 +185,7 @@ Now, you will have to type HOW MANY, if any, of the following illegal activities
 Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
-Subjects assigned to the treatment condition answered \emph{one} the following two treatments. The ones assigned to the low price item, read and answered the following question:
+In turn, subjects assigned to the treatment condition answered \emph{one} the following two treatments. The ones assigned to the \emph{low} price item, read and answered the following question:
 
 
 \begin{lstlisting}[frame=lrtb]
@@ -199,18 +200,18 @@ Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
 
-However, the ones assigned to the high price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. 
+However, the ones assigned to the \emph{high} price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. 
 
 
 
 % barplot:figure:control:treatment
-<<barplot:figure:control:treatment, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=barplot.descriptive.plot.note, fig.align='center', fig.width=4, fig.height=3.5,dpi=100 ,cache = FALSE>>=
+<<barplot:figure:control:treatment, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=barplot.descriptive.plot.note, fig.align='center', fig.width=5, fig.height=2,dpi=100 ,cache = FALSE>>=
 
 
 @
 
 
-\paragraph{Data Analyses.} \emph{Would U.S. citizens sell their vote?} Following the advice of \citet{Blair2012} and \citet{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{\autoref{tab:regression} shows the regression table.} These analyses allow estimating the probability of selling one's vote indirectly, via the list experiment. \autoref{fig:list:analysis:social:desirability:plot} suggests that $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote (both in \$100 or \$500).\footnote{This probability was obtained by computing the probability of the `high' and `low' conditions, and then dividing them by two.} Since differences are not statistically significant, there are not treatment-specific price elasticities. When subjects are directly asked about selling their votes, they systematically under-report (due to social desirability bias). Particularly, around $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it. 
+\paragraph{Data Analyses.} \emph{Would U.S. citizens sell their vote?} Following the advice of \citet{Blair2012} and \citet{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{\autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (\autoref{fig:list:analysis:individual:predictions:plot}). Using this information it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of liars. \autoref{fig:list:analysis:social:desirability:plot} suggests that, combining the estimates of the \emph{low} and \emph{high} treatments, $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This probability was obtained by computing the probability of the `high' and `low' conditions, and then dividing them by two.} Since differences between these two experimental conditions are not statistically significant, it is reasonable to think that there are not concerns associated with the design of the treatments (e.g., their specific predetermined prices). When subjects were directly asked about selling their votes, due to social desirability bias, they systematically under-reported their true answers. Particularly, around $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{The \emph{low} condition is barely non-significant. However, this does not alter the substantive results. Both experimental treatments suggest that subjects in fact lie about the possibility of selling their votes.}
 
 
 
@@ -222,21 +223,7 @@ However, the ones assigned to the high price vote-selling item, read exactly the
 
 
 
-
-
-
-\pagebreak
-\vspace*{\fill}
-
-% list:analysis:individual:predictions:plot
-<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100 ,cache = FALSE>>=
-
-
-@
-\pagebreak
-\vspace*{\fill}
-
-
+\emph{Who are the most-likely sellers?} 
 
 
 % predictions:independent:variables:plot
@@ -244,8 +231,15 @@ However, the ones assigned to the high price vote-selling item, read exactly the
 
 
 @
+
+
 \pagebreak
 \vspace*{\fill}
+
+
+
+
+
 
 \section{Discussion}
 
@@ -337,6 +331,10 @@ Which of the following  prices (in USD $) would you consider...
 too cheap for your vote? [slider going from $ 0 to $ 1000]
 too expensive for your vote? [slider going from $ 0 to $ 1000]
 \end{lstlisting}
+\pagebreak
+\vspace*{\fill}
+
+
 
 
 \subsection{Statistical Analysis of the List Experiment: Regression Table}
@@ -366,6 +364,24 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 
 \end{tabular}
 \end{table}
+\pagebreak
+\vspace*{\fill}
+
+
+
+
+
+
+\subsection{Statistical Analysis of the List Experiment: Individual Probabilities of Vote-Selling}
+
+% list:analysis:individual:predictions:plot
+<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100 ,cache = FALSE>>=
+
+
+@
+\pagebreak
+\vspace*{\fill}
+
 
 
 
