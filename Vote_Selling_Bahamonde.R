@@ -671,7 +671,7 @@ soc.des.plot = ggplot(socdes.p.high.low,
                    aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
         theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.2) +
         geom_pointrange(aes(
                 x = socdes.p.high.low$c.1.3,
@@ -692,7 +692,7 @@ soc.des.plot = ggplot(socdes.p.high.low,
 ### Plot
 soc.des.plot
 soc.des.plot.note <- paste(
-        "Declared and Predicted Vote-Sellers",
+        "Declared and Predicted Vote-Sellers.",
         "\\\\\\hspace{\\textwidth}", 
         "{\\bf Note}: Figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars').",
         "\\\\\\hspace{\\textwidth}",
@@ -1391,7 +1391,7 @@ socio.plot = ggplot(socideo.plot.d,
                     aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         geom_pointrange(aes(
                 x = socideo.plot.d$socioideo,
@@ -1487,7 +1487,7 @@ partyid.plot = ggplot(partyid.plot.d,
                       aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         geom_pointrange(aes(
                 x = partyid.plot.d$partyid,
@@ -1597,13 +1597,21 @@ educ.plot = ggplot(educ.plot.d,
                    aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         geom_pointrange(aes(
                 x = educ.plot.d$education,
                 ymin = educ.plot.d$lwr, 
                 ymax = educ.plot.d$upr), 
-                position = position_dodge(width = 0.25))
+                position = position_dodge(width = 0.25)) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 ######################################################
 # 6 income.n (ok)
@@ -1736,7 +1744,7 @@ income.plot = ggplot(income.plot.d,
                      aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
         xlab("") + 
-        ylab("Probability of Vote-Selling") +
+        ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         geom_pointrange(aes(
                 x = income.plot.d$income,
@@ -1744,7 +1752,7 @@ income.plot = ggplot(income.plot.d,
                 ymax = income.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
         theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
+              axis.text.x = element_text(size=5, angle = 45, hjust=1), 
               axis.title.y = element_text(size=7), 
               axis.title.x = element_text(size=7), 
               legend.text=element_text(size=7), 
@@ -1843,6 +1851,12 @@ p_load(data.table)
 
 clientelism = data.table(clientelism)
 
+lapop.bar.chart.N = nrow(clientelism)
+
+percentage.never = round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)
+percentage.sometimes = round(as.numeric(as.numeric(table(clientelism)["Sometimes"]) * 100) / lapop.bar.chart.N, 1)
+percentage.often = round(as.numeric(as.numeric(table(clientelism)["Often"]) * 100) / lapop.bar.chart.N, 1)
+
 if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) + 
@@ -1858,10 +1872,6 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
               legend.position="bottom")
-
-lapop.bar.chart.N = nrow(clientelism)
-
-percentage.never = round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)
 ## ----
 
 ## ---- lapop:bar:chart:plot ----
@@ -1871,7 +1881,7 @@ lapop.bar.chart.p
 lapop.bar.chart.p.note <- paste(
         "Frequency of Clientelism",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N =", paste(lapop.bar.chart.N, ".", sep = "")),
+        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N =", paste(lapop.bar.chart.N, ".", sep = ""), "The respective proportions are: ", paste(percentage.often, percentage.sometimes, percentage.never, sep = ", "), ".", sep = ""),
         "\\\\\\hspace{\\textwidth}", 
         paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: \\emph{In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?}"),
         "\n")
