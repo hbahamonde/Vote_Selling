@@ -183,9 +183,9 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 # use this to explain plot in the paper
 barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
-        "Frequencies of the different items asked in the list experiment.",
+        "Frequency of subjects declaring how many (if any) illegal things they would do.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: Figure shows the frequency of the number of items selected. In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
+        "{\\bf Note}: In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
         "\n")
 ## ----
 
@@ -1945,7 +1945,15 @@ price.plot = ggplot(pricing.d,aes(x=value, fill=variable)) + geom_density(alpha=
         ylab("Density") +
         scale_fill_discrete("") + #Price for Your Vote
         theme_bw() +
-        theme(legend.position="bottom", legend.direction="horizontal")
+        theme(legend.position="bottom", legend.direction="horizontal")  +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 ## getting intersecting price
 pricing.d2 = data.frame(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))
@@ -1993,7 +2001,14 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 
 
 ## ---- pricing:experiment:plot ----
-price.plot # calling the plot // need to save it to get the intersecting point.
+# calling the plot // need to save it to get the intersecting point.
+price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
+price.plot.note <- paste(
+        "Pricing Experiment: Ideal Selling Price",
+        "\\\\\\hspace{\\textwidth}", 
+        paste("{\\bf Note}: Figure shows the empirical distributions of the 'too cheap' and 'to expensive' supply curves. The intersection of the two (the vertical dashed line) is used to get an estimate of the ideal selling price. The data suggest that the right price for one's vote is: \\$", paste(round(line_intersection$x,0), ".", sep = "")),
+        "\n")
+
 ## ---- 
 
 
@@ -2138,6 +2153,58 @@ dat.combined = data.frame(voteselling, dat); colnames(dat.combined)[1] <- "votes
 
 
 
+######################################################
+# Descriptive Maps
+######################################################
+cat("\014")
+rm(list=ls())
+
+## ---- us:map:plot ----
+
+# Load Data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+
+
+## Map of Observations
+### loading a package with ZIP codes and their respective Lat's and Long's.
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(zipcode,ggplot2,ggmap)
+
+# install.packages("ggmap", type = "source")library(ggmap) # if it gives the following error ("Error: GeomRasterAnn was built with an incompatible version of ggproto"), install ggmap from source.
 
 
 
+data(zipcode)
+zipcode <- zipcode[c("zip", "latitude", "longitude")]
+dat <- merge(dat,zipcode,by=c("zip"))
+us <- c(left = -160, bottom = 15, right = -55, top = 50)
+map <- get_stamenmap(us, zoom = 5, maptype = "toner-lite")
+
+
+levels(dat$partyid)[levels(dat$partyid)=="SomethingElse"] <- "Something Else"
+
+
+ggmap(map) + geom_point(aes(
+        x = longitude,
+        colour=partyid,
+        y = latitude), 
+        alpha = .7,
+        size = 0.8,
+        shape = 1,
+        data = dat) +
+        xlab("Longitude") + 
+        ylab("Latitude") +
+        theme_bw() +
+        labs(color='') +
+        scale_colour_manual(values=c("blue", "red", "forestgreen", "cyan1")) +
+        theme_bw() +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
+
+## ----

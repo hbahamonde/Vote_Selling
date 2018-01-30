@@ -164,16 +164,26 @@ On the one hand, we know that there are a number of long-term structural and ins
 \caption{Experimental Flow\label{experimental:design:fig}}\centering
 \end{figure}
 
-
-\paragraph{Experimental Design.}\hypertarget{data:analyses}{There is an increasing literature dedicated to elicit truthful answers to sensitive questions via list experiments, including clientelism}.\footnote{See for example \citet{Gonzalez-Ocantos2012}.} This has skyrocketed a number of methodological advances in the statistical study of these kinds of experiments.\footnote{\citet{Corstange2008a,Corstange2008,Blair2012}.} Following their advice, a novel dataset (N=$\Sexpr{total.sample.size}$) representative at the national level was collected in 2016. Before splitting the subject pool into their respective experimental scenarios, all subjects were told to read \hyperlink{distractor.vignette}{a distractor paragraph}. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-selling. In the paragraph, four illegal activities were described, all of them formatted as pieces of news. Additionally, according to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the distractor paragraph was to define the concept. 
-
-
-Then, and as suggested in \autoref{experimental:design:fig}, the order in which they saw the direct question and the list experiment was randomly assigned. Eventually, all subjects answered both the direct question \emph{and} the list experiment. The \hyperlink{direct.question}{direct question} stated that there was going to be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned in the distractor paragraph. However, and despite faking random assignment, \emph{all} subjects were directly asked whether they would be interested in selling their votes. Direct answers then were used to estimate the number of ``liars,'' a process which I describe below. Immediately after the direct question, subjects answered a \hyperlink{pricing.experiment}{pricing experiment}, where they were asked for the right price for their votes. Following standard practice in marketing research, experimental subjects would slide two 	handles, one indicating which price was considered ``too cheap,'' and another one indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000. As I explain below, the intersection of the ``too cheap'' and ``too high'' distributions, was used to estimate the optimal price for a vote.
+\paragraph{Experimental Design.}\hypertarget{data:analyses}{There is an increasing literature dedicated to elicit truthful answers to sensitive questions via list experiments, including clientelism}.\footnote{See for example \citet{Gonzalez-Ocantos2012}.} This has skyrocketed a number of methodological advances in the statistical study of these kinds of experiments. Most of these studies have been conducted in a number of developing countries.\footnote{See for example \citet{Corstange2008a,Corstange2008,Blair2012}.} Employing a similar strategy, this study exploits variance within an on-line survey experiment in the United States.\footnote{The data were collected by \emph{SSI}.} The data (N=$\Sexpr{total.sample.size}$) were collected in 2016, and are representative at the national level. \autoref{fig:us:map:plot} shows the geographical distribution of survey respondents broken by party identification. Before splitting the subject pool into their respective experimental conditions, all subjects were told to read \hyperlink{distractor.vignette}{a distractor paragraph}. The idea was to frame the experiment as a study about crime in the U.S., not as a study about vote-selling. In the paragraph, four illegal activities were described, all of them formatted as pieces of news. Additionally, according to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge. Consequently, the secondary purpose of the distractor paragraph was to define the concept. 
 
 
-The list experiment contemplated one control (without any sensitive vote-selling item), and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider an arbitrarily low (\$100), and an arbitrarily high price (\$500), delivered via two different treatments. More than being hard pricing tests, these two treatments control for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income. To be sure, subjects randomly assigned to the treatment condition, only answered \emph{one} of these treatments. 
 
-Moving forward, subjects randomly assigned to the control condition,\footnote{This is an hypothetical situation. To isolate the risks and costs associated with engaging in any illegal activity, it was included a ``assuming you would not go to jail'' sentence.} answered the following question:
+
+% barplot:figure:control:treatment
+<<us:map:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap='Geographical Distribution of Survey Respondents broken by Party Identification', fig.align='center', fig.width=6, fig.height=4,dpi=1000 ,cache = FALSE>>=
+
+
+@
+
+
+
+
+Then, and as suggested in \autoref{experimental:design:fig}, the order in which they saw the direct question and the list experiment was randomly assigned. Eventually, all subjects answered both the direct question \emph{and} the list experiment. The \hyperlink{direct.question}{direct question} stated that there was going to be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned in the distractor paragraph. However, and despite faking random assignment, \emph{all} subjects were directly asked whether they would be interested in selling their votes. Direct answers then were used to estimate the proportion of ``liars,'' a process which I describe below. Immediately after the direct question, subjects answered a \hyperlink{pricing.experiment}{pricing experiment}, where they were asked for the right price for their votes. Following standard practice in marketing research, experimental subjects answered a \hyperlink{pricing.experiment}{pricing experiment}, where they would slide two handles, one indicating which price was considered ``too cheap,'' and another one indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000. As I explain below, the intersection of the ``too cheap'' and ``too high'' empirical distributions, was used to estimate the optimal price for a vote.
+
+
+The list experiment contemplated one control (without any sensitive vote-selling item), and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider either an arbitrarily low (\$100) or an arbitrarily high (\$500) price. Both prices were delivered via two different treatments. To be sure, subjects randomly assigned to the treatment condition, only answered \emph{one} of these treatments. More than being hard pricing tests, these two treatments account for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income. 
+
+Moving forward, subjects randomly assigned to the control condition,\footnote{This is an hypothetical situation. To isolate the risks and costs associated with engaging in any illegal activity, the next sentence was included:  ``assuming you would not go to jail.''} answered the following question:
 
 \begin{lstlisting}[frame=lrtb]
 Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
@@ -185,7 +195,7 @@ Now, you will have to type HOW MANY, if any, of the following illegal activities
 Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
-In turn, subjects assigned to the treatment condition answered \emph{one} the following two treatments. The ones assigned to the \emph{low} price item, read and answered the following question:
+In turn, subjects assigned to the treatment condition answered \emph{one} the following two treatments. The ones assigned to the \emph{low} price condition, read and answered the following question:
 
 
 \begin{lstlisting}[frame=lrtb]
@@ -200,7 +210,7 @@ Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
 
-However, the ones assigned to the \emph{high} price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. 
+However, the ones assigned to the \emph{high} price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. Notice that the figure shows the \emph{number} of items, not which ones. For instance, the frequency of ``3'' does not mean the frequency of the third item, but the total number of individuals answering that they would do three of the illegal activities described in the vignette. 
 
 
 
@@ -211,8 +221,7 @@ However, the ones assigned to the \emph{high} price vote-selling item, read exac
 @
 
 
-\paragraph{Data Analyses.} \emph{Would U.S. citizens sell their vote?} Following the advice of \citet{Blair2012} and \citet{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{\autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (\autoref{fig:list:analysis:individual:predictions:plot}). Using this information it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of liars. \autoref{fig:list:analysis:social:desirability:plot} suggests that, combining the estimates of the \emph{low} and \emph{high} treatments, $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This probability was obtained by computing the probability of the `high' and `low' conditions, and then dividing them by two.} Since differences between these two experimental conditions are not statistically significant, it is reasonable to think that there are not concerns associated with the design of the treatments (e.g., their specific predetermined prices). When subjects were directly asked about selling their votes, due to social desirability bias, they systematically under-reported their true answers. Particularly, around $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{The \emph{low} condition is barely non-significant. However, this does not alter the substantive results. Both experimental treatments suggest that subjects in fact lie about the possibility of selling their votes.}
-
+\paragraph{Would U.S. citizens sell their vote?} Following the advice of \citet{Blair2012} and \citet{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{\autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (\autoref{fig:list:analysis:individual:predictions:plot}). Using this information it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' \autoref{fig:list:analysis:social:desirability:plot} suggests that, combining the estimates of the \emph{low} and \emph{high} treatments, approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This probability was obtained by computing the probability of the `high' and `low' conditions, and then dividing them by two.} Since differences between these two experimental conditions are not statistically significant, it is reasonable to think that there are not concerns associated with the design of the treatments (e.g., their specific predetermined prices). When subjects were directly asked about selling their votes, due to social desirability bias, they systematically under-reported their true answers. Particularly, around $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{The \emph{low} condition is barely non-significant. However, this does not alter the substantive results. Both experimental treatments suggest that subjects in fact lie about the possibility of selling their votes.} These results are striking, and the author is not aware of any other experimental design where subjects in an industrialized democracy are asked whether they would sell their votes. 
 
 
 % list:analysis:social:desirability:plot
@@ -222,8 +231,22 @@ However, the ones assigned to the \emph{high} price vote-selling item, read exac
 @
 
 
+There seems to be two conflicting pictures. On the one hand, and leaving concerns of social desirability bias aside, we ``know''---using non-experimental data---that most people have never been offered to sell their votes (as per \autoref{fig:lapop:bar:chart:plot}). On the other hand, the results presented in this study strongly suggest that they would: a very high proportion of the representative sample would be willing to give up its right to vote freely for money. That is, while buyers are not buying, there is a large proportion of latent vote-sellers. In light of what is described in \citet{Stokes:2013cj}, I advance an interpretation which goes in line with their findings. 
 
-\emph{Who are the most-likely sellers?} 
+From the demand side, vote-buying is no longer an efficient strategy for party machines. Buying votes has become an increasingly expensive strategy to win votes. Industrialization has driven up the median income of the electorate, forcing party machines to turn to other less prohibitively alternatives. However, from the supply side (i.e. voters), the vote is still for sale, only that for a very high price, which party machines cannot afford any longer. \emph{What would be the tipping point for vote-sellers? Where do supply and demand meet?} A simple pricing experiment was conducted in this study. Subjects were directed to declare which price---within a \$1-\$1,000 range, and in \$1 increments---was considered \emph{too cheap}, and which price---idem---was considered \emph{too expensive}. With these two pieces of information, it was possible to construct two supply curves, where the \emph{too cheap} curve represents the lower bound, and the \emph{too expensive} curve represents the upper bound. Substantively, the optimal selling price is located where both curves intersect. Following this procedure, \autoref{fig:pricing:experiment:plot} indicates that survey respondents would sell their vote for \$$\Sexpr{round(line_intersection$x,0)}$. Evidently, being the selling price so expensive, the demand side is not able to catch up with the supply side, making vote buying in the U.S. a rare event.\footnote{Since there is no other way of knowing the \emph{cheap} and \emph{expensive} prices of a good than asking subjects directly, being very explicit about what good it is, these results should be taken with caution. The list experiment confirms that survey respondents systematically unreported the willingness to sell. Consequently, there is an unknown number of subjects that would have sold their votes, but due to the potential risk of being socially condemned, they preferred not to answer this question. Only $\Sexpr{nrow(pricing.d)}$ individuals answered the question. In any case, the results of the pricing experiment serve as a rough proxy of the right price for a vote.}
+
+
+ 
+% list:analysis:social:desirability:plot
+<<pricing:experiment:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100 ,cache = FALSE>>=
+
+
+@
+
+
+
+
+\paragraph{Who are the most-likely vote-sellers?} The objective of this paper is to learn about the micro-dynamics of vote-sellers, including what socio-economic variables are more associated with vote-selling.
 
 
 % predictions:independent:variables:plot
@@ -319,18 +342,20 @@ Now you will be entered into a random lottery for the opportunity to do ONE of t
 \begin{lstlisting}[frame=lrtb]
 After a random assignment, you have been selected for the opportunity to hypothetically sell your vote. This means that you will have the hypothetical opportunity to accept money from a candidate for your vote. Would you be willing to accept the offer, assuming you would not go to jail? By selecting ``Yes,'' you could earn up to $1,000.
 \end{lstlisting}
-
+\pagebreak
+\vspace*{\fill}
 
 
 \paragraph{Pricing Experiment} \hypertarget{pricing.experiment}{Immediately after answering} the direct question, they were asked for the right price of their votes. 
 
 
-\begin{lstlisting}[frame=lrtb]
-Which of the following  prices (in USD $) would you consider...
+% figure: pricing experiment.
+\begin{figure}[h]
+\includegraphics[scale=.7, center]{pricing_experiment.jpeg}
+\caption{Pricing Experiment}\centering
+\end{figure}
 
-too cheap for your vote? [slider going from $ 0 to $ 1000]
-too expensive for your vote? [slider going from $ 0 to $ 1000]
-\end{lstlisting}
+
 \pagebreak
 \vspace*{\fill}
 
