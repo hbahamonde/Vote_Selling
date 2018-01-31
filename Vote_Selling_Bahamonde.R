@@ -298,6 +298,7 @@ summary(sum.dif.means)
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # customization of ictreg
+options(scipen=999)
 method = as.character("ml")
 maxIter = as.numeric(200000)
 
@@ -1929,6 +1930,7 @@ load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load da
 pricing.d = na.omit(data.frame(dat$pricecheap,dat$priceexpensive))
 colnames(pricing.d)[1] <- "Cheap"
 colnames(pricing.d)[2] <- "Expensive"
+
 
 # reshaping dataset for density plots
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
