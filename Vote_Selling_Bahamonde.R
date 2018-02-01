@@ -1323,15 +1323,40 @@ dispersiontest(over.disp.test)
 
 ######################################################
 #####################################################
-# Design effects
 
-#ycount <- dat$ycount # Extracting vectors
-#treat <- dat$treat # Extracting vectors
-#treat <- factor(treat, labels = c("F", "T")) # Recoding treat as factor
-#treat <- as.logical(treat) # Recoding treat as logical vector
+## ---- design:effects:data
 
-#design <- ict.test(ycount, treat, J=3, gms = TRUE, n.draws = 250000, alpha = 0.05, pi.table = TRUE)
-#print(design) # no design effect
+
+# define parameters
+j = 3
+alpha = 0.05
+
+# Design effects [High Treatment]
+ycount.high <- dat.high$ycount
+treatment.high <- dat.high$treatment
+design.high <- ict.test(ycount.high, treatment.high, J=j, gms = TRUE, n.draws = n.draws, alpha =alpha, pi.table = TRUE)
+# print(design.high) # no design effect # NULL= no design. P value is above ALpha, so I fail to reject "no design effect."
+
+# Design effects [Low Treatment]
+ycount.low <- dat.low$ycount
+treatment.low <- dat.low$treatment
+design.low <- ict.test(ycount.low, treatment.low, J=j, gms = TRUE, n.draws = n.draws, alpha =alpha, pi.table = TRUE)
+# print(design.low) # no design effect # NULL= no design. P value is above ALpha, so I fail to reject "no design effect."
+
+
+#design.low.est = do.call(rbind.data.frame, design.low)[,1][2:9]
+#design.low.se = do.call(rbind.data.frame, design.low)[,2][2:9]
+
+#design.high.est = do.call(rbind.data.frame, design.high)[,1][2:9]
+#design.high.se = do.call(rbind.data.frame, design.high)[,2][2:9]
+
+# design.high.pvalue = do.call(rbind.data.frame, design.high)[,2][1]
+# design.low.pvalue = do.call(rbind.data.frame, design.low)[,1][1]
+## ----
+
+
+
+
 
 
 

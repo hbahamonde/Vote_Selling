@@ -78,6 +78,10 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 @
 
+<<design:effects:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
 <<pricing:experiment:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
 
 @
@@ -213,7 +217,7 @@ Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
 
-However, the ones assigned to the \emph{high} price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. Notice that the figure shows the total \emph{number} of items, not which ones. For instance, the frequency of ``3'' does not mean the frequency of the third item, but the total number of individuals answering that they would do three of the illegal activities described in the vignette. 
+However, the ones assigned to the \emph{high} price vote-selling item, read exactly the same vignette,  with the only difference that the third item read as follows: \texttt{(3) sell your vote to a candidate for \$500}. \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of subjects declaring how many (if any) illegal things they would do. Notice that the figure shows the total \emph{number} of items, not which ones. For instance, the frequency of ``3'' does not mean the frequency of the third item, but the total number of individuals answering that they would do three of the illegal activities described in the vignette.\footnote{The experimental design passes the standard tests for design effects (floor and ceiling effects). See \autoref{tab:design:effect}.}
 
 
 
@@ -390,8 +394,31 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 \vspace*{\fill}
 
 
+\subsection{Testing for Design Effects}
 
 
+\begin{table}[H]
+\centering
+\caption{Test for List Experiment Design Effects}
+\label{tab:design:effect}
+\begin{tabular}{c|cc|cc|}
+\cline{2-5}
+                   			& \multicolumn{2}{c|}{{ \textit{Low Condition}}} & \multicolumn{2}{c|}{{ \textit{High Condition}}}\\ \hline
+\textit{{\bf Respondent Types}} 	& \textit{Est.}        & \textit{SE}       & \textit{Est.}        & \textit{SE} \\ \hline
+(y = 0, t = 1) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][2]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][2]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][2]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][2]}\\
+(y = 1, t = 1) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][3]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][3]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][3]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][3]}\\
+(y = 2, t = 1) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][4]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][4]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][4]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][4]}\\
+(y = 3, t = 1) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][5]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][5]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][5]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][5]}\\
+(y = 0, t = 0) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][6]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][6]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][6]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][6]}\\
+(y = 1, t = 0) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][7]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][7]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][7]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][7]}\\
+(y = 2, t = 0) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][8]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][8]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][8]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][8]}\\
+(y = 3, t = 0) & \Sexpr{do.call(rbind.data.frame, design.low)[,1][9]} & \Sexpr{do.call(rbind.data.frame, design.low)[,2][9]} & \Sexpr{do.call(rbind.data.frame, design.high)[,1][9]} & \Sexpr{do.call(rbind.data.frame, design.high)[,2][9]}\\
+\hline
+\multicolumn{5}{p{8cm}}{\scriptsize {\bf Note}: Since the Bonferroni-corrected p-values of the \emph{low} (\Sexpr{do.call(rbind.data.frame, design.low)[,1][1]}) and \emph{high} (\Sexpr{do.call(rbind.data.frame, design.high)[,2][1]}) conditions are above the specified alpha (\Sexpr{alpha}), I fail to reject the null of no design effects.}
+\end{tabular}
+\end{table}
+\pagebreak
+\vspace*{\fill}
 
 
 \subsection{Statistical Analysis of the List Experiment: Individual Probabilities of Vote-Selling}
