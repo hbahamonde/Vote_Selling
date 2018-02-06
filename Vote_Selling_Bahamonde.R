@@ -2282,3 +2282,58 @@ ggmap(map) + geom_point(aes(
               legend.position="bottom")
 
 ## ----
+
+
+######################################################
+# Descriptive Maps: Vote Sellers
+######################################################
+cat("\014")
+rm(list=ls())
+
+
+# Load Data
+load( "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData") # Load data
+
+
+## Map of Observations
+### loading a package with ZIP codes and their respective Lat's and Long's.
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(zipcode,ggplot2,ggmap)
+
+# install.packages("ggmap", type = "source")library(ggmap) # if it gives the following error ("Error: GeomRasterAnn was built with an incompatible version of ggproto"), install ggmap from source.
+
+
+
+data(zipcode)
+zipcode <- zipcode[c("zip", "latitude", "longitude")]
+dat <- merge(dat,zipcode,by=c("zip"))
+us <- c(left = -160, bottom = 15, right = -55, top = 50)
+map <- get_stamenmap(us, zoom = 5, maptype = "toner-lite")
+
+
+levels(dat$partyid)[levels(dat$partyid)=="SomethingElse"] <- "Something Else"
+
+
+ggmap(map) + geom_point(aes(
+        x = longitude,
+        colour=partyid,
+        y = latitude), 
+        alpha = .7,
+        size = 0.8,
+        shape = 1,
+        data = dat) +
+        xlab("Longitude") + 
+        ylab("Latitude") +
+        theme_bw() +
+        labs(color='') +
+        scale_colour_manual(values=c("blue", "red", "forestgreen", "cyan1")) +
+        theme_bw() +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              legend.position="bottom")
+
