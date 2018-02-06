@@ -282,9 +282,56 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(list)
 
 dif.means <- ictreg(ycount ~ 1, data = dat, treat = "treatment", J=3, method = "lm")
-sum.dif.means <- summary(dif.means, n.draws = 100000) # quasi-Bayesian approximation based predictions
-summary(sum.dif.means)
+sum.dif.means <- summary(dif.means, n.draws = 400000) # quasi-Bayesian approximation based predictions
 
+sens.est = as.numeric(as.character(summary(sum.dif.means))[1])
+sens.se = as.numeric(as.character(summary(sum.dif.means))[2])
+
+cont.est = as.numeric(as.character(summary(sum.dif.means))[3])
+cont.se = as.numeric(as.character(summary(sum.dif.means))[4])
+
+# compute Cis [sens]
+sens.upper = sens.est + 1.96*sens.se
+sens.lower = sens.est - 1.96*sens.se
+
+# compute Cis [cont]
+cont.upper = cont.est + 1.96*cont.se
+cont.lower = cont.est - 1.96*cont.se
+
+# construct DF
+diff.means.plot.d = data.frame(
+        Variable = c("Sensitive", "Control"),
+        Estimates = c(sens.est, cont.est),
+        upper = c(sens.upper,cont.upper),
+        lower = c(sens.lower,cont.lower)
+        )
+
+
+
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(ggplot2)
+
+ggplot(diff.means.plot.d, aes(
+        x = Variable, 
+        y = Estimates, 
+        ymin = upper, 
+        ymax = lower)) +
+        geom_pointrange() + 
+        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+        coord_flip() + 
+        xlab("") + 
+        ylab("Coefficient") +
+        #ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
+        guides(colour=FALSE) +
+        theme(legend.position="none") + 
+        theme_bw()
+
+
+
+
+# ycount.control.high.d = data.frame(dat$ycount[!is.na(dat$treatment500)], dat$ycount[!is.na(dat$control)], all = TRUE)
+# ycount.control.low.d = data.frame(dat$ycount[!is.na(dat$treatment100)], dat$ycount[!is.na(dat$control)], all.x = TRUE)
+# t.test(dat$ycount[!is.na(dat$treatment500)], dat$ycount[!is.na(dat$control)], conf.level = 0.95, paired = FALSE, alternative = "two.sided")
 
 ###########################################################
 # Multivariate Analysis of List Experiment: Covariates
