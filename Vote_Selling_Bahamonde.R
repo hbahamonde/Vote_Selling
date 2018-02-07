@@ -772,13 +772,10 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "Declared and Predicted Vote-Sellers.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: Figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars').",
+        "{\\bf Note}: The figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars'). These estimatios were obtained from the model specified in \\autoref{tab:regression}.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
-
-
 ## ----
-
 
 
 
