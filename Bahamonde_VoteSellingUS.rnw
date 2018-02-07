@@ -165,7 +165,7 @@ The Australian ballot system lowered significantly the frequency of most of thes
 
 
 % Motivating next section
-On the one hand, we know that there are a number of long-term structural and institutional factors that have ended vote-buying as a feasible electoral strategy to win votes, particularly, in the United States.\footnote{See for instance \citet{Stokes:2013cj} and \citet{Kitschelt2007}.} On the demand side, then, there does not seem enough incentives to buy votes anymore. However, what do we know about vote-\emph{sellers}? In a highly controversial pair of articles,\footnote{See also \citet{Foa2017b}.} \citet[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States (including also a number of European countries). They find that only 10\% of citizens born in the inter-war period, 14\% of baby-boomers, and 26\% of millennials, say that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections.''\footnote{\citet[10]{Foa2016a}.} \emph{How ``unimportant'' is voting for U.S. citizens? Would they sell their votes, if offered the possibility?} Unfortunately, there have not been efforts dedicated to investigate these matters, and even less so employing experimental designs. Following \citet{GonzalezOcantos2014}, who also use an hypothetical situation to study vote-buying norms in Latin America, I implement a list experiment designed to elicit truthful answers to vote-selling: \emph{What would voters do if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling? Who are they?} 
+On the one hand, we know that there are a number of long-term structural and institutional factors that have ended vote-buying as a feasible electoral strategy to win votes, particularly, in the United States.\footnote{See for instance \citet{Stokes:2013cj} and \citet{Kitschelt2007}.} On the demand side, then, there does not seem enough incentives to buy votes anymore. However, what do we know about vote-\emph{sellers}? In a highly controversial pair of articles,\footnote{See also \citet{Foa2017b}.} \citet[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States (including also a number of European countries). They find that only 10\% of citizens born in the inter-war period, 14\% of baby-boomers, and 26\% of millennials, say that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections.''\footnote{\citet[10]{Foa2016a}.} \emph{How ``unimportant'' is voting for U.S. citizens? Would they sell their votes, if offered the possibility?} Unfortunately, there have not been efforts dedicated to investigate these matters, and even less so employing experimental designs. Following \citet{GonzalezOcantos2014}, who also use an hypothetical situation to study vote-buying norms in Latin America, I implement a list experiment designed to elicit truthful answers to vote-selling: \emph{What would voters do if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling? Who and where are they?} 
 
 
 \section{Vote-Selling in an Experimental Context: A List Experiment in an Industrialized Democracy}
@@ -197,6 +197,7 @@ Then, and as suggested in \autoref{experimental:design:fig}, the order in which 
 The list experiment contemplated one control (without any sensitive vote-selling item), and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, based on a number of pretests, it was decided to consider both an arbitrarily low (\$100) \emph{or} an arbitrarily high (\$500) price as possible treatments. To be sure, participants randomly assigned to the treatment condition, only answered \emph{one} of these two treatments. More than being hard pricing tests, these two treatments account for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income.\footnote{\citet[1189]{Holland2015} explain that ``the poor are thought to be more susceptible to vote buying.''}
 
 Moving forward, subjects randomly assigned to the control condition,\footnote{This is an hypothetical situation. To isolate the risks and costs associated with engaging in any illegal activity, the next sentence was included:  ``assuming you would not go to jail.''} answered the following question:
+
 
 \begin{lstlisting}[frame=lrtb]
 Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
@@ -280,15 +281,15 @@ From the demand side, vote-buying is no longer an efficient strategy for party m
 
 
 % liberals sell more.
-\autoref{fig:predictions:independent:variables:plot} shows the estimated effect of each variable on vote-selling.  Democrats and liberals are systematically more likely to sell than the rest. These findings go in line with a string of research that has studied the different constitutive values of liberals and conservatives. Political psychologist have found that liberals construct their moral systems primarily upon narrower psychological foundations when compared to conservatives. Particularly, liberals consider less important, compared to conservatives, both the authority/respect and the purity/sanctity dyads.\footnote{\citet[1029]{Graham2009}.} This might lead liberals to engage more frequently in behaviors that might be considered ``wrong,'' such as vote-selling. In fact, \citet[7]{Gray2014} explain that ``conservative participants may see impure violations as relatively \emph{more} wrong,''\footnote{Emphasis is mine.} in turn, presumably, making them less likely to engage in illegal activities. The findings in this paper seem to support the idea that liberals engage more frequently in illegal or ``wrong'' behaviors.
+\autoref{fig:predictions:independent:variables:plot} shows the estimated effect of each variable on vote-selling.  Democrats and liberals are systematically more likely to sell than conservatives. These findings go in line with a string of research that has studied the different constitutive values of liberals and conservatives. Political psychologist have found that liberals construct their moral systems primarily upon narrower psychological foundations when compared to conservatives. Particularly, liberals consider less important, compared to conservatives, both the authority/respect and the purity/sanctity dyads.\footnote{\citet[1029]{Graham2009}.} This might lead liberals to engage more frequently in behaviors that might be considered ``wrong,'' such as vote-selling. In fact, \citet[7]{Gray2014} explain that ``conservative participants may see impure violations as relatively \emph{more} wrong,''\footnote{Emphasis is mine.} in turn, presumably, making them \emph{less} likely to engage in illegal activities. The findings in this paper seem to support the idea that liberals engage more frequently in illegal or ``wrong'' behaviors.
 
 
 % Education doesn't explain
-Education and income levels do not seem to have a systematic impact on vote-selling. Poverty has longly been associated with vote-selling.\footnote{See \citet[]{Calvo2004,Weitz-shapiro}, \citet{Kitschelt2000} and Kitschelt and Altamirano in \citet[ch. 10]{Carlin:2015}.} \citet{Brusco2004}, \citet[]{Stokes:2013cj} and \citet[]{Nazareno2008a} explain that since the poor derive more utility from immediate transfers than the risky returns associated with future policy packages, clientelistic political parties \emph{only} target the poor. For instance, \citet[12]{Weitz-Shapiro:2014aa} explains that ``[a]lmost \emph{universally}, scholars of clientelism treat and analyze [this] practice as an exchange between politicians and their \emph{poor} clients.''\footnote{Emphases are mine.} However, this canonical predictor has recently been challenged. \citet{Szwarcberg2013} ``challenges the assumption [that brokers] will always distribute goods to low-income voters in exchange for electoral support,'' while \citet{Gonzalez-Ocantos2012} and \citet[]{Holland2015} find that income had little or no effect on vote-buying. \citet{Bahamonde:2017ad} in fact, advances an argument for why would brokers target non-poor individuals, specifically, explaining that brokers target individuals when they are identifiable and groups when brokers need to rely on the spillover effects of clientelism, regardless of individual income levels. The findings in this paper seem to support the idea that low-income individuals do not seem to be more likely to sell their votes.
+Education and income levels do not seem to have a systematic impact on vote-selling. Interestingly, poverty has longly been associated with vote-selling.\footnote{See \citet[]{Calvo2004,Weitz-shapiro}, \citet{Kitschelt2000} and Kitschelt and Altamirano in \citet[ch. 10]{Carlin:2015}.} \citet{Brusco2004}, \citet[]{Stokes:2013cj} and \citet[]{Nazareno2008a} explain that since the poor derive more utility from immediate transfers than the risky returns associated with future policy packages, clientelistic political parties \emph{only} target the poor. For instance, \citet[12]{Weitz-Shapiro:2014aa} explains that ``[a]lmost \emph{universally}, scholars of clientelism treat and analyze [this] practice as an exchange between politicians and their \emph{poor} clients.''\footnote{Emphases are mine.} However, this canonical predictor has recently been challenged. \citet{Szwarcberg2013} ``challenges the assumption [that brokers] will always distribute goods to low-income voters in exchange for electoral support,'' while \citet{Gonzalez-Ocantos2012} and \citet[]{Holland2015} find that income had little or no effect on vote-buying. In fact \citet{Bahamonde:2017ad} advances an argument for why would brokers also target non-poor individuals.\footnote{He explains that brokers target individuals when they are identifiable, and groups when brokers need to rely on the spillover effects of clientelism. Both effects happen regardless of individual income levels.} Overall, the findings presented in this paper seem to support the idea that low-income individuals are not necessarily more likely to sell their votes relative to wealthier individuals.
 
 
 % elasticities
-While both \emph{high} and \emph{low} treatments do not seem to be affected by specific design effects (i.e. the differences between the two treatment are not statistically significant), there seems to be a substantive pattern regarding the two treatments. Factors that heavily determine economic status (income and education), seem to be more elastic to the buying price of the vote. That is, even when poor individuals do not seem to sell more their votes relative to wealthier individuals, there does seem to be important within-group differences regarding the different experimental stimuli. Particularly, lower-income and less educated individuals are willing to sell their vote (just like the rest), but more so under the high-price condition. This might indicate that, for them, it would be worthwhile to incur in this illegality, but only when the payoff is large enough. While it is beyond the scope of this paper to resolve this issue, it might be possible, I contend, that less educated and low-income individuals are more risk averse, and hence, avoid illegal activities, unless the benefit is undoubtedly worth it. More fragile and precarious individuals are not willing to trade off their political freedom for a small sum of money. On the contrary, higher-income and more educated individuals do not seem to be affected by the different stimuli, and sell their vote in the same proportion, regardless of the price. For instance highly-educated individuals (graduate school level) sell their vote at the same proportion, both under the \emph{high} ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="High" , ][,1])*100}$\%) and \emph{low} ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="Low" , ][,1])*100}$\%) conditions.\footnote{Relatedly, \citet[205]{GonzalezOcantos2014} and \citet[494]{Corstange2012a}, find also very weak results for education in Peru and Nicaragua, and Lebanon, respectively.} 
+While both \emph{high} and \emph{low} treatments do not seem to be affected by specific design effects (i.e. the differences between the two treatment are not statistically significant), there seems to be a substantive pattern regarding these two treatments. Factors that heavily determine economic status (income and education), seem to be more elastic to the buying price of the vote. That is, even when poor individuals do not seem to sell more their votes relative to wealthier individuals, there does seem to be important within-group differences regarding the different experimental stimuli. Particularly, lower-income and less educated individuals are willing to sell their vote (just like the rest), but more so under the high-price condition. This might indicate that, for them, it would be worthwhile to incur in this illegality, but only when the payoff is large enough. \todo{here:Riley1992}While it is beyond the scope of this paper to resolve this issue, it might be possible, I contend, that less educated and low-income individuals are more risk averse, and hence, avoid illegal activities, unless the benefit is undoubtedly worth it. More fragile and precarious individuals are not willing to trade off their political freedom for a small sum of money. On the contrary, higher-income and more educated individuals do not seem to be affected by the different stimuli, and sell their vote in the same proportion, regardless of the price. For instance highly-educated individuals (graduate school level) sell their vote at the same proportion, both under the \emph{high} ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="High" , ][,1])*100}$\%) and \emph{low} ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="Low" , ][,1])*100}$\%) conditions.\footnote{Relatedly, \citet[205]{GonzalezOcantos2014} and \citet[494]{Corstange2012a}, find also very weak results for education in Peru and Nicaragua, and Lebanon, respectively.} 
 
 
 
@@ -315,12 +316,12 @@ Future research should consider different values placed on different offices. It
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\clearpage
 <<wordcount, echo=FALSE, cache=FALSE>>=
-library(knitr)
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(knitr)
 
 comma <- function (x, ...) {
-  format(x, ..., big.mark = ",", scientific = FALSE, trim = TRUE)
+format(x, ..., big.mark = ",", scientific = FALSE, trim = TRUE)
 } 
 
 # To dynamically extract name of the current file, use code below 
@@ -339,7 +340,6 @@ count <- regmatches(sum.row, regexpr(pattern, sum.row) )
 count <- comma(as.numeric(count)) # add comma
 @
 
-
 \begin{center}
 \vspace*{\stretch{1}}
 \dotfill
@@ -347,8 +347,10 @@ count <- comma(as.numeric(count)) # add comma
 \dotfill
 \vspace*{\stretch{1}}
 \end{center}
+\clearpage
+\clearpage
 
-\clearpage 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % WORD COUNT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -479,14 +481,4 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 \bibliography{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/library,/Users/hectorbahamonde/RU/Bibliografia_PoliSci/Bahamonde_BibTex2013}
 \bibliographystyle{plainnat}
 \end{document}
-
-Add:
-
-Kam2016b, p. 595:
-Students of American political development, for example, debate whether the decline in turnout at the 19th-century elec- tions that followed the secret ballot’s adoption in the United States reflected a concomitant decline in vote-buying (and, with it, a decline in the voter’s incentive to show up and vote) or a shift in campaign tactics from bribery to vote suppression (see, for example, Argersinger, 1985; Burnham, 1965, 1974; Converse, 1972, 1974; Cox & Kousser, 1981; Heckleman, 1995; Rusk, 1970, 1974).
-
-
-Rusk1970
-Argersinger1985
-Reynolds1986
 

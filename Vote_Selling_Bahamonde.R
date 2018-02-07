@@ -2341,7 +2341,7 @@ us.map.vote.selling.plot
 us.map.vote.selling.note <- paste(
         "Mapping (Predicted) Vote-Sellers.",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained. These individual predictions are shown in \\autoref{fig:list:analysis:individual:predictions:plot}. This map shows only the estimations that are statistically significant (N=", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
+        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP code level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained. These individual predictions are shown in \\autoref{fig:list:analysis:individual:predictions:plot}. This map shows only the estimations that are statistically significant (N=", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
         "\n")
 
 
