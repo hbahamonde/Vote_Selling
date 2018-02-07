@@ -1981,7 +1981,7 @@ lapop.bar.chart.p
 lapop.bar.chart.p.note <- paste(
         "Frequency of Clientelism",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N =", paste(lapop.bar.chart.N, ".", sep = ""), "The respective proportions are: ", paste(percentage.often, percentage.sometimes, percentage.never, sep = ", "), ".", sep = ""),
+        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N = ", paste(lapop.bar.chart.N, ".", sep = ""), "The respective proportions are: ", paste(percentage.often, percentage.sometimes, percentage.never, sep = ", "), ".", sep = ""),
         "\\\\\\hspace{\\textwidth}", 
         paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: \\emph{In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?}"),
         "\n")
@@ -2249,8 +2249,7 @@ data(zipcode)
 zipcode <- zipcode[c("zip", "latitude", "longitude")]
 dat <- merge(dat,zipcode,by=c("zip"))
 us <- c(left = -160, bottom = 15, right = -55, top = 50)
-map <- get_stamenmap(us, zoom = 5, maptype = "toner-lite")
-
+map <- get_stamenmap(us, zoom = 4, maptype = "toner-lite", scale = 2, format = "png")
 
 levels(dat$partyid)[levels(dat$partyid)=="SomethingElse"] <- "Something Else"
 
@@ -2287,6 +2286,7 @@ ggmap(map) + geom_point(aes(
 cat("\014")
 rm(list=ls())
 
+## ---- us:map:vote:selling:data ----
 
 # Load Data
 load( "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData") # Load data
@@ -2297,33 +2297,34 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predi
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(zipcode,ggplot2,ggmap)
 
-# install.packages("ggmap", type = "source")library(ggmap) # if it gives the following error ("Error: GeomRasterAnn was built with an incompatible version of ggproto"), install ggmap from source.
 
 
 
 data(zipcode)
 zipcode <- zipcode[c("zip", "latitude", "longitude")]
-dat <- merge(dat,zipcode,by=c("zip"))
+dat.with.predict <- merge(dat.with.predict,zipcode,by=c("zip"))
 us <- c(left = -160, bottom = 15, right = -55, top = 50)
-map <- get_stamenmap(us, zoom = 5, maptype = "toner-lite")
+map <- get_stamenmap(us, zoom = 4, maptype = "toner-lite", scale = 2, format = "png") # maptype = "toner-lite"
 
 
-levels(dat$partyid)[levels(dat$partyid)=="SomethingElse"] <- "Something Else"
+colnames(dat.with.predict)[which(names(dat.with.predict) == "fit")] <- 'Probability of Vote Selling'
 
 
-ggmap(map) + geom_point(aes(
+us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
         x = longitude,
-        colour=partyid,
-        y = latitude), 
-        alpha = .7,
-        size = 0.8,
-        shape = 1,
-        data = dat) +
+        #colour=fit,
+        y = latitude,
+        size = `Probability of Vote Selling`
+       ), 
+       colour = "red",
+        alpha = .3,
+        #size = 0.8,
+        shape = 21,
+        data = dat.with.predict[dat.with.predict$sign==1,]) +
         xlab("Longitude") + 
         ylab("Latitude") +
         theme_bw() +
         labs(color='') +
-        scale_colour_manual(values=c("blue", "red", "forestgreen", "cyan1")) +
         theme_bw() +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
@@ -2332,5 +2333,16 @@ ggmap(map) + geom_point(aes(
               legend.text=element_text(size=7), 
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
-              legend.position="bottom")
+              legend.position="bottom") + guides(fill=guide_legend("my awesome title"))
+## ----
 
+## ---- us:map:vote:selling:plot ----
+us.map.vote.selling.plot
+us.map.vote.selling.note <- paste(
+        "Mapping (Predicted) Vote-Sellers.",
+        "\\\\\\hspace{\\textwidth}", 
+        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained. These individual predictions are shown in \\autoref{fig:list:analysis:individual:predictions:plot}. This map shows only the estimations that are statistically significant (N=", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
+        "\n")
+
+
+## ----
