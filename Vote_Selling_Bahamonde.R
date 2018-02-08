@@ -171,8 +171,18 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
         xlab("Number of Items") + 
         ylab("Frequency") +
         theme_bw() +
-        theme(legend.position="none") +
-        scale_fill_manual(values=c("forestgreen", "red"))
+        scale_fill_manual(values=c("forestgreen", "red")) +
+        theme(axis.text.y = element_text(size=7), 
+              axis.text.x = element_text(size=7), 
+              axis.title.y = element_text(size=7), 
+              axis.title.x = element_text(size=7), 
+              legend.text=element_text(size=7), 
+              legend.title=element_text(size=7),
+              plot.title = element_text(size=7),
+              strip.text.x = element_text(size = 7),
+              legend.position="none")
+
+
 
 ## ----
 
@@ -1957,6 +1967,8 @@ percentage.never = round(as.numeric(as.numeric(table(clientelism)["Never"]) * 10
 percentage.sometimes = round(as.numeric(as.numeric(table(clientelism)["Sometimes"]) * 100) / lapop.bar.chart.N, 1)
 percentage.often = round(as.numeric(as.numeric(table(clientelism)["Often"]) * 100) / lapop.bar.chart.N, 1)
 
+
+
 if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) + 
@@ -1971,7 +1983,12 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
               legend.text=element_text(size=7), 
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
-              legend.position="bottom")
+              legend.position="bottom") +
+                scale_x_discrete(labels=c(
+                        paste("Often (", paste(percentage.often, "%", sep = ""), ")", sep = ""),
+                        paste("Sometimes (", paste(percentage.sometimes, "%", sep = ""), ")", sep = ""),
+                        paste("Never (", paste(percentage.never, "%", sep = ""), ")", sep = "")
+                        ))
 ## ----
 
 ## ---- lapop:bar:chart:plot ----
@@ -1981,9 +1998,9 @@ lapop.bar.chart.p
 lapop.bar.chart.p.note <- paste(
         "Frequency of Clientelism",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the frequency of survey respondents. N = ", paste(lapop.bar.chart.N, ".", sep = ""), "The respective proportions are: ", paste(percentage.often, percentage.sometimes, percentage.never, sep = ", "), ".", sep = ""),
+        paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: \\emph{In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?}"),
+        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: `In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?'"),
         "\n")
 ## ----
 
