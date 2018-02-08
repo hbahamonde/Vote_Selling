@@ -738,7 +738,7 @@ socdes.p.high.low = rbind(socdes.p.high, socdes.p.low)
 rownames(socdes.p.high.low) <- NULL
 socdes.p.high.low$Significance <- factor(socdes.p.high.low$Significance,
        levels = c(0,1),
-       labels = c("Non-Sign.", "Sign."))
+       labels = c("Non-Significant", "Significant"))
 
 
 ### Plot
@@ -772,7 +772,7 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "Declared and Predicted Vote-Sellers.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars'). These estimatios were obtained from the model specified in \\autoref{tab:regression}.",
+        "{\\bf Note}: The figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
@@ -2077,12 +2077,12 @@ price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype
 price.plot.note <- paste(
         "Pricing Experiment: Ideal Selling Price",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the empirical distributions of the 'too cheap' and 'to expensive' supply curves. The intersection of the two (the vertical dashed line) is used to get an estimate of the ideal selling price. The data suggest that the right price for one's vote is: \\$", paste(round(line_intersection$x,0), ".", sep = "")),
+        paste("{\\bf Note}: Figure shows the empirical distributions of the 'too cheap' and 'to expensive' supply curves. The intersection of the two (the vertical dashed line) is used to get an estimate of the ideal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
         "\n")
 
 ## ---- 
 
-
+round(line_intersection$x,0)
 ############################## 
 # CONJOINT Experiment DATA ANALYSES
 ##############################
