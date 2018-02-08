@@ -659,7 +659,7 @@ grid_arrange_shared_legend(
 individual.predictions.plot.note <- paste(
  "Individual Estimated Probabilities of Vote-Selling",
        "\\\\\\hspace{\\textwidth}", 
-       "{\\bf Note}: Figure shows the individual probability of vote-selling, under the 'low' and 'high' conditions, i.e. when they were asked in the list experiment whether they would sell their vote for \\$100 or \\$ 500. Then, these individual prediction were paired with the conjoint data.",
+       "{\\bf Note}: Figure shows the individual probability of vote-selling, under the 'low' and 'high' conditions.",
         "\n")
 ## ----
 
