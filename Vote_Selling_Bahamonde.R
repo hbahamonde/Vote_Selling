@@ -193,9 +193,9 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 # use this to explain plot in the paper
 barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
-        "Frequency of subjects declaring how many (if any) illegal things they would do.",
+        "Frequency and percentages of subjects declaring how many (if any) illegal things they would do.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one.",
+        "{\\bf Note}: In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one. Notice that it does not mean the number of individuals answering positive the fourth item.",
         "\n")
 ## ----
 
