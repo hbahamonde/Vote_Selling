@@ -157,6 +157,18 @@ treat.cont.bar.plot.d = data.frame(
 )
 
 
+# reorder factor var to have low treatment BEFORE high treatment.
+treat.cont.bar.plot.d$Condition = factor(treat.cont.bar.plot.d$Condition,levels(treat.cont.bar.plot.d$Condition)[c(1,3,2)])
+
+
+# calculate percentages
+if (!require("pacman")) install.packages("pacman"); library(pacman) 
+p_load(plyr)
+
+treat.cont.bar.plot.d = ddply(treat.cont.bar.plot.d, .(Condition), transform, percent = ycount/sum(ycount) * 100)
+treat.cont.bar.plot.d = ddply(treat.cont.bar.plot.d, .(Condition), transform, pos = (cumsum(ycount) - 0.5 * ycount))
+treat.cont.bar.plot.d$label = paste0(sprintf("%.0f", treat.cont.bar.plot.d$percent), "%")
+
 
 # Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
@@ -180,13 +192,9 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
               strip.text.x = element_text(size = 7),
-              legend.position="none")
-
-
-
+              legend.position="none") +
+        geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 2)
 ## ----
-
-
 
 
 ## ---- barplot:figure:control:treatment
