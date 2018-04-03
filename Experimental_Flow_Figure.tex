@@ -10,10 +10,18 @@
                 scale=.2,
                 line width=1pt] %
 
+% random
+\node[align=center,text=black] (random) at (-33,-10) { 
+{\bf (r)} 
+\(
+\left. \right\}
+\)
+ }; % 1
+
 
                     % 1
                     \node[draw,align=center,fill=yellow,text=black] (ArgumentA1) at (-22,-6) {Direct question}; % 1
-                    \node[draw,align=center,fill=green,text=black] (ArgumentB1) at (20,-6)   {List Experiment  % 2
+                    \node[draw,align=center,fill=green,text=black] (ArgumentB1) at (15,-6)   {List Experiment  % 2
                     $
                   \mbox{{\bf (r)}}
                   \left\{
@@ -27,8 +35,6 @@
                     %\node[draw,align=center, fill=red] (ArgumentC) at (60,-6) {Conjoint experiment}; % 3
 
 
-
-
                     %\draw[->,draw=blue,thick] (ArgumentB1) to (ArgumentC);
                     \draw[->,draw=blue,thick] (ArgumentA1) to (ArgumentB1);
 
@@ -38,7 +44,7 @@
 
 
                     % 2
-                    \node[draw,align=center,fill=green,text=black] (ArgumentA2) at (-1,-15) {List Experiment  % 1
+                    \node[draw,align=center,fill=green,text=black] (ArgumentA2) at (-.05,-15) {List Experiment  % 1
                     $
                     \mbox{{\bf (r)}}
                     \left\{
@@ -49,7 +55,7 @@
                           \end{array}
                     \right.
                     $};
-                    \node[draw,align=center,fill=yellow,text=black] (ArgumentB2) at (40,-15) {Direct question}; % 2
+                    \node[draw,align=center,fill=yellow,text=black] (ArgumentB2) at (37,-15) {Direct question}; % 2
                     %\node[draw,align=center, fill=red] (ArgumentC) at (60,-15) {Conjoint experiment}; % 3
 
 
@@ -61,8 +67,17 @@
 
 
 
+ % Pricing Experiment arriba 
+                    \node[draw,align=center,fill=orange,text=black] (ArgumentC1) at (54,-6) {Pricing Experiment}; % 1
+                    \draw[->,draw=blue,thick] (ArgumentB1) to (ArgumentC1);
+
+
+ % Pricing Experiment abajo
+                    \node[draw,align=center,fill=orange,text=black] (ArgumentC2) at (54,-15) {Pricing Experiment}; % 1
+                    \draw[->,draw=blue,thick] (ArgumentB2) to (ArgumentC2);
+
+
                     \end{tikzpicture}
                % \right.$
-
 
 \end{document}
