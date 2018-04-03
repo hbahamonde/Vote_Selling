@@ -1516,13 +1516,13 @@ socio.plot = ggplot(socideo.plot.d,
                 ymin = socideo.plot.d$lwr, 
                 ymax = socideo.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
-        theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
-              axis.title.y = element_text(size=7), 
-              axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
-              plot.title = element_text(size=7),
+        theme(axis.text.y = element_text(size=13), 
+              axis.text.x = element_text(size=13), 
+              axis.title.y = element_text(size=13), 
+              axis.title.x = element_text(size=13), 
+              legend.text=element_text(size=13), 
+              legend.title=element_text(size=13),
+              plot.title = element_text(size=13),
               legend.position="bottom")
 
 
@@ -1612,14 +1612,15 @@ partyid.plot = ggplot(partyid.plot.d,
                 ymin = partyid.plot.d$lwr, 
                 ymax = partyid.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
-        theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
-              axis.title.y = element_text(size=7), 
-              axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
-              plot.title = element_text(size=7),
+        theme(axis.text.y = element_text(size=13), 
+              axis.text.x = element_text(size=13), 
+              axis.title.y = element_text(size=13), 
+              axis.title.x = element_text(size=13), 
+              legend.text=element_text(size=13), 
+              legend.title=element_text(size=13),
+              plot.title = element_text(size=13),
               legend.position="bottom")
+
 
 
 ######################################################
@@ -1722,14 +1723,15 @@ educ.plot = ggplot(educ.plot.d,
                 ymin = educ.plot.d$lwr, 
                 ymax = educ.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
-        theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
-              axis.title.y = element_text(size=7), 
-              axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
-              plot.title = element_text(size=7),
+        theme(axis.text.y = element_text(size=13), 
+              axis.text.x = element_text(size=13), 
+              axis.title.y = element_text(size=13), 
+              axis.title.x = element_text(size=13), 
+              legend.text=element_text(size=13), 
+              legend.title=element_text(size=13),
+              plot.title = element_text(size=13),
               legend.position="bottom")
+
 
 ######################################################
 # 6 income.n (ok)
@@ -1870,11 +1872,11 @@ income.plot = ggplot(income.plot.d,
                 ymax = income.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
         theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=5, angle = 45, hjust=1), 
-              axis.title.y = element_text(size=7), 
+              axis.text.x = element_text(size=7, angle = 45, hjust=1), 
+              axis.title.y = element_text(size=13), 
               axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
+              legend.text=element_text(size=13), 
+              legend.title=element_text(size=13),
               plot.title = element_text(size=7),
               legend.position="bottom")
 
@@ -2339,18 +2341,17 @@ us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
         x = longitude,
         #colour=fit,
         y = latitude,
-        size = `Probability of Vote Selling`
-       ), 
-       colour = "red",
-        alpha = .3,
+        colour = `Probability of Vote Selling`), 
+       #colour = "red",
+        alpha = .4,
         #size = 0.8,
-        shape = 21,
+        #shape = 21,
         data = dat.with.predict[dat.with.predict$sign==1,]) +
         xlab("Longitude") + 
         ylab("Latitude") +
         theme_bw() +
-        labs(color='') +
-        theme_bw() +
+        #labs(color='') +
+        theme_bw() + 
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
               axis.title.y = element_text(size=7), 
@@ -2358,7 +2359,8 @@ us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
               legend.text=element_text(size=7), 
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
-              legend.position="bottom") + guides(fill=guide_legend("my awesome title"))
+              legend.position="bottom") +
+        scale_colour_gradient(low = "green", high = "red")
 ## ----
 
 ## ---- us:map:vote:selling:plot ----
