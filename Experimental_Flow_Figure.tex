@@ -11,13 +11,8 @@
                 line width=1pt] %
 
 % random
-\node[align=center,text=black] (random) at (-33,-10) { 
-{\bf (r)} 
-\(
-\left. \right\}
-\)
- }; % 1
-
+\draw[decoration={brace,mirror,raise=10pt},decorate]
+  (-28,-2) -- node[black,midway,xshift=-0.7cm] {({\bf r})} (-28,-19);
 
                     % 1
                     \node[draw,align=center,fill=yellow,text=black] (ArgumentA1) at (-22,-6) {Direct question}; % 1
