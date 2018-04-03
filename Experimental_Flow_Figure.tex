@@ -15,8 +15,15 @@
   (-28,-2) -- node[black,midway,xshift=-0.7cm] {({\bf r})} (-28,-19);
 
                     % 1
-                    \node[draw,align=center,fill=yellow,text=black] (ArgumentA1) at (-22,-6) {Direct question}; % 1
-                    \node[draw,align=center,fill=green,text=black] (ArgumentB1) at (15,-6)   {List Experiment  % 2
+                    \node[draw,align=center,fill=yellow,text=black] (DQ1) at (-22,-6) {Direct question}; % 1
+                    
+                    \node[draw,align=center,fill=green,text=black] (YES1) at (-12,-3) {Yes}; % 1
+                    \node[draw,align=center,fill=red,text=black] (NO1) at (-12,-9) {No}; % 1
+
+
+                    \node[draw,align=center,fill=orange,text=black] (PE1) at (1,-3) {Pricing Experiment}; % 1
+
+                    \node[draw,align=center,fill=green,text=black] (LE1) at (43,-6)   {List Experiment  % 1
                     $
                   \mbox{{\bf (r)}}
                   \left\{
@@ -27,19 +34,24 @@
                           \end{array}
                     \right.
                     $};
-                    %\node[draw,align=center, fill=red] (ArgumentC) at (60,-6) {Conjoint experiment}; % 3
+
+                    %\draw[->,draw=blue,thick] (DQ1) to (PE1);
+                    %\draw[->,draw=blue,thick] (PE1) to (LE1);
+                    \path [green,bend left,->] (DQ1) edge (YES1);
+                    \path [green,->] (YES1) edge (PE1);
+                    \path [green, out=10,in=180, ->] (9.2,-3) edge (14,-6);
 
 
-                    %\draw[->,draw=blue,thick] (ArgumentB1) to (ArgumentC);
-                    \draw[->,draw=blue,thick] (ArgumentA1) to (ArgumentB1);
+                    \path [red,bend right,->] (DQ1) edge (NO1);
+                    \path [red, out=40,in=180, ->] (-10.25,-9) edge (14,-7);
 
 
-                    %\node at (6., -1.-6) {};
+
 
 
 
                     % 2
-                    \node[draw,align=center,fill=green,text=black] (ArgumentA2) at (-.05,-15) {List Experiment  % 1
+                    \node[draw,align=center,fill=green,text=black] (LE2) at (-.05,-15) {List Experiment  % 1
                     $
                     \mbox{{\bf (r)}}
                     \left\{
@@ -50,27 +62,24 @@
                           \end{array}
                     \right.
                     $};
-                    \node[draw,align=center,fill=yellow,text=black] (ArgumentB2) at (37,-15) {Direct question}; % 2
-                    %\node[draw,align=center, fill=red] (ArgumentC) at (60,-15) {Conjoint experiment}; % 3
+                   
+
+                    \node[draw,align=center,fill=yellow,text=black] (DQ2) at (37,-15) {Direct question}; % 2
+                    \node[draw,align=center,fill=green,text=black] (YES2) at (49,-12) {Yes}; % 2
+                    \node[draw,align=center,fill=red,text=black] (NO2) at (49,-18) {No}; % 2
+                    \node[draw,align=center,fill=orange,text=black] (PE2) at (63.5,-12) {Pricing Experiment}; % 2
 
 
 
+                    \draw[->,draw=blue,thick] (LE2) to (DQ2); % OK
+
+%
+                    \path [green,bend left,->] (DQ2) edge (YES2);
+                    \path [green,->] (YES2) edge (PE2);
 
 
-                    %\draw[->,draw=blue,thick] (ArgumentB2) to (ArgumentC);
-                    \draw[->,draw=blue,thick] (ArgumentA2) to (ArgumentB2);
-
-
-
- % Pricing Experiment arriba 
-                    \node[draw,align=center,fill=orange,text=black] (ArgumentC1) at (54,-6) {Pricing Experiment}; % 1
-                    \draw[->,draw=blue,thick] (ArgumentB1) to (ArgumentC1);
-
-
- % Pricing Experiment abajo
-                    \node[draw,align=center,fill=orange,text=black] (ArgumentC2) at (54,-15) {Pricing Experiment}; % 1
-                    \draw[->,draw=blue,thick] (ArgumentB2) to (ArgumentC2);
-
+                    \path [red,bend right,->] (DQ2) edge (NO2);
+                    %\path [red, out=40,in=180, ->] (-10.25,-9) edge (14,-7);
 
                     \end{tikzpicture}
                % \right.$
