@@ -601,8 +601,7 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
               legend.position="bottom")
 
 # computing the sample size of the list experiment (which also determines the sample size in the conjoint portion) for the paper
-total.sample.size = formatC(nrow(indpred.p.high) + nrow(indpred.p.low), format="d", big.mark=",")
-
+total.sample.size = formatC(c(nrow(indpred.p.high) + nrow(indpred.p.low)), format="d", big.mark=",")
 
 ## merging the two plots
 # load libraries
