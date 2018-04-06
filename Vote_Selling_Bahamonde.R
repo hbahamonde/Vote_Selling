@@ -183,7 +183,7 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
         xlab("Number of Items") + 
         ylab("Frequency") +
         theme_bw() +
-        scale_fill_manual(values=c("forestgreen", "red")) +
+        scale_fill_manual(values=c("forestgreen", "forestgreen")) +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
               axis.title.y = element_text(size=7), 
@@ -201,9 +201,9 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 # use this to explain plot in the paper
 barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
-        "Frequency and percentages of subjects declaring how many (if any) illegal things they would do.",
+        "{\\bf Frequency and Percentages of Subjects Declaring How Many (if Any) Illegal Things They Would Do.}",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: In red, it is indicated how many times subjects answered all items (n=4), that is, including the sensitive one. Notice that it does not mean the number of individuals answering positive the fourth item.",
+        "{\\bf Note}: Notice that the X-axis denotes the number of items, not which ones.",
         "\n")
 ## ----
 
@@ -402,6 +402,8 @@ options(digits=2)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
 
+ci.level  = 0.95
+
 list.low <- ictreg(ycount ~ 
                            #age.n + 
                            #woman + 
@@ -433,7 +435,7 @@ se.cont.list.low = as.data.frame(summary(list.low, n.draws = n.draws)["se.contro
 
 ## Individual predictions
 ### Individual posterior likelihoods of vote-selling
-list.low.predicted.2B <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.low.predicted.2B <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
 list.low.predicted.2B$fit<-round(list.low.predicted.2B$fit, 2)
 list.low.predicted.2B$se.fit<-round(list.low.predicted.2B$se.fit, 2)
 indpred.p.low = data.frame(
@@ -510,7 +512,7 @@ se.cont.list.high = as.data.frame(summary(list.high, n.draws = n.draws)["se.cont
 
 ## Individual predictions
 ### Individual posterior likelihoods of vote-selling
-list.high.predicted.2B <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+list.high.predicted.2B <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
 list.high.predicted.2B$fit<-round(list.high.predicted.2B$fit, 2)
 list.high.predicted.2B$se.fit<-round(list.high.predicted.2B$se.fit, 2)
 indpred.p.high = data.frame(
@@ -667,18 +669,22 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 
 
 
-## ---- list:analysis:individual:predictions:plot
-# use this to explain plot in the paper
+## ---- list:analysis:individual:predictions:plot  ----
+# plot
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
         ind.pred.high.cond.plot,
         ncol = 1, nrow = 2)
+
 individual.predictions.plot.note <- paste(
- "Individual Estimated Probabilities of Vote-Selling",
+ "{\\bf Individual Estimated Probabilities of Vote-Selling.}",
        "\\\\\\hspace{\\textwidth}", 
-       "{\\bf Note}: Figure shows the individual probability of vote-selling, under the 'low' and 'high' conditions.",
+ paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the `low' and `high' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\citet[]{Blair2012} and \\citet[]{Imai2014a}, individual probabilities of vote-selling under the `low' and `high' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
         "\n")
 ## ----
+
+
+
 
 
 
@@ -723,8 +729,8 @@ direct.q.low <- glm(directquestion ~
                     data = dat.low, 
                      family = binomial("logit"))
 
-avg.pred.social.desirability.high <- predict.ictreg(list.high, direct.glm = direct.q.high, se.fit = TRUE, level = .95, interval = "confidence")
-avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct.q.low, se.fit = TRUE, level = .95, interval = "confidence")
+avg.pred.social.desirability.high <- predict.ictreg(list.high, direct.glm = direct.q.high, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct.q.low, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 
 ### DF for individual prediction: High Condition
@@ -787,13 +793,12 @@ soc.des.plot = ggplot(socdes.p.high.low,
 ### Plot
 soc.des.plot
 soc.des.plot.note <- paste(
-        "Declared and Predicted Vote-Sellers.",
+        "{\\bf Declared and Predicted Vote-Sellers.}",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the frequency of declared and predicted vote-sellers, and its difference ('liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.",
+        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (`liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
-
 
 
 ###########################################################################
@@ -806,7 +811,7 @@ soc.des.plot.note <- paste(
 
 
 # USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: High Condition
-ind.pred.social.desirability.high <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+ind.pred.social.desirability.high <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
 
 ind.pred.social.desirability.high$fit<-round(ind.pred.social.desirability.high$fit, 10)
 ind.pred.social.desirability.high$se.fit<-round(ind.pred.social.desirability.high$se.fit, 10)
@@ -819,7 +824,7 @@ rownames(ind.pred.social.desirability.high.d) <- NULL
 
 
 # USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: Low Condition
-ind.pred.social.desirability.low <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T)
+ind.pred.social.desirability.low <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
 
 ind.pred.social.desirability.low$fit<-round(ind.pred.social.desirability.low$fit, 10)
 ind.pred.social.desirability.low$se.fit<-round(ind.pred.social.desirability.low$se.fit, 10)
@@ -1426,7 +1431,7 @@ design.low <- ict.test(ycount.low, treatment.low, J=j, gms = TRUE, n.draws = n.d
 ######################################################
 
 
-## ---- predictions:independent:variables:plot ----
+## ---- predictions:independent:variables:data ----
 # 2 socideo (ok)
 
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
@@ -1445,11 +1450,11 @@ p_load(list)
 
 
 ## low
-avg.pred.socideoVL.low <- predict.ictreg(list.low, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoL.low <- predict.ictreg(list.low, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoM.low <- predict.ictreg(list.low, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoC.low <- predict.ictreg(list.low, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoVC.low <- predict.ictreg(list.low, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoVL.low <- predict.ictreg(list.low, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoL.low <- predict.ictreg(list.low, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoM.low <- predict.ictreg(list.low, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoC.low <- predict.ictreg(list.low, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoVC.low <- predict.ictreg(list.low, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 socideo.p.low = data.frame(
         t(avg.pred.socideoVL.low$fit), 
@@ -1471,11 +1476,11 @@ socideo.p.low$'Experimental Condition' <- "Low"
 
 
 ## high
-avg.pred.socideoVL.high <- predict.ictreg(list.high, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoL.high <- predict.ictreg(list.high, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoM.high <- predict.ictreg(list.high, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoC.high <- predict.ictreg(list.high, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.socideoVC.high <- predict.ictreg(list.high, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.socideoVL.high <- predict.ictreg(list.high, newdata = socideoVL, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoL.high <- predict.ictreg(list.high, newdata = socideoL, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoM.high <- predict.ictreg(list.high, newdata = socideoM, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoC.high <- predict.ictreg(list.high, newdata = socideoC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.socideoVC.high <- predict.ictreg(list.high, newdata = socideoVC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 socideo.p.high = data.frame(
         t(avg.pred.socideoVL.high$fit), 
@@ -1543,10 +1548,10 @@ p_load(list)
 
 
 ## low
-avg.pred.partyidD.low  <- predict.ictreg(list.low, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidR.low  <- predict.ictreg(list.low, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidI.low  <- predict.ictreg(list.low, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidSE.low  <- predict.ictreg(list.low, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidD.low  <- predict.ictreg(list.low, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidR.low  <- predict.ictreg(list.low, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidI.low  <- predict.ictreg(list.low, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidSE.low  <- predict.ictreg(list.low, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 partyid.p.low = data.frame(
         t(avg.pred.partyidD.low$fit), 
@@ -1566,10 +1571,10 @@ partyid.p.low$'Experimental Condition' <- "Low"
 
 
 ## high
-avg.pred.partyidD.high  <- predict.ictreg(list.high, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidR.high  <- predict.ictreg(list.high, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidI.high  <- predict.ictreg(list.high, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.partyidSE.high  <- predict.ictreg(list.high, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.partyidD.high  <- predict.ictreg(list.high, newdata = partyidD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidR.high  <- predict.ictreg(list.high, newdata = partyidR, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidI.high  <- predict.ictreg(list.high, newdata = partyidI, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.partyidSE.high  <- predict.ictreg(list.high, newdata = partyidSE, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 partyid.p.high = data.frame(
         t(avg.pred.partyidD.high$fit), 
@@ -1642,13 +1647,13 @@ p_load(list)
 
 ## low
 
-avg.pred.educ.SHS.low = predict.ictreg(list.low, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.HS.low = predict.ictreg(list.low, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.T.low = predict.ictreg(list.low, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.SC.low = predict.ictreg(list.low, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.AD.low = predict.ictreg(list.low, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.BD.low = predict.ictreg(list.low, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.GS.low = predict.ictreg(list.low, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.SHS.low = predict.ictreg(list.low, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.HS.low = predict.ictreg(list.low, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.T.low = predict.ictreg(list.low, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.SC.low = predict.ictreg(list.low, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.AD.low = predict.ictreg(list.low, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.BD.low = predict.ictreg(list.low, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.GS.low = predict.ictreg(list.low, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 educ.p.low = data.frame(
         t(avg.pred.educ.SHS.low$fit), 
@@ -1672,13 +1677,13 @@ educ.p.low$'Experimental Condition' <- "Low"
 
 
 ## high
-avg.pred.educ.SHS.high = predict.ictreg(list.high, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.HS.high = predict.ictreg(list.high, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.T.high = predict.ictreg(list.high, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.SC.high = predict.ictreg(list.high, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.AD.high = predict.ictreg(list.high, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.BD.high = predict.ictreg(list.high, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence")
-avg.pred.educ.GS.high = predict.ictreg(list.high, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence")
+avg.pred.educ.SHS.high = predict.ictreg(list.high, newdata = educ.SHS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.HS.high = predict.ictreg(list.high, newdata = educ.HS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.T.high = predict.ictreg(list.high, newdata = educ.T, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.SC.high = predict.ictreg(list.high, newdata = educ.SC, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.AD.high = predict.ictreg(list.high, newdata = educ.AD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.BD.high = predict.ictreg(list.high, newdata = educ.BD, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+avg.pred.educ.GS.high = predict.ictreg(list.high, newdata = educ.GS, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
 
 educ.p.high = data.frame(
         t(avg.pred.educ.SHS.high$fit), 
@@ -1760,20 +1765,20 @@ p_load(list)
 
 
 ## low
-income.low.1  = predict.ictreg(list.low, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.2  = predict.ictreg(list.low, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.3  = predict.ictreg(list.low, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.4  = predict.ictreg(list.low, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.5  = predict.ictreg(list.low, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.6  = predict.ictreg(list.low, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.7  = predict.ictreg(list.low, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.8  = predict.ictreg(list.low, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.9  = predict.ictreg(list.low, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.low.10 = predict.ictreg(list.low, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.low.11 = predict.ictreg(list.low, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.low.12 = predict.ictreg(list.low, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.low.13 = predict.ictreg(list.low, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.low.14 = predict.ictreg(list.low, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.low.1  = predict.ictreg(list.low, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.2  = predict.ictreg(list.low, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.3  = predict.ictreg(list.low, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.4  = predict.ictreg(list.low, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.5  = predict.ictreg(list.low, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.6  = predict.ictreg(list.low, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.7  = predict.ictreg(list.low, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.8  = predict.ictreg(list.low, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.9  = predict.ictreg(list.low, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.low.10 = predict.ictreg(list.low, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.low.11 = predict.ictreg(list.low, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.low.12 = predict.ictreg(list.low, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.low.13 = predict.ictreg(list.low, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.low.14 = predict.ictreg(list.low, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
 
 
 income.p.low = data.frame(
@@ -1805,20 +1810,20 @@ income.p.low$'Experimental Condition' <- "Low"
 
 
 ## high
-income.high.1  = predict.ictreg(list.high, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.2  = predict.ictreg(list.high, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.3  = predict.ictreg(list.high, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.4  = predict.ictreg(list.high, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.5  = predict.ictreg(list.high, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.6  = predict.ictreg(list.high, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.7  = predict.ictreg(list.high, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.8  = predict.ictreg(list.high, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.9  = predict.ictreg(list.high, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence")
-income.high.10 = predict.ictreg(list.high, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.high.11 = predict.ictreg(list.high, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.high.12 = predict.ictreg(list.high, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.high.13 = predict.ictreg(list.high, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence") 
-income.high.14 = predict.ictreg(list.high, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence") 
+income.high.1  = predict.ictreg(list.high, newdata = income.1, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.2  = predict.ictreg(list.high, newdata = income.2, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.3  = predict.ictreg(list.high, newdata = income.3, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.4  = predict.ictreg(list.high, newdata = income.4, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.5  = predict.ictreg(list.high, newdata = income.5, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.6  = predict.ictreg(list.high, newdata = income.6, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.7  = predict.ictreg(list.high, newdata = income.7, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.8  = predict.ictreg(list.high, newdata = income.8, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.9  = predict.ictreg(list.high, newdata = income.9, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level)
+income.high.10 = predict.ictreg(list.high, newdata = income.10, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.high.11 = predict.ictreg(list.high, newdata = income.11, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.high.12 = predict.ictreg(list.high, newdata = income.12, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.high.13 = predict.ictreg(list.high, newdata = income.13, avg = TRUE, se.fit = TRUE, interval = "confidence", level = ci.level) 
+income.high.14 = predict.ictreg(list.high, newdata = income.14, avg = TRUE, se.fit = TRUE, interval = "confidence" ,level = ci.level) 
 
 
 income.p.high = data.frame(
@@ -1941,16 +1946,22 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
                 }
         }
 }
+## ---- 
 
-
+## ---- predictions:independent:variables:plot ----
 grid_arrange_shared_legend(
         income.plot, 
         educ.plot,
         partyid.plot,
         socio.plot,
         ncol = 2, nrow = 2)
-## ---- 
 
+predictions.independent.variables.plot.note <-  paste(
+        "{\\bf Predicting Vote-Selling: Individual Characteristics.}",
+        "\\\\\\hspace{\\textwidth}", 
+        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), im this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of", sep = ""), paste("income, education, party identification and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        "\n")
+## ---- 
 
 
 ###############################################
@@ -2007,7 +2018,7 @@ lapop.bar.chart.p
 lapop.bar.chart.p.note <- paste(
         "Frequency of Clientelism",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
+        paste("{\\bf Note: Figure shows the frequency of survey respondents, N = }", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
         "\\\\\\hspace{\\textwidth}", 
         paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: `In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?'"),
         "\n")
@@ -2097,13 +2108,17 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 ## ---- 
 
 
+
+
+
+
 ## ---- pricing:experiment:plot ----
 # calling the plot // need to save it to get the intersecting point.
 price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
 price.plot.note <- paste(
-        "Pricing Experiment: Ideal Selling Price",
+        "{\\bf Pricing Experiment: Ideal Selling Price.}",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the empirical distributions of the 'too cheap' and 'to expensive' supply curves. The intersection of the two (the vertical dashed line) is used to get an estimate of the ideal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
+        paste(paste("{\\bf Note}: Subjects who answered `yes' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the `too cheap' and `to expensive' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
         "\n")
 
 ## ---- 
@@ -2365,9 +2380,9 @@ us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
 ## ---- us:map:vote:selling:plot ----
 us.map.vote.selling.plot
 us.map.vote.selling.note <- paste(
-        "Mapping (Predicted) Vote-Sellers.",
+        "{\\bf Mapping (Predicted) Vote-Sellers.}",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP code level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained. These individual predictions are shown in \\autoref{fig:list:analysis:individual:predictions:plot}. This map shows only the estimations that are statistically significant (N=", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
+        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP code level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained (see \\autoref{fig:list:analysis:individual:predictions:plot}). This map shows the geographic location of the estimations that are statistically significant only (N = ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
         "\n")
 
 
