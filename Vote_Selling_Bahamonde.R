@@ -201,7 +201,7 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 # use this to explain plot in the paper
 barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
-        "{\\bf Frequency and Percentages of Subjects Declaring How Many (if Any) Illegal Things They Would Do.}",
+        "{\\bf Frequency and Percentages of Subjects Declaring How Many (if Any) Illegal Things They Would Do}.",
         "\\\\\\hspace{\\textwidth}", 
         "{\\bf Note}: Notice that the X-axis denotes the number of items, not which ones.",
         "\n")
@@ -677,7 +677,7 @@ grid_arrange_shared_legend(
         ncol = 1, nrow = 2)
 
 individual.predictions.plot.note <- paste(
- "{\\bf Individual Estimated Probabilities of Vote-Selling.}",
+ "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
        "\\\\\\hspace{\\textwidth}", 
  paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the `low' and `high' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\citet[]{Blair2012} and \\citet[]{Imai2014a}, individual probabilities of vote-selling under the `low' and `high' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
         "\n")
@@ -793,7 +793,7 @@ soc.des.plot = ggplot(socdes.p.high.low,
 ### Plot
 soc.des.plot
 soc.des.plot.note <- paste(
-        "{\\bf Declared and Predicted Vote-Sellers.}",
+        "{\\bf Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
         "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (`liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
         "\\\\\\hspace{\\textwidth}",
@@ -1956,10 +1956,10 @@ grid_arrange_shared_legend(
         socio.plot,
         ncol = 2, nrow = 2)
 
-predictions.independent.variables.plot.note <-  paste(
-        "{\\bf Predicting Vote-Selling: Individual Characteristics.}",
+predictions.independent.variables.plot.note <- paste(
+        "{\\bf Predicting Vote-Selling: Individual Characteristics}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), im this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of", sep = ""), paste("income, education, party identification and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), in this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
 ## ---- 
 
@@ -2016,11 +2016,11 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
 lapop.bar.chart.p
 ### defining legend, title and notes.
 lapop.bar.chart.p.note <- paste(
-        "Frequency of Clientelism",
+        "{\\bf Frequency of Clientelism}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note: Figure shows the frequency of survey respondents, N = }", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
+        paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: `In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes or never?'"),
+        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: `In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes, or never?'"),
         "\n")
 ## ----
 
@@ -2116,7 +2116,7 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 # calling the plot // need to save it to get the intersecting point.
 price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
 price.plot.note <- paste(
-        "{\\bf Pricing Experiment: Ideal Selling Price.}",
+        "{\\bf Pricing Experiment: Ideal Selling Price}.",
         "\\\\\\hspace{\\textwidth}", 
         paste(paste("{\\bf Note}: Subjects who answered `yes' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the `too cheap' and `to expensive' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
         "\n")
@@ -2380,10 +2380,8 @@ us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
 ## ---- us:map:vote:selling:plot ----
 us.map.vote.selling.plot
 us.map.vote.selling.note <- paste(
-        "{\\bf Mapping (Predicted) Vote-Sellers.}",
+        "{\\bf Mapping (Predicted) Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP code level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained (see \\autoref{fig:list:analysis:individual:predictions:plot}). This map shows the geographic location of the estimations that are statistically significant only (N = ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
+        paste("{\\bf Note}: Figure shows the geographical location (at the ZIP code level) of estimated vote-sellers. Using the estimations in \\autoref{tab:regression}, individual probabilities of vote-selling were obtained (see \\autoref{fig:list:analysis:individual:predictions:plot}). This map shows the geographical location of the estimations that are statistically significant only (N = ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), ").", sep = ""),
         "\n")
-
-
 ## ----
