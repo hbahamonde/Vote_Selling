@@ -39,3 +39,7 @@ Python_Scrypt
 figure/
 
 Bahamonde_VoteSellingUS\.synctex\(busy\)
+
+*.bcf
+
+*.xml
