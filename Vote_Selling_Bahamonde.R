@@ -17,7 +17,7 @@ dat <- read.dta("/Users/hectorbahamonde/RU/research/Vote_Selling/data_list.dta")
 f = c("f_1_1_1",  "f_1_1_2", "f_1_1_3", "f_1_1_4", "f_1_1_5", "f_1_2_1", "f_1_2_2", "f_1_2_3", "f_1_2_4", "f_1_2_5", "f_2_1_1",  "f_2_1_2", "f_2_1_3", "f_2_1_4", "f_2_1_5", "f_2_2_1", "f_2_2_2", "f_2_2_3", "f_2_2_4", "f_2_2_5", "f_3_1_1", "f_3_1_2", "f_3_1_3", "f_3_1_4", "f_3_1_5", "f_3_2_1", "f_3_2_2", "f_3_2_3", "f_3_2_4", "f_3_2_5", "f_4_1_1", "f_4_1_2", "f_4_1_3", "f_4_1_4", "f_4_1_5", "f_4_2_1", "f_4_2_2", "f_4_2_3", "f_4_2_4", "f_4_2_5", "f_5_1_1", "f_5_1_2", "f_5_1_3", "f_5_1_4", "f_5_1_5", "f_5_2_1", "f_5_2_2", "f_5_2_3", "f_5_2_4", "f_5_2_5")
 
 dat = dat[!with(dat,is.na(treatment100) & is.na(treatment500) & is.na(control) |
-                  is.na(cj_1) | is.na(cj_2) | is.na(cj_3) | is.na(cj_4) | is.na(cj_5) ),]
+                        is.na(cj_1) | is.na(cj_2) | is.na(cj_3) | is.na(cj_4) | is.na(cj_5) ),]
 
 
 
@@ -40,8 +40,8 @@ names(dat)[names(dat) == "gender"] <- "woman"
 # recoding sell (direct sell question)
 names(dat)[names(dat) == "sell1"] <- "directquestion" # renaming
 dat$directquestion.f <- ordered(dat$directquestion, levels = c(#recoding
-  "No, I don't want to sell my vote", 
-  "Yes, I want to sell my vote"), labels = c("No", "Yes"))
+        "No, I don't want to sell my vote", 
+        "Yes, I want to sell my vote"), labels = c("No", "Yes"))
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(car)
@@ -50,12 +50,12 @@ dat$directquestion  <- recode(as.integer(dat$directquestion), "1 = 0 ; 2 = 1")
 
 # Combine (weighted) pol. knowledge vars
 dat$polknow = rowSums(data.frame(cbind(
-  dat$roberts/dat$tknow1_3, 
-  dat$supremecourt/dat$supremecourt_t, 
-  dat$vp/dat$vp_t, 
-  dat$veto/dat$veto_t,
-  dat$majority/dat$majority_t,
-  dat$conservative/dat$conservative_t)), na.rm = T)
+        dat$roberts/dat$tknow1_3, 
+        dat$supremecourt/dat$supremecourt_t, 
+        dat$vp/dat$vp_t, 
+        dat$veto/dat$veto_t,
+        dat$majority/dat$majority_t,
+        dat$conservative/dat$conservative_t)), na.rm = T)
 
 # Merge ZIP data
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
@@ -92,8 +92,8 @@ dat$educ.n = as.numeric(dat$educ)
 # drop missings THESE ARE THE COVARIATES I AM USING TO ESTIMATE THE LIST PART
 sapply(dat, function(x) sum(is.na(x)))
 completeFun <- function(data, desiredCols) {
-  completeVec <- complete.cases(data[, desiredCols])
-  return(data[completeVec, ])
+        completeVec <- complete.cases(data[, desiredCols])
+        return(data[completeVec, ])
 }
 dat = completeFun(dat, c("woman", "socideo", "partyid", "reg", "trustfed", "income.n", "educ.n", "polknow")) # variables
 
@@ -138,12 +138,12 @@ treat.cont.bar.plot.d = data.frame(
                 c(table(factor(dat$treatment100, levels = c(0,1,2,3,4), labels=c("0", "1", "2", "3", "4")))),
                 c(table(factor(dat$treatment500, levels = c(0,1,2,3,4), labels=c("0", "1", "2", "3", "4")))),
                 c(table(factor(dat$control, levels = c(0,1,2,3), labels=c("0", "1", "2", "3"))))
-                ),
+        ),
         Condition = c(
                 rep("Low Treatment ($ 100)", 5),
                 rep("High Treatment ($ 500)", 5),
                 rep("Control", 4)
-                ),
+        ),
         xcount = c(
                 0,1,2,3,4,#
                 0,1,2,3,4,#
@@ -216,17 +216,17 @@ p_load(ggplot2)
 # Plot
 
 ggplot.labels1 <- data.frame(
-  time = c(1, 2), 
-  value = c(1000, 300), 
-  label = c(table(dat$directquestion.f)[1], table(dat$directquestion.f)[2]), 
-  type = c("NA*", "MVH")
+        time = c(1, 2), 
+        value = c(1000, 300), 
+        label = c(table(dat$directquestion.f)[1], table(dat$directquestion.f)[2]), 
+        type = c("NA*", "MVH")
 )
 
 ggplot(dat[!is.na(dat$directquestion.f), ], aes(x=directquestion.f)) + geom_bar() +
-  xlab("Would you be willing to accept money from a candidate for your vote?") + 
-  ylab("Frequency") +
-  geom_text(data = ggplot.labels1, aes(x = time, y = value, label = label), colour = "forestgreen") +
-  theme_bw()
+        xlab("Would you be willing to accept money from a candidate for your vote?") + 
+        ylab("Frequency") +
+        geom_text(data = ggplot.labels1, aes(x = time, y = value, label = label), colour = "forestgreen") +
+        theme_bw()
 
 
 # Balance Plots PENDING
@@ -322,7 +322,7 @@ diff.means.plot.d = data.frame(
         Estimates = c(sens.est, cont.est),
         upper = c(sens.upper,cont.upper),
         lower = c(sens.lower,cont.lower)
-        )
+)
 
 
 
@@ -392,8 +392,8 @@ dat.low = completeFun(dat.low,
                               "income.n",
                               "educ.n"#,
                               #"polknow"
-                              )
-                )
+                      )
+)
 
 ## Setting tolerance
 options(scipen=999)
@@ -413,12 +413,12 @@ list.low <- ictreg(ycount ~
                            #trustfed +
                            income.n +
                            educ.n,# +
-                           #polknow, 
+                   #polknow, 
                    data = dat.low, 
-               treat = "treatment", 
-               J=3, 
-               method = method, 
-               maxIter = maxIter)
+                   treat = "treatment", 
+                   J=3, 
+                   method = method, 
+                   maxIter = maxIter)
 
 # summary(list.low, n.draws = 200000) # quasi-Bayesian approximation based predictions
 
@@ -464,18 +464,18 @@ completeFun <- function(data, desiredCols) {
 }
 
 dat.high = completeFun(dat.high, 
-                      c(
-                              #"age.n", 
-                              #"woman", 
-                              "socideo", 
-                              "partyid",
-                              #"reg",
-                              #"trustfed",
-                              "income.n",
-                              "educ.n"#,
-                              #"polknow"
-                      )
-                      )
+                       c(
+                               #"age.n", 
+                               #"woman", 
+                               "socideo", 
+                               "partyid",
+                               #"reg",
+                               #"trustfed",
+                               "income.n",
+                               "educ.n"#,
+                               #"polknow"
+                       )
+)
 
 
 ## Setting tolerance
@@ -677,9 +677,9 @@ grid_arrange_shared_legend(
         ncol = 1, nrow = 2)
 
 individual.predictions.plot.note <- paste(
- "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
-       "\\\\\\hspace{\\textwidth}", 
- paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the `low' and `high' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\citet[]{Blair2012} and \\citet[]{Imai2014a}, individual probabilities of vote-selling under the `low' and `high' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
+        "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
+        "\\\\\\hspace{\\textwidth}", 
+        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the `low' and `high' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the `low' and `high' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
         "\n")
 ## ----
 
@@ -708,7 +708,7 @@ direct.q.high <- glm(directquestion ~
                              educ.n,# +
                      #polknow, 
                      data = dat.high, 
-                family = binomial("logit"))
+                     family = binomial("logit"))
 
 
 ##############
@@ -727,7 +727,7 @@ direct.q.low <- glm(directquestion ~
                             educ.n,# +
                     #polknow, 
                     data = dat.low, 
-                     family = binomial("logit"))
+                    family = binomial("logit"))
 
 avg.pred.social.desirability.high <- predict.ictreg(list.high, direct.glm = direct.q.high, se.fit = TRUE, interval = "confidence", level = ci.level)
 avg.pred.social.desirability.low <- predict.ictreg(list.low, direct.glm = direct.q.low, se.fit = TRUE, interval = "confidence", level = ci.level)
@@ -760,8 +760,8 @@ socdes.p.low <- socdes.p.low[c("fit", "lwr", "upr", "Significance", "Condition",
 socdes.p.high.low = rbind(socdes.p.high, socdes.p.low)
 rownames(socdes.p.high.low) <- NULL
 socdes.p.high.low$Significance <- factor(socdes.p.high.low$Significance,
-       levels = c(0,1),
-       labels = c("Non-Significant", "Significant"))
+                                         levels = c(0,1),
+                                         labels = c("Non-Significant", "Significant"))
 
 
 ### Plot
@@ -769,7 +769,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 soc.des.plot = ggplot(socdes.p.high.low, 
-                   aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
+                      aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
         theme_bw() +
         xlab("") + 
         ylab("Estimated Proportion") +
@@ -1195,7 +1195,7 @@ predicting.vote.selling.plot = ggplot(acme.vs.d, aes(
         y = coefficients, 
         ymin = upper, 
         ymax = lower)
-        ) +
+) +
         geom_pointrange() + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
@@ -1364,15 +1364,15 @@ ggplot(acme.d, aes(
 ## overdispersion is a concern due to possible positive correlation among control items, then beta-binomial logistic regression may be used
 
 over.disp.test <-glm(ycount ~
-                       #age.n + 
-                       woman + 
-                       socideo + 
-                       partyid + 
-                       reg + 
-                       trustfed + 
-                       income.n + 
-                       educ.n + 
-                       polknow, 
+                             #age.n + 
+                             woman + 
+                             socideo + 
+                             partyid + 
+                             reg + 
+                             trustfed + 
+                             income.n + 
+                             educ.n + 
+                             polknow, 
                      #ziplabforce + 
                      #zippercamincome + 
                      #sizetimesincome + 
@@ -2004,11 +2004,11 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
               legend.title=element_text(size=7),
               plot.title = element_text(size=7),
               legend.position="bottom") +
-                scale_x_discrete(labels=c(
-                        paste("Often (", paste(percentage.often, "%", sep = ""), ")", sep = ""),
-                        paste("Sometimes (", paste(percentage.sometimes, "%", sep = ""), ")", sep = ""),
-                        paste("Never (", paste(percentage.never, "%", sep = ""), ")", sep = "")
-                        ))
+        scale_x_discrete(labels=c(
+                paste("Often (", paste(percentage.often, "%", sep = ""), ")", sep = ""),
+                paste("Sometimes (", paste(percentage.sometimes, "%", sep = ""), ")", sep = ""),
+                paste("Never (", paste(percentage.never, "%", sep = ""), ")", sep = "")
+        ))
 ## ----
 
 ## ---- lapop:bar:chart:plot ----
@@ -2142,25 +2142,25 @@ load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # L
 
 # function that does clustered SEs
 vcovCluster <- function(
-  model,
-  cluster
+        model,
+        cluster
 )
 {
-  require(sandwich)
-  require(lmtest)
-  if(nrow(model.matrix(model))!=length(cluster)){
-    stop("check your data: cluster variable has different N than model")
-  }
-  M <- length(unique(cluster))
-  N <- length(cluster)           
-  K <- model$rank   
-  if(M<50){
-    warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
-  }
-  dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
-  uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
-  rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
-  return(rcse.cov)
+        require(sandwich)
+        require(lmtest)
+        if(nrow(model.matrix(model))!=length(cluster)){
+                stop("check your data: cluster variable has different N than model")
+        }
+        M <- length(unique(cluster))
+        N <- length(cluster)           
+        K <- model$rank   
+        if(M<50){
+                warning("Fewer than 50 clusters, variances may be unreliable (could try block bootstrap instead).")
+        }
+        dfc <- (M/(M - 1)) * ((N - 1)/(N - K))
+        uj  <- apply(estfun(model), 2, function(x) tapply(x, cluster, sum));
+        rcse.cov <- dfc * sandwich(model, meat = crossprod(uj)/N)
+        return(rcse.cov)
 }
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
@@ -2201,11 +2201,11 @@ acme.5 = coeftest(model.5, vcov = vcovCluster(model.5, cluster = d$idnum))
 acme.d <- data.frame(coefficients = c(acme.1[2], acme.2[2],acme.3[2],acme.4[2],acme.5[2]),
                      se = c(acme.1[4], acme.2[4],acme.3[4],acme.4[4],acme.5[4]),
                      variable = c(
-                       "Citizens CAN run for office for the next two elections", 
-                       "Citizens CAN associate with others and form groups",
-                       "Media CAN confront the Government",
-                       "President CANNOT rule without Congress",
-                       "Citizens CAN vote in the next two elections"
+                             "Citizens CAN run for office for the next two elections", 
+                             "Citizens CAN associate with others and form groups",
+                             "Media CAN confront the Government",
+                             "President CANNOT rule without Congress",
+                             "Citizens CAN vote in the next two elections"
                      )
 )
 acme.d$upper <-acme.d$coefficient + 1.96*acme.d$se
@@ -2214,22 +2214,22 @@ acme.d$lower <-acme.d$coefficient - 1.96*acme.d$se
 
 
 acme.0 = data.frame(
-  variable = c("Citizens CANNOT run for office for the next two elections", 
-               "Citizens CANNOT associate with others and form groups",
-               "Media CANNOT confront the Government",
-               "President CAN rule without Congress",
-               "Citizens CANNOT vote in the next two elections"),
-  coefficients = c(rep(NA, times = 5)), 
-  se = c(rep(NA, times = 5)),
-  upper = c(rep(NA, times = 5)),
-  lower = c(rep(NA, times = 5))
+        variable = c("Citizens CANNOT run for office for the next two elections", 
+                     "Citizens CANNOT associate with others and form groups",
+                     "Media CANNOT confront the Government",
+                     "President CAN rule without Congress",
+                     "Citizens CANNOT vote in the next two elections"),
+        coefficients = c(rep(NA, times = 5)), 
+        se = c(rep(NA, times = 5)),
+        upper = c(rep(NA, times = 5)),
+        lower = c(rep(NA, times = 5))
 )
 
 acme.d = rbind(acme.d,acme.0)
 
 acme.d$attribute = c(
-  "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote",
-  "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote"
+        "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote",
+        "Right To Run", "Right to Associate", "Free Press", "President Autonomy", "Right to Vote"
 )
 
 
@@ -2240,19 +2240,19 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 ggplot() + geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) + 
-  geom_pointrange(data=acme.d, 
-                  mapping=aes(x=variable, 
-                              y=coefficients, 
-                              ymin=upper, 
-                              ymax=lower),
-                  #shape=22, 
-                  fill = "WHITE") +
-  coord_flip() + 
-  xlab("") + 
-  ylab("Coefficient") +
-  guides(colour=FALSE) +
-  theme(legend.position="none") + 
-  theme_bw()
+        geom_pointrange(data=acme.d, 
+                        mapping=aes(x=variable, 
+                                    y=coefficients, 
+                                    ymin=upper, 
+                                    ymax=lower),
+                        #shape=22, 
+                        fill = "WHITE") +
+        coord_flip() + 
+        xlab("") + 
+        ylab("Coefficient") +
+        guides(colour=FALSE) +
+        theme(legend.position="none") + 
+        theme_bw()
 
 ############
 ## Predicting Predicted Probabiltities of Vote Selling
@@ -2356,7 +2356,7 @@ us.map.vote.selling.plot <- ggmap(map) + geom_point(aes(
         #colour=fit,
         y = latitude,
         colour = `Probability of Vote Selling`), 
-       #colour = "red",
+        #colour = "red",
         alpha = .4,
         #size = 0.8,
         #shape = 21,

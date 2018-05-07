@@ -6,7 +6,7 @@
 
 
 % DOCUMENT ID
-\fancyhead[C]{Draft, please don't share without permission} % Custom header text
+%\fancyhead[C]{Draft, please don't share without permission} % Custom header text
 
 
 
@@ -41,7 +41,7 @@
 
 \maketitle % Insert title
 
-\thispagestyle{fancy} % All pages have headers and footers
+%\thispagestyle{fancy} % All pages have headers and footers
 
 %----------------------------------------------------------------------------------------
 % ABSTRACT
@@ -378,11 +378,20 @@ Approximately, $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="L
 Future research should also consider different values placed on different offices.\footnote{I owe this point to NAME.} It is reasonable to think that Presidential, Senate, House, state legislature, mayor, and City Council elections, follow different incentives and constrains to buy and sell votes. Not only that, future research should consider blocking on party identification. For example, designing a more complex experiment, where not only the price varies (like it does in the presented design), but also where the vote-selling treatment is partisan. \emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
 
 
+
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\printbibliography
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % WORD COUNT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \clearpage
+\newpage
+\pagenumbering{gobble}
 <<wordcount, echo=FALSE, cache=FALSE>>=
 library(knitr)
 
@@ -423,8 +432,9 @@ count <- comma(as.numeric(count)) # add comma
 
 
 
-
 \newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
 \section{Appendix}
 
 % reset counter for appendix
@@ -548,6 +558,8 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 
 
 \section{Online Appendix}
+\pagenumbering{roman}
+\setcounter{page}{1}
 
 %% reset tables and figures counter
 \setcounter{table}{0}
@@ -565,9 +577,5 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 @
 
 
-\clearpage 
-\newpage
-\bibliography{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/library,/Users/hectorbahamonde/RU/Bibliografia_PoliSci/Bahamonde_BibTex2013}
-\bibliographystyle{plainnat}
 \end{document}
 
