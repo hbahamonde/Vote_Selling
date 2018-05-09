@@ -21,8 +21,8 @@
 \textsc{H\'ector Bahamonde}\\ 
 \thanks{I thank Virginia Oliveros, Richard Lau, David Redlawsk, Christopher Chambers-Ju, Jessica Price, Maria Akchurin, Kosuke Imai, and the 2016 Experimental Research Group in Political Psychology at Rutgers. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University). Notice of IRB exemption Protocol \#E16-292 is kept in file at the Office of Research and Regulatory Affairs of Rutgers University.}
 \normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
-\normalsize \texttt{e:}\href{mailto:\filetext}{\texttt{\filetext}}\\
-\normalsize \texttt{w:}\href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
+\normalsize \href{mailto:\filetext}{\texttt{\filetext}}\\
+\normalsize \href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
 \vspace{-5mm}
 }
 \date{\today}
@@ -38,6 +38,7 @@
 
 
 \begin{document}
+\pagenumbering{gobble} 
 
 \maketitle % Insert title
 
@@ -114,8 +115,10 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 % end knitr stuff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \newpage
-
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \section{Vote-Sellers and Vote-Buyers: Two Sides of the Same Coin?}
 
@@ -381,7 +384,7 @@ Future research should also consider different values placed on different office
 
 
 \newpage
-\pagenumbering{roman}
+\pagenumbering{Roman}
 \setcounter{page}{1}
 \printbibliography
 
@@ -433,7 +436,7 @@ count <- comma(as.numeric(count)) # add comma
 
 
 \newpage
-\pagenumbering{roman}
+\pagenumbering{Roman}
 \setcounter{page}{1}
 \section{Appendix}
 
@@ -558,7 +561,7 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 
 
 \section{Online Appendix}
-\pagenumbering{roman}
+\pagenumbering{Roman}
 \setcounter{page}{1}
 
 %% reset tables and figures counter
