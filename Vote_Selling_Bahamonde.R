@@ -1086,7 +1086,7 @@ save(d, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.R
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
 
 ## excluding non-significative values
-# d <- d[ which(d$sign==1), ] # optional
+d <- d[ which(d$sign==1), ] # optional
 
 # function that does clustered SEs
 vcovCluster <- function(
@@ -1115,73 +1115,173 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(lmtest,sandwich,msm)
 
 
+##### SELLERS
+
+## only sellers
+d.sellers <- d[ which(d$fit>=.5), ] 
+
 
 # make outcome numeric
-d$voteselling <- as.numeric(d$fit)
+d.sellers$voteselling <- as.numeric(d.sellers$fit)
 
 # make treatments factors
-d$at.run = as.factor(d$at.run)
-d$at.asso = as.factor(d$at.asso)
-d$at.press = as.factor(d$at.press)
-d$at.presaut = as.factor(d$at.presaut)
-d$at.vote = as.factor(d$at.vote)
+d.sellers$at.run = as.factor(d.sellers$at.run)
+d.sellers$at.asso = as.factor(d.sellers$at.asso)
+d.sellers$at.press = as.factor(d.sellers$at.press)
+d.sellers$at.presaut = as.factor(d.sellers$at.presaut)
+d.sellers$at.vote = as.factor(d.sellers$at.vote)
 
 
 # change reference ctegories
-d <- within(d, at.run <- relevel(at.run, ref = 2))
-d <- within(d, at.asso <- relevel(at.asso, ref = 2))
-d <- within(d, at.press <- relevel(at.press, ref = 2))
-d <- within(d, at.presaut <- relevel(at.presaut, ref = 1))
-d <- within(d, at.vote <- relevel(at.vote, ref = 1))
+d.sellers <- within(d.sellers, at.run <- relevel(at.run, ref = 2))
+d.sellers <- within(d.sellers, at.asso <- relevel(at.asso, ref = 2))
+d.sellers <- within(d.sellers, at.press <- relevel(at.press, ref = 2))
+d.sellers <- within(d.sellers, at.presaut <- relevel(at.presaut, ref = 1))
+d.sellers <- within(d.sellers, at.vote <- relevel(at.vote, ref = 2))
 
-model.vs.1 = lm(voteselling ~ at.run, data=d)
-model.vs.2 = lm(voteselling ~ at.asso, data=d)
-model.vs.3 = lm(voteselling ~ at.press, data=d)
-model.vs.4 = lm(voteselling ~ at.presaut, data=d)
-model.vs.5 = lm(voteselling ~ at.vote, data=d)
+model.vs.1.sellers = lm(voteselling ~ at.run, data=d.sellers)
+model.vs.2.sellers = lm(voteselling ~ at.asso, data=d.sellers)
+model.vs.3.sellers = lm(voteselling ~ at.press, data=d.sellers)
+model.vs.4.sellers = lm(voteselling ~ at.presaut, data=d.sellers)
+model.vs.5.sellers = lm(voteselling ~ at.vote, data=d.sellers)
 
 
-d <- na.omit(d)
-acme.vs.1 = coeftest(model.vs.1, vcov = vcovCluster(model.vs.1, cluster = d$idnum)) # run
-acme.vs.2 = coeftest(model.vs.2, vcov = vcovCluster(model.vs.2, cluster = d$idnum)) # asso
-acme.vs.3 = coeftest(model.vs.3, vcov = vcovCluster(model.vs.3, cluster = d$idnum)) # press
-acme.vs.4 = coeftest(model.vs.4, vcov = vcovCluster(model.vs.4, cluster = d$idnum)) # pres aut
-acme.vs.5 = coeftest(model.vs.5, vcov = vcovCluster(model.vs.5, cluster = d$idnum)) # vote
+d.sellers <- na.omit(d.sellers)
+acme.vs.1.sellers = coeftest(model.vs.1.sellers, vcov = vcovCluster(model.vs.1.sellers, cluster = d.sellers$idnum)) # run
+acme.vs.2.sellers = coeftest(model.vs.2.sellers, vcov = vcovCluster(model.vs.2.sellers, cluster = d.sellers$idnum)) # asso
+acme.vs.3.sellers = coeftest(model.vs.3.sellers, vcov = vcovCluster(model.vs.3.sellers, cluster = d.sellers$idnum)) # press
+acme.vs.4.sellers = coeftest(model.vs.4.sellers, vcov = vcovCluster(model.vs.4.sellers, cluster = d.sellers$idnum)) # pres aut
+acme.vs.5.sellers = coeftest(model.vs.5.sellers, vcov = vcovCluster(model.vs.5.sellers, cluster = d.sellers$idnum)) # vote
+
+
+
+
+
+##### NOT not.SELLERS
+
+## only not sellers
+d.not.sellers <- d[ which(d$fit<=.49), ] 
+
+# make outcome numeric
+d.not.sellers$voteselling <- as.numeric(d.not.sellers$fit)
+
+# make treatments factors
+d.not.sellers$at.run = as.factor(d.not.sellers$at.run)
+d.not.sellers$at.asso = as.factor(d.not.sellers$at.asso)
+d.not.sellers$at.press = as.factor(d.not.sellers$at.press)
+d.not.sellers$at.presaut = as.factor(d.not.sellers$at.presaut)
+d.not.sellers$at.vote = as.factor(d.not.sellers$at.vote)
+
+
+# change reference ctegories
+d.not.sellers <- within(d.not.sellers, at.run <- relevel(at.run, ref = 2))
+d.not.sellers <- within(d.not.sellers, at.asso <- relevel(at.asso, ref = 2))
+d.not.sellers <- within(d.not.sellers, at.press <- relevel(at.press, ref = 2))
+d.not.sellers <- within(d.not.sellers, at.presaut <- relevel(at.presaut, ref = 1))
+d.not.sellers <- within(d.not.sellers, at.vote <- relevel(at.vote, ref = 2))
+
+model.vs.1.not.sellers = lm(voteselling ~ at.run, data=d.not.sellers)
+model.vs.2.not.sellers = lm(voteselling ~ at.asso, data=d.not.sellers)
+model.vs.3.not.sellers = lm(voteselling ~ at.press, data=d.not.sellers)
+model.vs.4.not.sellers = lm(voteselling ~ at.presaut, data=d.not.sellers)
+model.vs.5.not.sellers = lm(voteselling ~ at.vote, data=d.not.sellers)
+
+
+d.not.sellers <- na.omit(d.not.sellers)
+acme.vs.1.not.sellers = coeftest(model.vs.1.not.sellers, vcov = vcovCluster(model.vs.1.not.sellers, cluster = d.not.sellers$idnum)) # run
+acme.vs.2.not.sellers = coeftest(model.vs.2.not.sellers, vcov = vcovCluster(model.vs.2.not.sellers, cluster = d.not.sellers$idnum)) # asso
+acme.vs.3.not.sellers = coeftest(model.vs.3.not.sellers, vcov = vcovCluster(model.vs.3.not.sellers, cluster = d.not.sellers$idnum)) # press
+acme.vs.4.not.sellers = coeftest(model.vs.4.not.sellers, vcov = vcovCluster(model.vs.4.not.sellers, cluster = d.not.sellers$idnum)) # pres aut
+acme.vs.5.not.sellers = coeftest(model.vs.5.not.sellers, vcov = vcovCluster(model.vs.5.not.sellers, cluster = d.not.sellers$idnum)) # vote
+
+
+
+
+
+
 
 acme.vs.d <- data.frame(
-        variable = seq(1:10),
+        variable = rep(seq(1:10),2),
         coefficients = as.numeric(c(
-                acme.vs.1[2], 0, # run
-                acme.vs.5[2], 0, # vote
-                acme.vs.2[2], 0, # assoc
-                acme.vs.3[2], 0, # media
-                acme.vs.4[2], 0 # pres aut
-        )
+                # sellers
+                acme.vs.1.sellers[2], 0, # run
+                acme.vs.5.sellers[2], 0, # vote
+                acme.vs.2.sellers[2], 0, # assoc
+                acme.vs.3.sellers[2], 0, # media
+                acme.vs.4.sellers[2], 0, # pres aut
+                # not sellers
+                acme.vs.1.not.sellers[2], 0, # run
+                acme.vs.5.not.sellers[2], 0, # vote
+                acme.vs.2.not.sellers[2], 0, # assoc
+                acme.vs.3.not.sellers[2], 0, # media
+                acme.vs.4.not.sellers[2], 0 # pres aut
+                )
         ),
         se = as.numeric(c(
-                acme.vs.1[4], 0, # run
-                acme.vs.5[4], 0, # vote
-                acme.vs.2[4], 0, # assoc
-                acme.vs.3[4], 0, # media
-                acme.vs.4[4], 0  # pres aut
-        )
-        )
+                # sellers
+                acme.vs.1.sellers[4], 0, # run
+                acme.vs.5.sellers[4], 0, # vote
+                acme.vs.2.sellers[4], 0, # assoc
+                acme.vs.3.sellers[4], 0, # media
+                acme.vs.4.sellers[4], 0,  # pres aut
+                # not sellers
+                acme.vs.1.not.sellers[4], 0, # run
+                acme.vs.5.not.sellers[4], 0, # vote
+                acme.vs.2.not.sellers[4], 0, # assoc
+                acme.vs.3.not.sellers[4], 0, # media
+                acme.vs.4.not.sellers[4], 0  # pres aut
+                )
+        ),
+        Seller = c(rep("Seller", 10), rep("Not Seller", 10))
 )
+
+
+
+
+
+
+
 
 
 
 acme.vs.d$upper <-acme.vs.d$coefficients + 1.28*acme.vs.d$se
 acme.vs.d$lower <-acme.vs.d$coefficients - 1.28*acme.vs.d$se
-acme.vs.d$variable = order(acme.vs.d$variable)
+#acme.vs.d$variable = order(acme.vs.d$variable)
+
+
 
 
 acme.vs.d$variable <- factor(acme.vs.d$variable,
                              levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
-                             labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CANNOT vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+                             labels =   c(
+                                     #"Democratic Component \n 
+                                     ## run
+                                     "Citizens CAN run for office for the next two elections", 
+                                     "Citizens CANNOT run for office for the next two elections", 
+                                     ## vote
+                                     "Citizens CAN vote in the next two elections",
+                                     "Citizens CANNOT vote in the next two elections", 
+                                     ## assoc
+                                     #"Liberal Component \n
+                                     "Citizens CAN associate with others and form groups", 
+                                     "Citizens CANNOT associate with others and form groups", 
+                                     ## media
+                                     "Media CAN confront the Government",
+                                     "Media CANNOT confront the Government",
+                                     ## pres aut
+                                     #"Republican Component \n 
+                                     "President CANNOT rule without Congress", 
+                                     "President CAN rule without Congress")
 )
 
 
 acme.vs.d$variable = with(acme.vs.d, factor(variable, levels = rev(levels(variable))))
+
+
+acme.vs.d$Component = rep(c(rep("Democratic", 4), rep("Liberal", 4), rep("Republican", 2) ), 2)
+
+acme.vs.d <- acme.vs.d[ which(
+        acme.vs.d$coefficients!=0.000000000), ]
 
 
 
@@ -1190,17 +1290,19 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 
-predicting.vote.selling.plot = ggplot(acme.vs.d, aes(
-        x = variable, 
-        y = coefficients, 
-        ymin = upper, 
-        ymax = lower)
-) +
-        geom_pointrange() + 
-        geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
-        coord_flip() + 
-        xlab("") + 
-        ylab("Coefficient") +
+#predicting.vote.selling.plot = 
+        ggplot(acme.vs.d, aes(
+                x = variable, 
+                y = coefficients, 
+                ymin = upper, 
+                ymax = lower,colour=acme.vs.d$Seller)
+               ) +
+                geom_pointrange() + 
+                facet_wrap(Seller ~ Component ,  scales = "free_y") + 
+                geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+                coord_flip() + 
+                xlab("") + 
+                ylab("Coefficient") +
         #ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
         guides(colour=FALSE) +
         theme(legend.position="none") + 
@@ -1225,6 +1327,9 @@ predicting.vote.selling.plot.note <- paste(
 ###########################################################################
 # cat("\014")
 # rm(list=ls())
+
+
+## ---- conjoint:democratic:values:american:public:data
 
 # Load Data
 load("/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint.RData") # d
@@ -1327,7 +1432,7 @@ acme.d$variable = order(acme.d$variable)
 
 acme.d$variable <- factor(acme.d$variable,
                           levels = c(1,2,3,4,5,6,7,8,9,10),ordered=TRUE,
-                          labels =   c("Democratic Component \n Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Liberal Component \n Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","Republican Component \n President CANNOT rule without Congress", "President CAN rule without Congress")
+                          labels =   c("Citizens CAN run for office for the next two elections", "Citizens CANNOT run for office for the next two elections", "Citizens CAN vote in the next two elections","Citizens CANNOT vote in the next two elections", "Citizens CAN associate with others and form groups", "Citizens CANNOT associate with others and form groups", "Media CAN confront the Government","Media CANNOT confront the Government","President CANNOT rule without Congress", "President CAN rule without Congress")
 )
 
 
@@ -1335,26 +1440,38 @@ acme.d$variable = with(acme.d, factor(variable, levels = rev(levels(variable))))
 
 
 
+acme.d$Component = c(rep("Democratic", 4), rep("Liberal", 4), rep("Republican", 2) )
+acme.d <- acme.d[ which(
+        acme.d$coefficients!=0.000000000), ]
+
 # Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-ggplot(acme.d, aes(
+
+conjoint.democratic.values.american.public:plot = ggplot(acme.d, aes(
         x = variable, 
         y = coefficients, 
         ymin = upper, 
-        ymax = lower)
+        ymax = lower,colour=acme.d$Component)
 ) +
         geom_pointrange() + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
+        facet_wrap( ~Component,  ncol = 3, scales = "free_y") + 
         xlab("") + 
         ylab("Coefficient") +
-        ggtitle("Democratic Values of the American Public")+
+        #ggtitle("Democratic Values of the American Public")+
         guides(colour=FALSE) +
         theme(legend.position="none") + 
         theme_bw()
 
+## ----
+
+
+## ---- conjoint:democratic:values:american:public:plot
+conjoint.democratic.values.american.public
+## ----
 
 
 
