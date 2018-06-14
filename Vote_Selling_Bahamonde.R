@@ -1449,7 +1449,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 
-conjoint.democratic.values.american.public:plot = ggplot(acme.d, aes(
+conjoint.democratic.values.american.public.plot = ggplot(acme.d, aes(
         x = variable, 
         y = coefficients, 
         ymin = upper, 
@@ -1458,19 +1458,25 @@ conjoint.democratic.values.american.public:plot = ggplot(acme.d, aes(
         geom_pointrange() + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
-        facet_wrap( ~Component,  ncol = 3, scales = "free_y") + 
+        facet_wrap( ~Component,  ncol = 1, scales = "free_y") + 
         xlab("") + 
         ylab("Coefficient") +
         #ggtitle("Democratic Values of the American Public")+
         guides(colour=FALSE) +
-        theme(legend.position="none") + 
-        theme_bw()
-
+        theme_bw() +
+        theme(axis.text.y = element_text(size=10), 
+              axis.text.x = element_text(size=10), 
+              axis.title.y = element_text(size=10), 
+              axis.title.x = element_text(size=10), 
+              legend.text=element_text(size=10), 
+              legend.title=element_text(size=10),
+              plot.title = element_text(size=10),
+              legend.position="none")
 ## ----
 
 
-## ---- conjoint:democratic:values:american:public:plot
-conjoint.democratic.values.american.public
+## ---- conjoint.democratic.values.american.public.plot
+conjoint.democratic.values.american.public.plot
 ## ----
 
 
