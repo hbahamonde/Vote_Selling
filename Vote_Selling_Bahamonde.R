@@ -793,9 +793,9 @@ soc.des.plot = ggplot(socdes.p.high.low,
 ### Plot
 soc.des.plot
 soc.des.plot.note <- paste(
-        "{\\bf Declared and Predicted Vote-Sellers}.",
+        "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (`liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (`high' and `low') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
+        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (`liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
@@ -1208,13 +1208,13 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 
-predicting.vote.selling.plot =  ggplot(acme.vs.d, aes(
+predicting.vote.selling.plot = ggplot(acme.vs.d, aes(
         x = variable, 
         y = coefficients, 
         ymin = upper, 
         ymax = lower,
         colour = Component)) +
-        geom_pointrange() + 
+        geom_pointrange(size=0.25) + 
         facet_wrap(~ Component , ncol = 1, scales = "free_y") + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
@@ -1223,14 +1223,15 @@ predicting.vote.selling.plot =  ggplot(acme.vs.d, aes(
         #ggtitle("Predicting Vote Selling: Broken Democratic Dimensions")+
         guides(colour=FALSE) +
         theme_bw() +
-        theme(axis.text.y = element_text(size=10), 
-              axis.text.x = element_text(size=10), 
-              axis.title.y = element_text(size=10), 
-              axis.title.x = element_text(size=10), 
-              legend.text=element_text(size=10), 
-              legend.title=element_text(size=10),
-              plot.title = element_text(size=10),
-              legend.position="none")
+        theme(axis.text.y = element_text(size=6), 
+              axis.text.x = element_text(size=6), 
+              axis.title.y = element_text(size=6), 
+              axis.title.x = element_text(size=6), 
+              legend.text=element_text(size=6), 
+              legend.title=element_text(size=6),
+              plot.title = element_text(size=6),
+              legend.position="none", 
+              strip.text.x = element_text(size = 6))
 ## ----
 
 ## ---- conjoint:analysis:predicting:vote:selling:plot
@@ -1378,7 +1379,7 @@ conjoint.democratic.values.american.public.plot = ggplot(acme.d, aes(
         ymin = upper, 
         ymax = lower,colour=acme.d$Component)
 ) +
-        geom_pointrange() + 
+        geom_pointrange(size=0.25) + 
         geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
         coord_flip() + 
         facet_wrap( ~Component,  ncol = 1, scales = "free_y") + 
@@ -1386,15 +1387,17 @@ conjoint.democratic.values.american.public.plot = ggplot(acme.d, aes(
         ylab("Coefficient") +
         #ggtitle("Democratic Values of the American Public")+
         guides(colour=FALSE) +
-        theme_bw() +
-        theme(axis.text.y = element_text(size=10), 
-              axis.text.x = element_text(size=10), 
-              axis.title.y = element_text(size=10), 
-              axis.title.x = element_text(size=10), 
-              legend.text=element_text(size=10), 
-              legend.title=element_text(size=10),
-              plot.title = element_text(size=10),
-              legend.position="none")
+        theme_bw() + 
+        theme(axis.text.y = element_text(size=6), 
+              axis.text.x = element_text(size=6), 
+              axis.title.y = element_text(size=6), 
+              axis.title.x = element_text(size=6), 
+              legend.text=element_text(size=6), 
+              legend.title=element_text(size=6),
+              plot.title = element_text(size=6),
+              legend.position="none", 
+              strip.text.x = element_text(size = 6))
+
 ## ----
 
 ## ---- conjoint.democratic.values.american.public.plot
@@ -1563,6 +1566,7 @@ socio.plot = ggplot(socideo.plot.d,
                     aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
         xlab("") + 
+        ggtitle("Ideology") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
         geom_pointrange(aes(
@@ -1576,7 +1580,7 @@ socio.plot = ggplot(socideo.plot.d,
               axis.title.x = element_text(size=13), 
               legend.text=element_text(size=13), 
               legend.title=element_text(size=13),
-              plot.title = element_text(size=13),
+              plot.title = element_text(size=14, face = "bold", hjust = 0.5),
               legend.position="bottom")
 
 
@@ -1616,7 +1620,7 @@ partyid.p.low["Significance"] <- Significance
 partyid.p.low$Significance[partyid.p.low$Significance==1] <- "Yes"
 partyid.p.low$Significance[partyid.p.low$Significance==0] <- "No"
 partyid.p.low$partyid = as.factor(c(1:4))
-partyid.p.low$partyid <- factor(partyid.p.low$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+partyid.p.low$partyid <- factor(partyid.p.low$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something\nElse"))
 partyid.p.low$'Experimental Condition' <- "Low"
 
 
@@ -1639,7 +1643,7 @@ partyid.p.high["Significance"] <- Significance
 partyid.p.high$Significance[partyid.p.high$Significance==1] <- "Yes"
 partyid.p.high$Significance[partyid.p.high$Significance==0] <- "No"
 partyid.p.high$partyid = as.factor(c(1:4))
-partyid.p.high$partyid <- factor(partyid.p.high$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something Else"))
+partyid.p.high$partyid <- factor(partyid.p.high$partyid, levels = c(1:4), labels = c("Democrat", "Republican", "Independent", "Something\nElse"))
 partyid.p.high$'Experimental Condition' <- "High"
 
 
@@ -1661,6 +1665,7 @@ partyid.plot = ggplot(partyid.plot.d,
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        ggtitle("Party Identification") +
         geom_pointrange(aes(
                 x = partyid.plot.d$partyid,
                 ymin = partyid.plot.d$lwr, 
@@ -1672,7 +1677,7 @@ partyid.plot = ggplot(partyid.plot.d,
               axis.title.x = element_text(size=13), 
               legend.text=element_text(size=13), 
               legend.title=element_text(size=13),
-              plot.title = element_text(size=13),
+              plot.title = element_text(size=14, face = "bold", hjust = 0.5),
               legend.position="bottom")
 
 
@@ -1772,6 +1777,7 @@ educ.plot = ggplot(educ.plot.d,
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
+        ggtitle("Education") +
         geom_pointrange(aes(
                 x = educ.plot.d$education,
                 ymin = educ.plot.d$lwr, 
@@ -1783,7 +1789,7 @@ educ.plot = ggplot(educ.plot.d,
               axis.title.x = element_text(size=13), 
               legend.text=element_text(size=13), 
               legend.title=element_text(size=13),
-              plot.title = element_text(size=13),
+              plot.title = element_text(size=14, face = "bold", hjust = 0.5),
               legend.position="bottom")
 
 
@@ -1925,13 +1931,14 @@ income.plot = ggplot(income.plot.d,
                 ymin = income.plot.d$lwr, 
                 ymax = income.plot.d$upr), 
                 position = position_dodge(width = 0.25)) +
-        theme(axis.text.y = element_text(size=7), 
+        ggtitle("Income") + 
+        theme(axis.text.y = element_text(size=13), 
               axis.text.x = element_text(size=7, angle = 45, hjust=1), 
               axis.title.y = element_text(size=13), 
               axis.title.x = element_text(size=7), 
               legend.text=element_text(size=13), 
               legend.title=element_text(size=13),
-              plot.title = element_text(size=7),
+              plot.title = element_text(size=14, face = "bold", hjust = 0.5),
               legend.position="bottom")
 
 
@@ -2007,7 +2014,7 @@ grid_arrange_shared_legend(
         ncol = 2, nrow = 2)
 
 predictions.independent.variables.plot.note <- paste(
-        "{\\bf Predicting Vote-Selling: Individual Characteristics}.",
+        "{\\bf List Experiment: Predicting Vote-Selling (Individual Characteristics)}.",
         "\\\\\\hspace{\\textwidth}", 
         paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), in this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
