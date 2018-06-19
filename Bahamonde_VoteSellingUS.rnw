@@ -19,7 +19,7 @@
 \author[1]{
 \large
 \textsc{Hector Bahamonde}\\ 
-\thanks{I thank Virginia Oliveros, Richard Lau, David Redlawsk, Christopher Chambers-Ju, Jessica Price, Maria Akchurin, Kosuke Imai, and the 2016 Experimental Research Group in Political Psychology at Rutgers. This project was funded by the Center for the Experimental Study of Psychology and Politics (Rutgers University). Notice of IRB exemption Protocol \#E16-292 is kept in file at the Office of Research and Regulatory Affairs of Rutgers University.}
+\thanks{I thank Virginia Oliveros, Richard Lau, David Redlawsk, Christopher Chambers-Ju, Jessica Price, Maria Akchurin, Kosuke Imai, and the 2016 Experimental Research Group in Political Psychology at Rutgers. This project was funded by the Center for the Experimental Study of Psychology and Politics at Rutgers University. Notice of IRB exemption Protocol \#E16-292 is kept in file at the Office of Research and Regulatory Affairs of Rutgers University.}
 \normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
 \normalsize \href{mailto:\filetext}{\texttt{\filetext}}\\
 \normalsize \href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
@@ -137,7 +137,7 @@ However, nowadays vote-buying seems to have declined considerably. \cite[201]{St
 
 
 % Hook 1
-We seem to know that vote-\emph{buyers} cannot afford this strategy any longer, not at least in a massive scale, thus making vote-buying a rare event. However, several questions remain unanswered. And worryingly, most of them pertain to vote-\emph{sellers}. What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling? Given that most of the emphasis so far has been devoted to studying vote-\emph{buying},\footnote{\cite{Hicken2015,Hicken2018,Corstange2012a,Nichter2014a} constitute very important exceptions.} prior \emph{empirical} studies do not offer satisfactory answers to these questions.\footnote{While reviewing the literature, \textcite{Vicente2009} makes it clear that most contributions on vote-selling are generally formal and theoretical, rather than empirical.} In fact, in a recent paper, \textcite{Nichter2014a} explain that studies continue to view clientelism typically as a top-down process, generally overlooking citizens' demands.
+We seem to know that vote-\emph{buyers} cannot afford this strategy any longer, not at least in a massive scale, thus making vote-buying a rare event. However, several questions remain unanswered. And worryingly, most of them pertain to vote-\emph{sellers}. What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling? Given that most of the emphasis so far has been devoted to studying vote-\emph{buying},\footnote{\cite{Hicken2015,Hicken2018,Corstange2012a,Nichter2014a} constitute very important exceptions.} prior \emph{empirical} studies do not offer satisfactory answers to these questions.\footnote{While reviewing the literature, \textcite{Vicente2009} make it clear that most contributions on vote-selling are generally formal and theoretical, rather than empirical.} In fact, in a recent paper, \textcite{Nichter2014a} explain that studies continue to view clientelism typically as a top-down process, generally overlooking citizens' demands.
 
 
 
@@ -265,7 +265,7 @@ The experiment was framed as a study about crime in the U.S., not as a study abo
 % figure: experimental design.
 \begin{figure}[H]
 \includegraphics[scale=.7, center]{Experimental_Flow_Figure.pdf}
-\caption{{\bf Experimental Flow of the List Design\label{experimental:design:fig}}. \\\hspace{\textwidth} {\bf Note}: This figure shows the flow of the list experiment. Notice that (1) the order in which experimental subjects answered both the direct question and the list experiment was randomized, (2) there are two treatments, one with a selling price of \$100 (``low''), and one with a selling price of \$500.}\centering
+\caption{{\bf Experimental Flow of the List Design.\label{experimental:design:fig}}. \\\hspace{\textwidth} {\bf Note}: This figure shows the flow of the list experiment. Notice that (1) the order in which experimental subjects answered both the direct question and the list experiment was randomized, (2) there are two treatments, one with a selling price of \$100 (``low''), and one with a selling price of \$500.}\centering
 \end{figure}
 
 
@@ -295,7 +295,7 @@ Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 
 In turn, subjects randomly assigned to the treatment condition answered one the following two treatments. The ones assigned to the ``low'' price condition, read and answered the following question:
 
-\pagebreak[3]
+\pagebreak[10]
 \begin{lstlisting}[frame=lrtb]
 Now, you will have to type HOW MANY, if any, of the following illegal activities you might engage in, assuming you would not go to jail.
 
@@ -483,15 +483,25 @@ While the paper is rather descriptive in nature, the author believes that the ex
 
 
 %
-Future research should also consider different values placed on different offices.\footnote{I owe this point to Chris Chambers-Ju.} It is reasonable to think that Presidential, Senate, House, state legislature, mayor, and City Council elections, follow different incentives and constrains to buy and sell votes. Not only that, future research should consider blocking on party identification. For example, designing a more complex experiment, where not only the price varies (like it does in the presented design), but also where the vote-selling treatment is partisan. \emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
+Future research should also consider different values placed on different offices.\footnote{I owe this point to \fbox{\phantom{Chris Chambers-Ju}}.} It is reasonable to think that Presidential, Senate, House, state legislature, mayor, and City Council elections, follow different incentives and constrains to buy and sell votes. Not only that, future research should consider blocking on party identification. For example, designing a more complex experiment, where not only the price varies (like it does in the presented design), but also where the vote-selling treatment is partisan. \emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
 
 
 
-
+% References
 \newpage
 \pagenumbering{Roman}
 \setcounter{page}{1}
 \printbibliography
+
+
+% EndNotes
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\linespread{2} % 1.5, Line spacing - Palatino needs more space between lines
+\theendnotes
+\linespread{1.5} % 1.5, Line spacing - Palatino needs more space between lines
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -552,7 +562,7 @@ count <- comma(as.numeric(count)) # add comma
 \subsection{Experimental Manipulations and Vignettes}
 
 
-\paragraph{Distractor Paragraph} \hypertarget{distractor.vignette}{The next paragraph} was used to distract subjects from the main purpose of the study, and also to define what vote-selling was.
+\paragraph{Distractor Paragraph.} \hypertarget{distractor.vignette}{The next paragraph} was used to distract subjects from the main purpose of the study, and also to define what vote-selling was.
 
 \begin{lstlisting}[frame=lrtb]
 Washington, D.C.- A department store downtown had a robbery incident last week, reporting several missing iPods from their inventory. Authorities also inform that a group of local residents are trying to ``sell'' their votes to political candidates ahead of a local election for city council. Residents approached some of the candidates running for office and offered to vote for that candidate in return for monetary compensation. In a different subject matter, the local police station released a report on driving habits and behaviors in the Capitol district last week. Finally, cyber-crime has become an increasingly serious issue in the area in the past few year.
@@ -562,7 +572,7 @@ Washington, D.C.- A department store downtown had a robbery incident last week, 
 % A close associate of a politician offers to give you $100 for your vote. All you have to do is take a cellphone pic of your marked ballot before you cast it
 
 
-\paragraph{Direct Question} \hypertarget{direct.question}{All subjects} read the next paragraph, and then answered the direct question:
+\paragraph{Direct Question.} \hypertarget{direct.question}{All subjects} read the next paragraph, and then answered the direct question:
 
 \begin{lstlisting}[frame=lrtb]
 Now you will be entered into a random lottery for the opportunity to do ONE of the illegal things you just read before. This means that you might be randomly offered to hypothetically do ANY of the activities mentioned before.
@@ -576,13 +586,13 @@ After a random assignment, you have been selected for the opportunity to hypothe
 \pagebreak
 
 
-\paragraph{Pricing Experiment} \hypertarget{pricing.experiment}{Subjects who answered ``yes'' to the direct question}, were immediately asked to price their votes. 
+\paragraph{Pricing Experiment.} \hypertarget{pricing.experiment}{Subjects who answered ``yes'' to the direct question}, were immediately asked to price their votes. 
 
 
 % figure: pricing experiment.
 \begin{figure}[h]
 \includegraphics[scale=.7, center]{pricing_experiment.jpeg}
-\caption{Pricing Experiment}\centering\label{fig:pricing:experiment}
+\caption{Pricing Experiment.}\centering\label{fig:pricing:experiment}
 \end{figure}
 \vspace*{\fill}
 \pagebreak
@@ -630,7 +640,7 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 
 \begin{table}[H]
 \centering
-\caption{Test for List Experiment Design Effects}
+\caption{Test for List Experiment Design Effects.}
 \label{tab:design:effect}
 \begin{tabular}{c|cc|cc|}
 \cline{2-5}
@@ -679,7 +689,7 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 
 
 % barplot:figure:control:treatment
-<<us:map:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap='Geographical Distribution of Survey Respondents broken by Party Identification', fig.align='center', fig.width=6, fig.height=4,dpi=1000 ,cache = FALSE>>=
+<<us:map:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap='Geographical Distribution of Survey Respondents broken by Party Identification.', fig.align='center', fig.width=6, fig.height=4,dpi=1000 ,cache = FALSE>>=
 
 
 @

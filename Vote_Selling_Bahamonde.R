@@ -679,7 +679,7 @@ grid_arrange_shared_legend(
 individual.predictions.plot.note <- paste(
         "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the `low' and `high' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the `low' and `high' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
+        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the ``low'' and ``high'' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the ``low'' and ``high'' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
         "\n")
 ## ----
 
@@ -1239,7 +1239,7 @@ predicting.vote.selling.plot
 predicting.vote.selling.plot.note <- paste(
         "{\\bf Predicting Vote Selling: Broken Democratic Dimensions}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste(paste("{\\bf Note}: Figure shows the estimated dimension associated with vote-selling. After estimating the individual propensities for vote-selling via the list experiment, those estimations became the dependent variable in the conjoint portion. The plot shows which of Dahl's dimensions are associated with vote-selling.", as.character(if (1.96==ZScore) {"95\\%"} else { print("Error:Check CI") }), "confidence intervals included. As per \\autoref{fig:list:analysis:individual:predictions:plot}, only statistically significant estimations were included. N ="), format(length(resid(model.vs.1)),big.mark=",",scientific=FALSE)), ". Note that every individual performed five tasks, i.e. ``voted'' in five elections.", sep=""), "\n")
+        paste(paste(paste("{\\bf Note}: Figure shows the estimated dimension associated with vote-selling. After estimating the individual propensities for vote-selling via the list experiment, those estimations became the dependent variable in the conjoint portion. The plot shows which of Dahl's dimensions are associated with vote-selling.", as.character(if (1.96==ZScore) {"95\\%"} else { print("Error:Check CI") }), "confidence intervals included. As per \\autoref{fig:list:analysis:individual:predictions:plot}, only statistically significant estimations were included. N ="), format(length(resid(model.vs.1)),big.mark=",",scientific=FALSE)), ". Note that every individual performed five tasks, i.e. ``voted'' in five ``elections.''", sep=""), "\n")
 ## ----
 
 
