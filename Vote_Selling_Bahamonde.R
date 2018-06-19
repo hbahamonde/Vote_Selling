@@ -795,7 +795,7 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (`liars'). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
+        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (``liars''). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
@@ -2014,7 +2014,7 @@ grid_arrange_shared_legend(
         ncol = 2, nrow = 2)
 
 predictions.independent.variables.plot.note <- paste(
-        "{\\bf List Experiment: Predicting Vote-Selling (Individual Characteristics)}.",
+        "{\\bf List Experiment: Predicting Vote-Selling}.",
         "\\\\\\hspace{\\textwidth}", 
         paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), in this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
@@ -2077,7 +2077,7 @@ lapop.bar.chart.p.note <- paste(
         "\\\\\\hspace{\\textwidth}", 
         paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: `In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes, or never?'"),
+        paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: ``In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes, or never?''"),
         "\n")
 ## ----
 
@@ -2175,7 +2175,7 @@ price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype
 price.plot.note <- paste(
         "{\\bf Pricing Experiment: Ideal Selling Price}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: Subjects who answered `yes' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the `too cheap' and `to expensive' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
+        paste(paste("{\\bf Note}: Subjects who answered ``yes'' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the ``too cheap'' and ``to expensive'' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
         "\n")
 
 ## ---- 
