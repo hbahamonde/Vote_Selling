@@ -48,10 +48,14 @@
 % ABSTRACT
 %----------------------------------------------------------------------------------------
 \begin{abstract}
-\input{/Users/hectorbahamonde/RU/research/Vote_Selling/abstract.txt}\unskip
+\scriptsize{\input{/Users/hectorbahamonde/RU/research/Vote_Selling/abstract.txt}\unskip}
 \end{abstract}
 
-\hspace*{1.3cm}{\bf Please consider downloading the last version of the paper} \href{https://github.com/hbahamonde/Vote_Selling/blob/master/Bahamonde_VoteSellingUS.pdf}{\texttt{{\color{red}here}}}.
+
+\keywords{vote-buying; vote-selling; clientelism; conjoint experiments; list experiments; United States}
+
+
+%\hspace*{1.3cm}{\bf Please consider downloading the last version of the paper} \href{https://github.com/hbahamonde/Vote_Selling/blob/master/Bahamonde_VoteSellingUS.pdf}{\texttt{{\color{red}here}}}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -148,7 +152,7 @@ We seem to know that vote-\emph{buyers} cannot afford this strategy any longer, 
 
 
 % LAPOP Bar Chart
-<<lapop:bar:chart:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=lapop.bar.chart.p.note, fig.align='center', fig.width=4, fig.height=2,dpi=100 ,cache = FALSE>>=
+<<lapop:bar:chart:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=lapop.bar.chart.p.note, fig.align='center', fig.width=4, fig.height=2,dpi=100 ,cache = FALSE, include = TRUE>>=
 
 
 @
@@ -208,7 +212,7 @@ Political machines were not only oiled with money. On the one hand, many ``ticke
 
 With all these resources flooding the polls on election day, voting was truly a Dantesque spectacle. On election day, as ``men moved about the polling place, party agents would often offer them liquid refreshment, almost always whisky, as an enticement to vote their ticket.''\footnote{\cite[57]{Bensel:2004aa}.} Moreover, party machines would make sure that ``liquor was both freely available and consumed to excess.''\footnote{\cite[20]{Bensel:2004aa}.} ``As a result, the street or square outside the voting window frequently became a kind of alcoholic festival in which many men were clearly and spectacularly drunk [up to the point that] some could not remember whether or not they had voted.''\footnote{\cite[20]{Bensel:2004aa}.} American elections, even before the Gilded Age, were engineered according to these ``principles.'' When running for the Virginia House, a young George Washington ``spent nearly 40 pounds---a considerable sum for the day---on gallons of rum, wine, brandy, and beer; all used to win over the votes of his neighbors.''\footnote{\cite[5]{Campbell:2005aa}. \$1,250 in 2017 U.S. dollars. Conversion based on \cite{Williamson:2018aa}.} In summary, the environment outside the voting window was pitiful. Crowds were so drunk that not only voters were accustomed to fights outside the polls,\footnote{\cite[685]{Argersinger1985} and \cite[3]{Campbell:2005aa}. 	In turn, \cite[13]{Bensel:2004aa} explains that ``[a]lmost anything was permitted in this public space in terms of speech, electioneering, and, all too often, physical intimidation [while] election officials had no authority to maintain order outside.''} but also ``were throughly inebriated by the time they turned in their ticket.''\footnote{\cite[57]{Bensel:2004aa}.} 
 
-The Australian ballot system lowered the frequency of most of these malpractices significantly.\footnote{\cite[1221]{Rusk1970} and \cite[836]{Reynolds1986}.} However, as vote-selling and vote-buying were so embedded into what was considered normal,\footnote{\cite[195]{Reynolds1980} explains that during ``the Gilded Age (1877-1896) parties had so integrated vote buying into their operations that the transactions were common everywhere.''} the immediate effect of the Australian system was to lower turnout levels.\footnote{\cite[851]{Reynolds1986}.} 
+%The Australian ballot system lowered the frequency of most of these malpractices significantly.\footnote{\cite[1221]{Rusk1970} and \cite[836]{Reynolds1986}.} However, as vote-selling and vote-buying were so embedded into what was considered normal,\footnote{\cite[195]{Reynolds1980} explains that during ``the Gilded Age (1877-1896) parties had so integrated vote buying into their operations that the transactions were common everywhere.''} the immediate effect of the Australian system was to lower turnout levels.\footnote{\cite[851]{Reynolds1986}.} 
 
 
 Even while the \emph{modus operandi} of clientelism has changed, and both the frequency of vote-buying and the importance of party machines have declined,\footnote{\cite[230]{Stokes:2013cj} explain that ``party machines are a thing of the past.''} there are still some contemporary  accounts of vote-buying in American elections. For instance, \cite[243-244]{Campbell:2005aa} explains how a Democratic leader in Logan County, West Virginia, accepted \$35,000 in cash in exchange of supporting Senator Kennedy. As the Democratic leader explains it, ``this money was for one purpose: `We bought votes with it. Regardless of what you want to believe, that's the way real politics works.''' Other examples are the famous primary election in March 1972 in Chicago, where twenty \emph{Tribune} reporters managed to act as precinct officials. As one reported, ``[when] one voter was offered a ballot by a precinct official, the voter casually replied, `I already have one.'\unskip''\footnote{\cite[262]{Campbell:2005aa}.} And in the 1980s, in the coal-rich Appalachian mountains, ``[c]oal companies still exercised considerable leverage in election contests [where] liquor and cash were displayed in large quantities.''\footnote{\cite[275]{Campbell:2005aa}.} 
@@ -312,7 +316,7 @@ However, the ones assigned to the ``high'' price condition, read exactly the sam
 
 
 % barplot:figure:control:treatment
-<<barplot:figure:control:treatment, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=barplot.descriptive.plot.note, fig.align='center', fig.width=5, fig.height=2,dpi=100 ,cache = FALSE>>=
+<<barplot:figure:control:treatment, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=barplot.descriptive.plot.note, fig.align='center', fig.width=5, fig.height=2,dpi=100, cache = FALSE, include = TRUE>>=
 
 
 @
@@ -323,12 +327,12 @@ Given that the focus is to outline some conditions under which voters would sell
 
 
 
-\paragraph{List Experiment: Would U.S. citizens sell their vote?} Following the advice of \cite{Blair2012} and \cite{Imai2014}, the list data were analyzed using a statistical multivariate approach.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}},'' while the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The rest of the arguments were left at their default values. \autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (shown in \autoref{fig:list:analysis:individual:predictions:plot}). Using this information, it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' 
+\paragraph{List Experiment: Would U.S. citizens sell their vote?} Following the advice of \cite{Blair2012} and \cite{Blair2015}, the list data were analyzed using a statistical multivariate approach.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}},'' while the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The rest of the arguments were left at their default values. \autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (shown in \autoref{fig:list:analysis:individual:predictions:plot}). Using this information, it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' 
 
 
 
 % list:analysis:social:desirability:plot
-<<list:analysis:social:desirability:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=soc.des.plot.note, fig.align='center', fig.width=3.5, fig.height=3,dpi=100 ,cache = FALSE>>=
+<<list:analysis:social:desirability:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=soc.des.plot.note, fig.align='center', fig.width=3.5, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
 
 
 @
@@ -345,7 +349,7 @@ There seem to be two conflicting pictures. On the one hand, and leaving concerns
 
 
 % list:analysis:social:desirability:plot
-<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100 ,cache = FALSE>>=
+<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
 
 
 @
@@ -410,7 +414,7 @@ President Autonomy 								  & resident CAN rule without Congress 							& Presi
 \end{table}
 
 \afterpage{
-<<conjoint.democratic.values.american.public.plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=conjoint.democratic.values.american.public.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000 ,cache = FALSE>>=
+<<conjoint.democratic.values.american.public.plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=conjoint.democratic.values.american.public.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
 }
@@ -424,11 +428,11 @@ Statistically, the ACME was estimated. As explained by \textcite[20]{Hainmueller
 
 \paragraph{Conjoint Experiment: Democratic Values and Vote Selling.} 
 
-The following portion of the analyses identified which of these democratic sub-dimensions should fail to produce likely vote-sellers. The statistical analyses performed on list experiment data allowed estimating individual probabilities of vote-selling (as shown in \autoref{fig:list:analysis:individual:predictions:plot}). Next, the predicted individual probabilities of vote-selling were arranged on the left-hand side of the ACME linear regression, with the set of chosen attributes (i.e. the ``CAN'' and ``CANNOT'') on the right-hand side of the equation.\footnote{More formally, for every sub-dimension, the next OLS model was fitted: $y_{i}=\beta_{0}+\beta_{1}\text{Observed Choice}_{i}+\epsilon_{i}$, where $y_{i}$ is the predicted probability of vote selling (obtained via the methods formalized in \cite{Blair2015}), for all survey respondents $i$.} Using this method, it was possible to regress vote-selling on the chosen democratic sub-dimensions. This allowed investigating which dimensions should fail to produce likely vote-sellers.
+The following portion of the analyses identified which of these democratic sub-dimensions should fail to produce likely vote-sellers. The statistical analyses performed on list experiment data allowed estimating individual probabilities of vote-selling (as shown in \autoref{fig:list:analysis:individual:predictions:plot}). Next, the predicted individual probabilities of vote-selling were arranged on the left-hand side of the ACME linear regression, with the set of chosen attributes (i.e. the ``CAN'' and ``CANNOT'') on the right-hand side of the equation.\footnote{More formally, for every sub-dimension, the next OLS model was fitted: $y_{i}=\beta_{0}+\beta_{1}\text{Observed Choice}_{i}+\epsilon_{i}$, where $y_{i}$ is the predicted probability of vote selling (obtained via the methods formalized in \cite{Blair2012}), for all survey respondents $i$.} Using this method, it was possible to regress vote-selling on the chosen democratic sub-dimensions. This allowed investigating which dimensions should fail to produce likely vote-sellers.
 
 
 \afterpage{
-<<conjoint:analysis:predicting:vote:selling:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predicting.vote.selling.plot.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000 ,cache = FALSE>>=
+<<conjoint:analysis:predicting:vote:selling:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predicting.vote.selling.plot.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
 }
@@ -444,7 +448,7 @@ Vote-selling seems to be associated with lower levels of support of a system fra
 
 \afterpage{
 % predictions:independent:variables:plot
-<<predictions:independent:variables:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predictions.independent.variables.plot.note, fig.align='center', fig.width=15, fig.height=12,dpi=5000 ,cache = FALSE>>=
+<<predictions:independent:variables:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predictions.independent.variables.plot.note, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
 \clearpage
@@ -479,11 +483,7 @@ In turn, the conjoint experiment reveals that U.S. citizens have consistently ``
 Moving forward, \emph{What are the implications that a $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the representative sample are willing to sell their votes? Is that considered ``high'' or ``low''?} While there is a big jump between realized and hypothetical behaviors, the results presented in this paper are still worrisome. If that jump is made, this proportion is roughly comparable to what others have found in developing countries. Employing a similar strategy, \cite[210]{Gonzalez-Ocantos2012} find that 24\% of Nicaraguan votes were bought. In turn, the findings presented in this paper are below of what \cite[493]{Corstange2012a} finds for the Lebanon, where 55\% of voters sold their votes. In any case, the existence of a critical mass willing to sell their votes in the United States, has broader implications for American democracy. This is particularly important in times where the integrity of elections, and the democratic system in general, have been delegitimized by the President of the United States himself,\footnote{\cite[61,185]{Levitsky:2018aa}. They argue that ``no major presidential candidate had cast such doubt on the democratic system since 1860.''} possibly denoting a structural democratic legitimacy crisis. 
 
 
-While the paper is rather descriptive in nature, the author believes that the exercise was rather worth pursuing. Not only presenting experimental evidence about a large critical mass willing to sell their votes in a developed country was novel. As explained in the paper, much inferential leverage is derived when, given our priors, counterintuitive evidence is found in a ``least-likely'' design. It was well beyond the goal of this paper to investigate the long-term structural causes of vote-selling in the U.S., as well as the substantive implications of democratic attitudes on vote-selling. Hopefully, the paper sets the stage for future research, and encourages other scholars to field the experimental designs presented in this paper, including the conjoint experiment, in a comparative setting, where both developed and developing countries are included. 
-
-
-%
-Future research should also consider different values placed on different offices.\footnote{I owe this point to \fbox{\phantom{Chris Chambers-Ju}}.} It is reasonable to think that Presidential, Senate, House, state legislature, mayor, and City Council elections, follow different incentives and constrains to buy and sell votes. Not only that, future research should consider blocking on party identification. For example, designing a more complex experiment, where not only the price varies (like it does in the presented design), but also where the vote-selling treatment is partisan. \emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
+While the paper is rather descriptive in nature, the author believes that the exercise was rather worth pursuing. Not only presenting experimental evidence about a large critical mass willing to sell their votes in a developed country was novel. As explained in the paper, much inferential leverage is derived when, given our priors, counterintuitive evidence is found in a ``least-likely'' design. It was well beyond the goal of this paper to investigate the long-term structural causes of vote-selling in the U.S., as well as the substantive implications of democratic attitudes on vote-selling. Hopefully, the paper sets the stage for future research, and encourages other scholars to field the experimental designs presented in this paper, including the conjoint experiment, in a comparative setting, where both developed and developing countries are included. Future research should also consider different values placed on different offices.\footnote{I owe this point to \fbox{\phantom{Chris Chambers-Ju}}.} It is reasonable to think that Presidential, Senate, House, state legislature, mayor, and City Council elections, follow different incentives and constrains to buy and sell votes. Not only that, future research should consider blocking on party identification. For example, designing a more complex experiment, where not only the price varies (like it does in the presented design), but also where the vote-selling treatment is partisan. %\emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
 
 
 
@@ -665,13 +665,17 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 \subsection{Statistical Analysis of the List Experiment: Individual Probabilities of Vote-Selling}
 
 % list:analysis:individual:predictions:plot
-<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100 ,cache = FALSE>>=
+<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100, cache = FALSE, include = TRUE>>=
 
 
 @
 
 \vspace*{\fill}
 \pagebreak
+
+
+
+
 
 
 
