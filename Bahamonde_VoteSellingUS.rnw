@@ -495,12 +495,12 @@ Future research should also consider different values placed on different office
 
 
 % EndNotes
-\newpage
-\pagenumbering{Roman}
-\setcounter{page}{1}
-\linespread{2} % 1.5, Line spacing - Palatino needs more space between lines
-\theendnotes
-\linespread{1.5} % 1.5, Line spacing - Palatino needs more space between lines
+%\newpage
+%\pagenumbering{Roman}
+%\setcounter{page}{1}
+%\linespread{2} % 1.5, Line spacing - Palatino needs more space between lines
+%\theendnotes
+%\linespread{1.5} % 1.5, Line spacing - Palatino needs more space between lines
 
 
 
