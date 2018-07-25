@@ -20,7 +20,7 @@
 \large
 \textsc{Hector Bahamonde}\\ 
 \thanks{I thank Virginia Oliveros, Richard Lau, David Redlawsk, Christopher Chambers-Ju, Jessica Price, Maria Akchurin, Kosuke Imai, and the 2016 Experimental Research Group in Political Psychology at Rutgers. This project was funded by the Center for the Experimental Study of Psychology and Politics at Rutgers University.}
-\normalsize Postdoctoral Fellow $\bullet$ Center For Inter-American Policy \& Research $\bullet$ Tulane University\\
+\normalsize Assistant Professor $\bullet$ Instituto de Ciencias Sociales $\bullet$ O$'$Higgins University\\
 \normalsize \href{mailto:\filetext}{\texttt{\filetext}}\\
 \normalsize \href{http://www.hectorbahamonde.com}{\texttt{www.HectorBahamonde.com}}
 \vspace{-5mm}
