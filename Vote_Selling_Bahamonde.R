@@ -2073,7 +2073,7 @@ lapop.bar.chart.p = ggplot(clientelism, aes(clientelism)) +
 lapop.bar.chart.p
 ### defining legend, title and notes.
 lapop.bar.chart.p.note <- paste(
-        "{\\bf Frequency of Clientelism in the U.S. (2010)}.",
+        "{\\bf Frequency of Clientelism in the United States (2010)}.",
         "\\\\\\hspace{\\textwidth}", 
         paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
         "\\\\\\hspace{\\textwidth}", 
