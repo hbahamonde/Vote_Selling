@@ -201,7 +201,7 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 # use this to explain plot in the paper
 barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
-        "{\\bf Frequency and Percentages of Subjects Declaring How Many (if Any) Illegal Things They Would Do}.",
+        "{\\bf Frequency and Percentages of Subjects Declaring How Many (if any) Illegal Things They Would Do}.",
         "\\\\\\hspace{\\textwidth}", 
         "{\\bf Note}: Notice that the X-axis denotes the number of items, not which ones.",
         "\n")
@@ -795,7 +795,7 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (``liars''). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the idea behind having two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
+        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (``liars''). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the reason for two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
@@ -1239,7 +1239,7 @@ predicting.vote.selling.plot
 predicting.vote.selling.plot.note <- paste(
         "{\\bf Predicting Vote Selling: Broken Democratic Dimensions}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste(paste("{\\bf Note}: Figure shows the estimated dimension associated with vote-selling. After estimating the individual propensities for vote-selling via the list experiment, those estimations became the dependent variable in the conjoint portion. The plot shows which of Dahl's dimensions are associated with vote-selling.", as.character(if (1.96==ZScore) {"95\\%"} else { print("Error:Check CI") }), "confidence intervals included. As per \\autoref{fig:list:analysis:individual:predictions:plot}, only statistically significant estimations were included. N ="), format(length(resid(model.vs.1)),big.mark=",",scientific=FALSE)), ". Note that every individual performed five tasks, i.e. ``voted'' in five ``elections.''", sep=""), "\n")
+        paste(paste(paste("{\\bf Note}: Figure shows the estimated dimension associated with vote-selling. After estimating the individual propensities for vote-selling via the list experiment, those estimations became the dependent variable in the conjoint portion. The plot shows which of Dahl's dimensions are associated with vote-selling.", as.character(if (1.96==ZScore) {"The 95\\%"} else { print("Error:Check CI") }), "confidence intervals are included. As per \\autoref{fig:list:analysis:individual:predictions:plot}, only statistically significant estimations were included. N ="), format(length(resid(model.vs.1)),big.mark=",",scientific=FALSE)), ". Note that every individual performed five tasks, i.e. ``voted'' in five ``elections.''", sep=""), "\n")
 ## ----
 
 
@@ -1405,7 +1405,7 @@ conjoint.democratic.values.american.public.plot
 conjoint.democratic.values.american.public.note <- paste(
         "{\\bf Democratic Values of the American Public: A Conjoint Experimental Approach}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: Besides answering the list experiment, survey respondents also answered a conjoint experiment. Following the advice of \\cite{Hainmueller2014a}, the ACME for every democratic sub-dimension (as conceptualized by \\cite{Dahl1971,ODonnell1998,Luna2006}) was computed. The figure shows estimated preferences towards different democratic sub-dimensions. For instance, and regarding the ``democratic'' dimension, survey respondents systematically value having political rights in the next two elections as opposed to not have them. Similarly, and regarding the ``republican'' component, survey respondents systematically value the role of Congress (as opposed to a system where the President ``CAN'' rule without Congress).", as.character(if (1.96==ZScore) {"95\\%"} else { print("Error:Check CI") })
+        paste(paste("{\\bf Note}: Besides answering the list experiment, survey respondents also answered a conjoint experiment. Following the advice of \\cite{Hainmueller2014a}, the ACME for every democratic sub-dimension (as conceptualized by \\cite{Dahl1971,ODonnell1998,Luna2006}) was computed. The figure shows estimated preferences towards different democratic sub-dimensions. For instance, and regarding the ``democratic'' dimension, survey respondents systematically value having political rights in the next two elections as opposed to not have them. Similarly, and regarding the ``republican'' component, survey respondents systematically value the role of Congress (as opposed to a system where the President ``CAN'' rule without Congress).", as.character(if (1.96==ZScore) {"The 95\\%"} else { print("Error:Check CI") })
                     , "confidence intervals are included. All observations were included. N =", format(length(resid(model.1)),big.mark=",",scientific=FALSE)), ".", sep=""), "\n")
 ## ---- 
 
@@ -2016,7 +2016,7 @@ grid_arrange_shared_legend(
 predictions.independent.variables.plot.note <- paste(
         "{\\bf List Experiment: Predicting Vote-Selling}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), in this figure are shown the predicted probabilities, and their corresponding ", ci.level*100, "\\% confidence intervals, of:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), this figure shows  the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the idea behind having two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
 ## ---- 
 
@@ -2175,7 +2175,7 @@ price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype
 price.plot.note <- paste(
         "{\\bf Pricing Experiment: Ideal Selling Price}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: Subjects who answered ``yes'' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the ``too cheap'' and ``to expensive'' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
+        paste(paste("{\\bf Note}: Subjects who answered ``yes'' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing experiment (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the ``too cheap'' and ``too expensive'' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
         "\n")
 
 ## ---- 
