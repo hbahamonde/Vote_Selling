@@ -203,7 +203,7 @@ barplot.descriptive.plot
 barplot.descriptive.plot.note <- paste(
         "{\\bf Frequency and Percentages of Subjects Declaring How Many (if any) Illegal Things They Would Do}.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: Notice that the X-axis denotes the number of items, not which ones.",
+        "{\\bf Note}: Notice that the X-axis denotes the number of items, not which ones. Percentages show proportions per condition.",
         "\n")
 ## ----
 
@@ -603,7 +603,8 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
               legend.position="bottom")
 
 # computing the sample size of the list experiment (which also determines the sample size in the conjoint portion) for the paper
-total.sample.size = formatC(c(nrow(indpred.p.high) + nrow(indpred.p.low)), format="d", big.mark=",")
+total.sample.size = as.character(formatC(c(nrow(indpred.p.high) + nrow(indpred.p.low)), format="d", big.mark=","))
+# this here converts well into RNW if \Sexpr{} is not between $$ signs.
 
 ## merging the two plots
 # load libraries

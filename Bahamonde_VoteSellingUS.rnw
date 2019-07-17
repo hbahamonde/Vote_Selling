@@ -52,10 +52,10 @@
 \end{abstract}
 
 
-\keywords{vote-buying; vote-selling; clientelism; conjoint experiments; list experiments; United States}
+\keywords{vote-buying; vote-selling; clientelism; list experiments; United States}
 
 
-\hspace*{1.3cm}{\bf Please consider downloading the last version of the paper} \href{https://github.com/hbahamonde/Vote_Selling/blob/master/Bahamonde_VoteSellingUS.pdf}{\texttt{{\color{red}here}}}.
+\vspace{3cm}\hspace*{1.3cm}{\bf Please consider downloading the last version of the paper} \href{https://github.com/hbahamonde/Vote_Selling/blob/master/Bahamonde_VoteSellingUS.pdf}{\texttt{{\color{red}here}}}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,13 +116,6 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 @
 
-<<conjoint:democratic:values:american:public:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
-
-@
-
-<<conjoint:analysis:predicting:vote:selling:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
-
-@
 
 
 % end knitr stuff
@@ -132,28 +125,13 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\section{Vote-Sellers \emph{and} Vote-Buyers}
-
-% general hook on advanced democracies, and the decline on clientelism// US Context.
-Many advanced democracies were the first clientelistic political systems. For instance, \textcite[200]{Stokes:2013cj} explain that in the nineteenth-century United States, ``vote buying was commonplace,'' and that it was ``the major urban political institution in the late nineteenth century'' \parencite[2]{Erie:1990aa}. In Chicago, New York City, Newark, and other large American cities, votes were exchanged for ``cash, food, alcohol, health care, poverty relief, and myriad other benefits'' \parencite[200]{Stokes:2013cj}. The street price of the right to vote freely was low. Bensel explains that ``[voters] handed in a party ticket in return for a shot of whiskey, a pair of boots, or a small amount of money'' (in \textcite[227]{Stokes:2013cj}). In general, students of American political development have analyzed vote-buying in detail, confirming both its early development and its generalized practice \parencite{Bensel:2004aa,Campbell:2005aa}.\footnote{For the British case during the Victorian era, see \textcite{Kam2016b}.} 
-
-Nowadays vote-buying seems to have declined considerably for two competing explanations. First, \textcite[201]{Stokes:2013cj} have shown that industrialization drove up the electorate's median income making vote-buying more expensive for party machines. However, \textcite[320]{Kitschelt2007} explain that ``it is not economic development that accounts for the [...] decline of [vote-buying],'' but lower levels of ``[s]tate involvement in the public sector.'' Regardless, clientelist linkages are now rare. In fact, \autoref{fig:lapop:bar:chart:plot} suggests---using survey data from the United States---that $\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)}$\% of respondents have ``never'' received a clientelistic offer from a political party.\footnote{A very small percentage ($\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Often"]) + as.numeric(table(clientelism)["Sometimes"]) * 100 ) / lapop.bar.chart.N, 1)}$\%) report to have received some kind of clientelistic offer from a political party.}
-
-
-% Hook 0
-Yet, the clientelism literature should ``bring the voters back in.'' There is a solid ``vote-buying'' literature, but we lack a proper ``vote-selling'' \emph{body} of research. A unified framework that stresses the preferences and incentives of both sellers \emph{and} buyers is missing. Thus, this paper's analytical contribution is to tackle this problem as a story of demand \emph{and} supply, by explicitly considering the preferences of those who have the votes (voters), \emph{and} that which demands them (parties).
-
-
-
-
-% Hook 1
-This reconceptualization is necessary since several questions remain unanswered---and worryingly, most pertain to vote-\emph{sellers}. For instance, \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?} Except for a number of important studies \parencite{Hicken2015,Hicken2018,Corstange2012a,Nichter2014a}, the emphasis remains on studying vote-\emph{buying}. In fact, \textcite{Nichter2014a} explain that studies continue to view clientelism typically as a top-down process, generally overlooking citizens' demands. 
-
-
+\section{Vote-Sellers and Vote-Buyers}
 
 % Hook 2
-%Prior research usually focuses on whether parties have attempted to buy votes, overlooking the question of whether citizens would sell their votes. 
-To illustrate the issue at hand, \autoref{fig:lapop:bar:chart:plot} shows responses to whether a candidate or a member of a political party has offered something in exchange for people's votes, \emph{completely ignoring voters'  preferences}. Indeed, the figure represents the canon of the clientelism literature, begging the question if survey respondents answering ``never'' \emph{would} still be willing to sell their votes. I contend that this \emph{demand-side bias} gives an incomplete picture because overlooking the supply-side gives the falsely optimistic impression that U.S. voters systematically \emph{oppose} vote-buying and ``thus'' almost \emph{never} engage in clientelism (as \autoref{fig:lapop:bar:chart:plot} strongly suggests). % Moreover, demand-side studies of clientelism have traditionally focused, with a few exceptions \parencite{Zarazaga2015a,Szwarcberg2013,Oliveros2016,Stokes:2013cj,Corstange2012a,Hicken2015a,Hicken2018,Bratton2008a} on what parties do by asking \emph{voters} about what parties do, introducing additional bias. %This \emph{reverse demand-side bias} might cause other problems too. For instance, not only asking (directly) survey respondents about illegal behaviors constitutes an important source of social desirability bias,\footnote{Actually suggesting that the number of \emph{never}(s) should be larger. See \textcite{Gonzalez-Ocantos2012}. However, and unfortunately, their focus is on vote-\emph{buying}, overlooking vote-\emph{selling} too. They ask whether ``candidates or activists gave [voters] a gift or did a favor.''} double-biasing these results. Also, \emph{indirectly} learning  about what parties do by asking voters, poses a number problems to causal inference. At least, individual responses should be  confounded with personal frustrations and/or negative opinions about political parties and politics in general.
+Prior research usually focuses on whether parties have attempted to buy votes \parencite[]{Vicente2014,Vicente2009,Rueda2016,Rueda2014a,Reynolds1980,Nichter2014,KiewietDeJonge2015,Inan2012a,GonzalezOcantos2014,Diaz-Cayeros2012,Brusco2004}. While this is an important question, unfortunately, it overlooks the issue of whether citizens would sell their votes. This reconceptualization is necessary since several questions remain unanswered---and worryingly, most pertain to vote-sellers. For instance, \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?}
+
+
+Except for a number of important studies \parencite{Hicken2015,Hicken2018,Corstange2012a,Nichter2014a}, the emphasis remains on studying vote-buying. In fact, \textcite{Nichter2014a} explain that studies continue to view clientelism typically as a top-down process, generally overlooking citizens' demands. To illustrate the issue at hand, \autoref{fig:lapop:bar:chart:plot} shows responses of U.S. citizens to whether a candidate or a member of a political party has offered something in exchange for people's votes, completely ignoring voters' preferences. The figure begs the question if survey respondents answering ``never'' would still be willing to sell their votes. 
 
 
 % LAPOP Bar Chart
@@ -162,36 +140,42 @@ To illustrate the issue at hand, \autoref{fig:lapop:bar:chart:plot} shows respon
 
 @
 
+% Hook 0
+This note proposes that the clientelism literature should ``bring the voters back in.'' There is a solid vote-buying literature, but we lack a proper vote-selling body of research. A unified framework that stresses the preferences and incentives of both sellers and buyers is missing. Thus, this paper's analytical contribution is to tackle this problem as a story of demand and supply, by explicitly considering the preferences of those who have the votes (voters), and that which demands them (parties). The current demand-side bias in the literature gives an incomplete picture because overlooking the supply-side gives the falsely optimistic impression that U.S. voters systematically oppose vote-buying and ``thus'' almost never engage in clientelism (as \autoref{fig:lapop:bar:chart:plot} strongly suggests). % Moreover, demand-side studies of clientelism have traditionally focused, with a few exceptions \parencite{Zarazaga2015a,Szwarcberg2013,Oliveros2016,Stokes:2013cj,Corstange2012a,Hicken2015a,Hicken2018,Bratton2008a} on what parties do by asking \emph{voters} about what parties do, introducing additional bias. %This \emph{reverse demand-side bias} might cause other problems too. For instance, not only asking (directly) survey respondents about illegal behaviors constitutes an important source of social desirability bias,\footnote{Actually suggesting that the number of \emph{never}(s) should be larger. See \textcite{Gonzalez-Ocantos2012}. However, and unfortunately, their focus is on vote-\emph{buying}, overlooking vote-\emph{selling} too. They ask whether ``candidates or activists gave [voters] a gift or did a favor.''} double-biasing these results. Also, \emph{indirectly} learning  about what parties do by asking voters, poses a number problems to causal inference. At least, individual responses should be  confounded with personal frustrations and/or negative opinions about political parties and politics in general.
 
-Importantly, most contributions to vote-selling are generally formal/theoretical rather than empirical \parencite{Vicente2009}. Thus, previous empirical studies do not offer satisfactory answers to questions about vote-selling. A methodological contribution of this paper is to shed some light on these issues by leveraging an experimental design.
+
+Most contributions to vote-selling are generally formal/theoretical rather than empirical \parencite{Vicente2009}. Additionally, most empirical studies have been conducted in developing countries. For instance, \textcite{GonzalezOcantos2014} designed a list experiment to study hypothetical vote-buying in Latin America. Thus, previous empirical studies do not offer satisfactory answers to questions about vote-selling. 
+
+
+A methodological contribution of this paper is to shed some light on these issues by leveraging a list experiment in a consolidated democracy.\footnote{But see \textcite[]{Levitsky:2018aa}.} Given that the paper focuses on eliciting truthful preferences (regardless of whether the behavior is hypothetical), list experiments seem the ideal strategy to pursue. 
+
 
 
 % summarize the paper, explain main findings.
-In 2016, a novel dataset representative at the national level was collected. A total of $\Sexpr{format(total.sample.size,big.mark=",",scientific=FALSE)}$ U.S. voters participated in a list and a conjoint experiments between March 2\emph{nd} and March 6\emph{th}. Thanks to this experiment, it was possible to identify the demographic factors that would make U.S. voters more likely to sell their votes, at what price, and whether they would systematically lie about selling their votes. In addition, a conjoint experiment was implemented to capture---in a novel and unbiased way---support levels towards democracy. Given that democracy is a multi-dimensional concept, the conjoint analyses suggests that lower levels of specific democratic principles are likely to produce hypothetical vote-sellers.
+In 2016, a novel dataset representative at the national level was collected. A total of \Sexpr{total.sample.size} U.S. voters participated in a list experiment between March 2\emph{nd} and March 6\emph{th}. Thanks to this experiment, it was possible to identify the demographic factors that would make U.S. voters more likely to sell their votes, at what price, and whether they would systematically lie about selling their votes.
 
 
-
-The results are striking. The list data from the nationally representative sample suggests that a sizable portion of U.S. voters are willing to sell their vote (approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\%), would sell it at an optimal price of \$$\Sexpr{round(line_intersection$x,0)}$, and would systematically lie about it (approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\%). Given that these data are representative at the national level---and that this is not a convenient sample---these findings are surprising. Democrats and liberals are systematically more likely to sell than Republicans. Education and income levels do not seem to have a systematic impact on vote-selling. In turn, the conjoint data suggest that while democratic values of U.S. voters are in good shape, survey respondents who systematically do not value horizontal accountability, particularly between the president and the Congress, sell their vote systematically more.
-
-
+The results are striking. The data suggest that a sizable portion of U.S. voters are willing to sell their vote (approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\%), would sell it at an optimal price of \$$\Sexpr{round(line_intersection$x,0)}$, and would systematically lie about it (approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\%). Given that these data are representative at the national level---and that this is not a convenient sample---these findings are surprising. Democrats and liberals are systematically more likely to sell than Republicans. Education and income levels do not seem to have a systematic impact on vote-selling.
 
 While this paper essentially describes the phenomena, it leaves for future research further considerations about the causes of hypothetical vote-selling in the United States. Ultimately, this paper is an attempt to bridge the gap between the supply side and the demand side, i.e. vote-sellers and vote-buyers, by reporting unprecedented high levels of hypothetical vote-selling. 
 
-While we believe describing a social phenomenon---such as the existence of high levels of willingness to sell---is still a valuable exercise \emph{per se}, it is more so if done in a ``crucial case'' design framework, specifically, a ``least-likely'' design. As \textcite[12]{Levy2008} explains, ``[i]nferential leverage from a least likely case is enhanced if our theoretical priors for the leading alternative explanation make it a most likely case for that theory.'' The vote-buying literature (which mostly considers developing countries) describes vote-sellers as poor \parencite[12]{Weitz-Shapiro:2014aa}, uneducated \parencite{GonzalezOcantos2014}, and undemocratic \parencite{Carlin2015}. Previous literature, then, informs us that the willingness to sell votes should be low, making the United States---a developed country---a ``hard case'' for vote-selling. Thus, the counterintuitive results presented in this paper make our efforts worth pursuing. 
+\section{The United States as a Case}
+
+% general hook on advanced democracies, and the decline on clientelism// US Context.
+Many advanced democracies were the first clientelistic political systems. For instance, \textcite[200]{Stokes:2013cj} explain that in the nineteenth-century United States, ``vote buying was commonplace,'' and that it was ``the major urban political institution in the late nineteenth century'' \parencite[2]{Erie:1990aa}. In Chicago, New York City, Newark, and other large American cities, votes were exchanged for ``cash, food, alcohol, health care, poverty relief, and myriad other benefits'' \parencite[200]{Stokes:2013cj}. The street price of the right to vote freely was low. Bensel explains that ``[voters] handed in a party ticket in return for a shot of whiskey, a pair of boots, or a small amount of money'' (in \textcite[227]{Stokes:2013cj}). In general, students of American political development have analyzed vote-buying in detail, confirming both its early development and its generalized practice \parencite{Bensel:2004aa,Campbell:2005aa}.\footnote{For the British case during the Victorian era, see \textcite{Kam2016b}.} 
+
+Nowadays vote-buying seems to have declined considerably for two competing explanations. First, \textcite[201]{Stokes:2013cj} have shown that industrialization drove up the electorate's median income making vote-buying more expensive for party machines. However, \textcite[320]{Kitschelt2007} disregard the industrialization hypothesis, focusing on the lower levels of ``[s]tate involvement in the public sector.'' Regardless, clientelist linkages are now rare. In fact, \autoref{fig:lapop:bar:chart:plot} suggests that $\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Never"]) * 100) / lapop.bar.chart.N, 1)}$\% of U.S. respondents have never received a clientelistic offer from a political party.
+
+
+
+While only a very small percentage ($\Sexpr{round(as.numeric(as.numeric(table(clientelism)["Often"]) + as.numeric(table(clientelism)["Sometimes"]) * 100 ) / lapop.bar.chart.N, 1)}$\%) report to have received some kind of clientelistic offer from a political party, we do not know whether survey respondents would sell their votes. This paper shows systematic evidence that they would. Describing a social phenomenon---such as the existence of high levels of willingness to sell---is still a valuable exercise \emph{per se}. However, it is more so if done in a ``crucial case'' design framework, specifically, a ``least-likely'' design. As \textcite[12]{Levy2008} explains, ``[i]nferential leverage from a least likely case is enhanced if our theoretical priors for the leading alternative explanation make it a most likely case for that theory.'' The vote-buying literature (which mostly considers developing countries) describes vote-sellers as poor \parencite[12]{Weitz-Shapiro:2014aa}, uneducated \parencite{GonzalezOcantos2014}, and undemocratic \parencite{Carlin2015}. Previous literature, then, informs us that the willingness to sell votes in the United States should be low, making it a hard case for vote-selling. Thus, the counterintuitive results presented in this paper make our efforts worth pursuing. 
+
+
 
 % Motivating next section
 % \emph{What do we know about likely vote-sellers in the U.S.?} Unfortunately, the literature has overlooked this important question. The author is not aware of any other study where voters of an advanced democracy are asked via an experimental design (and finding positive results) whether they would sell their votes.
 
-
-In a highly controversial pair of articles, \textcite[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States. They find that 26\% of millennials declare that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections'' (\textcite[10]{Foa2016a}, and \textcite{Foa2017b}). 
-
-These findings raise a number of (unanswered) questions regarding the actual value citizens give to American electoral institutions, possibly undermining the legitimacy of the integrity of voting. \emph{Is voting ``unimportant'' enough to make U.S. citizens sell their votes, if offered the possibility?} 
-
-Leveraging the ability of conjoint experiments to study attitudes towards multi-dimensional concepts, a conjoint experiment was implemented to study attitudes towards democracy. Democracy, as a concept, is multi-dimensional \parencite{Munck2002}. Consequently, to capture the complexity of these attitudes towards the concept, a novel method was developed. This strategy builds directly on \textcite[]{Carlin2017,Luna2006}, who challenge the standard practice of asking survey respondents \emph{directly} about their levels of democratic support. Instead, and building on \textcite[]{ODonnell1998}, I operationalize ``support for democracy'' by specifying three components---liberal, republican, and democratic---which in turn, have a number of sub-dimensions while each sub-dimension has its corresponding survey questions. Unsurprisingly, I find that levels of democratic support in the United States are high in all three dimensions. 
-
-
-In particular, using the estimated individual probabilities of vote selling---as per the list experiment---as dependent variables and the set of chosen attributes of the conjoint experiment as independent variables, I can observe which specific democratic principles show scores low enough to produce hypothetical vote-sellers. I find that likely-sellers have lower levels of support for checks on presidential power, which in turn pertains to what \textcite[]{ODonnell1998} calls ``horizontal accountability.'' The paper leaves the corresponding explanations for future research.
-
+In fact, in a highly controversial pair of articles, \textcite[7]{Foa2016a} document a deep ``crisis of democratic legitimacy [which] extends across a [...] wider set of indicators'' in the United States. They find that 26\% of millennials declare that it is ``unimportant'' in a democracy for people to ``choose their leaders in free elections'' (\textcite[10]{Foa2016a}, and \textcite{Foa2017b}). These findings raise a number of (unanswered) questions regarding the actual value citizens give to American electoral institutions, possibly undermining the legitimacy of the integrity of voting. Is voting unimportant enough to make U.S. citizens sell their votes, if offered the possibility?
 
 
 \hyperlink{democratic:disconnect}{The next section} gives an historical account of vote-buying and vote-selling in the United States. The section is also an effort to situate both within a historical context. It particularly shows how vote-buying and vote-selling transitioned from important institutions in American elections, to scarcely practiced electoral methods. The \hyperlink{data:analyses}{following section} explains the measurement, experimental strategies, and empirical findings. The last section offers some \hyperlink{discussion}{working hypotheses and possible lines for future research}.
@@ -201,7 +185,7 @@ In particular, using the estimated individual probabilities of vote selling---as
 
 \section{Vote-Selling and Patronage in the United States: A Brief Historical Account}
 
-\epigraph{\emph{``I took it because it was there to take. I know it isn't right, but this has been going on for so long that we no longer looked upon it as a crime.''}}{{\tiny American vote seller in 1910 \parencite[200]{Reynolds1980}.}}
+%\epigraph{\emph{``I took it because it was there to take. I know it isn't right, but this has been going on for so long that we no longer looked upon it as a crime.''}}{{\tiny American vote seller in 1910 \parencite[200]{Reynolds1980}.}}
 
 %\todo{add Keyssar:2000aa}
 
@@ -230,10 +214,10 @@ Political machines were not only oiled with money, however. On the one hand, man
 
 With all these resources flooding the polls on election day, voting was truly an interesting spectacle. On election day, party agents would offer voters plenty of liquor as an incentive to vote their ticket. Hence, ``the street or square outside the voting window frequently became a kind of alcoholic festival in which many men were clearly and spectacularly drunk [up to the point that] some could not remember whether or not they had voted'' \parencite[20]{Bensel:2004aa}. American elections, even before the Gilded Age, were engineered according to these ``principles.'' When running for the Virginia House, a young George Washington ``spent nearly 40 pounds---a considerable sum for the day---on gallons of rum, wine, brandy, and beer; all used to win over the votes of his neighbors'' \parencite[5]{Campbell:2005aa}.\footnote{\$1,250 in 2017 U.S. dollars. Conversion based on \textcite{Williamson:2018aa}.} %In summary, the environment outside the voting window was pitiful. Crowds were so drunk that not only voters were accustomed to fights outside the polls,\footnote{\textcite[685]{Argersinger1985} and \textcite[3]{Campbell:2005aa}. 	In turn, \textcite[13]{Bensel:2004aa} explains that ``[a]lmost anything was permitted in this public space in terms of speech, electioneering, and, all too often, physical intimidation [while] election officials had no authority to maintain order outside.''} but also ``were throughly inebriated by the time they turned in their ticket.''\footnote{\textcite[57]{Bensel:2004aa}.} 
 
-%The Australian ballot system lowered the frequency of most of these malpractices significantly.\footnote{\textcite[1221]{Rusk1970} and \textcite[836]{Reynolds1986}.} However, as vote-selling and vote-buying were so embedded into what was considered normal,\footnote{\textcite[195]{Reynolds1980} explains that during ``the Gilded Age (1877-1896) parties had so integrated vote buying into their operations that the transactions were common everywhere.''} the immediate effect of the Australian system was to lower turnout levels.\footnote{\textcite[851]{Reynolds1986}.} 
+The Australian ballot system lowered the frequency of most of these malpractices significantly \parencite[1221]{Rusk1970}. However, as vote-selling and vote-buying were so embedded into what was considered normal, the immediate effect of the Australian system was to lower turnout levels \parencite[851]{Reynolds1986}. 
 
 
-The \emph{modus operandi} of clientelism has changed, and both the frequency of vote-buying/selling, and the importance of party machines, have declined. Scholars have pointed out that ``party machines are a thing of the past'' \parencite[230]{Stokes:2013cj}. However, there are still some contemporary accounts of vote-buying/selling in American elections. For instance, \textcite[243-244]{Campbell:2005aa} explains how a Democratic leader in Logan County, West Virginia, accepted \$35,000 in cash in exchange for supporting Senator Kennedy. As the Democratic leader explained, ``this money was for one purpose: `We bought votes with it [...] that's the way real politics works.''' Other examples are the famous primary election in March 1972 in Chicago \parencite[262]{Campbell:2005aa} or the elections at the coal-rich Appalachian mountains during the 1980s \parencite[275]{Campbell:2005aa}. Similarly, non-academic sources find that during the 2010 elections, ``selling votes [was] common type of election fraud'' \parencite{Fahrenthold2012}. Others find that ``[v]ote-buying is extremely common in \emph{developed} [...] countries'' \parencite[1]{Leight2016b}. \emph{If vote-buying is ``a thing of the past,'' why do we still see it? How common vote-selling is, then?} The next section attempts to quantify---in an unbiased way---the willingness to sell votes in a representative sample of U.S. voters.
+The \emph{modus operandi} of clientelism has changed today, and both the frequency of vote-buying/selling, and the importance of party machines, have declined. Scholars have pointed out that ``party machines are a thing of the past'' \parencite[230]{Stokes:2013cj}. However, there are still some contemporary accounts of vote-buying/selling in American elections. For instance, \textcite[243-244]{Campbell:2005aa} explains how a Democratic leader in Logan County, West Virginia, accepted \$35,000 in cash in exchange for supporting Senator Kennedy. As the Democratic leader explained, ``this money was for one purpose: `We bought votes with it [...] that's the way real politics works.''' Other examples are the famous primary election in March 1972 in Chicago \parencite[262]{Campbell:2005aa} or the elections at the coal-rich Appalachian mountains during the 1980s \parencite[275]{Campbell:2005aa}. Similarly, non-academic sources find that during the 2010 elections, ``selling votes [was] common type of election fraud'' \parencite{Fahrenthold2012}. Others find that ``[v]ote-buying is extremely common in \emph{developed} [...] countries'' \parencite[1]{Leight2016b}. If vote-buying is ``a thing of the past,'' why do we still see it? How common is vote-selling, then? The next section attempts to quantify---in an unbiased way---the willingness to sell votes in a representative sample of U.S. voters.
 
 
 %
@@ -245,55 +229,73 @@ The \emph{modus operandi} of clientelism has changed, and both the frequency of 
 % Vote buying and selling was once common.  \emph{What are the attitudes of U.S. voters towards vote-selling and democracy?}
 
 
-\section{Vote-Selling in an Experimental Context}
+\section{Experimental Design}
 
 
 
 
 % how l.e. work
-\paragraph{List Experiment: Estimating Hypothetical Willingness to Sell.} The study of individual preferences depends on truthful answers. However, there might be circumstances under which individuals might not want to answer truthfully due to social pressure. For instance, to avoid being judged by the interviewer, individuals might not want to reveal that they have done something illegal, like selling one's vote. If this systematic source of bias is not considered, it will pose threats to causal inference. List experiments, among other techniques, are well suited to elicit truthful answers \parencite{Blair2015a}. %List experiments administer two lists of items; one to the control group, one to the treated group. Both lists look exactly the same (say, each one containing the three same items), however the treatment list includes (traditionally) a fourth item, which is the sensitive item related to some socially condemned behavior. 
+The study of individual preferences depends on truthful answers. However, there might be circumstances under which individuals might not want to answer truthfully due to social pressure. For instance, to avoid being judged by the interviewer, individuals might not want to reveal that they have done something illegal, like selling one's vote. If this systematic source of bias is not considered, it will pose threats to causal inference. 
+
+
+List experiments are well suited to elicit truthful answers \parencite{Blair2015a}. List experiments administer two lists of items; one to the control group, one to the treated group. Both lists look exactly the same (say, each one containing the three same items), however the treatment list includes (traditionally) a fourth item, which is the sensitive item related to some socially condemned behavior. Respondents are asked how many items on the list they would endorse, not which ones. For instance, if an experimental subject answers ``2,'' the interviewer will not know whether that number includes the sensitive item. Consequently, if the survey respondent wants to endorse the sensitive item, the answer will be ``masked'' by the other items in the list. This concealment makes this technique suitable to study socially condemned behaviors, such as vote-buying \parencite{Gonzalez-Ocantos2012,Hicken2018,Corstange2012a,Corstange2008,Blair2012}, drug use \parencite{Druckman2015}, sexual preferences \parencite{Labrie2000}, attitudes towards race \parencite[]{Kuklinski1997b,Redlawsk2010a}, among others. 
 
 %
-%Respondents are asked how many items in the list they would endorse, not which ones. This particular feature helps in learning about individual's preferences in a non-intrusive fashion. For instance, if an experimental subject answers ``2,'' the interviewer will not know whether that number includes the sensitive item. Consequently, if the survey respondent wants to endorse the sensitive item, the answer will be ``masked'' by the other items in the list. This concealment makes this technique suitable to study socially condemned behaviors, such as vote-buying,\footnote{\textcite{Gonzalez-Ocantos2012,Hicken2018,Corstange2012a,Corstange2008,Blair2012}.} drug use,\footnote{\textcite{Druckman2015}.} sexual preferences,\footnote{\textcite{Labrie2000}.} attitudes towards race,\footnote{\textcite[]{Kuklinski1997b,Redlawsk2010a}.} among others. 
-
-%
-%Methodologically, given that both lists are assigned at random, the mean number of nonsensitive activities that respondents endorsed should be equal across the two lists. However, if there are any differences in means, they should be attributed only to the presence of the sensitive item. \textcite[]{Blair2012} formalize two assumptions, namely, there are (1) ``no design effects'' (i.e. the inclusion of a sensitive item has no effect on respondents' answers to control items), and (2) ``no liars'' (i.e. respondents give truthful answers for the sensitive item).
+Methodologically, given that both lists are assigned at random, the mean number of nonsensitive activities that respondents endorsed should be equal across the two lists. However, if there are any differences in means between the two groups, the differences should be attributed only to the presence of the sensitive item.
 
 
 % statistical analyses of list experiments
-While list experiments are common, researchers unfortunately ``[utilize] only a difference in means estimator, and [do] not provide a measure of the sensitive item for each respondent'' \parencite[159]{Glynn2013}. Fortunately, \textcite[]{Blair2012}, and \textcite[]{Imai2014a} provide a statistical framework to more efficiently analyze list data. \nolinebreak[4]%explain that when the two assumptions hold, and given that the item count for types $y=0$ and $y=4$ are fully observed,\footnote{For an hypothetical treatment list of four items.} experimental subjects with item count types $y=1$, $y=2$ and $y=3$ can be inferred using multivariate techniques.
-There are a number of advantages in using statistical methods to analyze list experiments data. First, using statistical methods allows for inferring who answered ``yes'' to the sensitive item---in this paper, this is a fundamental feature. A statistical approach of the list data allowed us to infer individual probabilities of vote-selling. Second, the statistical analyses permitted studying the relationship between preferences over the sensitive item (i.e. vote-selling) and an individual's characteristics, such as gender, income, party identification, among others. Third, since a ``direct'' question over the sensitive item was included in the design, it was also possible to estimate the amount of social desirability bias.
+While list experiments are common, researchers unfortunately ``[utilize] only a difference in means estimator, and [do] not provide a measure of the sensitive item for each respondent'' \parencite[159]{Glynn2013}. \textcite[]{Blair2012} and \textcite[]{Imai2014a} provide a statistical framework to more efficiently analyze list data. They formalize two assumptions, namely, there are (1) ``no design effects'' (i.e. the inclusion of a sensitive item has no effect on respondents' answers to control items), and (2) ``no liars'' (i.e. respondents give truthful answers for the sensitive item). When the two assumptions hold, and given that the item count for types $y=0$ and $y=4$ are fully observed,\footnote{For an hypothetical treatment list of four items.} experimental subjects with item count types $y=1$, $y=2$ and $y=3$ can be inferred using multivariate techniques. 
+
+
+Using these statistical methods allows for inferring who answered ``yes'' to the sensitive item. Second, the statistical analyses permitted studying the relationship between preferences over the sensitive item (i.e. vote-selling) and an individual's characteristics, such as income, party identification, among others. Third, since a ``direct'' question over the sensitive item was included in the design, it was also possible to estimate the amount of social desirability bias.
+
+
+
 
 
 % my experiment
-\paragraph{Experimental Design.}\hypertarget{data:analyses}{Despite all these methodological refinements}, most studies about vote-buying/selling have been conducted in developing countries only, overlooking a number of interesting questions about developed countries. For instance, \textcite{GonzalezOcantos2014} designed a list experiment to study \emph{hypothetical vote-buying} norms in Latin America. Employing a similar strategy, this paper exploits variance of an online survey list experiment conducted in the United States in which subjects were asked whether they would sell their votes. Since the focus of this study is on the willingness to sell, the ability of list experiments to elicit truthful preferences regardless of whether the behavior is real, or hypothetical, seems the ideal strategy to pursue. The data (N=$\Sexpr{total.sample.size}$) were collected in 2016 and are representative at the national level.\footnote{The data were collected by \emph{Research Now SSI} between March 2\emph{nd} and March 6\emph{th}. Survey respondents belong to the online panel owned and administered by SSI. Notice of IRB exemption Protocol \#E16-292 is kept in file at the Office of Research and Regulatory Affairs of \fbox{\phantom{Rutgers}} University.}  \autoref{fig:us:map:plot} shows the geographical distribution of survey respondents broken by party identification.
+\hypertarget{data:analyses}{The data} (N=\Sexpr{total.sample.size}) were collected in 2016 and are representative at the national level.\footnote{The data were collected by \emph{Research Now SSI} between March 2\emph{nd} and March 6\emph{th}. Survey respondents belong to the online panel owned and administered by SSI. Notice of IRB exemption Protocol \#E16-292 is kept in file at the Office of Research and Regulatory Affairs of \fbox{\phantom{Rutgers}} University.}  \autoref{fig:us:map:plot} shows the geographical distribution of survey respondents broken by party identification.
 
 
 
 
 %
-The experiment was framed as a study about crime in the United States, not a study about vote-selling.\footnote{To isolate the risks and costs associated with engaging in any illegal activity, the next sentence was included:  ``assuming you would not go to jail.''} Before splitting the subject pool into their respective experimental conditions, participants were asked to read an \hyperlink{distractor.vignette}{excerpt} in which four illegal activities were described (including vote-selling). All were formatted as pieces of news. The idea was to explain to ``newsreaders'' what ``vote-selling'' was.%\footnote{According to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge.}
+The experiment was framed as a study about crime in the United States, not a study about vote-selling.\footnote{To isolate the risks and costs associated with engaging in any illegal activity, the next sentence was included:  ``assuming you would not go to jail.''} Before splitting the subject pool into their respective experimental conditions, participants were asked to read an excerpt\footnote{See \hyperlink{distractor.vignette}{the appendix} for wording.} in which four illegal activities were described (including vote-selling). All were formatted as pieces of news. The idea was to explain to ``newsreaders'' what ``vote-selling'' was.%\footnote{According to several pre-studies that were conducted, it was noticed that the concept of ``vote-selling'' was not common knowledge.}
 
 
 % figure: experimental design.
 \begin{figure}[H]
 \includegraphics[scale=.7, center]{Experimental_Flow_Figure.pdf}
-\caption{{\bf Experimental Flow of the List Design.\label{experimental:design:fig}}\\\hspace{\textwidth} {\bf Note}: This figure shows the flow of the list experiment. Notice that (1) the order in which experimental subjects answered both the direct question and the list experiment was randomized, (2) there are two treatments, one with a selling price of \$100 (``low'') and one with a selling price of \$500.}\centering
+\caption{{\bf Experimental Flow of the List Design.\label{experimental:design:fig}}\\\hspace{\textwidth} {\bf Note}: This figure shows the flow of the list experiment. Notice that (1) the order in which experimental subjects answered both the direct question and the list experiment was randomized, (2) there are two treatments, one with a selling price of \$100 (``low'') and one with a selling price of \$500 (``high'').}\centering
 \end{figure}
 
 
 %
-To prevent possible priming effects,\footnote{\textcite[54]{Blair2012} explain that asking the direct question to individuals in the treated group might bias the results.} and as suggested in \autoref{experimental:design:fig}, the order in which experimental subjects answered the \hyperlink{direct.question}{direct question}, and the list experiment, were randomly assigned. To be sure, all subjects answered both the direct question and the list experiment. To further prevent the possibility of biased answers when asking the direct question to individuals in the treated group, the direct question stated that there would be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned previously in the excerpt. However, all participants were directly asked whether they would be interested in selling their votes. Direct answers were then used to estimate the proportion of ``liars.'' 
+To prevent possible priming effects,\footnote{\textcite[54]{Blair2012} explain that asking the direct question to individuals in the treated group might bias the results.} and as suggested in \autoref{experimental:design:fig}, the order in which experimental subjects answered the direct question\footnote{See \hyperlink{direct.question}{the appendix} for wording.}, and the list experiment, was randomly assigned. To be sure, all subjects answered both the direct question and the list experiment. To further prevent the possibility of biased answers when asking the direct question to individuals in the treated group, the direct question stated that there would be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned previously in the excerpt. However, all participants were directly asked whether they would be interested in selling their votes. Direct answers were then used to estimate the proportion of ``liars.'' 
 
 
 % 
-Subjects answering ``yes'' to the direct question, answered as a follow-up a \hyperlink{pricing.experiment}{pricing experiment} in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.
+Subjects answering ``yes'' to the direct question, answered as a follow-up a pricing experiment in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Pricing experiments are straightforward (\autoref{fig:pricing:experiment}). Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.
 
 
 
-The list experiment contemplated one control, and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, and based on a number of pretests, I decided to consider both an arbitrarily low (\$100) \emph{or} an arbitrarily high (\$500) price. Participants randomly assigned to the treatment condition, only answered one of these two treatments. More than hard pricing tests, these two treatments account for (possible) different elasticities that might have interacted with individual socio-economic backgrounds, mainly income.\footnote{\textcite[1189]{Holland2015} explain that ``the poor are thought to be more susceptible to vote buying.''}
 
-Moving forward, subjects randomly assigned to the control condition answered the following question:
+% figure: pricing experiment.
+\begin{figure}[h]
+\frame{\includegraphics[scale=.6, center]{pricing_experiment.jpeg}}
+\caption{{\bf Pricing Experiment.\label{fig:pricing:experiment}}\\\hspace{\textwidth} {\bf Note}: As shown in \autoref{experimental:design:fig}, all participants slid both handles, one indicating which price was considered ``too cheap,'' one indicating which price was considered ``too high'' for one's vote. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.}\centering
+\end{figure}
+%\vspace*{\fill}
+%\pagebreak
+
+
+
+
+Moving forward, the list experiment contemplated one control, and two possible treatments, each with different vote-selling prices. Since it is difficult to price a vote, and based on a number of pretests, it was decided to consider both an arbitrarily low (\$100) or an arbitrarily high (\$500) price. Participants randomly assigned to the treatment condition, only answered one of these two treatments. More than hard pricing tests, these two treatments account for possible different elasticities that might have interacted with individual socio-economic backgrounds, mainly income.\footnote{\textcite[1189]{Holland2015} explain that ``the poor are thought to be more susceptible to vote buying.''}
+
+
+Subjects randomly assigned to the control condition answered the following question:
 
 %\pagebreak[10]
 \begin{lstlisting}[frame=lrtb]
@@ -319,12 +321,53 @@ In turn, subjects randomly assigned to the treatment condition answered one of t
 
 
 %
-%The paper acknowledges that there is considerable friction and transaction costs in the real world that might mean that actually creating a market for vote selling would not be easy. For instance, party identification might increase (or decrease) the cost of selling one's vote, presumably preventing (or fostering) the transaction. For instance, if the party of both sellers and buyers coincide, that might represent a win-win situation for both, presumably fostering vote-selling. The experimental design does not consider blocking on party identification, as that might have increased the number of cells considerably.\footnote{To $3\times2\times3=18$ cells: Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications. Such experiment is not only much more expensive, but statistically more complex.} %Having that in mind, the paper's aim is to explore the micro-dynamics of the willingness to sell the vote, presumably, in elections that are relatively non-partisan. 
+The paper acknowledges that there is considerable friction and transaction costs in the real world that might mean that actually creating a market for vote selling would not be easy. For instance, party identification might increase (or decrease) the cost of selling one's vote, presumably preventing (or fostering) the transaction. For instance, if the party of both sellers and buyers coincide, that might represent a win-win situation for both, presumably fostering vote-selling. This experimental design does not consider blocking on party identification, as that might have increased the number of cells considerably.\footnote{To $3\times2\times3=18$ cells: Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications. Such experiment is not only much more expensive, but statistically more complex.} %Having that in mind, the paper's aim is to explore the micro-dynamics of the willingness to sell the vote, presumably, in elections that are relatively non-partisan. 
+
+
+\subsection{Would U.S. Citizens Sell Their Vote?} 
+
+Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list data were analyzed using a statistical multivariate approach. Numerical results are shown in \autoref{tab:regression}. Four covariates were included: income, education, party identification, and political ideology. These variables have been widely considered in the clientelism literature before \parencite{Nazareno2008a,GonzalezOcantos2014,Bahamonde2018,Weitz-shapiro}.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}}'' and the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The remaining arguments were left at their default values.} 
 
 
 
-\paragraph{List Experiment: Would U.S. citizens sell their vote?} Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list data were analyzed using a statistical multivariate approach.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}}''and the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The remaining arguments were left at their default values. \autoref{tab:regression} shows the regression table.} These analyses allow estimating the individual probability of vote-selling (shown in \autoref{fig:list:analysis:individual:predictions:plot}). Using this information, it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' 
 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c|cc|cc|cc|ll|}
+\cline{2-9}
+                   & \multicolumn{4}{c|}{\textbf{Sensitive Items}}                                        & \multicolumn{4}{c|}{\textbf{Control Items}}                                                                    \\ \cline{2-9} 
+                   & \multicolumn{2}{c|}{{ \textit{Low Treatment}}} & \multicolumn{2}{c|}{{ \textit{High Treatment}}} & \multicolumn{2}{c}{{ \textit{Low Condition}}} & \multicolumn{2}{l|}{{ \textit{High Condition}}}                            \\ \hline
+\textit{{\bf Variables}} & \textit{Est.}        & \textit{SE}       & \textit{Est.}        & \textit{SE}        & \textit{Est.}       & \textit{SE}       & \multicolumn{1}{c}{\textit{Est.}} & \multicolumn{1}{c|}{\textit{SE}} \\ \hline
+Intercept & $\Sexpr{as.numeric(coeffs.treat.list.low[1])}$ & $\Sexpr{as.numeric(se.treat.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[1])}$ & $\Sexpr{as.numeric(se.treat.list.high[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[1])}$ & $\Sexpr{as.numeric(se.cont.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[1])}$ & $\Sexpr{as.numeric(se.cont.list.high[1])}$\\
+Ideology$_{\text{Liberal}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[2])}$ & $\Sexpr{as.numeric(se.treat.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[2])}$ & $\Sexpr{as.numeric(se.treat.list.high[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[2])}$ & $\Sexpr{as.numeric(se.cont.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[2])}$ & $\Sexpr{as.numeric(se.cont.list.high[2])}$\\
+Ideology$_{\text{Moderate}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[3])}$ & $\Sexpr{as.numeric(se.treat.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[3])}$ & $\Sexpr{as.numeric(se.treat.list.high[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[3])}$ & $\Sexpr{as.numeric(se.cont.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[3])}$ & $\Sexpr{as.numeric(se.cont.list.high[3])}$\\
+Ideology$_{\text{Conservative}}$& $\Sexpr{as.numeric(coeffs.treat.list.low[4])}$ & $\Sexpr{as.numeric(se.treat.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[4])}$ & $\Sexpr{as.numeric(se.treat.list.high[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[4])}$ & $\Sexpr{as.numeric(se.cont.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[4])}$ & $\Sexpr{as.numeric(se.cont.list.high[4])}$\\
+Ideology$_{\text{VeryConservative}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[5])}$ & $\Sexpr{as.numeric(se.treat.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[5])}$ & $\Sexpr{as.numeric(se.treat.list.high[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[5])}$ & $\Sexpr{as.numeric(se.cont.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[5])}$ & $\Sexpr{as.numeric(se.cont.list.high[5])}$\\
+Party Id$_{\text{Republican}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[6])}$ & $\Sexpr{as.numeric(se.treat.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[6])}$ & $\Sexpr{as.numeric(se.treat.list.high[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[6])}$ & $\Sexpr{as.numeric(se.cont.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[6])}$ & $\Sexpr{as.numeric(se.cont.list.high[6])}$\\
+Party Id$_{\text{Independent}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[7])}$ & $\Sexpr{as.numeric(se.treat.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[7])}$ & $\Sexpr{as.numeric(se.treat.list.high[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[7])}$ & $\Sexpr{as.numeric(se.cont.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[7])}$ & $\Sexpr{as.numeric(se.cont.list.high[7])}$\\
+Party Id$_{\text{Something Else}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[8])}$ & $\Sexpr{as.numeric(se.treat.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[8])}$ & $\Sexpr{as.numeric(se.treat.list.high[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[8])}$ & $\Sexpr{as.numeric(se.cont.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[8])}$ & $\Sexpr{as.numeric(se.cont.list.high[8])}$\\
+Income & $\Sexpr{as.numeric(coeffs.treat.list.low[9])}$ & $\Sexpr{as.numeric(se.treat.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[9])}$ & $\Sexpr{as.numeric(se.treat.list.high[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[9])}$ & $\Sexpr{as.numeric(se.cont.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[9])}$ & $\Sexpr{as.numeric(se.cont.list.high[9])}$\\
+Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric(se.treat.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[10])}$ & $\Sexpr{as.numeric(se.treat.list.high[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[10])}$ & $\Sexpr{as.numeric(se.cont.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[10])}$ & $\Sexpr{as.numeric(se.cont.list.high[10])}$\\
+\hline
+\end{tabular}
+\caption{{\bf Multivariate Analysis of the List Experiment.\label{tab:regression}}\\\hspace{\textwidth} {\bf Note}: Table shows estimated coefficients from regression models where the outcome variables are whether or not subjects would sell their vote to a candidate for \$100 or \$500.}\centering
+\end{table}
+
+
+Using basic inferential statistics, individual probabilities of vote-selling were estimated (\autoref{fig:list:analysis:individual:predictions:plot}). Using this information, it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' 
+
+
+
+
+
+% list:analysis:individual:predictions:plot
+<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=14, fig.height=9,dpi=100000, cache = FALSE, include = TRUE>>=
+
+
+@
+
+Moving forward, \autoref{fig:list:analysis:social:desirability:plot} shows the estimated proportion of vote-sellers, the proportion of declared vote-sellers (based on the direct question), and the difference between the two (``liars''). Each estimation is divided by treatment (``high''/``low''). Since the estimated proportion of vote-sellers does not increase with the high-price treatment, it is then reasonable to think that there are not specific concerns associated with the design of the treatments. 
 
 
 % list:analysis:social:desirability:plot
@@ -334,128 +377,16 @@ In turn, subjects randomly assigned to the treatment condition answered one of t
 @
 
 
-Based on the statistical analyses of the list experiment data, \autoref{fig:list:analysis:social:desirability:plot} shows the estimated proportion of vote-sellers, the proportion of declared vote-sellers (based on the direct question), and the difference between the two (``liars''). Each estimation is divided by treatment (``high''/``low''). Since the proportion of vote-sellers does not increase with the high-price treatment, it is then reasonable to think that there are not specific concerns associated with the design of the treatments. 
+Substantively, the figure suggests that after combining the estimates of the ``low'' and ``high'' treatments, approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]*100, 0)}$\%) conditions.} While a considerable proportion answered the direct question affirmatively ($\Sexpr{round(mean(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"])* 100, 0)}$\%),\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][2]*100, 0)}$\%) conditions.} the analyses still suggest that survey respondents systematically under-reported their true answers: approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]*100, 0)}$\%) conditions. The ``low'' condition is barely non-significant, and hence it does not alter the substantive results.}  
 
 
-Substantively, the figure suggests that after combining the estimates of the ``low'' and ``high'' treatments, approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]*100, 0)}$\%) conditions.} While a considerable proportion answered the direct question affirmatively ($\Sexpr{round(mean(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"])* 100, 0)}$\%),\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][2]*100, 0)}$\%) conditions.} the analyses still suggest that survey respondents systematically under-reported their true answers: Approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Soc. Des."][2]*100, 0)}$\%) conditions. The ``low'' condition is barely non-significant, and hence it does not alter the substantive results.}  Overall, these results are striking, and the author is not aware of any other experimental design in which subjects in an industrialized democracy are asked whether they would sell their votes, and moreover, find positive results.
+\subsection{\emph{Who} are the Most-Likely Vote-Sellers?} 
 
+Using the estimated coefficients in \autoref{tab:regression}, \autoref{fig:predictions:independent:variables:plot} shows the estimated effect of each variable on vote-selling.
 
-
-There seem to be two conflicting pictures. On the one hand, and leaving concerns of social desirability bias aside, we ``know''---using \emph{non}-experimental data---that most people have never been offered the possibility to sell their votes (as per \autoref{fig:lapop:bar:chart:plot}). On the other, the results presented here strongly suggest that they would. While buyers (e.g. parties) are not buying, there is a large proportion of \emph{latent} vote-sellers willing to sell their votes. 
-
-
-% list:analysis:social:desirability:plot
-<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
-
-
-@
-
-
-\paragraph{Price Experiment: What would be the tipping point for vote-sellers?} \emph{Where do supply and demand meet?} This study conducted a pricing experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. 
-
-
-
-These results are not unrealistic. \textcite{Bahamonde2018} finds that clientelist political parties in Brazil target non-poor voters at considerably higher prices. In the U.S. context, \textcite[6]{Shawn2012} noted that a broker purchased one man's vote for \$800 during the 2010 elections in eastern Kentucky, which aligns with \textcite{Stokes:2013cj}. From the demand-side, vote-buying is no longer an efficient strategy for party machines. Industrialization has driven up the median income of the electorate, increasing the selling price, turning vote-buying into an increasingly expensive strategy to win votes. Evidently, with the selling price so expensive, the demand-side (i.e. parties) are unable to catch up with the supply-side, making vote buying in the United States a rare event. This situation has forced party machines to turn to other, less prohibitively costly alternatives. Thus, these results confirm that from the supply-side (i.e. voters) the vote is still for sale, only for a very high price---a price that party machines cannot really afford. 
-
-
-\paragraph{Conjoint Experiment: Attitudes Towards Democracy.} 
-
-Willingness to sell seems high. \emph{Are the democratic values of U.S. citizens ``in good health''? And how can they be measured?} This section proposes a new experimental way to measure---indirectly and in an unbiased fashion---individual attitudes towards democracy. Considering that democracy is a multi-dimensional concept, the task is a complex one. %Considering that democracy is a multi-dimensional concept, the proposed methodology tests which particular democratic dimension(s) should ``fail'' in order to produce likely vote-sellers.
-
-\textcite[3]{Carlin2017} explains that the ``most common survey questions of democratic support explicitly ask respondents whether they prefer democracy over other regime types.'' That type of strategy is based on the ``Linzian'' question, which asks whether democracy is preferred over other types of regimes. Unfortunately, these kinds of questions are not only difficult to answer \parencite[376]{McClosky1964}, but also they introduce a number of validity concerns, including social desirability biases \parencite[3]{Carlin2017}, and measurement error due to the inter-subjective meaning survey respondents give to the concept of ``democracy'' \parencite[1502]{Carlin2011a}.
-
-\textcite[]{Hainmueller2014a,Hainmueller2015} implemented a series of conjoint experiments to study attitudes towards immigration---a multi-dimensional concept too---particularly attitudes towards a number of immigrants' characteristics, such as country of origin or language skills. Generally, conjoint designs ``ask respondents to choose [...] hypothetical profiles that combine multiple attributes, enabling researchers to estimate the relative influence of each attribute value on the resulting choice'' \parencite[2]{Hainmueller2014a}. In their design, they were interested in knowing what kinds of immigrant profiles were more likely to be granted citizenship. Following their lead, a conjoint experiment was designed to study what kinds of democratic sub-dimensions---administered via different hypothetical candidate profiles---were more salient among U.S. citizens. And, while candidates do not usually describe themselves in these terms, the advantage is that this technique captures attitudes towards democracy in a non-intrusive way. The design minimizes the risks of introducing social desirability bias \parencite[3]{Hainmueller2014a}.
-
-
-\begin{table}[]
-\resizebox{\textwidth}{!}{%
-\centering
-\begin{tabular}{p{0.4\linewidth}|p{0.2\linewidth}|p{0.4\linewidth}}
-\textbf{Dalh's Polyarchy Component}               & \textbf{O'Donnell's Dimension} & \textbf{Experimental Operationalization}               \\\hline\hline
-Right to vote                                     & Democratic & Citizens can vote in the next two elections            \\\hline
-Eligibility for public office                     & Democratic & Citizens can run for office for the next two elections \\ \hline
-Freedom to form and join organizations            & Liberal & Citizens can associate with others and form groups     \\ \hline
-Freedom of expression                             & Liberal & Media can confront the government                      \\ \hline
-Alternative sources of information                & Liberal & Media can confront the Government                      \\ \hline
-Right of political leaders to compete for support & Republican  & President can rule without Congress                    \\ \hline
-\end{tabular}}
-\caption{Attitudes Towards Democracy: A Conjoint Experimental Approach.}
-\label{poly:dim:table}
-\end{table}
-
-In an important paper, \textcite[]{ODonnell1998}---building on \textcite{Dahl1971}---explains that democracy is a multi-dimensional concept. He identifies three sub-dimensions: a democratic, liberal, and republican. The first component relates to the degree in which polyarchies hold free and fair elections (or ``vertical accountability''). The last two components, however, pertain to ``horizontal accountability;'' that is, whether the private and individual spheres are protected from the state (liberal component)\footnote{Essentially, ``the idea that there are some rights that should not be encroached upon by any power, prominently including the state'' \parencite[3]{ODonnell1998}.} and whether there are ``obligations to individuals placed in the public sphere'' (republican component, see \textcite[3]{ODonnell1998}). \textcite{Luna2006} conceptualizes these three dimensions in a series of survey questions. Building on his approach (and partially on \textcite{Carlin2011a}), I developed a conjoint experiment that all survey respondents answered after the list experiment portion of the study. \autoref{poly:dim:table} shows Dahl's polyarchy components, O'Donnell's re-conceptualization (three dimensions), and the proposed experimental operationalization. 
-
-
-Following standard practice, experimental subjects were asked to choose between candidates ``1'' and ``2'' five times. Each time, both candidates endorsed different (or not) policy positions. \autoref{conj:example:table} shows one possible example. To minimize spillover effects, every task had different candidates such that the first task asked respondents to choose between candidates ``1'' and ``2,'' then in the next task, between candidates ``3'' and ``4,'' and so on. Attributes' order (rows) were randomized. Both the ``CAN'' and ``CANNOT'' were also randomized.\footnote{To minimize experimental fatigue, it was decided to capitalize both the ``can'' and ``cannot'' to accentuate the differences (or similarities) between the two hypothetical candidates.} In practice, survey respondents chose among unique profiles every time. As the table shows, both candidates could (or could not) differ on their respective policy positions. More than hard tests of different candidate profiles, this design accounts for hypothetical policy positions on relevant democracy dimensions, which are fundamental for understanding its multidimensionality.
-
-
-
-%\footnote{Before seeing the two choices, survey respondents read the following text: \texttt{In the next section you will see 10 different candidates presented in pairs. Each candidate supports different policies. Some candidates might or might not share some similarities/differences. You might not like any of them, but we want to know which candidate represents the lesser of two evils for you. You might want to focus your attention on the issues that you care about the most}.}
-
-
-
-\begin{table}[]
-\resizebox{\textwidth}{!}{%
-\centering
-\begin{tabular}{p{0.2\linewidth}|p{0.4\linewidth}|p{0.4\linewidth}}
-\toprule
-\multicolumn{3}{l}{\texttt{Please carefully review the options detailed below.}} \\
-\multicolumn{3}{l}{\texttt{Which of these two candidates represents the lesser of two evils for you?}} \\
-\midrule 									              & \textbf{Candidate 1} 										& \textbf{Candidate 2}               \\\hline\hline
-Right to vote                                     & Citizens CAN vote in the next two elections 				& Citizens CAN vote in the next two elections            \\\hline
-Right to run 					                  & Citizens CANNOT run for office for the next two elections 	& Citizens CAN run for office for the next two elections \\ \hline
-Right to associate 						          & Citizens CANNOT associate with others and form groups 		& Citizens CAN associate with others and form groups     \\ \hline
-Free press 				                          & Media CAN confront the government 							& Media CANNOT confront the government                      \\ \hline
-President Autonomy 								  & resident CAN rule without Congress 							& President CAN rule without Congress                    \\ 
-\midrule
-\end{tabular}}
-\caption{Experimental Design: Example of the Tasks Respondents were Asked to Respond.}
-\label{conj:example:table}
-\end{table}
-
-\afterpage{
-<<conjoint.democratic.values.american.public.plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=conjoint.democratic.values.american.public.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
-
-@
-}
-
-Statistically, the ACME was estimated. As \textcite[20]{Hainmueller2014a} explain, ACMEs for all attributes were obtained by running a single regression of the choice outcome on the dummy variables for the attribute values (say 1 for where ``Citizens CAN vote in the next two elections'' and 0 when citizens ``CANNOT'').\footnote{More formally, for every sub-dimension, the next OLS model was fitted: $y_{i}=\beta_{0}+\beta_{1}\text{Sub-Dimension}_{0,1}+\epsilon_{i}$, where $y_{i}$ is the observed choice, for all survey respondents $i$. Every sub-dimension has either the ``CAN'' (1) or ``CANNOT'' (0) option, which is administered at random, as \autoref{conj:example:table} shows.} All estimated coefficients then represent a comparison between these two policy positions.%, say, ``Citizens CAN vote in the next two elections'' and ``Citizens CANNOT vote in the next two elections.'' Following this procedure for all attributes, it was possible to estimate the mean attitudes towards democracy in a non-intrusive way. 
-
-
-
-\autoref{fig:conjoint.democratic.values.american.public.plot} suggests that survey respondents in general hold ``healthy'' democratic values: All attitudes move in the expected direction. And, to answer the question above, they do systematically value their voting rights (``citizens CAN vote''). Political participation (``citizens CAN run for office'') ranks slightly lower relative to the rest. Power of the media is slightly stronger than the ability to form groups. The role of Congress is seen as more relevant than the right to run for office. The following portion of the analyses identified which democratic principles should score low to produce hypothetical vote-sellers.
-
-
-\paragraph{Conjoint Experiment: Democratic Values and Vote Selling.} 
-
-The statistical analyses performed on list experiment data allowed for estimating individual probabilities of vote-selling (as shown in \autoref{fig:list:analysis:individual:predictions:plot}). Next, the predicted individual probabilities of vote-selling were arranged on the left-hand side of the ACME linear regression, with the set of chosen attributes (i.e. the ``CAN'' and ``CANNOT'') on the right-hand side of the equation. 
-
-More formally, for every sub-dimension, the next OLS model was fitted: 
-
-
-\begin{equation}
-y_{i}=\beta_{0}+\beta_{1}\text{Observed Choice}_{i}+\epsilon_{i}
-\end{equation}
-
-where $y_{i}$ is the predicted individual probability of vote selling (\autoref{fig:list:analysis:individual:predictions:plot}), obtained via the methods formalized in \textcite{Blair2012}, for all survey respondents $i$. In other words, by using this method, it was possible to regress individual probabilities of vote-selling (\autoref{fig:list:analysis:individual:predictions:plot}) on the chosen democratic sub-dimensions. This allowed for an investigation of which dimensions should score low to produce hypothetical vote-sellers.
-
-
-\afterpage{
-<<conjoint:analysis:predicting:vote:selling:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predicting.vote.selling.plot.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
-
-@
-}
-
-Vote-selling seems to be associated with lower levels of support of a system framed within the tradition of checks and balances (horizontal accountability). \autoref{fig:conjoint:analysis:predicting:vote:selling:plot} illustrates that individuals who systematically have lower levels of support towards a system governed by principles of checks and balances, in what both \textcite[]{ODonnell1998} and  \textcite{Dahl1971} call ``horizontal accountability,'' increases the individual probability of selling one's vote; that is, individuals who do not value Congress as an institution capable of offsetting the president's political power, systematically sell their vote more. Neither the democratic nor the republican components seem to have a systematic explanatory power in predicting hypothetical vote-selling. 
-
-
-Sub-dimensions that involve empowerment of citizens and press, do not have an effect on vote-selling. Interestingly, attitudes towards voting do not have an effect on vote-selling either, meaning individuals supporting hypothetical candidates whose preferences include ``Citizens CANNOT vote in the next two elections'' do not necessarily sell more. 
-
-
-Overall, a structural failure to value a political system embedded within the checks and balances tradition seems to be associated with vote-selling. For instance, and while not statistically significant, survey respondents supporting candidates that might ban the free press, which is another form of horizontal accountability, tend to sell their votes more. 
-
-
-\paragraph{List Experiment: \emph{Who} are the most-likely vote-sellers?} Four covariates were included when analyzing the list data: income, education, party identification, and political ideology. These variables have been widely considered in the clientelism literature before \parencite{Nazareno2008a,GonzalezOcantos2014,Bahamonde2018,Weitz-shapiro}.\footnote{Each variable was estimated twice (one per treatment). The regression table is \autoref{tab:regression}.} 
+% liberals sell more.
+Democrats and liberals are systematically more likely to sell. These findings are in line with research that studies the different constitutive values of liberals and conservatives. Political psychologists have found that liberals, when compared with conservatives, construct their moral systems primarily upon narrower psychological foundations. Particularly, liberals consider less important both the authority/respect and the purity/sanctity dyads \parencite[1029]{Graham2009}. This might lead liberals to engage more frequently in behaviors that might be considered ``wrong,'' such as vote-selling. In fact, \textcite[7]{Gray2014} explain that conservatives ``see impure violations as relatively more wrong.''% in turn, presumably, making them less likely to engage in illegal activities. In turn, liberals' constitutive set of values make them more likely to sell their votes.
+%The findings in this paper seem to support the idea that liberals engage more frequently in illegal or ``wrong'' behaviors.
 
 
 \afterpage{
@@ -468,38 +399,59 @@ Overall, a structural failure to value a political system embedded within the ch
 
 
 
-% liberals sell more.
-\autoref{fig:predictions:independent:variables:plot} shows the estimated effect of each variable on vote-selling. Democrats and liberals are systematically more likely to sell. These findings are in line with research that studies the different constitutive values of liberals and conservatives. Political psychologists have found that liberals, when compared with conservatives, construct their moral systems primarily upon narrower psychological foundations. Particularly, liberals consider less important both the authority/respect and the purity/sanctity dyads \parencite[1029]{Graham2009}. This might lead liberals to engage more frequently in behaviors that might be considered ``wrong,'' such as vote-selling. In fact, \textcite[7]{Gray2014} explain that conservatives ``see impure violations as relatively more wrong.''% in turn, presumably, making them less likely to engage in illegal activities. In turn, liberals' constitutive set of values make them more likely to sell their votes.
-%The findings in this paper seem to support the idea that liberals engage more frequently in illegal or ``wrong'' behaviors.
+
 
 
 % Education doesn't explain
 Education and income levels do not seem to have a systematic impact on vote-selling. Interestingly, poverty has long been associated with vote-selling \parencite{Calvo2004,Weitz-shapiro,Kitschelt2000,Carlin:2015}. \textcite{Brusco2004}, \textcite[]{Stokes:2013cj} and \textcite[]{Nazareno2008a} explain that since the poor derive more utility from immediate transfers relative to returns associated with future (and risky) policy packages, clientelistic political parties only target the poor. For instance, \textcite[12]{Weitz-Shapiro:2014aa} explains that ``[a]lmost universally, scholars of clientelism treat and analyze [this] practice as an exchange between politicians and their poor clients.'' However, this canonical predictor has recently been questioned. \textcite{Szwarcberg2013} ``challenges the assumption [that brokers] will always distribute goods to low-income voters in exchange for electoral support,'' while \textcite{Gonzalez-Ocantos2012} and \textcite[]{Holland2015} find that income had little or no effect on vote-buying. In fact, \textcite{Bahamonde2018} advances an argument for why brokers would also target non-poor individuals.%\footnote{Leveraging the Brazilian case, he explains that brokers target individuals when they are identifiable and groups when brokers need to rely on the spillover effects of clientelism. Both effects happen regardless of individual income levels.}% Overall, the findings presented in this paper seem to support the idea that low-income individuals are not necessarily more likely to sell their votes relative to wealthier individuals. 
 
 % elasticities
-While the differences between the two treatments are not statistically significant---which in fact confirms that the arbitrarily low and high treatments were well-chosen---there seems to be a substantive pattern regarding these two treatments. Factors that heavily determine economic status (income and education), seem to be more elastic to the buying price of the vote: Even when poor individuals do not seem to sell more (when compared with wealthier individuals), there does seem to be important within-group differences between the treatments. Particularly, low-income and less educated individuals are willing to sell their vote (just like the rest), but more so under the high-price condition. This might indicate that, for them, it is worthwhile to behave illegally, but only when the payoff is ``large enough.'' These results are in line with experimental and applied economists who argue that ``risk aversion decreases as one raises above the poverty level and decreases significantly for the very wealthy'' \parencite[32]{Riley1992}. In other words, less educated and low-income individuals, who are more fragile and precarious, tend to avoid risks, and hence, illegal activities. However, a discrete increase in the payoff makes the immediate monetary transfer more attractive, lessening risk aversion. %On the contrary, higher-income and more educated individuals do not seem to be affected by the different stimuli, and sell their vote in the same proportion, regardless of the price. For instance, highly-educated individuals (graduate school level) sell their vote at the same proportion, both under the ``high'' ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="High" , ][,1])*100}$\%) and ``low'' ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="Low" , ][,1])*100}$\%) conditions. Relatedly, \textcite[205]{GonzalezOcantos2014} and \textcite[494]{Corstange2012a}, also find very weak results for education in Peru and Nicaragua, and Lebanon, respectively. 
+While the differences between the two treatments are not statistically significant---which in fact confirms that the arbitrarily low and high treatments were well-chosen---there seems to be a substantive pattern regarding these two treatments. Factors that heavily determine economic status (income and education), seem to be more elastic to the buying price of the vote: even when poor individuals do not seem to sell more (when compared with wealthier individuals), there does seem to be important within-group differences between the treatments. Particularly, low-income and less educated individuals are willing to sell their vote (just like the rest), but more so under the high-price condition. This might indicate that, for them, it is worthwhile to behave illegally, but only when the payoff is ``large enough.'' These results are in line with experimental and applied economists who argue that ``risk aversion decreases as one raises above the poverty level and decreases significantly for the very wealthy'' \parencite[32]{Riley1992}. In other words, less educated and low-income individuals, who are more fragile and precarious, tend to avoid risks, and hence, illegal activities. However, a discrete increase in the payoff makes the immediate monetary transfer more attractive, lessening risk aversion. %On the contrary, higher-income and more educated individuals do not seem to be affected by the different stimuli, and sell their vote in the same proportion, regardless of the price. For instance, highly-educated individuals (graduate school level) sell their vote at the same proportion, both under the ``high'' ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="High" , ][,1])*100}$\%) and ``low'' ($\Sexpr{(educ.plot.d[educ.plot.d$education == "Graduate \n  School" & educ.plot.d$'Experimental Condition'=="Low" , ][,1])*100}$\%) conditions. Relatedly, \textcite[205]{GonzalezOcantos2014} and \textcite[494]{Corstange2012a}, also find very weak results for education in Peru and Nicaragua, and Lebanon, respectively. 
 
 
 
+\subsection{Where do Supply and Demand Meet?} 
+
+What would be the tipping point for vote-sellers? As shown in \autoref{experimental:design:fig}, a pricing experiment was conducted in addition to the list experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. 
+
+
+% pricing:experiment:plot
+<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
+
+
+@
+
+
+These results are not unrealistic. While the selling price is really high, it matches with what others have found. \textcite{Bahamonde2018} finds that clientelist political parties in Brazil do target non-poor voters at considerably higher prices. In turn, \textcite[6]{Shawn2012} noted that a broker purchased one man's vote for \$800 during the 2010 elections in eastern Kentucky.  
+
+However, moving beyond anecdotal evidence, these results align with \textcite{Stokes:2013cj}. From the demand-side, vote-buying is no longer an efficient strategy for party machines. Industrialization has driven up the median income of the electorate, increasing the selling price, turning vote-buying into an increasingly expensive strategy to win votes. Evidently, with the selling price so expensive, the demand-side (i.e. parties) are unable to catch up with the supply-side, making vote buying in the United States a rare event. This situation has forced party machines to turn to other, less prohibitively costly alternatives. Thus, these results confirm that from the supply-side (i.e. voters) the vote is still for sale, only for a very high price---a price that party machines cannot really afford.
 
 \section{General Discussion}
 
-\hypertarget{discussion}{The paper began by establishing the tension between supply and demand sides within a clientelistic relationship}. In order to study the micro-dynamics of clientelism, more hypothetical questions should be fielded. If clientelism is conceptualized as a transaction between party machines and citizens, studying only realized transactions should produce only partial answers. \textcite[131]{Geddes1990} explains the well-known problems of studying ``only cases that have achieved the outcome of interest.'' Questions involving hypothetical scenarios, on the contrary, can potentially shed light on unrealized transactions. Notably, \textcite{GonzalezOcantos2014} constitutes one of the few examples in the study of hypothetical behaviors in the vote-buying literature. Following their lead, the paper presents evidence of vote-selling in the United States. 
 
+%
+\hypertarget{discussion}{There seem to be two conflicting pictures}. On the one hand, and leaving concerns of social desirability bias aside, we ``know''---using \emph{non}-experimental data---that most people have never been offered the possibility to sell their votes (as per \autoref{fig:lapop:bar:chart:plot}). On the other, the results presented here strongly suggest that they would. While buyers (e.g. parties) are not buying, there is a large proportion of \emph{latent} vote-sellers willing to sell their votes. 
 
+%
 While vote-buying/selling in the United States was commonplace during the 19th century, higher median incomes have increased the cost of this strategy as a feasible tool to win elections, in turn, making vote-buying rare in the United States. The paper confirms this hypothesis by suggesting that an important estimated proportion of U.S. voters---$\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\%---is very much willing to sell their votes, but for an estimated very high price---\$$\Sexpr{round(line_intersection$x,0)}$. 
 
-The conjoint experiment reveals that U.S. citizens have consistently ``healthy'' democratic values, scoring high in every democratic sub-dimension. Vote-sellers, however, have lower levels of support towards a system governed by principles of checks and balances, in what both \textcite[]{ODonnell1998} and  \textcite{Dahl1971} call ``horizontal accountability,'' increases the individual probability of selling one's vote.
+
+%
+Overall, these results are striking, and the author is not aware of any other experimental design in which subjects in an industrialized democracy are asked whether they would sell their votes, and moreover, find positive results.
+
+%
+The paper began by establishing the tension between supply and demand sides within a clientelistic relationship. In order to study the micro-dynamics of clientelism, more hypothetical questions should be fielded. If clientelism is conceptualized as a transaction between party machines and citizens, studying only realized transactions should produce only partial answers. \textcite[131]{Geddes1990} explains the well-known problems of studying ``only cases that have achieved the outcome of interest.'' Questions involving hypothetical scenarios, on the contrary, can potentially shed light on unrealized transactions. Notably, \textcite{GonzalezOcantos2014} constitutes one of the few examples in the study of hypothetical behaviors in the vote-buying literature. Following their lead, the paper presented evidence of vote-selling in the United States. 
 
 
-Moving forward, \emph{What are the implications of $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the representative sample willing to sell their votes? Is that considered ``high'' or ``low''?} While there is a big jump between realized and hypothetical behaviors, the results presented in this paper are still worrisome. If that jump is made, this proportion is roughly comparable to what others have found in developing countries. Employing a similar strategy, \textcite[210]{Gonzalez-Ocantos2012} find that 24\% of Nicaraguan votes were bought. In turn, the findings presented in this paper are below of what \textcite[493]{Corstange2012a} finds for Lebanon, in which 55\% of voters sold their votes. Then again, there are a number of important institutional and economic differences between the United States and these countries. However, what this paper shows is the existence of a rather important proportion that, under very general conditions, \emph{would} sell their votes. 
+
+%Moving forward, What are the implications of $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List"][2]) / 2) * 100, 0)}$\% of the representative sample willing to sell their votes? Is that considered ``high'' or ``low''? While there is a big jump between realized and hypothetical behaviors, the results presented in this paper are still worrisome. If that jump is made, this proportion is roughly comparable to what others have found in developing countries. Employing a similar strategy, \textcite[210]{Gonzalez-Ocantos2012} find that 24\% of Nicaraguan votes were bought. In turn, the findings presented in this paper are below of what \textcite[493]{Corstange2012a} finds for Lebanon, in which 55\% of voters sold their votes. Then again, there are a number of important institutional and economic differences between the United States and these countries. However, what this paper shows is the existence of a rather important proportion that, under very general conditions, \emph{would} sell their votes. 
 
 
 
-In any case, the existence of a critical mass of Americans willing to sell their votes has broader implications for U.S. democracy. This is particularly important at times in which the integrity of elections and the democratic system in general have been delegitimized by the president of the United States \parencite[61,185]{Levitsky:2018aa},\footnote{They argue that ``no major presidential candidate had cast such doubt on the democratic system since 1860.''} possibly denoting a structural democratic legitimacy crisis. 
+%In any case, the existence of a critical mass of Americans willing to sell their votes has broader implications for U.S. democracy. This is particularly important at times in which the integrity of elections and the democratic system in general have been delegitimized by the president of the United States \parencite[61,185]{Levitsky:2018aa},\footnote{They argue that ``no major presidential candidate had cast such doubt on the democratic system since 1860.''} possibly denoting a structural democratic legitimacy crisis. 
 
 
-While the paper is rather descriptive in nature, the author believes that the exercise was rather worth pursuing. The experimental evidence of a large critical mass willing to sell their votes in a developed country was novel. Also, a new experimental measurement to capture unbiased attitudes towards democracy was introduced. However, it was well beyond the goal of this paper to investigate the long-term structural causes of vote-selling in the United States as well as the substantive implications of democratic attitudes on vote-selling. Hopefully, the paper sets the stage for future research and encourages other scholars to field the experimental designs presented in this paper, including the conjoint experiment, in a comparative setting, such that both developed and developing countries are included. Future research should also consider different values placed on different offices.\footnote{I owe this point to \fbox{\phantom{Chris Chambers-Ju}}.} It is reasonable to think that presidential, Senate, House, state legislature, mayor, and city council elections, follow different incentives and constraints to buy and sell votes. And, future research should consider blocking on party identification. For example, designing a more complex experiment in which not only the price varies (like it does in the presented design), but also the vote-selling treatment is partisan. %\emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
+While the paper is rather descriptive in nature, the author believes that the exercise was rather worth pursuing. The experimental evidence of a large critical mass willing to sell their votes in a developed country was novel. Also, a new experimental measurement to capture unbiased attitudes towards democracy was introduced. However, it was well beyond the goal of this paper to investigate the long-term structural causes of vote-selling in the United States as well as the substantive implications of democratic attitudes on vote-selling. Hopefully, the paper sets the stage for future research and encourages other scholars to field the experimental designs presented in this paper in a comparative setting, such that both developed and developing countries are included. Future research should also consider different values placed on different offices.\footnote{I owe this point to \fbox{\phantom{Chris Chambers-Ju}}.} It is reasonable to think that presidential, Senate, House, state legislature, mayor, and city council elections, follow different incentives and constraints to buy and sell votes. And, future research should consider blocking on party identification. For example, designing a more complex experiment in which not only the price varies (like it does in the presented design), but also the vote-selling treatment is partisan. %\emph{Do subjects sell more when they sell it to the party of their like? Or do citizens opt-out of vote-selling when they are being bought by the opposite party? Or do vote-sellers do not care about these distinctions at all?} One downside of such a design might be that the number of cells increases from $2$ (i.e. \emph{high} and \emph{low} treatments), to $3\times2\times3=18$ cells.\footnote{Republican/Democrat/Independent vote-selling treatments, High/Low vote-selling prices, Republican/Democrat/Independent party identifications.} Such higher-dimension factorial design, in turn, implies having enough number of individuals in every cell, increasing the cost of the experiment. Moreover, within the behavioral economics framework, future designs should consider real monetary incentives and real (monetary) risks of selling one's vote. Another interesting addition might be to assign a random probability of being caught selling the vote.
 
 
 
@@ -602,53 +554,17 @@ After a random assignment, you have been selected for the opportunity to hypothe
 \pagebreak
 
 
-\paragraph{Pricing Experiment.} \hypertarget{pricing.experiment}{Subjects who answered ``yes'' to the direct question}, were immediately asked to price their votes. 
+%\paragraph{Pricing Experiment.} \hypertarget{pricing.experiment}{Subjects who answered ``yes'' to the direct question}, were immediately asked to price their votes. 
 
 
 % figure: pricing experiment.
-\begin{figure}[h]
-\includegraphics[scale=.7, center]{pricing_experiment.jpeg}
-\caption{Pricing Experiment.}\centering\label{fig:pricing:experiment}
-\end{figure}
-\vspace*{\fill}
-\pagebreak
+%\begin{figure}[h]
+%\includegraphics[scale=.7, center]{pricing_experiment.jpeg}
+%\caption{Pricing Experiment.}\centering\label{fig:pricing:experiment}
+%\end{figure}
+%\vspace*{\fill}
+%\pagebreak
 
-
-
-\subsection{Statistical Analysis of the List Experiment: Regression Table}
-
-
-
-
-
-
-
-
-\begin{table}[H]
-\centering
-\caption{Statistical Analysis of the List Experiment: Estimated coefficients from regression models where the outcome variables are whether or not subjects would sell their vote to a candidate for \$100 or \$500.}
-\label{tab:regression}
-\begin{tabular}{c|cc|cc|cc|ll|}
-\cline{2-9}
-                   & \multicolumn{4}{c|}{\textbf{Sensitive Items}}                                        & \multicolumn{4}{c|}{\textbf{Control Items}}                                                                    \\ \cline{2-9} 
-                   & \multicolumn{2}{c|}{{ \textit{Low Treatment}}} & \multicolumn{2}{c|}{{ \textit{High Treatment}}} & \multicolumn{2}{c}{{ \textit{Low Condition}}} & \multicolumn{2}{l|}{{ \textit{High Condition}}}                            \\ \hline
-\textit{{\bf Variables}} & \textit{Est.}        & \textit{SE}       & \textit{Est.}        & \textit{SE}        & \textit{Est.}       & \textit{SE}       & \multicolumn{1}{c}{\textit{Est.}} & \multicolumn{1}{c|}{\textit{SE}} \\ \hline
-Intercept & $\Sexpr{as.numeric(coeffs.treat.list.low[1])}$ & $\Sexpr{as.numeric(se.treat.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[1])}$ & $\Sexpr{as.numeric(se.treat.list.high[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[1])}$ & $\Sexpr{as.numeric(se.cont.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[1])}$ & $\Sexpr{as.numeric(se.cont.list.high[1])}$\\
-Ideology$_{\text{Liberal}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[2])}$ & $\Sexpr{as.numeric(se.treat.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[2])}$ & $\Sexpr{as.numeric(se.treat.list.high[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[2])}$ & $\Sexpr{as.numeric(se.cont.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[2])}$ & $\Sexpr{as.numeric(se.cont.list.high[2])}$\\
-Ideology$_{\text{Moderate}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[3])}$ & $\Sexpr{as.numeric(se.treat.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[3])}$ & $\Sexpr{as.numeric(se.treat.list.high[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[3])}$ & $\Sexpr{as.numeric(se.cont.list.low[3])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[3])}$ & $\Sexpr{as.numeric(se.cont.list.high[3])}$\\
-Ideology$_{\text{Conservative}}$& $\Sexpr{as.numeric(coeffs.treat.list.low[4])}$ & $\Sexpr{as.numeric(se.treat.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[4])}$ & $\Sexpr{as.numeric(se.treat.list.high[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[4])}$ & $\Sexpr{as.numeric(se.cont.list.low[4])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[4])}$ & $\Sexpr{as.numeric(se.cont.list.high[4])}$\\
-Ideology$_{\text{VeryConservative}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[5])}$ & $\Sexpr{as.numeric(se.treat.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[5])}$ & $\Sexpr{as.numeric(se.treat.list.high[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[5])}$ & $\Sexpr{as.numeric(se.cont.list.low[5])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[5])}$ & $\Sexpr{as.numeric(se.cont.list.high[5])}$\\
-Party Id$_{\text{Republican}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[6])}$ & $\Sexpr{as.numeric(se.treat.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[6])}$ & $\Sexpr{as.numeric(se.treat.list.high[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[6])}$ & $\Sexpr{as.numeric(se.cont.list.low[6])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[6])}$ & $\Sexpr{as.numeric(se.cont.list.high[6])}$\\
-Party Id$_{\text{Independent}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[7])}$ & $\Sexpr{as.numeric(se.treat.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[7])}$ & $\Sexpr{as.numeric(se.treat.list.high[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[7])}$ & $\Sexpr{as.numeric(se.cont.list.low[7])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[7])}$ & $\Sexpr{as.numeric(se.cont.list.high[7])}$\\
-Party Id$_{\text{Something Else}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[8])}$ & $\Sexpr{as.numeric(se.treat.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[8])}$ & $\Sexpr{as.numeric(se.treat.list.high[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[8])}$ & $\Sexpr{as.numeric(se.cont.list.low[8])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[8])}$ & $\Sexpr{as.numeric(se.cont.list.high[8])}$\\
-Income & $\Sexpr{as.numeric(coeffs.treat.list.low[9])}$ & $\Sexpr{as.numeric(se.treat.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[9])}$ & $\Sexpr{as.numeric(se.treat.list.high[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[9])}$ & $\Sexpr{as.numeric(se.cont.list.low[9])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[9])}$ & $\Sexpr{as.numeric(se.cont.list.high[9])}$\\
-Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric(se.treat.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[10])}$ & $\Sexpr{as.numeric(se.treat.list.high[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[10])}$ & $\Sexpr{as.numeric(se.cont.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[10])}$ & $\Sexpr{as.numeric(se.cont.list.high[10])}$\\
-\hline
-
-\end{tabular}
-\end{table}
-\vspace*{\fill}
-\pagebreak
 
 
 \subsection{Testing for Design Effects}
@@ -678,16 +594,16 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 \pagebreak
 
 
-\subsection{Statistical Analysis of the List Experiment: Individual Probabilities of Vote-Selling}
+%\subsection{Statistical Analysis of the List Experiment: Individual Probabilities of Vote-Selling}
 
 % list:analysis:individual:predictions:plot
-<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100, cache = FALSE, include = TRUE>>=
+%<<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=6, fig.height=4,dpi=100, cache = FALSE, include = TRUE>>=
 
 
-@
+%@
 
-\vspace*{\fill}
-\pagebreak
+%\vspace*{\fill}
+%\pagebreak
 
 
 
