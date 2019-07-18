@@ -568,6 +568,7 @@ ind.pred.low.cond.plot = ggplot() + geom_pointrange(data=indpred.p.low,
         ylab("Probability of Vote-Selling\n(Low Condition)") +
         #guides(colour=FALSE) + 
         theme_bw() +
+        scale_colour_grey() +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
               axis.title.y = element_text(size=7), 
@@ -593,6 +594,7 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
         ylab("Probability of Vote-Selling\n(High Condition)") +
         #guides(colour=FALSE) + 
         theme_bw() +
+        scale_colour_grey() +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
               axis.title.y = element_text(size=7), 
@@ -772,6 +774,7 @@ p_load(ggplot2)
 soc.des.plot = ggplot(socdes.p.high.low, 
                       aes(c.1.3, fit, colour = Significance, shape = Condition)) + 
         theme_bw() +
+        scale_colour_grey() +
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.2) +
@@ -1566,6 +1569,7 @@ p_load(ggplot2)
 socio.plot = ggplot(socideo.plot.d, 
                     aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
+        scale_colour_grey() +
         xlab("") + 
         ggtitle("Ideology") + 
         ylab("Estimated Proportion") +
@@ -1663,6 +1667,7 @@ p_load(ggplot2)
 partyid.plot = ggplot(partyid.plot.d, 
                       aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
+        scale_colour_grey() +
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
@@ -1775,6 +1780,7 @@ p_load(ggplot2)
 educ.plot = ggplot(educ.plot.d, 
                    aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
+        scale_colour_grey() +
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
@@ -1924,6 +1930,7 @@ p_load(ggplot2)
 income.plot = ggplot(income.plot.d, 
                      aes(sign, fit, colour = `Experimental Condition`)) + 
         theme_bw() +
+        scale_colour_grey() +
         xlab("") + 
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.9) +
@@ -2106,11 +2113,12 @@ pricing.d<- melt(pricing.d)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-price.plot = ggplot(pricing.d,aes(x=value, fill=variable)) + geom_density(alpha=0.25) + 
+price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(color = variable)), alpha=0.25) + 
         xlab("Price for your vote") + 
         ylab("Density") +
         scale_fill_discrete("") + #Price for Your Vote
         theme_bw() +
+        scale_color_grey() +
         theme(legend.position="bottom", legend.direction="horizontal")  +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
@@ -2355,17 +2363,18 @@ levels(dat$partyid)[levels(dat$partyid)=="SomethingElse"] <- "Something Else"
 
 ggmap(map) + geom_point(aes(
         x = longitude,
-        colour=partyid,
+        shape=partyid,
         y = latitude), 
         alpha = .7,
         size = 0.8,
-        shape = 1,
+        #shape = 1,
         data = dat) +
         xlab("Longitude") + 
         ylab("Latitude") +
         theme_bw() +
         labs(color='') +
-        scale_colour_manual(values=c("blue", "red", "forestgreen", "cyan1")) +
+        #scale_colour_manual(values=c("blue", "red", "forestgreen", "cyan1")) +
+        scale_color_grey() +
         theme_bw() +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 

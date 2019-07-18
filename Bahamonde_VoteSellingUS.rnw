@@ -607,21 +607,7 @@ After a random assignment, you have been selected for the opportunity to hypothe
 
 
 
-
-
-
-
-\section{Online Appendix}
-\pagenumbering{Roman}
-\setcounter{page}{1}
-
-%% reset tables and figures counter
-\setcounter{table}{0}
-\renewcommand{\thetable}{OA\arabic{table}}
-\setcounter{figure}{0}
-\renewcommand{\thefigure}{OA\arabic{figure}}
-
-
+\subsection{Geographical Distribution of Survey Respondents}
 
 
 % barplot:figure:control:treatment
@@ -629,6 +615,26 @@ After a random assignment, you have been selected for the opportunity to hypothe
 
 
 @
+
+
+
+
+%\section{Online Appendix}
+%\pagenumbering{Roman}
+%\setcounter{page}{1}
+
+%% reset tables and figures counter
+%\setcounter{table}{0}
+%\renewcommand{\thetable}{OA\arabic{table}}
+%\setcounter{figure}{0}
+%\renewcommand{\thefigure}{OA\arabic{figure}}
+
+
+
+
+% Notes
+\linespread{2}
+\newpage\theendnotes
 
 
 \end{document}
