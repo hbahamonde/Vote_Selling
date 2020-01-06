@@ -197,6 +197,82 @@ barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d,
 ## ----
 
 
+
+##############################
+# difference in means test
+##############################
+
+## ---- ttests
+
+# low
+mean.t.low.d = c(
+        # 0
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"]), 
+        # 1
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"]),
+        # 2
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"]),
+        # 3
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"]),
+        # 4
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==4 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==4 & treat.cont.bar.plot.d$Condition=="Low Treatment ($ 100)"])
+)
+
+mean.t.low = round(mean(mean.t.low.d),3)
+
+
+## high 
+mean.t.high.d = c(
+        # 0
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"]), 
+        # 1
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"]),
+        # 2
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"]),
+        # 3
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"]),
+        # 4
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==4 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==4 & treat.cont.bar.plot.d$Condition=="High Treatment ($ 500)"])
+)
+
+mean.t.high = round(mean(mean.t.high.d),3)
+
+# control
+mean.control.d = c(
+        # 0
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="Control"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==0 & treat.cont.bar.plot.d$Condition=="Control"]), 
+        # 1
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="Control"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==1 & treat.cont.bar.plot.d$Condition=="Control"]),
+        # 2
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="Control"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==2 & treat.cont.bar.plot.d$Condition=="Control"]),
+        # 3
+        rep(treat.cont.bar.plot.d$xcount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="Control"],treat.cont.bar.plot.d$ycount[treat.cont.bar.plot.d$xcount==3 & treat.cont.bar.plot.d$Condition=="Control"])
+)
+
+mean.control = round(mean(mean.control.d),3)
+
+# t-tests
+
+## diff in means
+diff.mean.high.control = round(as.numeric(mean(mean.t.high.d) - mean(mean.control.d)), 3)
+diff.mean.low.control = round(as.numeric(mean(mean.t.low.d) - mean(mean.control.d)), 3)
+
+## p-values
+high.control.t.test.pvalue = round(as.numeric(t.test(mean.t.high.d,mean.control.d)$'p.value'),3)
+low.control.t.test.pvalue = round(as.numeric(t.test(mean.t.low.d,mean.control.d)$'p.value'),3)
+
+## t-statistic
+high.control.t.test.t = round(as.numeric(t.test(mean.t.high.d,mean.control.d)$'statistic'),3)
+low.control.t.test.t = round(as.numeric(t.test(mean.t.low.d,mean.control.d)$'statistic'),3)
+
+## df
+high.control.t.test.df = round(as.numeric(t.test(mean.t.high.d,mean.control.d)$'parameter'),0)
+low.control.t.test.df = round(as.numeric(t.test(mean.t.low.d,mean.control.d)$'parameter'),0)
+## ----
+
+
+
+
 ## ---- barplot:figure:control:treatment
 # use this to explain plot in the paper
 barplot.descriptive.plot
