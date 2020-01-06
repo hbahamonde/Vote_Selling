@@ -333,6 +333,25 @@ The paper acknowledges that there is considerable friction and transaction costs
 
 \subsection{Would U.S. Citizens Sell Their Vote?} 
 
+\begin{table}[H]
+\centering
+\begin{tabular}{cccccc}
+\hline
+\hline
+\textit{{\bf Condition}} & \textit{{\bf Mean}} & \textit{{\bf Difference with Control Condition}}  & \textit{{\bf t}} & \textit{{\bf df}} & \textit{{\bf p-value}} \\ \hline
+High (\$500) & \Sexpr{as.character(mean.t.high)} & \Sexpr{as.character(mean.t.high)} - \Sexpr{as.character(mean.control)} = \Sexpr{as.character(diff.mean.high.control)}  & \Sexpr{as.character(high.control.t.test.t)} & \Sexpr{as.character(high.control.t.test.df)} & \Sexpr{high.control.t.test.pvalue} \\ \hline
+Low (\$100) & \Sexpr{as.character(mean.t.low)} & \Sexpr{as.character(mean.t.low)} - \Sexpr{as.character(mean.control)} = \Sexpr{as.character(diff.mean.low.control)}  & \Sexpr{as.character(low.control.t.test.t)} & \Sexpr{as.character(low.control.t.test.df)} & \Sexpr{low.control.t.test.pvalue} \\ \hline
+\hline
+\end{tabular}
+\caption{{\bf Differences in Means between Treatments (high and low) and the Control Group.\label{tab:t:test}}\\\hspace{\textwidth} {\bf Note}: Table shows two-tailed t-tests between each experimental treated unit (``high'' and ``low'' conditions) and the control group. Stars denote statistical significance. T-tests are two-tailed.}\centering
+\end{table}
+
+
+
+\autoref{tab:t:test} shows a simple difference in means analysis between each treated group and the control group. In average, the control group would do $\Sexpr{mean.control}$ things of the list. Subjects treated under the ``low'' condition (\$100) would do $\Sexpr{mean.t.low}$ things of the list, while subjects in the ``high'' condition (\$500) would do $\Sexpr{mean.t.high}$ things. 
+
+There are three important points regarding this table. First, the difference between the means of the \emph{treated} groups (i.e. the ``high'' and ``low'' groups) is statistically zero. That implies that both treatments should not introduce design bias into the experiment. Second, while treated subjects do have slightly higher means when compared to the control group (i.e. indicating some propensity to sell their votes), these differences are not statistically significant. Third (and while not statistically significant), $\Sexpr{diff.mean.high.control}$ $\times\;100\;=\;$ $\Sexpr{diff.mean.high.control*100}$\% of subjects would sell their votes under the ``high'' condition, while $\Sexpr{diff.mean.low.control}$ $\times\;100\;=\;$ $\Sexpr{diff.mean.low.control*100}$\% of subjects would sell their votes under the ``low'' condition. As shown in the following analyses, these figures are way below to what it is found in the direct question, both under the ``high'' and ``low'' conditions.\footnote{$\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][1]*100, 0)}$\% and $\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][2]*100, 0)}$\%, respectively.} However, these kinds of bivariate analyses are statistically inefficient, and the data should be analyzed using multivariate techniques instead.
+
 Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list data were analyzed using a statistical multivariate approach. Numerical results are shown in \autoref{tab:regression}. Four covariates were included: income, education, party identification, and political ideology. These variables have been widely considered in the clientelism literature before \parencite{Nazareno2008a,GonzalezOcantos2014,Bahamonde2018,Weitz-shapiro}.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}}'' and the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The remaining arguments were left at their default values.} 
 
 
