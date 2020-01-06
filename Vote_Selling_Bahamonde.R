@@ -2344,6 +2344,12 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 
 
 ## Map of Observations
+
+# install package zipcode from source when I run this script during January 2020.
+## zipcode was removed from R, and last version (bellow installed) is 1.0 (dated 2012).
+install.packages("https://cran.r-project.org/src/contrib/Archive/zipcode/zipcode_1.0.tar.gz", repos=NULL, type="source")
+
+
 ### loading a package with ZIP codes and their respective Lat's and Long's.
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(zipcode,ggplot2,ggmap)
