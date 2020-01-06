@@ -3,6 +3,8 @@
 
 \subimport{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/}{LaTeX_Paper_Packages_And_Style}
 
+% this below is to have endnotes at the end of the document.
+% \let\footnote=\endnote 
 
 
 % DOCUMENT ID
@@ -643,8 +645,8 @@ After a random assignment, you have been selected for the opportunity to hypothe
 
 
 % Notes
-\linespread{2}
-\newpage\theendnotes
+%\linespread{2}
+%\newpage\theendnotes
 
 
 \end{document}
