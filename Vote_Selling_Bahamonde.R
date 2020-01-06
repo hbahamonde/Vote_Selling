@@ -126,7 +126,7 @@ rm(list=ls())
 ## ---- barplot:data:control:treatment ----
 
 # Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # Histogram for Item Count
 ## Create a factor variable to use in the plot
@@ -155,7 +155,6 @@ treat.cont.bar.plot.d = data.frame(
                 rep("NonSens", 4)
         )
 )
-
 
 # reorder factor var to have low treatment BEFORE high treatment.
 treat.cont.bar.plot.d$Condition = factor(treat.cont.bar.plot.d$Condition,levels(treat.cont.bar.plot.d$Condition)[c(1,3,2)])
