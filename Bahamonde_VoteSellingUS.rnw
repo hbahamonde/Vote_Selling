@@ -135,7 +135,7 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 \section{Vote-Sellers and Vote-Buyers}
 
 % Hook 2
-Prior\todo{activate endnote} research usually focuses on whether parties have attempted to buy votes \parencite[]{Vicente2014,Vicente2009,Rueda2016,Rueda2014a,Reynolds1980,Nichter2014,KiewietDeJonge2015,Inan2012a,GonzalezOcantos2014,Diaz-Cayeros2012,Brusco2004}. While this is an important question, unfortunately, it overlooks the issue of whether citizens would sell their votes. This reconceptualization is necessary since several questions remain unanswered---and worryingly, most pertain to vote-sellers. For instance, \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?}
+Prior \todo{activate endnote} research usually focuses on whether parties have attempted to buy votes \parencite[]{Vicente2014,Vicente2009,Rueda2016,Rueda2014a,Reynolds1980,Nichter2014,KiewietDeJonge2015,Inan2012a,GonzalezOcantos2014,Diaz-Cayeros2012,Brusco2004}. While this is an important question, unfortunately, it overlooks the issue of whether citizens would sell their votes. This reconceptualization is necessary since several questions remain unanswered---and worryingly, most pertain to vote-sellers. For instance, \emph{What would voters do, if offered the chance to sell their votes? Would they sell their votes (and at what price), or would they consistently opt-out of vote-selling?}
 
 
 Except for a number of important studies \parencite{Hicken2015,Hicken2018,Corstange2012a,Nichter2014a}, the emphasis remains on studying vote-buying. In fact, \textcite{Nichter2014a} explain that studies continue to view clientelism typically as a top-down process, generally overlooking citizens' demands. To illustrate the issue at hand, \autoref{fig:lapop:bar:chart:plot} shows responses of U.S. citizens to whether a candidate or a member of a political party has offered something in exchange for people's votes, completely ignoring voters' preferences. The figure begs the question if survey respondents answering ``never'' would still be willing to sell their votes. 
@@ -333,7 +333,7 @@ The paper acknowledges that there is considerable friction and transaction costs
 
 \subsection{Would U.S. Citizens Sell Their Vote?} 
 
-\begin{table}[H]
+\begin{table}[h]
 \centering
 \begin{tabular}{cccccc}
 \hline
@@ -343,7 +343,7 @@ High (\$500) & \Sexpr{as.character(mean.t.high)} & \Sexpr{as.character(mean.t.hi
 Low (\$100) & \Sexpr{as.character(mean.t.low)} & \Sexpr{as.character(mean.t.low)} - \Sexpr{as.character(mean.control)} = \Sexpr{as.character(diff.mean.low.control)}  & \Sexpr{as.character(low.control.t.test.t)} & \Sexpr{as.character(low.control.t.test.df)} & \Sexpr{low.control.t.test.pvalue} \\ \hline
 \hline
 \end{tabular}
-\caption{{\bf Differences in Means between Treatments (high and low) and the Control Group.\label{tab:t:test}}\\\hspace{\textwidth} {\bf Note}: Table shows two-tailed t-tests between each experimental treated unit (``high'' and ``low'' conditions) and the control group. Stars denote statistical significance. T-tests are two-tailed.}\centering
+\caption{{\bf Differences in Means between Treatments (high and low) and the Control Group.\label{tab:t:test}}\\\hspace{\textwidth} {\bf Note}: Table shows two-tailed t-tests between each experimental treated unit (``high'' and ``low'' conditions) and the control group. Stars denote statistical significance.}\centering
 \end{table}
 
 
@@ -352,7 +352,16 @@ Low (\$100) & \Sexpr{as.character(mean.t.low)} & \Sexpr{as.character(mean.t.low)
 
 There are three important points regarding this table. First, the difference between the means of the \emph{treated} groups (i.e. the ``high'' and ``low'' groups) is statistically zero. That implies that both treatments should not introduce design bias into the experiment. Second, while treated subjects do have slightly higher means when compared to the control group (i.e. indicating some propensity to sell their votes), these differences are not statistically significant. Third (and while not statistically significant), $\Sexpr{diff.mean.high.control}$ $\times\;100\;=\;$ $\Sexpr{diff.mean.high.control*100}$\% of subjects would sell their votes under the ``high'' condition, while $\Sexpr{diff.mean.low.control}$ $\times\;100\;=\;$ $\Sexpr{diff.mean.low.control*100}$\% of subjects would sell their votes under the ``low'' condition. As shown in the following analyses, these figures are way below to what it is found in the direct question, both under the ``high'' and ``low'' conditions.\footnote{$\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][1]*100, 0)}$\% and $\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct"][2]*100, 0)}$\%, respectively.} However, these kinds of bivariate analyses are statistically inefficient, and the data should be analyzed using multivariate techniques instead.
 
-Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list data were analyzed using a statistical multivariate approach. Numerical results are shown in \autoref{tab:regression}. Four covariates were included: income, education, party identification, and political ideology. These variables have been widely considered in the clientelism literature before \parencite{Nazareno2008a,GonzalezOcantos2014,Bahamonde2018,Weitz-shapiro}.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}}'' and the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The remaining arguments were left at their default values.} 
+Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list data were analyzed using a statistical multivariate approach.\footnote{The \texttt{R} package \texttt{list} was used \parencite{Blair2015}. The estimation method used was the ``\text{\Sexpr{method}}'' and the maximum number of iterations was \Sexpr{format(round(as.numeric(maxIter), 0), nsmall=0, big.mark=",")}. The remaining arguments of the package were left at their default values.} As shown in \textcite{Imai2011}, numerical results are shown in \autoref{tab:regression}. The table presents the estimated coefficients (``Est.'') and its standard errors (``SE'') for all covariates included in the model. Following \parencite{Calvo2004,Stokes2005,Kitschelt2007,Nazareno2008a,Weitz-shapiro,GonzalezOcantos2014,Oliveros2016,Bahamonde2018}, four covariates were included: income, education, party identification, and political ideology. 
+
+
+
+
+Following, \textcite{Imai2011} the table shows estimated coefficients (``Est.'') along its corresponding standard errors (``SE'') from the regression model. The outcome variable is whether or not subjects would sell their vote to a candidate for \$500 or \$100. Since every price (\$500 or \$100) represents a different treatment, the table shows one model per condition (``high'' and ``low''). The idea of the table is twofolds. First, the table  shows statistically efficient estimates between treated and untreated experimental subjects. Thus, the analyst can compare the estimated coefficients between treated subjects under the ``low'' condition (left column of the left panel) with untreated subjects under the ``low'' condition too (left column of the right panel).
+
+
+
+
 
 
 
@@ -363,7 +372,7 @@ Following the advice of \textcite{Blair2012} and \textcite{Blair2015}, the list 
 \begin{tabular}{c|cc|cc|cc|ll|}
 \cline{2-9}
                    & \multicolumn{4}{c|}{\textbf{Sensitive Items}}                                        & \multicolumn{4}{c|}{\textbf{Control Items}}                                                                    \\ \cline{2-9} 
-                   & \multicolumn{2}{c|}{{ \textit{Low Treatment}}} & \multicolumn{2}{c|}{{ \textit{High Treatment}}} & \multicolumn{2}{c}{{ \textit{Low Condition}}} & \multicolumn{2}{l|}{{ \textit{High Condition}}}                            \\ \hline
+                   & \multicolumn{2}{|c}{{ \textit{Low Condition}}} & \multicolumn{2}{c|}{{ \textit{High Condition}}} & \multicolumn{2}{c}{{ \textit{Low Condition}}} & \multicolumn{2}{l|}{{ \textit{High Condition}}}                            \\ \hline
 \textit{{\bf Variables}} & \textit{Est.}        & \textit{SE}       & \textit{Est.}        & \textit{SE}        & \textit{Est.}       & \textit{SE}       & \multicolumn{1}{c}{\textit{Est.}} & \multicolumn{1}{c|}{\textit{SE}} \\ \hline
 Intercept & $\Sexpr{as.numeric(coeffs.treat.list.low[1])}$ & $\Sexpr{as.numeric(se.treat.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[1])}$ & $\Sexpr{as.numeric(se.treat.list.high[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[1])}$ & $\Sexpr{as.numeric(se.cont.list.low[1])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[1])}$ & $\Sexpr{as.numeric(se.cont.list.high[1])}$\\
 Ideology$_{\text{Liberal}}$ & $\Sexpr{as.numeric(coeffs.treat.list.low[2])}$ & $\Sexpr{as.numeric(se.treat.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[2])}$ & $\Sexpr{as.numeric(se.treat.list.high[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[2])}$ & $\Sexpr{as.numeric(se.cont.list.low[2])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[2])}$ & $\Sexpr{as.numeric(se.cont.list.high[2])}$\\
@@ -377,7 +386,7 @@ Income & $\Sexpr{as.numeric(coeffs.treat.list.low[9])}$ & $\Sexpr{as.numeric(se.
 Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric(se.treat.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.treat.list.high[10])}$ & $\Sexpr{as.numeric(se.treat.list.high[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.low[10])}$ & $\Sexpr{as.numeric(se.cont.list.low[10])}$ & $\Sexpr{as.numeric(coeffs.cont.list.high[10])}$ & $\Sexpr{as.numeric(se.cont.list.high[10])}$\\
 \hline
 \end{tabular}
-\caption{{\bf Multivariate Analysis of the List Experiment.\label{tab:regression}}\\\hspace{\textwidth} {\bf Note}: Table shows estimated coefficients from regression models where the outcome variables are whether or not subjects would sell their vote to a candidate for \$100 or \$500.}\centering
+\caption{{\bf Multivariate Analysis of the List Experiment.\label{tab:regression}}\\\hspace{\textwidth} {\bf Note}: Following \textcite{Imai2011}, the table shows estimated coefficients (``Est.'') and its corresponding standard errors (``SE'') from the regression model, where the outcome variable is whether or not subjects would sell their vote to a candidate. There is a model for each treatment, both ``high'' (\$500) and ``low'' (\$100).}\centering
 \end{table}
 
 
