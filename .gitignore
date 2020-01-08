@@ -1,51 +1,26 @@
-# ignore temp files w/ trailing ~
-*~
 
-# ignore hidden files
-.*
+.DS_Store
 
-# ignore files with the rolling extensions
-*.DS_Store
-*.Rhistory
-*.aux
-*.bbl
-*.blg
-*.log
-*.out
-*.toc
-*.synctex.gz
-*.gz
-*.fdb_latexmk
-*.fls
-*.Rhistory
-*.md
+.Rhistory
+
+Bahamonde_VoteSellingUS.aux
+
+Bahamonde_VoteSellingUS.bbl
+
+Bahamonde_VoteSellingUS.bcf
+
+Bahamonde_VoteSellingUS.blg
+
+Bahamonde_VoteSellingUS.fdb_latexmk
+
+Bahamonde_VoteSellingUS.fls
+
+Bahamonde_VoteSellingUS.log
+
+Bahamonde_VoteSellingUS.out
+
+Bahamonde_VoteSellingUS.run.xml
+
+Bahamonde_VoteSellingUS.synctex.gz
 
 Bahamonde_VoteSellingUS.tex
-
-
-# don't ignore the .gitignore file
-!.gitignore
-
-# ignore folders
-
-
-LICENSE
-CENSUS
-DataBackUp
-Examples
-IRB
-Python_Scrypt
-
-figure/
-
-Bahamonde_VoteSellingUS\.synctex\(busy\)
-
-*.bcf
-
-*.xml
-
-*.ent
-
-*.fff
-
-*.ttt
