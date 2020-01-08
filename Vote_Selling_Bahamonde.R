@@ -161,8 +161,9 @@ treat.cont.bar.plot.d$Condition = factor(treat.cont.bar.plot.d$Condition,levels(
 
 
 # calculate percentages
-if (!require("pacman")) install.packages("pacman"); library(pacman) 
-p_load(plyr)
+## plyr is dicontinued/retired as it January 2020. Hence, I'll be installing from source
+install.packages("https://cran.r-project.org/src/contrib/plyr_1.8.5.tar.gz", repos=NULL, type="source")
+library(plyr)
 
 treat.cont.bar.plot.d = ddply(treat.cont.bar.plot.d, .(Condition), transform, percent = ycount/sum(ycount) * 100)
 treat.cont.bar.plot.d = ddply(treat.cont.bar.plot.d, .(Condition), transform, pos = (cumsum(ycount) - 0.5 * ycount))
@@ -2425,10 +2426,12 @@ load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load d
 install.packages("https://cran.r-project.org/src/contrib/Archive/zipcode/zipcode_1.0.tar.gz", repos=NULL, type="source")
 
 
-### loading a package with ZIP codes and their respective Lat's and Long's.
+# plyr is dicontinued/retired as it January 2020. Hence, I'll be installing from source
+install.packages("https://cran.r-project.org/src/contrib/plyr_1.8.5.tar.gz", repos=NULL, type="source")
+library(plyr)
+
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(zipcode,ggplot2,ggmap)
-
 # install.packages("ggmap", type = "source")library(ggmap) # if it gives the following error ("Error: GeomRasterAnn was built with an incompatible version of ggproto"), install ggmap from source.
 
 
