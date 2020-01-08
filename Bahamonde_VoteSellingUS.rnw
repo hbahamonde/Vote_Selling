@@ -366,16 +366,14 @@ By leveraging this multivariate approach it is possible to estimate the proporti
 @
 
 
-Substantively, \autoref{fig:list:analysis:social:desirability:plot} suggests that after combining the estimates of the ``low'' and ``high'' treatments, approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]*100, 0)}$\%) conditions.} While a considerable proportion answered the direct question affirmatively ($\Sexpr{(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2}$\%),\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0)}$\%) conditions.} the analyses still suggest that survey respondents systematically under-reported their true answers: approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0)}$\% of the nationally representative sample lied about it.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]*100, 0)}$\%) conditions. The ``low'' condition is barely non-significant, and hence it does not alter the substantive results.}  
+Substantively, \autoref{fig:list:analysis:social:desirability:plot} suggests that after combining the estimates of the ``low'' and ``high'' treatments, approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]*100, 0)}$\%) conditions.} While a considerable proportion answered the direct question affirmatively ($\Sexpr{(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2}$\%),\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0)}$\%) conditions.} the analyses still suggest that survey respondents systematically under-reported their true answers: approximately $\Sexpr{round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0)}$\% of the nationally representative sample would have lied about it.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]*100, 0)}$\%) conditions. The ``low'' condition is barely non-significant, and hence it does not alter the substantive results.}  
+
+
+For reasons of internal validity, it is important to note in \autoref{fig:list:analysis:social:desirability:plot} that since the estimated quantities do not vary across the different treatments (``high'' and ``low''), it is then reasonable to think that there are not specific concerns associated with the (arbitrarily) chosen prices. Otherwise, the estimated treatment effects would have been a function of the design itself.
 
 
 
-Since the estimated proportion of vote-sellers does not increase with the high-price treatment, it is then reasonable to think that there are not specific concerns associated with the design of the treatments. \todo{va?}
-
-
-
-
-As shown in \textcite{Imai2011}, numerical results are shown in \autoref{tab:regression}. The table shows estimated coefficients (``Est.'') along its corresponding standard errors (``SE'') from the regression model. The outcome variable is whether subjects would sell their vote to a candidate for \$500 or \$100 (``high'' and ``low,'' respectively). Since every price (\$500 or \$100) represents a different treatment, the table shows one model per condition (``high'' and ``low''). The idea of the table is twofolds. First, it shows statistically efficient estimates between treated and untreated experimental subjects (``Sensitive'' and ``Control,'' respectively). Second, the table shows different estimated coefficients for the ``low'' and ``high'' conditions. Hence, one way to read the table is by looking at the results corresponding to the same experimental regime. That is, by comparing the estimates of the treated subjects under the ``low'' condition (left column of the left panel) with the estimates of the untreated subjects under the ``low'' condition too (left column of the right panel). Another way to read to table is by looking at the results corresponding to treated subjects, but under the different two treatments. That is, by double-checking that both ``high'' and ``low'' experimental treatments give very similar results, it is possible to rule out potential design bias. 
+For completeness, and as shown in \textcite{Imai2011}, numerical results are shown in \autoref{tab:regression}. The table shows estimated coefficients (``Est.'') along its corresponding standard errors (``SE'') from the regression model. The outcome variable is whether subjects would sell their vote to a candidate for \$500 or \$100 (``high'' and ``low,'' respectively). Since every price (\$500 or \$100) represents a different treatment, the table shows one model per condition (``high'' and ``low''). The idea of the table is twofolds. First, it shows statistically efficient estimates between treated and untreated experimental subjects (``Sensitive'' and ``Control,'' respectively). Second, the table shows different estimated coefficients for the ``low'' and ``high'' conditions. Hence, one way to read the table is by looking at the results corresponding to the same experimental regime. That is, by comparing the estimates of the treated subjects under the ``low'' condition (left column of the left panel) with the estimates of the untreated subjects under the ``low'' condition too (left column of the right panel). Another way to read to table is by looking at the results corresponding to treated subjects, but under the different two treatments. That is, by double-checking that both ``high'' and ``low'' experimental treatments give very similar results, it is possible to rule out potential design bias. 
 
 
 \begin{table}[H]
@@ -401,6 +399,11 @@ Education & $\Sexpr{as.numeric(coeffs.treat.list.low[10])}$ & $\Sexpr{as.numeric
 \end{table}
 
 
+\subsection{\emph{Who} are the Most-Likely Vote-Sellers?} 
+
+
+
+
 Using basic inferential statistics, individual probabilities of vote-selling were estimated (\autoref{fig:list:analysis:individual:predictions:plot}). Using this information, it is possible to estimate the proportion of individuals selling their votes. In combination with the estimates of the direct question, it was also possible to estimate the number of ``liars.'' 
 
 
@@ -413,8 +416,6 @@ Using basic inferential statistics, individual probabilities of vote-selling wer
 
 @
 
-
-\subsection{\emph{Who} are the Most-Likely Vote-Sellers?} 
 
 Using the estimated coefficients in \autoref{tab:regression}, \autoref{fig:predictions:independent:variables:plot} shows the estimated effect of each variable on vote-selling.
 
