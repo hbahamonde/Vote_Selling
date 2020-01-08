@@ -821,7 +821,7 @@ socdes.p.high = data.frame(avg.pred.social.desirability.high$fit,
 
 
 socdes.p.high$c.1.3 = as.factor(socdes.p.high$c.1.3)
-socdes.p.high$c.1.3 <- factor(socdes.p.high$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+socdes.p.high$c.1.3 <- factor(socdes.p.high$c.1.3, labels = c("List\nExperiment", "Direct\nQuestion", "Social\nDesirability"))
 socdes.p.high <- socdes.p.high[c("fit", "lwr", "upr", "Significance", "Condition", "c.1.3")]
 
 ### DF for individual prediction: Low Condition
@@ -832,7 +832,7 @@ socdes.p.low = data.frame(avg.pred.social.desirability.low$fit,
                           Condition = rep("Low ($100)"), 3)
 
 socdes.p.low$c.1.3 = as.factor(socdes.p.low$c.1.3)
-socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List", "Direct", "Soc. Des."))
+socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List\nExperiment", "Direct\nQuestion", "Social\nDesirability"))
 socdes.p.low <- socdes.p.low[c("fit", "lwr", "upr", "Significance", "Condition", "c.1.3")]
 
 ### Rbinding both DF's
@@ -869,13 +869,16 @@ soc.des.plot = ggplot(socdes.p.high.low,
 ## ----
 
 
+
+
+
 ## ---- list:analysis:social:desirability:plot
 ### Plot
 soc.des.plot
 soc.des.plot.note <- paste(
         "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        "{\\bf Note}: The figure shows the proportion of declared and predicted vote-sellers, and its difference (``liars''). These estimations were obtained from the model specified in \\autoref{tab:regression}.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since the vote-selling prices were set arbitrarily, the reason for two conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.",
+        paste("{\\bf Note}: The figure shows the proportion of declared (`Direct Question') and predicted (`List Experiment') vote-sellers, and its difference (`Social Desirability'). Combining both `high' and `low' treatments,", paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0), "%", sep=""), "would be willing to sell their votes. And of the ones who answered affirmatively when asked directly", paste("(",(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2,"%",")", sep=""), "there is an estimated additional" , paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0), "%", sep=""), "who lied about it. `Liars' answer negatively the direct question, but in reality, they would sell it.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "Since both vote-selling prices were set arbitrarily, the reason for having these two conditions (``high'' and ``low'') was to control for possible price elasticities. As the figure suggests, there are some small differences. However, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the experimental design."),
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
