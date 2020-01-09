@@ -646,11 +646,11 @@ ind.pred.low.cond.plot = ggplot() + geom_pointrange(data=indpred.p.low,
         theme_bw() +
         scale_colour_grey() +
         theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
-              axis.title.y = element_text(size=7), 
-              axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
+              axis.text.x = element_text(size=12), 
+              axis.title.y = element_text(size=18), 
+              axis.title.x = element_text(size=18), 
+              legend.text=element_text(size=18), 
+              legend.title=element_text(size=18),
               plot.title = element_text(size=7),
               legend.position="bottom")
 
@@ -672,11 +672,11 @@ ind.pred.high.cond.plot = ggplot() + geom_pointrange(data=indpred.p.high,
         theme_bw() +
         scale_colour_grey() +
         theme(axis.text.y = element_text(size=7), 
-              axis.text.x = element_text(size=7), 
-              axis.title.y = element_text(size=7), 
-              axis.title.x = element_text(size=7), 
-              legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
+              axis.text.x = element_text(size=12), 
+              axis.title.y = element_text(size=18), 
+              axis.title.x = element_text(size=18), 
+              legend.text=element_text(size=18), 
+              legend.title=element_text(size=18),
               plot.title = element_text(size=7),
               legend.position="bottom")
 
@@ -758,7 +758,7 @@ grid_arrange_shared_legend(
 individual.predictions.plot.note <- paste(
         "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the ``low'' and ``high'' conditions. After fitting the model in \\autoref{tab:regression}, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the ``low'' and ``high'' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
+        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the ``low'' and ``high'' conditions. After fitting the model, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the ``low'' and ``high'' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
         "\n")
 ## ----
 
