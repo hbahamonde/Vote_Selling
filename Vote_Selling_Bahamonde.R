@@ -2108,6 +2108,214 @@ predictions.independent.variables.plot.note <- paste(
 ## ---- 
 
 
+
+###############################################
+# Covariate Balance
+###############################################
+
+
+## ---- cov:balance:d ----
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+
+
+# Finding Regime Per Observation
+control <- ifelse(dat$control=="NA", 0, 1)
+treatment100 <- ifelse(dat$treatment100=="NA", 0, 100)
+treatment500 <- ifelse(dat$treatment500=="NA", 0, 500)
+df = data.frame(cbind(control, treatment100, treatment500))
+df$Regime1 = rowSums(df, na.rm=T)
+dat$Regime = ifelse(df$Regime1==1, "Control", ifelse(df$Regime1==100, "Low Treatment", ifelse(df$Regime1==500, "High Treatment", 0)))
+
+
+cov.balance.d = data.frame(
+    as.data.frame(dat$income), 
+    as.data.frame(dat$educ), 
+    as.data.frame(dat$partyid), 
+    as.data.frame(dat$socideo),
+    as.data.frame(dat$Regime)
+    )
+
+
+# Renaming Columns
+colnames(cov.balance.d)[colnames(cov.balance.d)=="dat.income"] <- "Income"
+colnames(cov.balance.d)[colnames(cov.balance.d)=="dat.educ"] <- "Education"
+colnames(cov.balance.d)[colnames(cov.balance.d)=="dat.partyid"] <- "Party Id"
+colnames(cov.balance.d)[colnames(cov.balance.d)=="dat.socideo"] <- "Ideology"
+colnames(cov.balance.d)[colnames(cov.balance.d)=="dat.Regime"] <- "Regime"
+
+# Fixing Levels
+
+## Party ID
+levels(cov.balance.d$"Party Id")[levels(cov.balance.d$"Party Id")=="SomethingElse"] <- "Something Else"
+## Education
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="SomeHighSchool"] <- "Some High School"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="HighSchoolGraduate"] <- "High School Graduate"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="TechnicalSchool"] <- "Technical School"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="SomeCollege"] <- "Some College"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="AssociateDegree"] <- "Associate Degree"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="BachelorsDegree"] <- "Bachelors Degree"
+levels(cov.balance.d$Education)[levels(cov.balance.d$Education)=="GraduateSchool"] <- "Graduate School"
+## Ideology
+levels(cov.balance.d$Ideology)[levels(cov.balance.d$Ideology)=="VeryLiberal"] <- "Very Liberal"
+levels(cov.balance.d$Ideology)[levels(cov.balance.d$Ideology)=="VeryConservative"] <- "Very Conservative"
+
+
+# Plots
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2)
+
+## Income
+cov.balance.plot.income = ggplot(cov.balance.d, aes(colour = Regime,Income, ..count.. ) ) + 
+  geom_point(stat = "count", size = 4) + 
+  coord_flip() +
+  theme_bw() +
+  ggtitle("Income") +
+  ylab("Count") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=9), 
+        axis.text.x = element_text(size=9), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=9), 
+        legend.text=element_text(size=15), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=15),
+        legend.position="bottom")
+
+## Education
+cov.balance.plot.education = ggplot(cov.balance.d, aes(colour = Regime,Education, ..count.. ) ) + 
+  geom_point(stat = "count", size = 4) +  #   geom_point(stat = "count", size = 3, shape = 20) + 
+  coord_flip() +
+  theme_bw() +
+  ggtitle("Education") +
+  ylab("Count") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=9), 
+        axis.text.x = element_text(size=9), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=9), 
+        legend.text=element_text(size=15), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=15),
+        legend.position="bottom")
+
+
+## Party Id
+cov.balance.plot.partyid = ggplot(cov.balance.d, aes(colour = Regime,`Party Id`, ..count.. ) ) + 
+  geom_point(stat = "count", size = 4) + 
+  coord_flip() +
+  theme_bw() +
+  ggtitle("Party Id") +
+  ylab("Count") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=9), 
+        axis.text.x = element_text(size=9), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=9), 
+        legend.text=element_text(size=15), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=15),
+        legend.position="bottom")
+
+## Ideology
+cov.balance.plot.ideology = ggplot(cov.balance.d, aes(colour = Regime,Ideology, ..count.. ) ) + 
+  geom_point(stat = "count", size = 4) + 
+  coord_flip() +
+  theme_bw() +
+  ggtitle("Ideology") +
+  ylab("Count") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=9), 
+        axis.text.x = element_text(size=9), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=9), 
+        legend.text=element_text(size=15), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=15),
+        legend.position="bottom")
+
+
+# MERGING ALL PLOTS
+
+# load libraries
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(gridExtra)
+
+
+
+# To force GGplots to share same legend.
+grid_arrange_shared_legend <- function(...) {
+  require(ggplot2)
+  require(gridExtra)
+  plots <- list(...)
+  g <- ggplotGrob(plots[[1]] + theme(legend.position="bottom"))$grobs
+  legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+  lheight <- sum(legend$height)
+  grid.arrange(
+    do.call(arrangeGrob, lapply(plots, function(x)
+      x + theme(legend.position="none"))),
+    legend,
+    ncol = 1,
+    heights = grid::unit.c(unit(1, "npc") - lheight, lheight))
+}
+
+#### multiplot
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+## ---- 
+
+## ---- cov:balance:plot ----
+grid_arrange_shared_legend(
+  cov.balance.plot.income, 
+  cov.balance.plot.education,
+  cov.balance.plot.partyid,
+  cov.balance.plot.ideology,
+  ncol = 2, nrow = 2)
+
+cov.balance.plot.note <-  paste(
+  "{\\bf Frequency of Clientelism in the United States (2010)}.",
+  "\\\\\\hspace{\\textwidth}", 
+  paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
+  "\\\\\\hspace{\\textwidth}", 
+  paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: ``In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes, or never?''"),
+  "\n")
+## ---- 
+
+
+
+
 ###############################################
 # Direct CLIENTELISM question plot from LAPOP
 ###############################################
