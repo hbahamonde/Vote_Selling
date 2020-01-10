@@ -332,21 +332,23 @@ In turn, subjects randomly assigned to the treatment condition answered one of t
 @
 
 
-% Balance Tests % Here
+% Balance Tests
+Besides going through the experimental portion of the study, participants also answering a small questioner. A number of questions were covered, including income, education, party identification and political ideology. These answers will be used to construct a statistical multivariate model to estimate likely vote-sellers. 
 
-As with every experimental study, it is important to show that all experimental regimes (both treatments and control) were truly randomly assigned to subjects. The idea is to show that the probability of being in any of the experimental regimes is not associated to individual covariates. 
+As with every experimental study, it is important to show that all experimental regimes (both treatments and control) were truly randomly assigned to subjects. The idea is to show that the probability of being in any of the experimental regimes---the propensity score---is not associated to individual covariates. \autoref{fig:ps:plot} shows the densities of the propensity score. The propensity score is computed by estimated a GLM, where the outcome variable is whether the experimental subject is treated or not. This model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This is the same exact set of variables used when estimating likely vote-sellers. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the mechanism assignment. 
+
+Additionally, \autoref{fig:cov:balance:plot} in the Appendix section shows the the frequency of every experimental regime per every level of income, education, party identification and political ideology. The figure shows frequencies on the x-axis, and y-axis shows the levels of every variable. Since the three conditions (displayed in dots) are grouped together at every variable level, the figure strongly suggest that randomization was achieved nicely.
 
 
-\afterpage{
-% cov:balance:plot
-<<cov:balance:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=NULL, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
+
+% ps:plot
+<<ps:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=ps.plot.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
-\clearpage
-}
 
 
 
+% HERE
 
 
 
@@ -411,13 +413,12 @@ Democrats and liberals are systematically more likely to sell. These findings ar
 %The findings in this paper seem to support the idea that liberals engage more frequently in illegal or ``wrong'' behaviors.
 
 
-\afterpage{
+
 % predictions:independent:variables:plot
 <<predictions:independent:variables:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predictions.independent.variables.plot.note, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
-\clearpage
-}
+
 
 
 
@@ -576,19 +577,6 @@ After a random assignment, you have been selected for the opportunity to hypothe
 \pagebreak
 
 
-%\paragraph{Pricing Experiment.} \hypertarget{pricing.experiment}{Subjects who answered ``yes'' to the direct question}, were immediately asked to price their votes. 
-
-
-% figure: pricing experiment.
-%\begin{figure}[h]
-%\includegraphics[scale=.7, center]{pricing_experiment.jpeg}
-%\caption{Pricing Experiment.}\centering\label{fig:pricing:experiment}
-%\end{figure}
-%\vspace*{\fill}
-%\pagebreak
-
-
-
 \subsection{Testing for Design Effects}
 
 
@@ -639,6 +627,12 @@ After a random assignment, you have been selected for the opportunity to hypothe
 @
 
 
+\subsection{Covariate Balance}
+
+% cov:balance:plot
+<<cov:balance:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=NULL, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
+
+@
 
 
 %\section{Online Appendix}

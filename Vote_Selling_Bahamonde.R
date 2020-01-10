@@ -2294,7 +2294,77 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     }
   }
 }
+
+###############################################
+# Balance Statistical Tests
+###############################################
+
+# Build two DFs, one per treatment condition.
+cov.balance.d.low <- subset(cov.balance.d , Regime == "Control" | Regime == "Low Treatment")
+cov.balance.d.high <- subset(cov.balance.d , Regime == "Control" | Regime == "High Treatment")
+
+
+# Propensity Score (Low)
+m.ps.low <- glm(Regime ~ Income + Education + `Party Id` + Ideology, 
+                family = binomial(), 
+                data = cov.balance.d.low)
+
+ps.df.low <- data.frame(ps.low = predict(m.ps.low, type = "response"),
+                        Regime = m.ps.low$model$Regime)
+
+
+# Propensity Score (High)
+m.ps.high <- glm(Regime ~ Income + Education + `Party Id` + Ideology, 
+                 family = binomial(), 
+                 data = cov.balance.d.high)
+
+ps.df.high <- data.frame(ps.high = predict(m.ps.high, type = "response"),
+                         Regime = m.ps.high$model$Regime)
+
+# Density Plot of PS's
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(ggplot2,ggpubr) # ggpubr is to merge both plots
+
+## PS Low
+ps.plot.low = ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) + 
+  geom_density(alpha=0.4) +
+  theme_bw() +
+  ggtitle("Propensity Score: Low Treatment") +
+  ylab("Density") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=7), 
+        axis.text.x = element_text(size=7), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=7), 
+        legend.text=element_text(size=7), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=8),
+        legend.position="bottom",
+        legend.key.size = unit(0.5,"cm"),
+        legend.spacing.x = unit(0.3, 'cm')) 
+
+
+## PS High
+ps.plot.high =   ggplot(ps.df.high, aes(x=ps.high, fill=Regime)) + 
+  geom_density(alpha=0.4) +
+  theme_bw() +
+  ggtitle("Propensity Score: High Treatment") +
+  ylab("Density") + 
+  xlab("") +
+  theme(axis.text.y = element_text(size=7), 
+        axis.text.x = element_text(size=7), 
+        axis.title.y = element_text(size=7), 
+        axis.title.x = element_text(size=7), 
+        legend.text=element_text(size=7), 
+        legend.title=element_text(size=0),
+        plot.title = element_text(size=8),
+        legend.position="bottom",
+        legend.key.size = unit(0.5,"cm"),
+        legend.spacing.x = unit(0.3, 'cm')) 
+
 ## ---- 
+
+
 
 ## ---- cov:balance:plot ----
 grid_arrange_shared_legend(
@@ -2305,7 +2375,7 @@ grid_arrange_shared_legend(
   ncol = 2, nrow = 2)
 
 cov.balance.plot.note <-  paste(
-  "{\\bf Frequency of Clientelism in the United States (2010)}.",
+  "{\\bf }.",
   "\\\\\\hspace{\\textwidth}", 
   paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
   "\\\\\\hspace{\\textwidth}", 
@@ -2314,7 +2384,18 @@ cov.balance.plot.note <-  paste(
 ## ---- 
 
 
+## ---- ps:plot ----
+ggarrange(ps.plot.low, ps.plot.high,
+          labels = c("", ""),
+          ncol = 2, nrow = 1)
 
+ps.plot.note <-  paste(
+  "{\\bf Propensity Score: Probability of being Assigned to an Experimental Condition}.",
+  "\\\\\\hspace{\\textwidth}", 
+  "{\\bf Note}: Figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimated a GLM, where the outcome variable is whether the experimental subject is treated or not. This model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This is the same exact set of variables used when estimating likely vote-sellers using the multivariate approach adopted below. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the mechanism assignment.",
+  "\\\\\\hspace{\\textwidth}", 
+  "\n")
+## ---- 
 
 ###############################################
 # Direct CLIENTELISM question plot from LAPOP
