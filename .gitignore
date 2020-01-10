@@ -26,3 +26,13 @@ Bahamonde_VoteSellingUS.synctex.gz
 Bahamonde_VoteSellingUS.tex
 
 figure/
+
+*.aux
+
+*.fdb_latexmk
+
+*.fls
+
+*.log
+
+*.gz
