@@ -287,16 +287,16 @@ The experiment was framed as a study about crime in the United States, not a stu
 To prevent possible priming effects,\footnote{\textcite[54]{Blair2012} explain that asking the direct question to individuals in the treated group might bias the results.} and as suggested in \autoref{experimental:design:fig}, the order in which experimental subjects answered the direct question,\footnote{See \hyperlink{direct.question}{the appendix} for wording.} and the list experiment, was randomly assigned. To be sure, all subjects answered both the direct question and the list experiment. To further prevent the possibility of biased answers when asking the direct question to individuals in the treated group, the direct question stated that there would be assigned, at random, the hypothetical possibility to do one of the illegal things mentioned previously in the excerpt. However, all participants were directly asked whether they would be interested in selling their votes. Direct answers were then used to estimate the proportion of ``liars.'' 
 
 
-% 
-Subjects answering ``yes'' to the direct question, answered as a follow-up a pricing experiment in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Pricing experiments are straightforward (\autoref{fig:pricing:experiment}). Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too high'' for one's vote. Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.
+%  
+Subjects answering ``yes'' to the direct question, answered as a follow-up a pricing test in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too high'' for one's vote (\autoref{fig:pricing:experiment}). Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.
 
 
 
 
-% figure: pricing experiment.
+% figure: pricing test.
 \begin{figure}[h]
 \frame{\includegraphics[scale=.6, center]{pricing_experiment.jpeg}}
-\caption{{\bf Pricing Experiment.\label{fig:pricing:experiment}}\\\hspace{\textwidth} {\bf Note}: As shown in \autoref{experimental:design:fig}, all participants slid both handles, one indicating which price was considered ``too cheap,'' one indicating which price was considered ``too high'' for one's vote. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.}\centering
+\caption{{\bf Pricing Test.\label{fig:pricing:experiment}}\\\hspace{\textwidth} {\bf Note}: As shown in \autoref{experimental:design:fig}, all participants slid both handles, one indicating which price was considered ``too cheap,'' one indicating which price was considered ``too high'' for one's vote. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.}\centering
 \end{figure}
 %\vspace*{\fill}
 %\pagebreak
@@ -320,6 +320,7 @@ Now, you will have to type HOW MANY, if any, of the following illegal activities
 Type in HOW MANY (NOT WHICH), if any, of these things you would do.
 \end{lstlisting}
 
+
 In turn, subjects randomly assigned to the treatment condition answered one of the following two treatments. Subjects assigned to the ``low'' price condition read the exact same vignette, but the next line was added in the third place: \texttt{(3) sell your vote to a candidate for $\dollar$100}. Those assigned to the ``high'' price condition read the following line: \texttt{(3) sell your vote to a candidate for \$500}.\footnote{Since one of the two sentences was added, item \texttt{(3) download your favorite music from the internet illegally} was moved to the fourth place.} 
 
 \autoref{fig:barplot:figure:control:treatment} shows the distinct frequencies of participants declaring how many (if any) illegal things participants would do. Notice that the figure shows the total number of items, not which ones. For instance, a frequency of ``3'' does not mean the frequency of the third item, but the total number of individuals answering that they would do three of the illegal activities described in the vignette.\footnote{The experimental design passes the standard tests for design effects (floor and ceiling effects). See \autoref{tab:design:effect}.} The order of the items was not randomized so as not to violate the stable unit treatment value assumption, or ``SUTVA.''\footnote{\textcite[98]{Morton:2010ly} explain that the treatment should be invariant, or ``stable.''}
@@ -335,9 +336,9 @@ In turn, subjects randomly assigned to the treatment condition answered one of t
 % Balance Tests
 Besides going through the experimental portion of the study, participants also answering a small questioner. A number of questions were covered, including income, education, party identification and political ideology. These answers will be used to construct a statistical multivariate model to estimate likely vote-sellers. 
 
-As with every experimental study, it is important to show that all experimental regimes (both treatments and control) were truly randomly assigned to subjects. The idea is to show that the probability of being in any of the experimental regimes---the propensity score---is not associated to individual covariates. \autoref{fig:ps:plot} shows the densities of the propensity score. The propensity score is computed by estimated a GLM, where the outcome variable is whether the experimental subject is treated or not. This model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This is the same exact set of variables used when estimating likely vote-sellers. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the mechanism assignment. 
+As with every experimental study, it is important to show that all experimental regimes (both treatments and control) were truly randomly assigned to subjects. The idea is to show that the probability of being in any of the experimental regimes---the propensity score---is not associated to individual covariates. \autoref{fig:ps:plot} shows the density of the propensity score for both treatments. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated or not---this process was performed for both treatments. \todo{cite} The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This will be the same exact set of variables used when estimating likely vote-sellers below. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the assign mechanism.\footnote{Additionally, \autoref{fig:cov:balance:plot} in the Appendix section shows the frequency of every experimental regime per every level of income, education, party identification and political ideology. The figure shows frequencies on the x-axis, while the y-axis shows the levels of every variable. Since the three conditions (displayed in dots) are grouped together per every variable level, the figure strongly suggest that randomization was achieved as expected.} 
 
-Additionally, \autoref{fig:cov:balance:plot} in the Appendix section shows the the frequency of every experimental regime per every level of income, education, party identification and political ideology. The figure shows frequencies on the x-axis, and y-axis shows the levels of every variable. Since the three conditions (displayed in dots) are grouped together at every variable level, the figure strongly suggest that randomization was achieved nicely.
+
 
 
 
@@ -398,13 +399,14 @@ The \emph{estimated} proportion of vote-sellers (shown in ``List Experiment'' in
 For reasons of internal validity, it is important to note in \autoref{fig:list:analysis:social:desirability:plot} that since the estimated quantities do not vary across the different treatments (``high'' and ``low''), it is then reasonable to think that there are not specific concerns associated with the (arbitrarily) chosen prices. Otherwise, the estimated treatment effects would have been a function of the design itself.
 
 
+The vertical axis of \autoref{fig:list:analysis:individual:predictions:plot} shows the estimated probabilities of the entire experimental sample which is sorted across the horizontal axis. The figure is relevant as it openly shows the amount of uncertainty of the statistical estimates. Ultimately, these individual-specific predictions will be used to profile likely vote-sellers.
+
+
 % list:analysis:individual:predictions:plot
 <<list:analysis:individual:predictions:plot, echo = FALSE, fig.pos='H', warning = FALSE, message = F, fig.cap=individual.predictions.plot.note, fig.align='center', fig.width=14, fig.height=9,dpi=100000, cache = FALSE, include = TRUE>>=
 
 
 @
-
-The vertical axis of \autoref{fig:list:analysis:individual:predictions:plot} shows the estimated probabilities of the entire experimental sample which is sorted across the horizontal axis. The figure is relevant as it openly shows the amount of uncertainty of the statistical estimates. Ultimately, these individual-specific predictions will be used to profile likely vote-sellers.
 
 \subsection{\emph{Who} are the Most-Likely Vote-Sellers?} 
 
@@ -414,15 +416,15 @@ Democrats and liberals are systematically more likely to sell. These findings ar
 
 
 
+
+\afterpage{
 % predictions:independent:variables:plot
 <<predictions:independent:variables:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=predictions.independent.variables.plot.note, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
+\clearpage
 
-
-
-
-
+}
 
 
 % Education doesn't explain
@@ -435,7 +437,7 @@ While the differences between the two treatments are not statistically significa
 
 \subsection{Where do Supply and Demand Meet?} 
 
-What would be the tipping point for vote-sellers? As shown in \autoref{experimental:design:fig}, a pricing experiment was conducted in addition to the list experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. 
+What would be the tipping point for vote-sellers? As shown in \autoref{experimental:design:fig}, a pricing test was conducted in addition to the list experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. \todo{soften language and narrative}
 
 
 % pricing:experiment:plot
@@ -544,11 +546,12 @@ count <- comma(as.numeric(count)) # add comma
 \newpage
 \pagenumbering{Roman}
 \setcounter{page}{1}
-\section{Appendix}
+\section{Appendix} 
+
+\todo{check order of items is correlative}
 
 % reset counter for appendix
 \subimport{/Users/hectorbahamonde/RU/Bibliografia_PoliSci/}{LaTeX_Reset_Counter_For_Appendix}
-
 
 \subsection{Experimental Manipulations and Vignettes}
 
@@ -562,7 +565,7 @@ Washington, D.C.- A department store downtown had a robbery incident last week, 
 % Other wording (Chris Chambers Ju)
 % A close associate of a politician offers to give you $100 for your vote. All you have to do is take a cellphone pic of your marked ballot before you cast it
 
-
+\newpage
 \paragraph{Direct Question.} \hypertarget{direct.question}{All subjects} read the next paragraph, and then answered the direct question:
 
 \begin{lstlisting}[frame=lrtb]
@@ -576,7 +579,7 @@ After a random assignment, you have been selected for the opportunity to hypothe
 \vspace*{\fill}
 \pagebreak
 
-
+\newpage
 \subsection{Testing for Design Effects}
 
 
@@ -616,7 +619,7 @@ After a random assignment, you have been selected for the opportunity to hypothe
 %\pagebreak
 
 
-
+\newpage
 \subsection{Geographical Distribution of Survey Respondents}
 
 
@@ -626,13 +629,15 @@ After a random assignment, you have been selected for the opportunity to hypothe
 
 @
 
-
+\newpage
 \subsection{Covariate Balance}
 
 % cov:balance:plot
-<<cov:balance:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=NULL, fig.align='center', fig.width=15, fig.height=12,dpi=5000, cache = FALSE, include = TRUE>>=
+<<cov:balance:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=cov.balance.plot.note, fig.align='center', fig.width=13, fig.height=10,dpi=5000, cache = FALSE, include = TRUE>>=
 
 @
+
+
 
 
 %\section{Online Appendix}
