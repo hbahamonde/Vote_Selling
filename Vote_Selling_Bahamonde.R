@@ -2375,11 +2375,10 @@ grid_arrange_shared_legend(
   ncol = 2, nrow = 2)
 
 cov.balance.plot.note <-  paste(
-  "{\\bf }.",
+  "{\\bf Empirical Covariate Balance of the Variables Used to Estimate Likely Vote-Sellers}.",
   "\\\\\\hspace{\\textwidth}", 
-  paste("{\\bf Note}: Figure shows the frequency of survey respondents, N = ", paste(lapop.bar.chart.N, ".", sep = ""), sep = ""),
+  "{\\bf Note}: The figure shows the frequency of every experimental regime per every level of income, education, party identification and political ideology. The figure shows frequencies on the x-axis, while the y-axis shows the levels of every variable. Since the three conditions (displayed in dots) are in general grouped together per every variable level, the figure strongly suggest that randomization was achieved as expected.",
   "\\\\\\hspace{\\textwidth}", 
-  paste("{\\bf Source}: \\href{https://www.vanderbilt.edu/lapop/usa/2010_United_States_Questionnaire.pdf}{LAPOP}, 2010 wave for the United States. Question is \\texttt{clien1}: ``In recent years and thinking about election campaigns, has a candidate or someone from a political party offered you something, like a favor, food, or any other benefit or object in return for your vote or support? Has this happened often, sometimes, or never?''"),
   "\n")
 ## ---- 
 
