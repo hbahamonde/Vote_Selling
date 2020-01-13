@@ -288,7 +288,7 @@ To prevent possible priming effects,\footnote{\textcite[54]{Blair2012} explain t
 
 
 %  
-Subjects answering ``yes'' to the direct question, answered as a follow-up a pricing test in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too high'' for one's vote (\autoref{fig:pricing:experiment}). Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote.
+Subjects answering ``yes'' to the direct question, answered as a follow-up a pricing test in which they were asked to put a price on their votes. Subjects who answered ``no'' to the direct question, were asked a follow-up question asking them whether they were sure they did not want to sell their votes. Following standard practice in marketing research, participants slid two handles, one indicating which price was considered ``too cheap,'' and another indicating which price was considered ``too expensive'' for one's vote (\autoref{fig:pricing:experiment}). Both sliders ranged from \$0 to \$1,000, in \$1 increments. The intersection of the ``too cheap'' and ``too high'' empirical distributions was used to estimate the optimal selling price for a vote (\autoref{fig:pricing:experiment:plot}).
 
 
 
@@ -408,7 +408,28 @@ The vertical axis of \autoref{fig:list:analysis:individual:predictions:plot} sho
 
 @
 
-\subsection{\emph{Who} are the Most-Likely Vote-Sellers?} 
+\subsection{What is the Price U.S. Citizens would Sell their Votes? Where Supply and Demand Meet.} 
+
+What would be the tipping point for vote-sellers? As shown in \autoref{experimental:design:fig}, a pricing test was conducted in addition to the list experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. \todo{soften language and narrative}
+
+
+% pricing:experiment:plot
+<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
+
+
+@
+
+
+These results are not unrealistic. While the selling price is really high, it matches with what others have found. \textcite[52]{Bahamonde2018} finds that clientelist political parties in Brazil do target non-poor voters at considerably higher prices. Part of the argument is that ``higher levels of economic development not only raise personal incomes, but also shifts the broker's vote-buying capacities upwards.''\footnote{Similarly, see \textcite{Schaffer:2004aa} for the Philippine, and \textcite[14]{Abramo2001} for the Brazilian cases.} In turn, \textcite[6]{Shawn2012} noted that a broker purchased one man's vote for \$800 during the 2010 elections in eastern Kentucky. Thus, higher incomes make vote-buying more expensive (and more rare).
+
+
+However, moving beyond anecdotal evidence, these results align with \textcite{Stokes:2013cj}. From the demand-side, vote-buying is no longer an efficient strategy for party machines. Industrialization has driven up the median income of the electorate, increasing the selling price, turning vote-buying into an increasingly expensive strategy to win votes. Evidently, with the selling price so expensive, the demand-side (i.e. parties) are unable to catch up with the supply-side, making vote buying in the United States a rare event. This situation has forced party machines to turn to other, less prohibitively costly alternatives. Thus, these results confirm that from the supply-side (i.e. voters) the vote is still for sale, only for a very high price---a price that party machines cannot really afford.
+
+
+Since the pricing test was constructed based on the direct question, a word of caution is needed. The list experiment does suggest that respondents lied when directly asked if they would sell their votes. Consequently, we should expect the optimal vote-selling price to be biased in some degree. Not only a small proportion of likely vote-sellers answered the direct question affirmatively, but also, we do not know how many of the ones who answered the direct question negatively (that they would not sell) would in fact sell their votes. However, more than being definitive and final pricing tests, these findings do seem to suggest that the vote-selling price seems to be high enough to deter political parties of engaging more frequently in vote-selling.
+
+
+\subsection{Who are the Most-Likely Vote-Sellers?} 
 
 % liberals sell more.
 Democrats and liberals are systematically more likely to sell. These findings are in line with research that studies the different constitutive values of liberals and conservatives. Political psychologists have found that liberals, when compared with conservatives, construct their moral systems primarily upon narrower psychological foundations. Particularly, liberals consider less important both the authority/respect and the purity/sanctity dyads \parencite[1029]{Graham2009}. This might lead liberals to engage more frequently in behaviors that might be considered ``wrong,'' such as vote-selling. In fact, \textcite[7]{Gray2014} explain that conservatives ``see impure violations as relatively more wrong.''% in turn, presumably, making them less likely to engage in illegal activities. In turn, liberals' constitutive set of values make them more likely to sell their votes.
@@ -435,21 +456,7 @@ While the differences between the two treatments are not statistically significa
 
 
 
-\subsection{Where do Supply and Demand Meet?} 
 
-What would be the tipping point for vote-sellers? As shown in \autoref{experimental:design:fig}, a pricing test was conducted in addition to the list experiment. Subjects were directed to declare which price was considered ``too cheap'' and which was ``too expensive.''\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves. The ``too cheap'' curve, representing the lower bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper bound (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the optimal selling price is located where both curves intersect. \autoref{fig:pricing:experiment:plot} indicates that the average survey respondent would sell his/her vote for \$$\Sexpr{round(line_intersection$x,0)}$. \todo{soften language and narrative}
-
-
-% pricing:experiment:plot
-<<pricing:experiment:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=price.plot.note, fig.align='center', fig.width=4, fig.height=3,dpi=100, cache = FALSE, include = TRUE>>=
-
-
-@
-
-
-These results are not unrealistic. While the selling price is really high, it matches with what others have found. \textcite{Bahamonde2018} finds that clientelist political parties in Brazil do target non-poor voters at considerably higher prices. In turn, \textcite[6]{Shawn2012} noted that a broker purchased one man's vote for \$800 during the 2010 elections in eastern Kentucky.  
-
-However, moving beyond anecdotal evidence, these results align with \textcite{Stokes:2013cj}. From the demand-side, vote-buying is no longer an efficient strategy for party machines. Industrialization has driven up the median income of the electorate, increasing the selling price, turning vote-buying into an increasingly expensive strategy to win votes. Evidently, with the selling price so expensive, the demand-side (i.e. parties) are unable to catch up with the supply-side, making vote buying in the United States a rare event. This situation has forced party machines to turn to other, less prohibitively costly alternatives. Thus, these results confirm that from the supply-side (i.e. voters) the vote is still for sale, only for a very high price---a price that party machines cannot really afford.
 
 \section{General Discussion}
 
