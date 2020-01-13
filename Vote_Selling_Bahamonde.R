@@ -2389,7 +2389,7 @@ ggarrange(ps.plot.low, ps.plot.high,
           ncol = 2, nrow = 1)
 
 ps.plot.note <-  paste(
-  "{\\bf Propensity Score: The Probability of being Assigned to an Experimental Condition}.",
+  "{\\bf The Propensity Score: The Probability of being Assigned to Treatment}.",
   "\\\\\\hspace{\\textwidth}", 
   "{\\bf Note}: The figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated or not. The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This is the same exact set of variables used when estimating likely vote-sellers when employing the multivariate approach below. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the mechanism assignment.",
   "\\\\\\hspace{\\textwidth}", 
