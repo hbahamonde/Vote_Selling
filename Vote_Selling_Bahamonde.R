@@ -2492,9 +2492,13 @@ price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(color = variable
               axis.title.y = element_text(size=7), 
               axis.title.x = element_text(size=7), 
               legend.text=element_text(size=7), 
-              legend.title=element_text(size=7),
+              legend.title=element_text(size=0),
               plot.title = element_text(size=7),
-              legend.position="bottom")
+              legend.position="bottom",
+              legend.key.size = unit(0.5,"cm"),
+              legend.spacing.x = unit(0.3, 'cm'))
+
+
 
 ## getting intersecting price
 pricing.d2 = data.frame(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))
