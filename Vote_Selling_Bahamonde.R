@@ -2104,9 +2104,9 @@ grid_arrange_shared_legend(
         ncol = 2, nrow = 2)
 
 predictions.independent.variables.plot.note <- paste(
-        "{\\bf List Experiment: Predicting Vote-Selling}.",
+        "{\\bf List Experiment: Covariates used to Estimate Likely Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), this figure shows  the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        paste(paste("{\\bf Note}: These variables were used in the multivariate statistical model to estimate invidividual-level probabilities of vote-selling. The figure shows the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
 ## ---- 
 
