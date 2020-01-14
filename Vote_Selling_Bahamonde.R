@@ -2483,12 +2483,11 @@ pricing.d<- melt(pricing.d)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(color = variable)), alpha=0.25) + 
+price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(fill = variable)), alpha=0.25) + # colour = variable
         xlab("Price for your vote") + 
         ylab("Density") +
-        scale_fill_discrete("") + #Price for Your Vote
         theme_bw() +
-        scale_color_grey() +
+        #scale_fill_grey() +
         theme(legend.position="bottom", legend.direction="horizontal")  +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
