@@ -603,6 +603,36 @@ indpred.p.high.fit= indpred.p.high$fit
 
 
 
+#### TEST AREA BELOW: Individual Probs of Vote Selling and Pricing
+test = data.frame(
+        prob.vote.selling = c(indpred.p.low.fit,indpred.p.high.fit),
+        Pricing = c(
+                rep("Low",length(indpred.p.low.fit)),
+                rep("High",length(indpred.p.high.fit))
+                )
+        )
+
+
+test = data.frame(
+        prob.vote.selling = c(indpred.p.high$fit[indpred.p.high$Significance=="Yes"],indpred.p.low$fit[indpred.p.low$Significance=="Yes"]),
+        Pricing = c(
+                rep("High", length(indpred.p.high$fit[indpred.p.high$Significance=="Yes"])),
+                rep("Low", length(indpred.p.low$fit[indpred.p.low$Significance=="Yes"]))
+                )
+        
+)
+
+indpred.p.high$fit[indpred.p.high$Significance=="Yes"]
+
+
+library(ggplot2)
+ggplot(test, aes(x=Pricing, y=prob.vote.selling)) +
+        geom_boxplot()
+#### TEST AREA ABOVE: Individual Probs of Vote Selling and Pricing
+
+
+
+
 ######################################################
 # table
 
