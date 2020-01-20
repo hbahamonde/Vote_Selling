@@ -36,3 +36,5 @@ figure/
 *.log
 
 *.gz
+
+*.ent
