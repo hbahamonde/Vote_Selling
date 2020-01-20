@@ -174,10 +174,11 @@ treat.cont.bar.plot.d$label = paste0(sprintf("%.0f", treat.cont.bar.plot.d$perce
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d, 
-                                  aes(x=xcount, 
-                                      y = ycount,
-                                      fill=n.items)) + 
+barplot.descriptive.plot = 
+        ggplot(treat.cont.bar.plot.d, 
+               aes(x=xcount, 
+                   y = ycount,
+                   fill=n.items)) + 
         geom_bar(stat = "identity") + 
         facet_grid(.~ Condition) + 
         xlab("Number of Items") + 
@@ -2168,14 +2169,15 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 ## Income
-cov.balance.plot.income = ggplot(cov.balance.d, aes(colour = Regime,Income, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Income") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.income = 
+        ggplot(cov.balance.d, aes(shape = Regime,Income, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Income") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2185,14 +2187,15 @@ cov.balance.plot.income = ggplot(cov.balance.d, aes(colour = Regime,Income, ..co
         legend.position="bottom")
 
 ## Education
-cov.balance.plot.education = ggplot(cov.balance.d, aes(colour = Regime,Education, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) +  #   geom_point(stat = "count", size = 3, shape = 20) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Education") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.education = 
+        ggplot(cov.balance.d, aes(shape = Regime,Education, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) +  #   geom_point(stat = "count", size = 3, shape = 20) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Education") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2203,14 +2206,15 @@ cov.balance.plot.education = ggplot(cov.balance.d, aes(colour = Regime,Education
 
 
 ## Party Id
-cov.balance.plot.partyid = ggplot(cov.balance.d, aes(colour = Regime,`Party Id`, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Party Id") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.partyid = 
+        ggplot(cov.balance.d, aes(shape = Regime,`Party Id`, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Party Id") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2220,14 +2224,15 @@ cov.balance.plot.partyid = ggplot(cov.balance.d, aes(colour = Regime,`Party Id`,
         legend.position="bottom")
 
 ## Ideology
-cov.balance.plot.ideology = ggplot(cov.balance.d, aes(colour = Regime,Ideology, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Ideology") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.ideology = 
+        ggplot(cov.balance.d, aes(shape = Regime,Ideology, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Ideology") +
+        ylab("Count") + 
+        xlab("") + 
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2329,13 +2334,15 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2,ggpubr) # ggpubr is to merge both plots
 
 ## PS Low
-ps.plot.low = ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) + 
-  geom_density(alpha=0.4) +
-  theme_bw() +
-  ggtitle("Propensity Score: Low Treatment") +
-  ylab("Density") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=7), 
+ps.plot.low = 
+        ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) + 
+        geom_density(alpha=0.4) +
+        theme_bw() +
+        ggtitle("Propensity Score: Low Treatment") +
+        ylab("Density") + 
+        xlab("") +
+        scale_fill_grey(start=0.9, end=0.1)  + 
+        theme(axis.text.y = element_text(size=7), 
         axis.text.x = element_text(size=7), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=7), 
@@ -2348,13 +2355,15 @@ ps.plot.low = ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) +
 
 
 ## PS High
-ps.plot.high =   ggplot(ps.df.high, aes(x=ps.high, fill=Regime)) + 
-  geom_density(alpha=0.4) +
-  theme_bw() +
-  ggtitle("Propensity Score: High Treatment") +
-  ylab("Density") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=7), 
+ps.plot.high =  
+        ggplot(ps.df.high, aes(x=ps.high, fill=Regime)) + 
+        geom_density(alpha=0.4) +
+        theme_bw() +
+        ggtitle("Propensity Score: High Treatment") +
+        ylab("Density") + 
+        scale_fill_grey(start=0.9, end=0.1)  + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=7), 
         axis.text.x = element_text(size=7), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=7), 
@@ -2553,7 +2562,8 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 
 ## ---- pricing:experiment:plot ----
 # calling the plot // need to save it to get the intersecting point.
-price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
+price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) + scale_fill_grey(start=0.9, end=0.1)
+
 price.plot.note <- paste(
         "{\\bf Pricing Test: Ideal Selling Price}.",
         "\\\\\\hspace{\\textwidth}", 
