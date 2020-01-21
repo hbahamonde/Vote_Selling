@@ -19,7 +19,7 @@ List experiment.
 <table border="0">
 <tr>
     <td>
-    <img src=".figure/list:analysis:social:desirability:plot-1.pdf" width="100%" />
+    <img src="./figure/list:analysis:social:desirability:plot-1.pdf" width="100%" />
     </td>
 </tr>
 </table>
