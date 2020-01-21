@@ -19,3 +19,7 @@ List experiment.
 2. Subjects would sell their votes for $730 each.
 
 3. 8% of experimental subjects lied when asked directly if they would sell their votes.
+
+4. Democrats and liberals are systematically more likely to sell. 
+
+5. Education levels and income do not seem to impact on vote-selling.
