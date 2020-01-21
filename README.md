@@ -17,8 +17,8 @@ List experiment.
 1. 25% of experimental subjects would sell their vote.
 
 
-<object data="https://github.com/hbahamonde/Vote_Selling/raw/master/figure/list:analysis:social:desirability:plot-1.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://github.com/hbahamonde/Vote_Selling/raw/master/figure/list:analysis:social:desirability:plot-1.pdf">
+<object data="./figure/list:analysis:social:desirability:plot-1.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="./figure/list:analysis:social:desirability:plot-1.pdf">
     </embed>
 </object>
 
