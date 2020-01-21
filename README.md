@@ -16,6 +16,16 @@ List experiment.
 
 1. 25% of experimental subjects would sell their vote.
 
+<table border="0">
+<tr>
+    <td>
+    <img src="https://github.com/hbahamonde/Vote_Selling/raw/master/figure/list:analysis:social:desirability:plot-1.pdf" width="100%" />
+    </td>
+</tr>
+</table>
+
+
+
 2. Subjects would sell their votes for $730 each.
 
 3. 8% of experimental subjects lied when asked directly if they would sell their votes.
