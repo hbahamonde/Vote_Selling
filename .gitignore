@@ -25,7 +25,6 @@ Bahamonde_VoteSellingUS.synctex.gz
 
 Bahamonde_VoteSellingUS.tex
 
-figure/
 
 *.aux
 
@@ -36,3 +35,5 @@ figure/
 *.log
 
 *.gz
+
+*.ent

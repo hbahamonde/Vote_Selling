@@ -174,10 +174,11 @@ treat.cont.bar.plot.d$label = paste0(sprintf("%.0f", treat.cont.bar.plot.d$perce
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-barplot.descriptive.plot = ggplot(treat.cont.bar.plot.d, 
-                                  aes(x=xcount, 
-                                      y = ycount,
-                                      fill=n.items)) + 
+barplot.descriptive.plot = 
+        ggplot(treat.cont.bar.plot.d, 
+               aes(x=xcount, 
+                   y = ycount,
+                   fill=n.items)) + 
         geom_bar(stat = "identity") + 
         facet_grid(.~ Condition) + 
         xlab("Number of Items") + 
@@ -600,6 +601,9 @@ indpred.p.high$Significance[indpred.p.high$Significance==0] <- "No"
 names(indpred.p.high)[4] = "se.fit"
 rownames(indpred.p.high) <- NULL
 indpred.p.high.fit= indpred.p.high$fit
+
+
+
 
 
 
@@ -2101,9 +2105,9 @@ grid_arrange_shared_legend(
         ncol = 2, nrow = 2)
 
 predictions.independent.variables.plot.note <- paste(
-        "{\\bf List Experiment: Predicting Vote-Selling}.",
+        "{\\bf List Experiment: Covariates used to Estimate Likely Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: After fitting the model on the list experiment data (see \\autoref{tab:regression}), this figure shows  the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for:", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        paste(paste("{\\bf Note}: These variables were used in the multivariate statistical model to estimate invidividual-level probabilities of vote-selling. The figure shows the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
 ## ---- 
 
@@ -2165,14 +2169,15 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2)
 
 ## Income
-cov.balance.plot.income = ggplot(cov.balance.d, aes(colour = Regime,Income, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Income") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.income = 
+        ggplot(cov.balance.d, aes(shape = Regime,Income, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Income") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2182,14 +2187,15 @@ cov.balance.plot.income = ggplot(cov.balance.d, aes(colour = Regime,Income, ..co
         legend.position="bottom")
 
 ## Education
-cov.balance.plot.education = ggplot(cov.balance.d, aes(colour = Regime,Education, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) +  #   geom_point(stat = "count", size = 3, shape = 20) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Education") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.education = 
+        ggplot(cov.balance.d, aes(shape = Regime,Education, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) +  #   geom_point(stat = "count", size = 3, shape = 20) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Education") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2200,14 +2206,15 @@ cov.balance.plot.education = ggplot(cov.balance.d, aes(colour = Regime,Education
 
 
 ## Party Id
-cov.balance.plot.partyid = ggplot(cov.balance.d, aes(colour = Regime,`Party Id`, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Party Id") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.partyid = 
+        ggplot(cov.balance.d, aes(shape = Regime,`Party Id`, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Party Id") +
+        ylab("Count") + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2217,14 +2224,15 @@ cov.balance.plot.partyid = ggplot(cov.balance.d, aes(colour = Regime,`Party Id`,
         legend.position="bottom")
 
 ## Ideology
-cov.balance.plot.ideology = ggplot(cov.balance.d, aes(colour = Regime,Ideology, ..count.. ) ) + 
-  geom_point(stat = "count", size = 4) + 
-  coord_flip() +
-  theme_bw() +
-  ggtitle("Ideology") +
-  ylab("Count") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=9), 
+cov.balance.plot.ideology = 
+        ggplot(cov.balance.d, aes(shape = Regime,Ideology, ..count.. ) ) + 
+        geom_point(stat = "count", size = 4) + 
+        coord_flip() +
+        theme_bw() +
+        ggtitle("Ideology") +
+        ylab("Count") + 
+        xlab("") + 
+        theme(axis.text.y = element_text(size=9), 
         axis.text.x = element_text(size=9), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=9), 
@@ -2326,13 +2334,15 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(ggplot2,ggpubr) # ggpubr is to merge both plots
 
 ## PS Low
-ps.plot.low = ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) + 
-  geom_density(alpha=0.4) +
-  theme_bw() +
-  ggtitle("Propensity Score: Low Treatment") +
-  ylab("Density") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=7), 
+ps.plot.low = 
+        ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) + 
+        geom_density(alpha=0.4) +
+        theme_bw() +
+        ggtitle("Propensity Score: Low Treatment") +
+        ylab("Density") + 
+        xlab("") +
+        scale_fill_grey(start=0.9, end=0.1)  + 
+        theme(axis.text.y = element_text(size=7), 
         axis.text.x = element_text(size=7), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=7), 
@@ -2345,13 +2355,15 @@ ps.plot.low = ggplot(ps.df.low, aes(x=ps.low, fill=Regime)) +
 
 
 ## PS High
-ps.plot.high =   ggplot(ps.df.high, aes(x=ps.high, fill=Regime)) + 
-  geom_density(alpha=0.4) +
-  theme_bw() +
-  ggtitle("Propensity Score: High Treatment") +
-  ylab("Density") + 
-  xlab("") +
-  theme(axis.text.y = element_text(size=7), 
+ps.plot.high =  
+        ggplot(ps.df.high, aes(x=ps.high, fill=Regime)) + 
+        geom_density(alpha=0.4) +
+        theme_bw() +
+        ggtitle("Propensity Score: High Treatment") +
+        ylab("Density") + 
+        scale_fill_grey(start=0.9, end=0.1)  + 
+        xlab("") +
+        theme(axis.text.y = element_text(size=7), 
         axis.text.x = element_text(size=7), 
         axis.title.y = element_text(size=7), 
         axis.title.x = element_text(size=7), 
@@ -2480,12 +2492,11 @@ pricing.d<- melt(pricing.d)
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(ggplot2)
 
-price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(color = variable)), alpha=0.25) + 
+price.plot = ggplot(pricing.d,aes(x=value)) + geom_density((aes(fill = variable)), alpha=0.25) + # colour = variable
         xlab("Price for your vote") + 
         ylab("Density") +
-        scale_fill_discrete("") + #Price for Your Vote
         theme_bw() +
-        scale_color_grey() +
+        #scale_fill_grey() +
         theme(legend.position="bottom", legend.direction="horizontal")  +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
@@ -2551,7 +2562,8 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 
 ## ---- pricing:experiment:plot ----
 # calling the plot // need to save it to get the intersecting point.
-price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
+price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) + scale_fill_grey(start=0.9, end=0.1)
+
 price.plot.note <- paste(
         "{\\bf Pricing Test: Ideal Selling Price}.",
         "\\\\\\hspace{\\textwidth}", 
