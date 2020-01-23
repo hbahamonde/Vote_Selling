@@ -669,8 +669,8 @@ After a random assignment, you have been selected for the opportunity to hypothe
 
 
 % Notes
-%\linespread{2}
-%\newpage\theendnotes
+\linespread{2}
+\newpage\theendnotes
 
 
 \end{document}
