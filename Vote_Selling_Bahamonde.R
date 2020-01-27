@@ -882,7 +882,7 @@ soc.des.plot
 soc.des.plot.note <- paste(
         "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: The figure shows the proportion of declared (`Direct Question') and predicted (`List Experiment') hypothetical vote-sellers, and its difference (`Social Desirability'). Combining both `high' and `low' treatments,", paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0), "\\%", sep=""), "would be willing to sell their votes. And of the ones who answered affirmatively when asked directly", paste("(",(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2,"\\%",")", sep=""), "there is an estimated additional" , paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0), "\\%", sep=""), "who lied about it. `Liars' answer negatively the direct question, but in reality, they are likely sellers.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "There are two arbitrarily `high' and `low' vote-selling prices. The reason for having both was to control for possible price elasticities. As the figure suggests, there are some small differences. However, they are not statistically significant. Consequently, these arbitrary pricing decisions do not threaten the experimental design."),
+        paste("{\\bf Note}: The figure shows the proportion of declared (``Direct Question'') and predicted (``List Experiment'') hypothetical vote-sellers, and their difference (``Social Desirability''). Combining both ``high'' and ``low'' treatments,", paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0), "\\%", sep=""), "would be willing to sell their votes. And of those who answered affirmatively when asked directly", paste("(",(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2,"\\%",")", sep=""), "there is an estimated additional" , paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0), "\\%", sep=""), "who lied about it. ``Liars'' answer the direct question negatively, but in reality, they are likely sellers.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "There are two arbitrarily ``high'' and ``low'' vote-selling prices. The reason for having both was to control for possible price elasticities. The figure suggests some small differences. However, they are not statistically significant. Consequently, these arbitrary pricing decisions do not threaten the experimental design."),
         "\\\\\\hspace{\\textwidth}",
         "\n")
 ## ----
@@ -2105,9 +2105,9 @@ grid_arrange_shared_legend(
         ncol = 2, nrow = 2)
 
 predictions.independent.variables.plot.note <- paste(
-        "{\\bf List Experiment: Covariates used to Estimate Likely Vote-Sellers}.",
+        "{\\bf List Experiment: Covariates Used to Estimate Likely Vote-Sellers}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste("{\\bf Note}: These variables were used in the multivariate statistical model to estimate invidividual-level probabilities of vote-selling. The figure shows the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
+        paste(paste("{\\bf Note}: These variables were used in the multivariate statistical model to estimate individual-level probabilities of vote-selling. The figure shows the predicted probabilities and their corresponding ", ci.level*100, "\\% confidence intervals for", sep = ""), paste("income, education, party identification, and ideology. Since the vote-selling prices were set arbitrarily, the reason for two experimental conditions (``high'' and ``low'') was to control for possible price elasticities. While there are some perceptible changes, they are not statistically significant. Consequently, these arbitrary decisions do not threaten the identification strategy.")),
         "\n")
 ## ---- 
 
@@ -2395,6 +2395,10 @@ cov.balance.plot.note <-  paste(
 ## ---- 
 
 
+The figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated. The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification, and political ideology). This is exactly the same set of variables used when estimating likely vote-sellers while employing the multivariate approach below. In simple terms, the figure shows that conditional on observables, the probabilities of being assigned to either condition are indistinguishable. That is, the observable characteristics of the experimental sample are not correlated with the assignment mechanism. 
+
+
+
 ## ---- ps:plot ----
 ggarrange(ps.plot.low, ps.plot.high,
           labels = c("", ""),
@@ -2403,7 +2407,7 @@ ggarrange(ps.plot.low, ps.plot.high,
 ps.plot.note <-  paste(
   "{\\bf The Propensity Score: The Probability of being Assigned to Treatment}.",
   "\\\\\\hspace{\\textwidth}", 
-  "{\\bf Note}: The figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated or not. The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification and political ideology). This is the same exact set of variables used when estimating likely vote-sellers when employing the multivariate approach below. In simple, the figure shows that, conditional on observables, the probabilities of being assigned to either condition are indistinguishable from each other. That is, the observable characteristics of the experimental sample are not correlated with the mechanism assignment.",
+  "{\\bf Note}: The figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated. The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification, and political ideology). This is exactly the same set of variables used when estimating likely vote-sellers while employing the multivariate approach below. In simple terms, the figure shows that conditional on observables, the probabilities of being assigned to either condition are indistinguishable. That is, the observable characteristics of the experimental sample are not correlated with the assignment mechanism.",
   "\\\\\\hspace{\\textwidth}", 
   "\n")
 ## ---- 
