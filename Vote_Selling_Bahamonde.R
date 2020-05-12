@@ -859,9 +859,9 @@ soc.des.plot = ggplot(socdes.p.high.low,
         ylab("Estimated Proportion") +
         geom_hline(yintercept=0, colour = "red", linetype = "dashed", size = 0.2) +
         geom_pointrange(aes(
-                x = socdes.p.high.low$c.1.3,
-                ymin = socdes.p.high.low$lwr, 
-                ymax = socdes.p.high.low$upr), position = position_dodge(width = 0.25)) +
+                x = c.1.3,
+                ymin = lwr, 
+                ymax = upr), position = position_dodge(width = 0.25)) +
         theme(axis.text.y = element_text(size=7), 
               axis.text.x = element_text(size=7), 
               axis.title.y = element_text(size=7), 
