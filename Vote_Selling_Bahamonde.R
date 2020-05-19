@@ -599,7 +599,7 @@ socdes.p.high = data.frame(avg.pred.social.desirability.high$fit,
 
 
 socdes.p.high$c.1.3 = as.factor(socdes.p.high$c.1.3)
-socdes.p.high$c.1.3 <- factor(socdes.p.high$c.1.3, labels = c("List\nExperiment", "Direct\nQuestion", "Social\nDesirability"))
+socdes.p.high$c.1.3 <- factor(socdes.p.high$c.1.3, labels = c("List\nExperiment\n(with covariates)", "Direct\nQuestion\n(with covariates)", "Social\nDesirability\n(with covariates)"))
 socdes.p.high <- socdes.p.high[c("fit", "lwr", "upr", "Condition", "c.1.3")]
 
 ### DF for individual prediction: Low Condition
@@ -612,7 +612,7 @@ socdes.p.low = data.frame(
         )
 
 socdes.p.low$c.1.3 = as.factor(socdes.p.low$c.1.3)
-socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List\nExperiment\n(with covariates)", "Direct\nQuestion\n(with covariates)", "Social\nDesirability"))
+socdes.p.low$c.1.3 <- factor(socdes.p.low$c.1.3, labels = c("List\nExperiment\n(with covariates)", "Direct\nQuestion\n(with covariates)", "Social\nDesirability\n(with covariates)"))
 socdes.p.low <- socdes.p.low[c("fit", "lwr", "upr", "Condition", "c.1.3")]
 
 ### Rbinding both DF's
@@ -650,9 +650,10 @@ soc.des.plot = ggplot(socdes.p.high.low.diff.in.means,
 
 ## ----
 
+round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100, 0)
 
 
-
+round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100, 0)
 
 ## ---- list:analysis:social:desirability:plot
 ### Plot
@@ -2789,6 +2790,7 @@ dat.with.predict = data.frame(rbind(dat.low.with.predict, dat.high.with.predict)
 # Saving Data
 save(dat.with.predict, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData")
 ## ---- 
+
 
 
 ## ---- list:analysis:individual:predictions:plot  ----
