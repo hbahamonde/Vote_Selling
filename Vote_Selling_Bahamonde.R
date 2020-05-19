@@ -424,6 +424,12 @@ dat.high = completeFun(dat.high,
                                )
                        )
 
+# Total Sample Size
+total.sample.size = as.character(formatC(c(nrow(dat.high) + nrow(dat.low)), format="d", big.mark=","
+                                         )
+                                 )
+
+
 # Difference in means 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
 p_load(list)
@@ -667,40 +673,6 @@ soc.des.plot.note <- paste(
 
 # cat("\014")
 # rm(list=ls())
-
-
-# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: High Condition
-ind.pred.social.desirability.high <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
-
-ind.pred.social.desirability.high$fit<-round(ind.pred.social.desirability.high$fit, 10)
-ind.pred.social.desirability.high$se.fit<-round(ind.pred.social.desirability.high$se.fit, 10)
-ind.pred.social.desirability.high.d = data.frame(
-        ind.pred.social.desirability.high$fit, 
-        ind.pred.social.desirability.high$se.fit, 
-        sign = ifelse(sign(ind.pred.social.desirability.high$fit$lwr) == sign(ind.pred.social.desirability.high$fit$upr), 1, 0))
-names(ind.pred.social.desirability.high.d)[4] = "se.fit"
-rownames(ind.pred.social.desirability.high.d) <- NULL
-
-
-# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: Low Condition
-ind.pred.social.desirability.low <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
-
-ind.pred.social.desirability.low$fit<-round(ind.pred.social.desirability.low$fit, 10)
-ind.pred.social.desirability.low$se.fit<-round(ind.pred.social.desirability.low$se.fit, 10)
-ind.pred.social.desirability.low.d = data.frame(
-        ind.pred.social.desirability.low$fit, 
-        ind.pred.social.desirability.low$se.fit, 
-        sign = ifelse(sign(ind.pred.social.desirability.low$fit$lwr) == sign(ind.pred.social.desirability.low$fit$upr), 1, 0))
-names(ind.pred.social.desirability.low.d)[4] = "se.fit"
-rownames(ind.pred.social.desirability.low.d) <- NULL
-
-# cbind regular DFs (with the two conditions) with the predictions
-dat.low.with.predict = data.frame(cbind(dat.low, ind.pred.social.desirability.low.d))
-dat.high.with.predict = data.frame(cbind(dat.high, ind.pred.social.desirability.high.d))
-dat.with.predict = data.frame(rbind(dat.low.with.predict, dat.high.with.predict))
-
-# Saving Data
-save(dat.with.predict, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData")
 
 
 ############################## 
@@ -2499,7 +2471,7 @@ rm(list=ls())
 ## ---- us:map:plot ----
 
 # Load Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 
 ## Map of Observations
@@ -2510,7 +2482,7 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/zipcode/zipcode
 
 
 # plyr is dicontinued/retired as it January 2020. Hence, I'll be installing from source
-install.packages("https://cran.r-project.org/src/contrib/plyr_1.8.5.tar.gz", repos=NULL, type="source")
+# install.packages("https://cran.r-project.org/src/contrib/plyr_1.8.6.tar.gz", repos=NULL, type="source")
 library(plyr)
 
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
@@ -2628,6 +2600,9 @@ us.map.vote.selling.note <- paste(
 # Plot Individual predictions (both High and Low conditions)
 ##############
 
+# HERE
+
+## ---- list:analysis:individual:predictions:data  ----
 ### Individual posterior likelihoods of vote-selling (high)
 list.high.predicted.2B <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
 list.high.predicted.2B$fit<-round(list.high.predicted.2B$fit, 2)
@@ -2779,13 +2754,44 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
                 }
         }
 }
+
+
+# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: High Condition
+ind.pred.social.desirability.high <- predict.ictreg(list.high, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
+
+ind.pred.social.desirability.high$fit<-round(ind.pred.social.desirability.high$fit, 10)
+ind.pred.social.desirability.high$se.fit<-round(ind.pred.social.desirability.high$se.fit, 10)
+ind.pred.social.desirability.high.d = data.frame(
+        ind.pred.social.desirability.high$fit, 
+        ind.pred.social.desirability.high$se.fit, 
+        sign = ifelse(sign(ind.pred.social.desirability.high$fit$lwr) == sign(ind.pred.social.desirability.high$fit$upr), 1, 0))
+names(ind.pred.social.desirability.high.d)[4] = "se.fit"
+rownames(ind.pred.social.desirability.high.d) <- NULL
+
+
+# USE THE VECTOR WITH INDIVUDUAL PREDICTIONS: Low Condition
+ind.pred.social.desirability.low <- predict.ictreg(list.low, se.fit = TRUE, interval= "confidence", avg = F, return.draws = T, level = ci.level)
+
+ind.pred.social.desirability.low$fit<-round(ind.pred.social.desirability.low$fit, 10)
+ind.pred.social.desirability.low$se.fit<-round(ind.pred.social.desirability.low$se.fit, 10)
+ind.pred.social.desirability.low.d = data.frame(
+        ind.pred.social.desirability.low$fit, 
+        ind.pred.social.desirability.low$se.fit, 
+        sign = ifelse(sign(ind.pred.social.desirability.low$fit$lwr) == sign(ind.pred.social.desirability.low$fit$upr), 1, 0))
+names(ind.pred.social.desirability.low.d)[4] = "se.fit"
+rownames(ind.pred.social.desirability.low.d) <- NULL
+
+# cbind regular DFs (with the two conditions) with the predictions
+dat.low.with.predict = data.frame(cbind(dat.low, ind.pred.social.desirability.low.d))
+dat.high.with.predict = data.frame(cbind(dat.high, ind.pred.social.desirability.high.d))
+dat.with.predict = data.frame(rbind(dat.low.with.predict, dat.high.with.predict))
+
+# Saving Data
+save(dat.with.predict, file = "/Users/hectorbahamonde/RU/research/Vote_Selling/mergedconjoint_with_predicted_voteselling.RData")
 ## ---- 
 
 
-
-
 ## ---- list:analysis:individual:predictions:plot  ----
-# plot
 grid_arrange_shared_legend(
         ind.pred.low.cond.plot, 
         ind.pred.high.cond.plot,
