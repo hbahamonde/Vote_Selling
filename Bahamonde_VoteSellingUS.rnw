@@ -91,20 +91,24 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 @
 
-
-<<list:analysis:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+<<diff:in:means, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
 
 @
+
+<<list:analysis:covariates, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
+<<list:analysis:social:desirability:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
 
 <<design:effects:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
 
 @
 
 <<pricing:experiment:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
-
-@
-
-<<list:analysis:social:desirability:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
 
 @
 
