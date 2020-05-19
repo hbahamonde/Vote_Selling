@@ -650,10 +650,6 @@ soc.des.plot = ggplot(socdes.p.high.low.diff.in.means,
 
 ## ----
 
-round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100, 0)
-
-
-round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100, 0)
 
 ## ---- list:analysis:social:desirability:plot
 ### Plot
