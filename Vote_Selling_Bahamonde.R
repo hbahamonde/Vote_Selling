@@ -269,6 +269,10 @@ low.control.t.test.t = round(as.numeric(t.test(mean.t.low.d,mean.control.d)$'sta
 ## df
 high.control.t.test.df = round(as.numeric(t.test(mean.t.high.d,mean.control.d)$'parameter'),0)
 low.control.t.test.df = round(as.numeric(t.test(mean.t.low.d,mean.control.d)$'parameter'),0)
+
+## confidence intervals in %'s
+
+
 ## ----
 
 
@@ -444,6 +448,10 @@ dif.means.high.predicted = predict(dif.means.high,avg = T, interval = "confidenc
 
 # estimaging diff in means control
 dif.means.control <- ictreg(ycount ~ 1, data = dat, treat = "treatment", J=3, method = "lm")
+dif.means.control.high <- ictreg(ycount ~ 1, data = dat.high, treat = "treatment", J=3, method = "lm")
+dif.means.control.low <- ictreg(ycount ~ 1, data = dat.low, treat = "treatment", J=3, method = "lm")
+
+options(digits=4)
 dif.means.control.mean = as.numeric(dif.means.control$par.control, length=5)
 dif.means.control.se = as.numeric(dif.means.control$se.control, length=5)
 dif.means.control.upr = dif.means.control.mean + 1.96*dif.means.control.se
@@ -646,7 +654,8 @@ soc.des.plot = ggplot(socdes.p.high.low.diff.in.means,
               axis.title.x = element_text(size=7), 
               legend.text=element_text(size=7), 
               legend.title=element_text(size=7),
-              plot.title = element_text(size=7))
+              plot.title = element_text(size=7),
+              legend.position="bottom")
 
 ## ----
 
@@ -656,10 +665,9 @@ soc.des.plot = ggplot(socdes.p.high.low.diff.in.means,
 soc.des.plot
 soc.des.plot.note <- paste(
         "{\\bf List Experiment Data: Declared and Predicted Vote-Sellers}.",
-        "\\\\\\hspace{\\textwidth}", 
-        paste("{\\bf Note}: The figure shows the proportion of declared (``Direct Question'') and predicted (``List Experiment'') hypothetical vote-sellers, and their difference (``Social Desirability''). Combining both ``high'' and ``low'' treatments,", paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="List\nExperiment"][2]) / 2) * 100, 0), "\\%", sep=""), "would be willing to sell their votes. And of those who answered affirmatively when asked directly", paste("(",(round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][1]*100, 0) + round(socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Direct\nQuestion"][2]*100, 0))/2,"\\%",")", sep=""), "there is an estimated additional" , paste(round(((socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][1] + socdes.p.high.low$fit[socdes.p.high.low$c.1.3=="Social\nDesirability"][2]) / 2) * 100,0), "\\%", sep=""), "who lied about it. ``Liars'' answer the direct question negatively, but in reality, they are likely sellers.", paste("The figure shows ", ci.level*100, "\\% confidence intervals.", sep = ""), "There are two arbitrarily ``high'' and ``low'' vote-selling prices. The reason for having both was to control for possible price elasticities. The figure suggests some small differences. However, they are not statistically significant. Consequently, these arbitrary pricing decisions do not threaten the experimental design."),
-        "\\\\\\hspace{\\textwidth}",
-        "\n")
+        "\\\\\\hspace{\\textwidth}", paste("{\\bf Note}: The figure summarizes \\autoref{tab:t:test} by showing simple difference in means (without covariates). It also shows the proportion of declared (``Direct Question'') and predicted (``List Experiment'') hypothetical vote-sellers, and its difference (``Social Desirability''). The three sets of main estimates are parametric (i.e. estimated via a multivariate procedure). Combining both ``high'' and ``low'' treatments," , paste(round(mean(c(round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"]*100,0), round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]*100,0))),0), "\\%", sep=""), "would be willing to sell their votes. And of those who answered affirmatively when asked directly", paste("(", round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"]*100, socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]*100)),0), "\\%)", sep = ""), " there is an estimated additional ", paste(round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"]*100, socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]*100)),0), "\\%", sep = ""), "who lied about it. ``Liars'' answer the direct question negatively, but in reality, they are likely sellers. The figure shows 95\\% confidence intervals. There are two arbitrarily ``high'' and ``low'' vote-selling prices. The reason for having both was to control for possible price elasticities. The figure suggests some small differences. However, they are not statistically significant. Consequently, these arbitrary pricing decisions do not threaten the experimental design."
+                                           )
+        )
 ## ----
 
 
@@ -2597,7 +2605,7 @@ us.map.vote.selling.note <- paste(
 # Plot Individual predictions (both High and Low conditions)
 ##############
 
-# HERE
+
 
 ## ---- list:analysis:individual:predictions:data  ----
 ### Individual posterior likelihoods of vote-selling (high)
