@@ -125,15 +125,18 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 @
 
-<<cov:balance:d, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
-
-@
-
 <<list:analysis:individual:predictions:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
 
 @
 
 
+<<cov:balance:multinomial:data, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
+<<abstract, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
 
 % end knitr stuff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -336,14 +339,13 @@ In turn, subjects randomly assigned to the treatment condition answered one of t
 
 
 % Balance Tests
-As with every experimental study, it is important to show that all experimental regimes (both treatments and control) were truly randomly assigned to subjects. The idea is to show that the probability of being in any of the experimental regimes---the propensity score---is not associated with individual covariates. \autoref{fig:ps:plot} shows the density of the propensity score for both treatments \parencite{Guo:2009il}. The propensity score is computed by estimating a simple generalized linear model, where the outcome variable is whether the experimental subject is treated, and this process was performed for both treatments. The model was estimated as a function of observable covariates captured by a short questionnaire included in the study. Four variables were used (income, education, party identification, and political ideology)---exactly the same set of variables used when estimating likely vote-sellers below. Simply put, the figure shows that conditional on observables, the probabilities of being assigned to either condition are indistinguishable. That is, the observable characteristics of the experimental sample are not correlated with the assignment mechanism.\footnote{Non-parametric evidence of covariate balance is shown in \autoref{fig:cov:balance:plot}  in the Appendix section, which shows the frequency of every experimental regime per every level of income, education, party identification, and political ideology. The figure shows frequencies on the x-axis, while the y-axis shows the levels of every variable. Since the three conditions (displayed in dots) are grouped together per every variable level, the figure strongly suggests that randomization was achieved as expected.} 
+It is important to show that the probability of being assigned to any condition is not associated with individual covariates. \autoref{multinomial:logistic:covariate:balance:table} shows a multinomial logistic model. The dependent variable is the treatment condition (high treatment, low treatment and control). The independent variables are observable characteristics captured by a short questionnaire included in the study. Four variables were used: income, education, party identification, and political ideology. These are the same set of variables used when estimating likely vote-sellers below. Conveniently, the base category in the multinomial logistic regression is the control condition. The coefficients in the table are all close to zero (and statistically non-significant). Consequently, these results show that there are not observable differences between the ``high'' treatment condition and the control group. The same applies to the ``low'' condition.\footnote{I thank to the anonymous reviewer at \emph{Acta Politica} for this suggestion.}
 
 
 
 
-
-% ps:plot
-<<ps:plot, echo = FALSE, fig.pos='h', warning = FALSE, message = F, fig.cap=ps.plot.note, fig.align='center', fig.width=5, fig.height=3,dpi=5000, cache = FALSE, include = TRUE>>=
+% cov:balance:multinomial:table
+<<cov:balance:multinomial:table, echo = FALSE, warning = FALSE, message = F, cache = FALSE, results='asis'>>=
 
 @
 
@@ -391,6 +393,12 @@ However, in this context, bivariate calculations are statistically inefficient, 
 Leveraging this multivariate approach makes estimating the proportion of hypothetical vote-sellers possible. For both the ``low'' and ``high'' treatments, \autoref{fig:list:analysis:social:desirability:plot} shows the proportions of declared vote-sellers (``Direct Question'') and predicted vote-sellers (``List Experiment'') and the difference between the two (``Social Desirability'').\footnote{Since the estimated quantities do not vary across the different treatments (``high'' and ``low''), it is then reasonable to think that there are not specific concerns associated with the (arbitrarily) chosen prices.} Substantively, the figure suggests that after combining the estimates of the ``low'' and ``high'' treatments, approximately $\Sexpr{round(((socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][1] + socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][2]) / 2) * 100, 0)}$\% of the nationally representative sample would be willing to sell their vote.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][1]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][2]*100, 0)}$\%) estimates.} While a considerable proportion answered the direct question affirmatively ($\Sexpr{round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100,0)}$\%),\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"]*100,0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Direct\nQuestion\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]*100,0)}$\%) estimates.} the analyses still suggest that survey respondents systematically underreported their true answers: approximately $\Sexpr{round(mean(c(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"], socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]))*100, 0)}$\% of the nationally representative sample would have lied.\footnote{This number was calculated averaging over the ``high'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="High ($500)"]*100, 0)}$\%) and ``low'' ($\Sexpr{round(socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="Social\nDesirability\n(with covariates)" & socdes.p.high.low.diff.in.means$Condition=="Low ($100)"]*100,0)}$\%) estimates.} 
 
 
+% why the difference between the difference in means and the multivariate approach is so large
+The difference in means approach in \autoref{tab:t:test} suggests that between \Sexpr{as.character(as.numeric(round(dif.means.high.predicted$fit["fit"], 3))*100)}\% and \Sexpr{as.character(as.numeric(round(dif.means.low.predicted$fit["fit"], 3))*100)}\% would be willing to sell their votes. However, the multivariate approach in \autoref{fig:list:analysis:social:desirability:plot} suggests that $\Sexpr{round(((socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][1] + socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][2]) / 2) * 100, 0)}$\% would be willing to do so. While at first these differences might seem huge, they actually are not. As the literature suggests, multivariate approaches to analyzing list experiment data are far more efficient \parencite{Blair2012,Blair2015}. Within the framework of regression analysis, the difference in means approach is just a bivariate lineal model.\footnote{With just a constant 1 on the right hand side of the equation.} Instead, the multivariate approach incorporates covariates. One way of showing the efficiency of a statistical model is by examining its standard errors \parencite[676]{King1986}: the worse fitting the data, the bigger the standard errors, the more imprecise the model (and the wider the confidence intervals). \autoref{fig:list:analysis:social:desirability:plot} shows the estimations and their corresponding confidence intervals. Considering the statistical uncertainty of both methods, it is easy to see that the multivariate approach is far more efficient than the difference in means approach. Going beyond efficiency issues, the estimates of both methods are statistically indistinguishable from each other. In fact, since the confidence intervals of both approaches overlap, it is not possible to say that the estimated \Sexpr{as.character(as.numeric(round(dif.means.high.predicted$fit["fit"], 3))*100)}\% and \Sexpr{as.character(as.numeric(round(dif.means.low.predicted$fit["fit"], 3))*100)}\% are ``smaller'' than the estimated $\Sexpr{round(((socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][1] + socdes.p.high.low.diff.in.means$fit[socdes.p.high.low.diff.in.means$c.1.3=="List\nExperiment\n(with covariates)"][2]) / 2) * 100, 0)}$\%.\footnote{I thank the two anonymous reviewers of \emph{Acta Politica} for stimulating this discussion.}
+
+
+
+
 The estimated proportion of vote-sellers---``List Experiment'' in \autoref{fig:list:analysis:social:desirability:plot}---is calculated using information from subjects with fully observable preferences, i.e., subjects with an item count of 0 or 4. For the former, we know they would not do anything, while for the latter, we know they would do all things mentioned in the list (including the sensitive item). Using the identified covariates (income, education, party identification, and political ideology), a model is fitted to predict all subjects with 0's and 4's on the left-hand side. Using this information, it is possible to obtain individual-level vote-selling predictions, i.e., participants who would do 1, 2, or 3 things on the list (shown in \autoref{fig:list:analysis:individual:predictions:plot}, in the Appendix). Then, these individual-level predictions are compared with the direct question answered by all experimental subjects. If a subject is predicted to be a vote-seller, but answers the direct question negatively, it is inferred that due to concerns of social desirability, s/he might have chosen to lie. 
 
 
@@ -398,6 +406,9 @@ The estimated proportion of vote-sellers---``List Experiment'' in \autoref{fig:l
 
 
 \subsection{What is the Price for which U.S. Citizens Would Sell their Votes?} 
+
+% https://en.wikipedia.org/wiki/Van_Westendorp%27s_Price_Sensitivity_Meter
+% https://www.qualtrics.com/experience-management/product/pricing-survey-questions/
 
 Participants were also asked to declare which price they considered ``too cheap'' and which was ``too expensive'' for their votes.\footnote{Since there is no other way of knowing what ``cheap'' and ``expensive'' mean without mentioning directly what specific good is being considered, it was necessary to ask survey respondents directly how much they would sell their votes for. Only $\Sexpr{nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive)))}$ individuals would sell their votes when asked directly.}  With these two pieces of information, it was possible to construct two supply curves: the ``too cheap'' curve, representing the lower boundary (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,1]), 0)}$) and the ``too expensive'' curve, representing the upper boundary (mean = \$$\Sexpr{round( mean(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))[,2]), 0)}$). Substantively, the ideal selling price is located where the curves intersect.
 
