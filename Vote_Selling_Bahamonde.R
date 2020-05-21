@@ -384,7 +384,7 @@ ci.level  = 0.95
 
 
 # Loading the Data
-load( "/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
 
 # Constructing DFs
 
@@ -2240,6 +2240,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 p_load(reshape2)
 
 pricing.d<- melt(pricing.d)
+# mean(pricing.d$value[pricing.d$variable=="Cheap"])
 
 # Plot
 if (!require("pacman")) install.packages("pacman"); library(pacman) 
