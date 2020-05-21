@@ -2056,6 +2056,82 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 # Balance Statistical Tests
 ###############################################
 
+# Reviewers didn't like propensity scores and suggested a multinomial logistic predicting treatment status. Still a good idea. No significance in the parameters, no statistical association with treatment status.
+
+## ---- cov:balance:multinomial:data ----
+# cat("\014")
+# rm(list=ls())
+
+# data
+load("/Users/hectorbahamonde/RU/research/Vote_Selling/dat_list.RData") # Load data
+dat.multinomial <- dat
+
+
+# dependent variable: treatment condition
+dat.multinomial$condition <- as.factor(ifelse(dat.multinomial$treatlow == 1 & dat.multinomial$treatment == 1, "Low", 
+                                    ifelse(dat.multinomial$treatlow == 0 & dat.multinomial$treatment == 1, "High",
+                                           ifelse(dat.multinomial$treatment == 0, "Control", NA)
+                                           )
+                                    )
+                                    )
+
+# change reference cat
+dat.multinomial$condition = relevel(dat.multinomial$condition, ref = "Control")
+
+# Multinomial Model
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(nnet) # to fit model
+
+multinomial.output = multinom(condition ~ as.numeric(socideo) + as.numeric(partyid) + income.n + educ.n, 
+                              dat = dat.multinomial)
+## ---- 
+
+# For table
+#if (!require("pacman")) install.packages("pacman"); library(pacman) 
+#p_load(texreg) 
+
+#library(remotes)
+# install_github("leifeld/texreg", force = T) # These packages have more recent versions available. Which would you like to update? (3, "None")
+
+
+## ---- cov:balance:multinomial:table ----
+if (!require("pacman")) install.packages("pacman"); library(pacman)
+p_load(texreg) # to fit model
+# library(texreg) # I think "include.nobs" is still in the GitHub. May 21st 2020.
+
+texreg( # use "screenreg" or "texreg"
+        list(multinomial.output), 
+        caption = "Covariate Balance: Multinomial Logistic Regression for both Treatment Conditions.", 
+        custom.model.names = c("High Treatment","Low Treatment"),
+        omit.coef = "(Intercept)",
+        custom.coef.names = c("Ideology", "Party Id.", "Income", "Education"),
+        label = "multinomial:logistic:covariate:balance:table",
+        custom.note = paste("\\parbox{.4\\linewidth}{\\vspace{2pt}%stars. \\\\ Reference category is control condition.  Intercept was excluded from the table.", paste("N = ", total.sample.size, ".}", sep="")),
+        scalebox = 0.8,
+        center = TRUE,
+        use.packages = FALSE,
+        dcolumn = TRUE,
+        #booktabs = TRUE,
+        digits = 3,
+        stars = c(0.01, 0.05, 0.1), 
+        include.nobs = F, 
+        include.deviance = FALSE,
+        no.margin = TRUE
+        )
+## ---- 
+
+
+
+paste("\\parbox{.4\\linewidth}{\\vspace{2pt}%stars. \\\\ %stars. Reference category is control condition. Intercept was excluded from the table.", paste("N = ", total.sample.size, ".}", sep="")
+)
+
+
+
+
+
+
+
+
 # Build two DFs, one per treatment condition.
 cov.balance.d.low <- subset(cov.balance.d , Regime == "Control" | Regime == "Low Treatment")
 cov.balance.d.high <- subset(cov.balance.d , Regime == "Control" | Regime == "High Treatment")
@@ -2143,8 +2219,6 @@ cov.balance.plot.note <-  paste(
   "\n")
 ## ---- 
 
-
-The figure shows the densities of the propensity score, which is the probability of being assigned to treatment. The propensity score is computed by estimating a GLM, where the outcome variable is whether the experimental subject is treated. The model is estimated as a function of observable covariates. Four variables were used (income, education, party identification, and political ideology). This is exactly the same set of variables used when estimating likely vote-sellers while employing the multivariate approach below. In simple terms, the figure shows that conditional on observables, the probabilities of being assigned to either condition are indistinguishable. That is, the observable characteristics of the experimental sample are not correlated with the assignment mechanism. 
 
 
 
