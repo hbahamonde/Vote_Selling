@@ -2896,7 +2896,7 @@ grid_arrange_shared_legend(
 individual.predictions.plot.note <- paste(
         "{\\bf Individual Estimated Probabilities of Vote-Selling}.",
         "\\\\\\hspace{\\textwidth}", 
-        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the ``low'' and ``high'' conditions. After fitting the model, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the ``low'' and ``high'' conditions were estimated. A total of ", paste(length(dat.with.predict$'Probability of Vote Selling'[dat.with.predict$sign==1])), "estimations are significant (both conditions).", sep = " "), paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " ")),
+        paste(paste(paste(paste("{\\bf Note}: Figure shows the individual probabilities of vote-selling (N = ", total.sample.size, ")",  sep = ""), sep = ""), "under the ``low'' and ``high'' conditions. After fitting the model, and following the advice of \\textcite[]{Blair2012} and \\textcite[]{Imai2014a}, individual probabilities of vote-selling under the ``low'' and ``high'' conditions were estimated. ", paste("The figure also shows", paste(ci.level*100,"\\%", sep = ""), "confidence intervals.", sep = " "))),
         "\n")
 ## ----
 
