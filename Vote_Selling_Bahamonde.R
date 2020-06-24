@@ -1421,6 +1421,18 @@ close(fileConn)
 ## ----
 
 
+################
+#### BIB EXPORT
+################
+# in terminal, make sure this is run just once:
+# chmod +x /Users/hectorbahamonde/RU/research/Vote_Selling/references.command
+## ---- bib:export ----
+path = "/Users/hectorbahamonde/RU/research/Vote_Selling/"
+fileConn <- file("references.command")
+writeLines(paste("JabRef -a", paste(paste(path, list.files(path="/Users/hectorbahamonde/RU/research/Vote_Selling/", pattern = ".aux")[1], sep=""), paste(path, "references.bib", sep = ""), sep = ",")), fileConn)
+close(fileConn)
+## ----
+
 
 
 

@@ -456,6 +456,12 @@ While the paper is rather descriptive, the author believes that the exercise was
 \printbibliography
 
 
+<<bib:export, echo=FALSE, comment=NA, warning=FALSE, message=FALSE, include = FALSE, cache=FALSE, eval=TRUE>>=
+
+@
+
+
+
 % EndNotes
 %\newpage
 %\pagenumbering{Roman}
