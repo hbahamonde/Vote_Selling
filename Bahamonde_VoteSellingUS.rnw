@@ -59,7 +59,6 @@
 
 \begin{center}
 {\bf \input{/Users/hectorbahamonde/RU/research/Vote_Selling/status.txt}\unskip} \\
-\href{https://github.com/hbahamonde/Vote_Selling/blob/master/Bahamonde_VoteSellingUS.pdf}{\texttt{Download last version {\color{red}here}}}.
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
