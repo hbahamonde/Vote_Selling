@@ -144,14 +144,6 @@ read_chunk('/Users/hectorbahamonde/RU/research/Vote_Selling/Vote_Selling_Bahamon
 
 \clearpage
 \newpage
-\begin{abstract}
-\input{/Users/hectorbahamonde/RU/research/Vote_Selling/abstract.txt}\unskip
-\end{abstract}
-
-
-
-\clearpage
-\newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
