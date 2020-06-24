@@ -37,3 +37,7 @@ Bahamonde_VoteSellingUS.tex
 *.gz
 
 *.ent
+
+*.bak
+
+*.tmp
