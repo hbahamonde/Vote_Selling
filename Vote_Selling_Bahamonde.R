@@ -1402,6 +1402,16 @@ line_intersection <- curve_intersect(curve.1, curve.2)
 
 
 
+# calling the plot // need to save it to get the intersecting point.
+price.plot = price.plot + geom_vline(xintercept=line_intersection$x, colour = "red", linetype = "dashed", size = 0.5) 
+ggsave(price.plot, file="price_plot.pdf", width = 8, height = 6, units = "cm")
+
+
+price.plot.note <- paste(
+        "{\\bf Pricing Test: Ideal Selling Price}.",
+        "\\\\\\hspace{\\textwidth}", 
+        paste(paste("{\\bf Note}: Subjects who answered ``yes'' to the direct question (N = ", nrow(na.omit(data.frame(dat$pricecheap,dat$priceexpensive))), ")", sep = ""), " were asked to price their votes via a pricing test (see \\autoref{fig:pricing:experiment}). This figure shows the empirical distributions of the ``too cheap'' and ``too expensive'' answers. The intersection of these two supply curves (the vertical dashed line) represents the estimated optimal selling price. The data suggest that the right price for one's vote is \\$", paste(round(line_intersection$x,0), ".", sep = ""), sep = ""),
+        "\n")
 
 
 

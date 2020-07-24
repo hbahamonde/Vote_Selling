@@ -279,7 +279,9 @@
 
 \section{Introduction}
 
+\subsection{Introduction}
 
+\miniframeson
 \begin{frame}\frametitle{{\scriptsize ``{\input{/Users/hectorbahamonde/RU/research/Vote_Selling/title.txt}\unskip}'' }}
 \begin{minipage}{0.47\textwidth}
     \begin{itemize}
@@ -312,6 +314,7 @@
 \end{frame}
 
 
+\section{Motivation}
 \subsection{Motivation}
 
 \miniframeson
@@ -380,7 +383,6 @@
 
 \miniframeson
 \begin{frame}\frametitle{Now Vote Buying is Rare}
-\begin{minipage}{0.7\textwidth}
     \begin{itemize}
           \item Two competing hypotheses:
             \begin{enumerate}
@@ -388,15 +390,11 @@
               \item {\bf Stokes}: industrialization drove up the electorate's median income, making vote buying more expensive for party machines.
             \end{enumerate}
     \end{itemize}
-\end{minipage}
-\begin{minipage}{0.1\textwidth}
-\centering\includegraphics[scale=0.09]{/Users/hectorbahamonde/RU/research/Vote_Selling/george_washington.jpg}
-\end{minipage}
 \end{frame}
 
 
 
-\section{Setup}
+\section{Empirical Section}
 
 \subsection{Research Question and Data}
 
@@ -418,25 +416,26 @@
 \subsection{Methods}
 
 \miniframeson
-\begin{frame}\frametitle{Vote Selling: Social Desirability Bias}
+\begin{frame}\frametitle{The Study of Vote Selling Introduces Social Desirability Bias}
     \begin{itemize}
       \item Directly asking respondents whether they would sell their votes will cause {\bf social desirability bias}.
-      \item Respondents might feel ashamed/embarrassed when admitting doing something socially condemnable.
+      \item Respondents might feel ashamed/embarrassed admitting doing something socially condemnable.
       \item {\bf Source of bias}: in avoiding answering with the truth, liars' profiles are systematically different.
     \end{itemize}
 \end{frame}
 
 
-\miniframesoff
-\begin{frame}\frametitle{List Experiments: Overcoming Social Desirability Bias}
+\miniframeson
+\begin{frame}\frametitle{The Use of List Experiments Overcomes Social Desirability Bias}
     \begin{itemize}
       \item {\bf List experiments} designed to study illegal/uncommon behaviors (drug consumption, corruption, sexual behaviors).
       \item {\bf Mechanics}: 
         \begin{itemize}
             \item Two lists (control, treatment). Both are \emph{exactly} the same. 
             \item The treatment has an extra item, the {\bf sensitive} one.
+            \item {\bf Respondent's task}: declare how many items (not which ones) s/he would endorse.
         \end{itemize}
-      \item {\bf Easy estimation}: since both lists are assigned at random, any difference in means should be attributed to the sensitive item \emph{only}.
+      \item {\bf Easy estimation}: since both lists are assigned at random, any difference in means between the {\bf item count} of the treatment and control lists should be attributed to the sensitive item \emph{only}.
     \end{itemize}
 \end{frame}
 
@@ -461,7 +460,7 @@
   \centering\includegraphics[scale=0.22]{/Users/hectorbahamonde/RU/research/Vote_Selling/LE_3.pdf}
 \end{frame}
 
-\miniframesoff
+\miniframeson
 \begin{frame}\frametitle{My Experimental Design}
  %\vspace{-0.5cm}
   \centering\includegraphics[scale=0.65]{/Users/hectorbahamonde/RU/research/Vote_Selling/Experimental_Flow_Figure.pdf}
@@ -477,13 +476,132 @@
 \begin{frame}\frametitle{Dependent Variable}
 \begin{minipage}{0.4\textwidth}
     \begin{itemize}
-          \item Sum of items each subject $i$ declares.
-          \item Two treatments were administered (``cheap''/``expensive''): account for possible elasticities.\\{\scriptsize Hard to price a vote.}
+          \item Item count for subject $i$, broken by experimental regime.
+          \item Two treatments were administered (``cheap''/``expensive''): they account for possible elasticities.\\{\scriptsize Hard to price a vote.}
     \end{itemize}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \centering\includegraphics[scale=0.6]{/Users/hectorbahamonde/RU/research/Vote_Selling/figure/barplot:figure:control:treatment-1.pdf}
 \end{minipage}
+\end{frame}
+
+
+\subsection{Identification Strategy}
+
+\miniframeson
+\begin{frame}\frametitle{Modeling Individual Probabilities of Vote Selling}
+    \begin{itemize}
+    	\item While list experiments are straightforward, difference in means analyses are (a) inefficient and (b) unable to tell us anything about individual preferences.
+        \item {\bf Multivariate approach}: Estimate what we cannot observe (vote selling) using information that we do observe (socio-economic questionnaire).
+        	\begin{itemize}
+        		\item Questionnaire used to build a profile of subject types ``1'', ``2,'' ``3'' and ``4.''
+				\item {\bf Potential outcomes framework}: infer (statistically) who \emph{would} have answered ``4'' (vote selling).
+        			%\begin{enumerate}
+        			%	\item Model marginal distribution of the response to control items.
+        			%	\item Model the conditional distribution of the response to the sensitive item \emph{given} the response to the control items.
+        			%	\item {\tiny Marginalize the conditional expectation of the Poisson–Binomial distribution via maximum likelihood.}
+        			%\end{enumerate}
+    		\end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Results}
+
+
+\miniframeson
+\begin{frame}\frametitle{Results: Who wants to sell and who's lying?}
+\begin{minipage}{0.4\textwidth}
+    \begin{itemize}
+          \item Dif in means: inefficient.
+          \item List experiment: 25\% would be willing to sell their vote.
+          \item Only 18\% sells when directly asked.
+          \item 7\% lied (due to social desirability bias).
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\centering\includegraphics[scale=0.65]{/Users/hectorbahamonde/RU/research/Vote_Selling/figure/list:analysis:social:desirability:plot-1.pdf}
+\end{minipage}
+\end{frame}
+
+
+
+\miniframeson
+\begin{frame}\frametitle{Individual Results}
+\centering\includegraphics[scale=0.3]{/Users/hectorbahamonde/RU/research/Vote_Selling/figure/list:analysis:individual:predictions:plot-1.pdf}
+\end{frame}
+
+
+
+\miniframeson
+\begin{frame}\frametitle{Price Test}
+\begin{minipage}{0.45\textwidth}
+\centering\includegraphics[scale=0.3]{/Users/hectorbahamonde/RU/research/Vote_Selling/pricing_experiment.jpeg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\centering\includegraphics[scale=0.7]{/Users/hectorbahamonde/RU/research/Vote_Selling/price_plot.pdf}
+\end{minipage}
+\end{frame}
+
+
+\miniframeson
+\begin{frame}\frametitle{Profiling Sellers}
+\centering\includegraphics[scale=0.2]{/Users/hectorbahamonde/RU/research/Vote_Selling/figure/predictions:independent:variables:plot-1.pdf}
+\end{frame}
+
+
+\section{Discussion}
+
+\subsection{Summary}
+
+\miniframeson
+\begin{frame}\frametitle{What this Talk Was About: Main Findings}
+    \begin{enumerate}
+      \item Approximately 25\% of voters in the U.S. would sell their vote.
+      \item They would sell it for a minimum payment of \$418. 
+      \item Democrats and Liberals are more likely to sell.
+      \item Education or income levels do not seem to impact the likelihood of vote selling.
+    \end{enumerate}
+\end{frame}
+
+
+\subsection{Future Avenues of Research}
+
+\miniframeson
+\begin{frame}\frametitle{What's Ahead}
+    \begin{enumerate}
+      \item Future research.
+    \end{enumerate}
+\end{frame}
+
+
+\miniframesoff
+\begin{frame}[plain,c, label=thank_you]
+\begin{center}
+\Huge{Gracias}\\
+\vspace{1cm} \texttt{www.Hector{\color{black!30!green}{\bf Bahamonde}}.com}
+\end{center}
+\vspace{1cm}
+\end{frame}
+
+
+\section{Appendix}
+
+\miniframesoff
+\begin{frame}\frametitle{Priming Subjects before the Study}
+\centering\includegraphics[scale=0.3]{/Users/hectorbahamonde/RU/research/Vote_Selling/Appendix_1.png}
+\end{frame}
+
+\miniframesoff
+\begin{frame}\frametitle{Distractor Paragraph: Direct Question (I)}
+All subjects read the next paragraph, and then all answered the direct question
+\centering\includegraphics[scale=0.3]{/Users/hectorbahamonde/RU/research/Vote_Selling/Appendix_2.png}
+\end{frame}
+
+
+\miniframesoff
+\begin{frame}\frametitle{Distractor Paragraph: Direct Question (II)}
+\centering\includegraphics[scale=0.3]{/Users/hectorbahamonde/RU/research/Vote_Selling/Appendix_3.png}
 \end{frame}
 
 
