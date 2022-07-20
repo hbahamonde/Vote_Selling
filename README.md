@@ -27,4 +27,4 @@ List experiment.
 
 ## Status
 
-Revise and resubmit, Acta Politica.
+Published, Acta Politica.
